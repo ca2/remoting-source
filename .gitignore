@@ -1,0 +1,12 @@
+time-*/
+workspace.xml
+cmake-build-*/
+cmake-time-*/
+**/CMakeFiles
+**/doxygen.directory
+.visualgdb/
+.DS_Store
+_packages.txt
+application_build_helper_input.txt
+application_build_helper_output.txt
+matter_output.txt
