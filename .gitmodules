@@ -1,0 +1,8 @@
+[submodule "app"]
+	path = app
+	url = ../app
+	branch = main
+[submodule "remoting"]
+	path = remoting
+	url = ../remoting
+	branch = main
