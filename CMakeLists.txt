@@ -224,7 +224,7 @@ add_subdirectory(remoting)
 
 add_custom_target(__release_all)
 add_dependencies(__release_all _remoting_client)
-add_dependencies(__release_all _remoting_control_desktop)
+#add_dependencies(__release_all _remoting_control_desktop)
 add_dependencies(__release_all _remoting_node_desktop)
 #add_dependencies(release_all _app_app)
 #add_dependencies(release_all _app_just_acme_message_box)
