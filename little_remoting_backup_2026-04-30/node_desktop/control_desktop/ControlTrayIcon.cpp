@@ -219,11 +219,9 @@ namespace remoting_control_desktop
    void ControlTrayIcon::onConfigurationMenuItemClick()
    {
 
-      ::cast < ::remoting_node_desktop::application > papp = m_papplication;
+      auto papp = MainSubsystem().m_papplicationSubsystem;
 
-      auto pserverapp = papp->m_pserverapplication;
-
-      pserverapp->removeModelessDialog(m_pconfigdialog->operating_system_window());
+      papp->removeModelessDialog(m_pconfigdialog->operating_system_window());
 
       bool isConnectedToService = false;
 

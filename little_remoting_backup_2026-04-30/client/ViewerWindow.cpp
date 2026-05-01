@@ -803,7 +803,7 @@ namespace remoting_client
         m_poperatingsystemapplication->postMessage(remoting_impact::_WM_USER_ABOUT);
     }
 
-    bool ViewerWindow::onCommand(unsigned int controlID, bool bAccelerator, unsigned int notificationID)
+    bool ViewerWindow::onCommand(unsigned int controlID, unsigned int notificationID)
     {
 
 
