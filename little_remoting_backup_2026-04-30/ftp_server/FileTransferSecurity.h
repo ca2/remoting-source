@@ -1,0 +1,61 @@
+// Copyright (C) 2009,2010,2011,2012 GlavSoft LLC.
+// All rights reserved.
+//
+//-------------------------------------------------------------------------
+// This file is part of the TightVNC software.  Please visit our Web site:
+//
+//                       http://www.tightvnc.com/
+//
+// This program is free software; you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation; either version 2 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License along
+// with this program; if not, w_rite to the Free Software Foundation, Inc.,
+// 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+//-------------------------------------------------------------------------
+//
+
+#pragma once
+
+
+#include "subsystem/platform/Exception.h"
+#include "subsystem/platform/Singleton.h"
+//#include "log_writer/LogWriter.h"
+
+#include "remoting/remoting/win_system/Impersonator.h"
+
+#include "remoting/remoting/desktop/Desktop.h"
+
+class CLASS_DECL_REMOTING FileTransferSecurity : private Impersonator
+{
+public:
+  FileTransferSecurity(Desktop *desktop, ::subsystem::LogWriter * plogwriter);
+  virtual ~FileTransferSecurity();
+
+  // Sets access rights for calling process for execution
+  // file transfer request handler code.
+  void beginMessageProcessing();
+  // Checks result and throws exception if caller
+  // must not execute file transfer code and return error
+  // to client.
+  void throwIfAccessDenied();
+  // Sets previous (before startMessageProcessing call) access rights
+  // for calling process.
+  void endMessageProcessing();
+
+protected:
+  bool m_hasAccess;
+
+  ::pointer < Desktop > m_pdesktop;
+
+  ::pointer < ::subsystem::LogWriter > m_plogwriter;
+};
+
+

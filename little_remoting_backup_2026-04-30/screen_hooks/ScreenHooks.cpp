@@ -1,0 +1,221 @@
+// Copyright (C) 2009,2010,2011,2012 GlavSoft LLC.
+// All rights reserved.
+//
+//-------------------------------------------------------------------------
+// This file is part of the TightVNC software.  Please visit our Web site:
+//
+//                       http://www.tightvnc.com/
+//
+// This program is free software; you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation; either version 2 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License along
+// with this program; if not, w_rite to the Free Software Foundation, Inc.,
+// 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+//-------------------------------------------------------------------------
+//
+
+#include "ScreenHooks.h"
+#include "subsystem/_common_header.h"
+#include "remoting/node_desktop/NamingDefs.h"
+//#include "remoting/remoting/region/::int_point.h"
+#include "remoting/remoting/region/Region.h"
+
+// Pre-definition:
+LRESULT CALLBACK callWndRetProc(int nCode, ::wparam wParam, ::lparam lParam);
+LRESULT CALLBACK getMsgProc(int code, ::wparam wParam, ::lparam lParam);
+LRESULT CALLBACK sysMsgProc(int code, ::wparam wParam, ::lparam lParam);
+void processMessage(HWND hwnd, unsigned int scopedstrMessage, ::wparam wParam, ::lparam lParam);
+void sendRect(const ::int_rectangle &  rectangle);
+void sendClientRect(HWND hwnd);
+void sendNClientRegion(HWND hwnd);
+::int_rectangle getWindowRect(HWND hwnd);
+::int_rectangle getClientRect(HWND hwnd);
+
+// Per-instance variables:
+HMODULE g_hModule = 0;
+
+#pragma comment(linker, "/section:.shared,RWS")
+#pragma data_seg(".shared")
+HHOOK g_callWndProcH = 0;
+HHOOK g_getMessageH = 0;
+HHOOK g_sysMessageH = 0;
+HWND g_targetWinHwnd = 0;
+#pragma data_seg()
+
+bool APIENTRY DllMain(HMODULE hModule,
+                      DWORD  ul_reason_for_call,
+                      LPVOID lpReserved)
+{
+  switch (ul_reason_for_call)
+  {
+  case DLL_PROCESS_ATTACH:
+    g_hModule = hModule;
+    break;
+  case DLL_THREAD_ATTACH:
+  case DLL_THREAD_DETACH:
+  case DLL_PROCESS_DETACH:
+    break;
+  }
+  return true;
+}
+
+__declspec(dllexport) bool setHook(HWND targedWinHwnd)
+{
+  g_targetWinHwnd = targedWinHwnd;
+  g_callWndProcH = SetWindowsHookEx(WH_CALLWNDPROCRET,
+                                    callWndRetProc,
+                                    g_hModule,
+                                    0);
+
+  g_getMessageH = SetWindowsHookEx(WH_GETMESSAGE,
+                                   getMsgProc,
+                                   g_hModule,
+                                   0);
+
+  g_sysMessageH = SetWindowsHookEx(WH_SYSMSGFILTER,
+                                   sysMsgProc,
+                                   g_hModule,
+                                   0);
+
+  return g_callWndProcH != 0 && g_getMessageH != 0 && g_sysMessageH != 0;
+}
+
+__declspec(dllexport) bool unsetHook()
+{
+  bool result = UnhookWindowsHookEx(g_callWndProcH) != 0;
+  result = result && UnhookWindowsHookEx(g_getMessageH) != 0;
+  return result;
+}
+
+LRESULT CALLBACK callWndRetProc(int nCode, ::wparam wParam, ::lparam lParam)
+{
+  if (nCode == HC_ACTION) {
+    CWPRETSTRUCT *cpwS = (CWPRETSTRUCT *)lParam;
+    processMessage(cpwS->hwnd, cpwS->scopedstrMessage, cpwS->wParam, cpwS->lParam);
+  }
+  return CallNextHookEx(g_callWndProcH, nCode, wParam, lParam);
+}
+
+LRESULT CALLBACK getMsgProc(int code, ::wparam wParam, ::lparam lParam)
+{
+  if (code == MSGF_DIALOGBOX || code == MSGF_MENU || code == MSGF_SCROLLBAR) {
+    MSG *msg = (MSG *)lParam;
+    processMessage(msg->hwnd, msg->scopedstrMessage, msg->wParam, msg->lParam);
+  }
+  return CallNextHookEx(g_getMessageH, code, wParam, lParam);
+}
+
+LRESULT CALLBACK sysMsgProc(int code, ::wparam wParam, ::lparam lParam)
+{
+  if (code == MSGF_DIALOGBOX || code == MSGF_MENU || code == MSGF_SCROLLBAR) {
+    MSG *msg = (MSG *)lParam;
+    processMessage(msg->hwnd, msg->scopedstrMessage, msg->wParam, msg->lParam);
+  }
+  return CallNextHookEx(g_sysMessageH, code, wParam, lParam);
+}
+
+void processMessage(HWND hwnd, unsigned int scopedstrMessage, ::wparam wParam, ::lparam lParam)
+{
+  switch (scopedstrMessage) {
+  case WM_PAINT:
+    //FIXME: Process a region that folowing with WM_PAINT.
+  case WM_CTLCOLOREDIT:
+  case WM_ACTIVATE:
+  case WM_ERASEBKGND:
+    sendClientRect(hwnd);
+    break;
+  case WM_NCPAINT:
+  case WM_NCACTIVATE:
+  case WM_HSCROLL:
+  case WM_VSCROLL:
+    sendNClientRegion(hwnd);
+    break;
+  case 0x0092: // Menu
+    sendClientRect(hwnd);
+    sendNClientRegion(hwnd);
+    break;
+  case WM_DRAWITEM:
+    if (lParam != 0) {
+      DRAWITEMSTRUCT *dts = (DRAWITEMSTRUCT *)lParam;
+      HWND ctlHwnd = dts->hwndItem;
+      if (wParam == 0) { // it is a menu control
+      } else {
+        sendRect(&getWindowRect(ctlHwnd));
+      }
+    }
+    break;
+  }
+}
+
+void sendRect(const ::int_rectangle &  rectangle)
+{
+  short left   = (short)rectangle.left;
+  short top    = (short)rectangle.top;
+  short right  = (short)rectangle.right;
+  short bottom = (short)rectangle.bottom;
+  PostMessage(g_targetWinHwnd, HookDefinitions::SPEC_IPC_CODE,
+              MAKEWPARAM(top, left),
+              MAKELPARAM(bottom, right));
+}
+
+void sendClientRect(HWND hwnd)
+{
+  ::int_rectangle clientRect = getClientRect(hwnd);
+  sendRect(clientRect);
+}
+
+void sendNClientRegion(HWND hwnd)
+{
+  Region ncRegion(&getWindowRect(hwnd));
+  Region cRegion(&getClientRect(hwnd));
+
+  ncRegion.subtract(&cRegion);
+
+  ::int_rectangle_array_base rectanglea;
+  ::int_rectangle_array_base::iterator iRect;
+  ncRegion.getRects(&rectanglea);
+  for (iRect = rectanglea.begin(); iRect < rectanglea.end(); iRect++) {
+    sendRect(&(*iRect));
+  }
+}
+
+::int_rectangle getWindowRect(HWND hwnd)
+{
+  ::int_point offset;
+  offset.x = GetSystemMetrics(SM_XVIRTUALSCREEN);
+  offset.y = GetSystemMetrics(SM_YVIRTUALSCREEN);
+
+  RECT clientRect;
+  ::int_rectangle rectangleResult;
+  if (GetWindowRect(hwnd, clientRect) != 0) {
+    rectangleResult.fromWindowsRect(clientRect);
+    rectangleResult.move(offset.x, offset.y);
+  }
+  return rectangleResult;
+}
+
+::int_rectangle getClientRect(HWND hwnd)
+{
+  ::int_rectangle rectangleResult;
+  RECT clientRect;
+  if (GetClientRect(hwnd, clientRect) != 0) {
+    POINT offset;
+    offset.x = 0;
+    offset.y = 0;
+
+    ClientToScreen(hwnd, &offset);
+    offset.x -= GetSystemMetrics(SM_XVIRTUALSCREEN);
+    offset.y -= GetSystemMetrics(SM_YVIRTUALSCREEN);
+    rectangleResult.fromWindowsRect(clientRect);
+    rectangleResult.move(offset.x, offset.y);
+  }
+  return rectangleResult;
+}
