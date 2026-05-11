@@ -100,7 +100,7 @@ void WindowsApplication::shutdown()
   PostMessage(m_mainWindow, WM_CLOSE, 0, 0);
 }
 
-void WindowsApplication::postMessage(unsigned int scopedstrMessage, ::wparam wParam, ::lparam lParam)
+void WindowsApplication::postMessage(::u32 scopedstrMessage, ::wparam wParam, ::lparam lParam)
 {
   PostMessage(m_mainWindow, scopedstrMessage, wParam, lParam);
 }
@@ -131,7 +131,7 @@ bool WindowsApplication::processDialogMessage(MSG *msg)
   return false;
 }
 
-LRESULT CALLBACK WindowsApplication::wndProc(HWND hWnd, unsigned int msg, ::wparam wparam, ::lparam lparam)
+LRESULT CALLBACK WindowsApplication::wndProc(HWND hWnd, ::u32 msg, ::wparam wparam, ::lparam lparam)
 {
   switch (msg) {
   case WM_CLOSE:

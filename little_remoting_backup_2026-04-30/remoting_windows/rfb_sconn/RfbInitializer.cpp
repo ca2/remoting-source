@@ -102,7 +102,7 @@ namespace remoting
             m_output->writeUInt8(0);
          }
          ::string reason(&::string(e.get_message()));
-         unsigned int reasonLen = (unsigned int)reason.length();
+         ::u32 reasonLen = (::u32)reason.length();
          _ASSERT(reasonLen == reason.length());
 
          m_output->writeUInt32(reasonLen);
@@ -142,7 +142,7 @@ namespace remoting
          m_output->writeUInt32(authInfo.getCapCount());
          authInfo.sendCaps(m_output);
          // Read the security type selected by the client.
-         unsigned int clientAuthValue = m_input->readUInt32();
+         ::u32 clientAuthValue = m_input->readUInt32();
          if (!authInfo.includes(clientAuthValue)) {
             throw ::subsystem::Exception("");
          }
@@ -153,7 +153,7 @@ namespace remoting
           }
    }
 
-   void RfbInitializer::doAuth(unsigned int authType)
+   void RfbInitializer::doAuth(::u32 authType)
    {
       if (authType == AuthDefs::VNC) {
          doVncAuth();
@@ -231,7 +231,7 @@ namespace remoting
    {
       try {
          // Determine effective security type from the configuration.
-         unsigned int primSecType = SecurityDefs::VNC;
+         ::u32 primSecType = SecurityDefs::VNC;
          if (!m_pconfigurator->getServerConfig()->isUsingAuthentication()
              || !m_bAuthAllowed) {
             primSecType = SecurityDefs::NONE;
@@ -264,7 +264,7 @@ namespace remoting
          //        as well, unless the authentication was set to AuthDefs::NONE.
          if (m_minorVerNum >= 8) {
             ::string reason(&::string(e.get_message()));
-            unsigned int reasonLen = (unsigned int)reason.length();
+            ::u32 reasonLen = (::u32)reason.length();
             _ASSERT(reasonLen == reason.length());
 
             m_output->writeUInt32(1); // FIXME: Use a named constant instead of 1.
@@ -309,7 +309,7 @@ namespace remoting
       }
 
       ::string ansiName(&deskName);
-      unsigned int dnLen = (unsigned int)ansiName.length();
+      ::u32 dnLen = (::u32)ansiName.length();
       _ASSERT(dnLen == ansiName.length());
 
       m_output->writeUInt32(dnLen);
@@ -330,7 +330,7 @@ namespace remoting
       encCaps->sendCaps(m_output);
    }
 
-   unsigned int RfbInitializer::getProtocolMinorVersion(const char str[12])
+   ::u32 RfbInitializer::getProtocolMinorVersion(const char str[12])
    {
       if ( str[0] != 'R' || str[1] != 'F' || str[2] != 'B' || str[3] != ' ' ||
            !isdigit(str[4]) || !isdigit(str[5]) || !isdigit(str[6]) ||
@@ -340,13 +340,13 @@ namespace remoting
          throw ::subsystem::Exception("Invalid format of the RFB version scopedstrMessage");
            }
 
-      unsigned int majorVersion =
+      ::u32 majorVersion =
         (str[4] - '0') * 100 + (str[5] - '0') * 10 + (str[6] - '0');
       if (majorVersion != 3) {
          throw ::subsystem::Exception("Unsupported RFB protocol version requested");
       }
 
-      unsigned int minorVersion =
+      ::u32 minorVersion =
         (str[8] - '0') * 100 + (str[9] - '0') * 10 + (str[10] - '0');
       return minorVersion;
    }

@@ -42,7 +42,7 @@ namespace remoting
                         SocketIPv4 *socket,
                         ClientTerminationListener *extTermListener,
                         ClientAuthListener *pclientauthlistener, bool viewOnly,
-                        bool isOutgoing, unsigned int id,
+                        bool isOutgoing, ::u32 id,
                         const ViewPortState *constViewPort,
                         const ViewPortState *dynViewPort,
                         int idleTimeout,
@@ -87,7 +87,7 @@ namespace remoting
       m_plogwriter->debug("Connection from {} has been closed for client #{}", peerStr, m_id);
    }
 
-   unsigned int RfbClient::getId() const
+   ::u32 RfbClient::getId() const
    {
       return m_id;
    }
@@ -317,7 +317,7 @@ namespace remoting
       m_pclipboardexchange->sendClipboard(newClipboard);
    }
 
-   void RfbClient::onKeyboardEvent(unsigned int keySym, bool down)
+   void RfbClient::onKeyboardEvent(::u32 keySym, bool down)
    {
       // FIXME: How to deal with the situations when we inject a "key down" event, then foreground
       //        window changes and is no longer owned by the shared app so we cannot pass "key up"
@@ -326,7 +326,7 @@ namespace remoting
       bool mayPass = true;
       bool shareApp = m_pviewportDynamic->getOnlyApplication();
       if (shareApp) {
-         unsigned int pid = m_pviewportDynamic->getApplicationId();
+         ::u32 pid = m_pviewportDynamic->getApplicationId();
          mayPass = m_pdesktop->isApplicationInFocus(pid);
       }
 

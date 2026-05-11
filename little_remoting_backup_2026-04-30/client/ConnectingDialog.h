@@ -83,10 +83,10 @@ namespace remoting_client
         void set_connecting(int iPhase);
 
         //protected:
-        bool onCommand(unsigned int controlID, unsigned int notificationID);
+        bool onCommand(::u32 controlID, ::u32 notificationID);
         bool onInitDialog();
 
-        virtual bool dialog_procedure(::iptr & iptrResult, unsigned int message, ::wparam wparam, ::lparam lparam);
+        virtual bool dialog_procedure(::iptr & iptrResult, ::u32 message, ::wparam wparam, ::lparam lparam);
 
     };
 

@@ -323,7 +323,7 @@ namespace remoting
    bool Configurator::loadQueryConfig(::remoting::SettingsManager *sm, ::remoting_node::ServerConfig * pserverconfig)
    {
       bool loadResult = true;
-      unsigned int uintValue;
+      ::u32 uintValue;
       bool boolValue;
       if (!sm->getUINT("QueryTimeout", &uintValue))
       {
@@ -377,7 +377,7 @@ namespace remoting
       //
 
       bool boolVal = false;
-      unsigned int uintVal = 0;
+      ::u32 uintVal = 0;
 
       if (!sm->getUINT("LocalInputPriorityTimeout", &uintVal))
       {
@@ -637,7 +637,7 @@ namespace remoting
       {
          saveResult = false;
       }
-      if (!sm->setUINT("DisconnectAction", (unsigned int)m_pserverconfig.getDisconnectAction()))
+      if (!sm->setUINT("DisconnectAction", (::u32)m_pserverconfig.getDisconnectAction()))
       {
          saveResult = false;
       }
@@ -665,7 +665,7 @@ namespace remoting
       {
          saveResult = false;
       }
-      if (!sm->setUINT("LogLevel", (unsigned int)m_pserverconfig.getLogLevel()))
+      if (!sm->setUINT("LogLevel", (::u32)m_pserverconfig.getLogLevel()))
       {
          saveResult = false;
       }
@@ -774,7 +774,7 @@ namespace remoting
       {
          saveResult = false;
       }
-      if (!sm->setUINT("IdleTimeout", (unsigned int)m_pserverconfig.getIdleTimeout()))
+      if (!sm->setUINT("IdleTimeout", (::u32)m_pserverconfig.getIdleTimeout()))
       {
          saveResult = false;
       }
@@ -790,7 +790,7 @@ namespace remoting
       //
 
       bool boolVal;
-      unsigned int uintVal;
+      ::u32 uintVal;
 
       if (!sm->getUINT("RfbPort", &uintVal))
       {

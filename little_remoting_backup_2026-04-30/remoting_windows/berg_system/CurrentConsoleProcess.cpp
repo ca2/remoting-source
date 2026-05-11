@@ -57,11 +57,11 @@ void CurrentConsoleProcess::start()
 
   m_plogwriter->debug("sti: cb = {}, hStdError = %p, hStdInput = %p,"
              " hStdOutput = %p, dwFlags = %u",
-             (unsigned int)sti.cb,
+             (::u32)sti.cb,
              (void *)sti.hStdError,
              (void *)sti.hStdInput,
              (void *)sti.hStdOutput,
-             (unsigned int)sti.dwFlags);
+             (::u32)sti.dwFlags);
 
   try {
     HANDLE userToken = WindowsSubsystem().WTS().duplicateCurrentProcessUserToken(m_connectRdpSession, m_plogwriter);

@@ -75,7 +75,7 @@ namespace remoting_node_desktop
          ::string shMemName;
          cmdLineParser.getSharedMemName(shMemName);
          ::subsystem_windows::SharedMemory shMem(shMemName, 72);
-         unsigned long long *mem = (unsigned long long *)shMem.getMemPointer();
+         ::u64 *mem = (::u64 *)shMem.getMemPointer();
 
          class ::time timeStart = ::time::now();
 
@@ -83,7 +83,7 @@ namespace remoting_node_desktop
          ::happening m_sleepInterval;
          while (mem[0] == 0)
          {
-            unsigned int timeForWait = maximum(10_s - timeStart.elapsed(), 0_s).integral_millisecond();
+            ::u32 timeForWait = maximum(10_s - timeStart.elapsed(), 0_s).integral_millisecond();
             if (timeForWait == 0)
             {
                throw ::subsystem::Exception("The desktop server time out expired");
@@ -93,11 +93,11 @@ namespace remoting_node_desktop
          }
 
          HANDLE readPipeHandle, writePipeHandle;
-         unsigned int maxPortionSize;
+         ::u32 maxPortionSize;
 
          readPipeHandle = (HANDLE)mem[1];
          writePipeHandle = (HANDLE)mem[2];
-         maxPortionSize = (unsigned int)mem[3];
+         maxPortionSize = (::u32)mem[3];
          auto ppipeClient = create_newø<::subsystem::AnonymousPipe>();
          auto pfileClientRead = MainSubsystem().fileFrom_HANDLE(readPipeHandle);
          auto pfileClientWrite = MainSubsystem().fileFrom_HANDLE(writePipeHandle);
@@ -110,7 +110,7 @@ namespace remoting_node_desktop
 
          readPipeHandle = (HANDLE)mem[4];
          writePipeHandle = (HANDLE)mem[5];
-         maxPortionSize = (unsigned int)mem[6];
+         maxPortionSize = (::u32)mem[6];
          auto ppipeServer = create_newø<::subsystem::AnonymousPipe>();
          auto pfileServerRead = MainSubsystem().fileFrom_HANDLE(readPipeHandle);
          auto pfileServerWrite = MainSubsystem().fileFrom_HANDLE(writePipeHandle);

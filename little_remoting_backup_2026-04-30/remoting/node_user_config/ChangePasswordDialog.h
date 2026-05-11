@@ -56,8 +56,8 @@ namespace remoting_node
       //
 
       virtual bool onInitDialog();
-      virtual bool onCommand(unsigned int cID, unsigned int nID);
-      virtual bool onNotify(unsigned int controlID, ::lparam data) { return true; }
+      virtual bool onCommand(::u32 cID, ::u32 nID);
+      virtual bool onNotify(::u32 controlID, ::lparam data) { return true; }
       virtual bool onDestroy() { return true; }
 
       //

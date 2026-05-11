@@ -121,13 +121,13 @@ void DibSection::setupBMIStruct(BITMAPINFO *pBmi, const ::innate_subsystem::Pixe
     pBmi->bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
     unsigned char index = 0;
     for (int i = 0; i < 256; i++, index++) {
-      unsigned int red = (index >> pixelformat.redShift) & pixelformat.redMax;
+      ::u32 red = (index >> pixelformat.redShift) & pixelformat.redMax;
       red = red * 0xFF / pixelformat.redMax;
       paletteBMI->rgbQuad[index].rgbRed = (unsigned char)red;
-      unsigned int green = (index >> pixelformat.greenShift) & pixelformat.greenMax;
+      ::u32 green = (index >> pixelformat.greenShift) & pixelformat.greenMax;
       green = green * 0xFF / pixelformat.greenMax;
       paletteBMI->rgbQuad[index].rgbGreen = (unsigned char)(green);
-      unsigned int blue = (index >> pixelformat.blueShift) & pixelformat.blueMax;
+      ::u32 blue = (index >> pixelformat.blueShift) & pixelformat.blueMax;
       blue = blue * 0xFF / pixelformat.blueMax;
       paletteBMI->rgbQuad[index].rgbBlue  = (unsigned char)blue;
     }

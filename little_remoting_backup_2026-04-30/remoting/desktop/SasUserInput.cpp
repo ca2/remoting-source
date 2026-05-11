@@ -65,7 +65,7 @@ namespace remoting
 
    void SasUserInput::setNewClipboard(const ::scoped_string &newClipboard) { m_client->setNewClipboard(newClipboard); }
 
-   void SasUserInput::setKeyboardEvent(unsigned int keySym, bool down)
+   void SasUserInput::setKeyboardEvent(::u32 keySym, bool down)
    {
       bool delPressed = false;
 
@@ -122,12 +122,12 @@ namespace remoting
       return m_client->getWindowHandleByName(windowName);
    }
 
-   void SasUserInput::getApplicationRegion(unsigned int procId, Region & region)
+   void SasUserInput::getApplicationRegion(::u32 procId, Region & region)
    {
       m_client->getApplicationRegion(procId, region);
    }
 
-   bool SasUserInput::isApplicationInFocus(unsigned int procId) { return m_client->isApplicationInFocus(procId); }
+   bool SasUserInput::isApplicationInFocus(::u32 procId) { return m_client->isApplicationInFocus(procId); }
 
 
 } // namespace remoting

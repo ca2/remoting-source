@@ -43,9 +43,9 @@ namespace remoting
       // This function doesn't distinguish between left and right modifiers.
       void sendModifier(unsigned char virtKey, bool down);
 
-      void processKeyEvent(unsigned short virtKey, unsigned int addKeyData);
+      void processKeyEvent(unsigned short virtKey, ::u32 addKeyData);
       bool vkCodeToString(unsigned short virtKey, bool isKeyDown, ::wstring *res);
-      void processCharEvent(int charCode, unsigned int addKeyData);
+      void processCharEvent(int charCode, ::u32 addKeyData);
       // Checks a new modifiers state after focus restoration and sends difference
       void processFocusRestoration();
       // This function release all modifiers unconditionally.
@@ -71,10 +71,10 @@ namespace remoting
       void checkAndSendDiff(unsigned char virtKey, unsigned char state);
 
       // Send one key event (Alt translated to Meta if Scroll Lock is on).
-      virtual void sendKeySymEvent(unsigned int rfbKeySym, bool down);
+      virtual void sendKeySymEvent(::u32 rfbKeySym, bool down);
 
       // Send one key event (Alt not translated to Meta).
-      virtual void sendVerbatimKeySymEvent(unsigned int rfbKeySym, bool down);
+      virtual void sendVerbatimKeySymEvent(::u32 rfbKeySym, bool down);
 
       // helper functions
       //int GettingCharFromCtrlSymbol(int ctrlSymbol);

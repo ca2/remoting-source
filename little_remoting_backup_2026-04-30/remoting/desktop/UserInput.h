@@ -58,7 +58,7 @@ namespace remoting
       // By the keyFlag argument will be set the mouse button state as described in
       // the rfb protocol.
       virtual void setMouseEvent(const ::int_point pointNewPosition, unsigned char keyFlag) = 0;
-      virtual void setKeyboardEvent(unsigned int keySym, bool down) = 0;
+      virtual void setKeyboardEvent(::u32 keySym, bool down) = 0;
       virtual void getCurrentUserInfo(::string &desktopName, ::string &userName) = 0;
 
       virtual void getPrimaryDisplayCoords(::int_rectangle & rectangle) = 0;
@@ -69,8 +69,8 @@ namespace remoting
       virtual void getWindowCoords(const ::operating_system::window & operatingsystemwindow, ::int_rectangle & rectangle) = 0;
       virtual ::operating_system::window getWindowHandleByName(const ::scoped_string &windowName) = 0;
 
-      virtual void getApplicationRegion(unsigned int procId, ::remoting::Region & region) = 0;
-      virtual bool isApplicationInFocus(unsigned int procId) = 0;
+      virtual void getApplicationRegion(::u32 procId, ::remoting::Region & region) = 0;
+      virtual bool isApplicationInFocus(::u32 procId) = 0;
 
       virtual void initKeyFlag(unsigned char initValue);
 

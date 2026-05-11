@@ -98,7 +98,7 @@ namespace remoting
       ::pointer < ::subsystem::LogWriter > m_plogwriter;
 
       // Information
-      unsigned int m_id;
+      ::u32 m_id;
 
       ::pointer < ::remoting_node::NewConnectionEvents>m_pnewconnectionevents;
       // This timer sets by IdleTimeout value from server config
@@ -110,7 +110,7 @@ namespace remoting
       RfbClient(::remoting_node::NewConnectionEvents *newConnectionEvents, ::subsystem::SocketIPv4Interface *socket,
                 ClientTerminationListener *pclientterminationlistener,
                 ClientAuthListener *pclientauthlistener, bool viewOnly,
-                bool isOutgoing, unsigned int id,
+                bool isOutgoing, ::u32 id,
                 const ViewPortState & viewportstateConst,
                 const ViewPortState & viewportstateDynamic,
                 int idleTimeout,
@@ -122,7 +122,7 @@ namespace remoting
 
       ClientState getClientState();
 
-      unsigned int getId() const;
+      ::u32 getId() const;
       void getPeerHost(::string & address);
       void getLocalIpAddress(::string & address);
       ::pointer < ::subsystem::SocketAddressIPv4Interface > getSocketAddr() const;
@@ -159,7 +159,7 @@ namespace remoting
       void notifyAbStateChanging(ClientState state);
 
       // This class is layer between WinDesktop and ClientInputHandler.
-      virtual void onKeyboardEvent(unsigned int keySym, bool down);
+      virtual void onKeyboardEvent(::u32 keySym, bool down);
       virtual void onMouseEvent(unsigned short x, unsigned short y, unsigned char buttonMask);
 
       void setClientState(ClientState newState);

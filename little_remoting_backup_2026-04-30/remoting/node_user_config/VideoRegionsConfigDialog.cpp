@@ -73,7 +73,7 @@ namespace remoting_node
       return false;
 
    }
-   // bool VideoRegionsConfigDialog::onNotify(unsigned int controlID, ::lparam data)
+   // bool VideoRegionsConfigDialog::onNotify(::u32 controlID, ::lparam data)
    // {
    //    if (controlID == IDC_VIDEO_RECOGNITION_INTERVAL_SPIN) {
    //       LPNMUPDOWN scopedstrMessage = (LPNMUPDOWN)data;
@@ -84,7 +84,7 @@ namespace remoting_node
    //    return true;
    // }
 
-   bool VideoRegionsConfigDialog::onCommand(unsigned int controlID, unsigned int notificationID)
+   bool VideoRegionsConfigDialog::onCommand(::u32 controlID, ::u32 notificationID)
    {
       if (notificationID == EN_UPDATE) {
          if (controlID == IDC_VIDEO_CLASS_NAMES || controlID == IDC_VIDEO_RECTS) {
@@ -225,7 +225,7 @@ namespace remoting_node
 
       int interval;
       MainSubsystem().StringParser().parseInt(vriss, &interval);
-      m_pserverconfig->setVideoRecognitionInterval((unsigned int)interval);
+      m_pserverconfig->setVideoRecognitionInterval((::u32)interval);
 
    }
 

@@ -69,7 +69,7 @@ namespace remoting
       } else if (bpp == 16) {
          rreEncode<unsigned short>(rectangle, pframebuffer);
       } else if (bpp == 32) {
-         rreEncode<unsigned int>(rectangle, pframebuffer);
+         rreEncode<::u32>(rectangle, pframebuffer);
       } else {
          _ASSERT(0);
       }
@@ -113,7 +113,7 @@ namespace remoting
       }
 
       // Send header.
-      m_output->writeUInt32(static_cast<unsigned int>(subrectPixelValue.size()));
+      m_output->writeUInt32(static_cast<::u32>(subrectPixelValue.size()));
       m_output->writeFully(&backgroundPixelValue, sizeof(PIXEL_T));
 
       // Send subrectangles.

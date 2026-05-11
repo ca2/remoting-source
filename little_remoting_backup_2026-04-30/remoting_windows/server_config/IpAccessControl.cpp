@@ -26,8 +26,8 @@
 
 void IpAccessControl::serialize(DataOutputStream * pdataoutputstream)
 {
-  _ASSERT((unsigned int)size() == size());
-  unsigned int count = (unsigned int)size();
+  _ASSERT((::u32)size() == size());
+  ::u32 count = (::u32)size();
   output->writeUInt32(count);
 
   ::string str;

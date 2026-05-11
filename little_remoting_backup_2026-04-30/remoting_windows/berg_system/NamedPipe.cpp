@@ -31,7 +31,7 @@
 
 #define MAX_PORTION_SIZE 512 * 1024
 
-NamedPipe::NamedPipe(HANDLE hPipe, unsigned int maxPortionSize, bool asServer)
+NamedPipe::NamedPipe(HANDLE hPipe, ::u32 maxPortionSize, bool asServer)
 : Pipe(maxPortionSize),
   m_hPipe(hPipe),
   m_asServer(asServer)

@@ -161,7 +161,7 @@ namespace remoting
 
    void UserInputServer::applyKeyEvent(BlockingGate *pblockinggate)
    {
-      unsigned int keySym;
+      ::u32 keySym;
       bool down;
       readKeyEvent(&keySym, &down, pblockinggate);
       m_puserinput->setKeyboardEvent(keySym, down);
@@ -205,7 +205,7 @@ namespace remoting
       ::string windowName;
       windowName = pblockinggate->readUtf8();
       auto operatingsystemwindow = m_puserinput->getWindowHandleByName(windowName);
-      pblockinggate->writeUInt64((unsigned long long)(HWND)::as_HWND(operatingsystemwindow));
+      pblockinggate->writeUInt64((::u64)(HWND)::as_HWND(operatingsystemwindow));
    }
 
    void UserInputServer::ansDisplayNumberCoords(BlockingGate *pblockinggate)
@@ -241,7 +241,7 @@ namespace remoting
 
    void UserInputServer::ansApplicationRegion(BlockingGate *pblockinggate)
    {
-      unsigned int procId = pblockinggate->readUInt32();
+      ::u32 procId = pblockinggate->readUInt32();
       Region region;
       m_puserinput->getApplicationRegion(procId, &region);
       sendRegion(&region, pblockinggate);
@@ -249,8 +249,8 @@ namespace remoting
 
    void UserInputServer::ansApplicationInFocus(BlockingGate *pblockinggate)
    {
-      unsigned int procId = pblockinggate->readUInt32();
-      bool result = m_puserinput->isApplicationInFocus((unsigned int)procId);
+      ::u32 procId = pblockinggate->readUInt32();
+      bool result = m_puserinput->isApplicationInFocus((::u32)procId);
       pblockinggate->writeUInt8(result ? 1 : 0);
    }
 

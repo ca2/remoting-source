@@ -96,8 +96,8 @@ namespace remoting_client
         //
 
         virtual bool onInitDialog();
-        //virtual bool onNotify(unsigned int controlID, ::lparam data);
-        virtual bool onCommand(unsigned int controlID, unsigned int notificationID);
+        //virtual bool onNotify(::u32 controlID, ::lparam data);
+        virtual bool onCommand(::u32 controlID, ::u32 notificationID);
         virtual bool onDestroy();
 
          bool _002OnAction(int iControl) override;
@@ -106,7 +106,7 @@ namespace remoting_client
          bool _002OnSelectionChange(int iControl) override;
 
 
-        virtual void onMessageReceived(unsigned int uMsg, ::wparam wParam, ::lparam lParam);
+        virtual void onMessageReceived(::u32 uMsg, ::wparam wParam, ::lparam lParam);
 
         //
         // Button event handlers
@@ -283,7 +283,7 @@ namespace remoting_client
 
         //private:
 
-        static const unsigned int WM_OPERATION_FINISHED = WM_USER + 2;
+        static const ::u32 WM_OPERATION_FINISHED = WM_USER + 2;
     };
 
 

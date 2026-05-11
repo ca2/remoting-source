@@ -40,7 +40,7 @@ namespace remoting
       // This method is called, if received server scopedstrMessage with code "msgCode".
       // Use "input" outside onRequest() is prohibited.
       //
-      virtual void onServerMessage(unsigned int msgCode,::DataInputStream * pinput) = 0;
+      virtual void onServerMessage(::u32 msgCode,::DataInputStream * pinput) = 0;
    };
 } // namespace remoting
 

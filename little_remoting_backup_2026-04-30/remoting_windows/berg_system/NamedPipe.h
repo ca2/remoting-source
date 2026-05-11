@@ -42,7 +42,7 @@ public:
   /**
    * Creates pipe transport.
    */
-  NamedPipe(HANDLE hPipe, unsigned int maxPortionSize, bool asServer);
+  NamedPipe(HANDLE hPipe, ::u32 maxPortionSize, bool asServer);
   /**
    * Destroys instance.
    */

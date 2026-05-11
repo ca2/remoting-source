@@ -394,7 +394,7 @@ namespace remoting
       }
    }
 
-   void RemoteViewerCore::sendKeyboardEvent(bool downFlag, unsigned int key)
+   void RemoteViewerCore::sendKeyboardEvent(bool downFlag, ::u32 key)
    {
       // If core isn't connected, then m_output may be isn't initialized.
       // Exit from function, if it is.
@@ -620,12 +620,12 @@ namespace remoting
 
       // get authentication result, if version 3.8 or authentication isn't None
       if (m_minor >= 8 || authenticationType != SecurityDefs::NONE) {
-         unsigned int authResult = 0;
+         ::u32 authResult = 0;
          if (authenticationType) {
             authResult = m_input->readUInt32();
             m_plogwriter->debug("Auth result is {}", authResult);
          }
-         static const unsigned int AUTH_RESULT_OK = 0;
+         static const ::u32 AUTH_RESULT_OK = 0;
          if (!authenticationType || authResult != AUTH_RESULT_OK) {
             // if version 3.3 or 3.7 then server connection closed
             m_plogwriter->error("Authentication failure");
@@ -652,7 +652,7 @@ namespace remoting
    {
       m_plogwriter->debug("Reading ::list_base of security types...");
       // read ::list_base of security types
-      ::array_base<unsigned int> secTypes;
+      ::array_base<::u32> secTypes;
       readSecurityTypeList(&secTypes);
       m_plogwriter->debug("List of security type is read");
       if (secTypes.size() == 0) {
@@ -662,7 +662,7 @@ namespace remoting
 
       // log information about security ::list_base
       ::string secTypeString;
-      for (::array_base<unsigned int>::iterator i = secTypes.begin(); i != secTypes.end(); i++) {
+      for (::array_base<::u32>::iterator i = secTypes.begin(); i != secTypes.end(); i++) {
          if(i != secTypes.begin())
             secTypeString += ", ";
          ::string nameType;
@@ -695,23 +695,23 @@ namespace remoting
       return typeSelected;
    }
 
-   void RemoteViewerCore::readSecurityTypeList(::array_base<unsigned int> *secTypes)
+   void RemoteViewerCore::readSecurityTypeList(::array_base<::u32> *secTypes)
    {
       if (m_minor < 7) {
-         unsigned int type = m_input->readUInt32();
+         ::u32 type = m_input->readUInt32();
          if (type != 0)
             secTypes->add(type);
       } else { // m_minor >= 7
          int secTypesNumber = m_input->readUInt8();
          if (secTypesNumber != 0) {
             secTypes->resize(secTypesNumber);
-            for (::array_base<unsigned int>::iterator i = secTypes->begin(); i != secTypes->end(); i++)
+            for (::array_base<::u32>::iterator i = secTypes->begin(); i != secTypes->end(); i++)
                *i = m_input->readUInt8();
          }
       }
    }
 
-   ::string RemoteViewerCore::getSecurityTypeName(unsigned int securityType) const
+   ::string RemoteViewerCore::getSecurityTypeName(::u32 securityType) const
    {
       switch (securityType) {
          case SecurityDefs::NONE:
@@ -724,7 +724,7 @@ namespace remoting
       return "Unknown type";
    }
 
-   ::string RemoteViewerCore::getAuthenticationTypeName(unsigned int authenticationType) const
+   ::string RemoteViewerCore::getAuthenticationTypeName(::u32 authenticationType) const
    {
       switch (authenticationType) {
          case AuthDefs::NONE:
@@ -735,12 +735,12 @@ namespace remoting
       return "Unknown type";
    }
 
-   int RemoteViewerCore::selectSecurityType(const ::array_base<unsigned int> *secTypes,
-                                            const ::map<unsigned int, AuthHandler *> *authHandlers,
+   int RemoteViewerCore::selectSecurityType(const ::array_base<::u32> *secTypes,
+                                            const ::map<::u32, AuthHandler *> *authHandlers,
                                   const bool isTightEnabled) const
    {
       // Typedef const iterator.
-      typedef ::array_base<unsigned int>::const_iterator SecTypesIterator;
+      typedef ::array_base<::u32>::const_iterator SecTypesIterator;
 
       if (isTightEnabled) {
          // If server supports security type "Tight", select it.
@@ -768,10 +768,10 @@ namespace remoting
    void RemoteViewerCore::initTunnelling()
    {
       m_plogwriter->debug("Initialization of tight-tunneling...");
-      unsigned int tunnelCount = m_input->readUInt32();
+      ::u32 tunnelCount = m_input->readUInt32();
       if (tunnelCount > 0) {
          bool hasNoTunnel = false;
-         for (unsigned int i = 0; i < tunnelCount; i++) {
+         for (::u32 i = 0; i < tunnelCount; i++) {
             RfbCapabilityInfo cap = readCapability();
             if (cap.code == TunnelDefs::NOTUNNEL) {
                hasNoTunnel = true;
@@ -795,7 +795,7 @@ namespace remoting
    int RemoteViewerCore::initAuthentication()
    {
       m_plogwriter->debug("Initialization of tight-authentication...");
-      unsigned int authTypesNumber = m_input->readUInt32();
+      ::u32 authTypesNumber = m_input->readUInt32();
 
       m_plogwriter->information("Number of auth-types is {}", authTypesNumber);
       if (authTypesNumber == 0) {
@@ -803,12 +803,12 @@ namespace remoting
       }
 
       m_plogwriter->debug("Reading authentication capability...");
-      for (unsigned int i = 0; i < authTypesNumber; i++) {
+      for (::u32 i = 0; i < authTypesNumber; i++) {
          RfbCapabilityInfo cap = readCapability();
          m_authCaps.enable(&cap);
       }
       size_t numEnabled = m_authCaps.numEnabled();
-      ::array_base<unsigned int> authTypes(numEnabled);
+      ::array_base<::u32> authTypes(numEnabled);
       for (size_t i = 0; i < numEnabled; ++i) {
          authTypes[i] = m_authCaps.getByOrder(i);
       }
@@ -938,7 +938,7 @@ namespace remoting
 
          // received server messages
          while (!isTerminating()) {
-            unsigned int msgType = receiveServerMessageType();
+            ::u32 msgType = receiveServerMessageType();
 
             switch (msgType) {
                case ServerMsgDefs::FB_UPDATE:
@@ -1027,15 +1027,15 @@ namespace remoting
       }
    }
 
-   unsigned int RemoteViewerCore::receiveServerMessageType()
+   ::u32 RemoteViewerCore::receiveServerMessageType()
    {
       // Viewer in common case read first byte (unsigned char) as scopedstrMessage id,
       // but if first byte is equal to 0xFC then it's TightVNC extension scopedstrMessage and
-      // must read next 3 bytes and create unsigned int scopedstrMessage id for processing.
+      // must read next 3 bytes and create ::u32 scopedstrMessage id for processing.
 
       static const unsigned short SERVER_MSG_SPECIAL_TIGHT_CODE = 0xFC;
 
-      unsigned int msgType = m_input->readUInt8();
+      ::u32 msgType = m_input->readUInt8();
       if (msgType == SERVER_MSG_SPECIAL_TIGHT_CODE) {
          for (int i = 0; i < 3; i++) {
             msgType <<= 8;
@@ -1211,7 +1211,7 @@ namespace remoting
       m_input->readUInt16();
       m_input->readUInt8();
 
-      unsigned int length = m_input->readUInt32();
+      ::u32 length = m_input->readUInt32();
       ::array_base<char> buffer(length + 1);
       m_input->readFully(buffer.data(), length);
       buffer[length] = '\0';
@@ -1231,7 +1231,7 @@ namespace remoting
 
    void RemoteViewerCore::receiveServerCutTextUtf8()
    {
-      unsigned int length = m_input->readUInt32();
+      ::u32 length = m_input->readUInt32();
       ::array_base<char> buffer(length + 1);
       m_input->readFully(buffer.data(), length);
       buffer[length] = '\0';
@@ -1352,7 +1352,7 @@ namespace remoting
          setFbProperties(screenDimension, serverPixelFormat);
       }
 
-      unsigned int sizeInBytes = m_input->readUInt32();
+      ::u32 sizeInBytes = m_input->readUInt32();
       ::array_base<char> buffer(sizeInBytes + 1);
       m_input->read(buffer.data(), sizeInBytes);
       buffer[sizeInBytes] = '\0';
@@ -1440,7 +1440,7 @@ namespace remoting
    }
 
    void RemoteViewerCore::addAuthCapability(AuthHandler *authHandler,
-                                            unsigned int code,
+                                            ::u32 code,
                                             const char *vendorSignature,
                                             const char *nameSignature,
                                             const ::string description)
@@ -1450,7 +1450,7 @@ namespace remoting
    }
 
    void RemoteViewerCore::addServerMsgCapability(ServerMessageListener *listener,
-                                                 unsigned int code,
+                                                 ::u32 code,
                                                  const char *vendorSignature,
                                                  const char *nameSignature,
                                                  const ::string description)
@@ -1459,7 +1459,7 @@ namespace remoting
       registerMessageListener(code, listener);
    }
 
-   void RemoteViewerCore::addClientMsgCapability(unsigned int code,
+   void RemoteViewerCore::addClientMsgCapability(::u32 code,
                                                  const char *vendorSignature,
                                                  const char *nameSignature,
                                                  const ::string description)
@@ -1469,7 +1469,7 @@ namespace remoting
 
    void RemoteViewerCore::addEncodingCapability(Decoder *decoder,
                                                 int priorityEncoding,
-                                                unsigned int code,
+                                                ::u32 code,
                                                 const char *vendorSignature,
                                                 const char *nameSignature,
                                                 const ::string description)
@@ -1478,32 +1478,32 @@ namespace remoting
       registerDecoderHandler(code, decoder, priorityEncoding);
    }
 
-   void RemoteViewerCore::getEnabledClientMsgCapabilities(::array_base<unsigned int> *codes) const
+   void RemoteViewerCore::getEnabledClientMsgCapabilities(::array_base<::u32> *codes) const
    {
       m_clientMsgCaps.getEnabledCapabilities(*codes);
    }
 
-   void RemoteViewerCore::getEnabledServerMsgCapabilities(::array_base<unsigned int> *codes) const
+   void RemoteViewerCore::getEnabledServerMsgCapabilities(::array_base<::u32> *codes) const
    {
       m_serverMsgCaps.getEnabledCapabilities(*codes);
    }
 
-   void RemoteViewerCore::getEnabledEncodingCapabilities(::array_base<unsigned int> *codes) const
+   void RemoteViewerCore::getEnabledEncodingCapabilities(::array_base<::u32> *codes) const
    {
       m_encodingCaps.getEnabledCapabilities(*codes);
    }
 
-   void RemoteViewerCore::registerAuthHandler(unsigned int code, AuthHandler *handler)
+   void RemoteViewerCore::registerAuthHandler(::u32 code, AuthHandler *handler)
    {
       m_authHandlers[code] = handler;
    }
 
-   void RemoteViewerCore::registerMessageListener(unsigned int code, ServerMessageListener *listener)
+   void RemoteViewerCore::registerMessageListener(::u32 code, ServerMessageListener *listener)
    {
       m_serverMsgHandlers[code] = listener;
    }
 
-   void RemoteViewerCore::registerDecoderHandler(unsigned int code, Decoder *decoder, int priority)
+   void RemoteViewerCore::registerDecoderHandler(::u32 code, Decoder *decoder, int priority)
    {
       m_decoderHandlers[code] = decoder;
       m_decoderPriority[code] = priority;

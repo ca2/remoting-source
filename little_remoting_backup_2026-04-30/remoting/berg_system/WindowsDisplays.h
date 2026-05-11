@@ -62,7 +62,7 @@ private:
   ::int_rectangle_array_base m_displayRects;
   lockable_critical_section m_displayRectsMutex;
   
-  static const unsigned int UPDATE_INTERVAL = 3000;
+  static const ::u32 UPDATE_INTERVAL = 3000;
   class ::time m_latestUpdateTime;
 };
 

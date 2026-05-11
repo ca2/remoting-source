@@ -51,8 +51,8 @@ namespace remoting_windows
       virtual void setMouseBlocking(bool block);
       // This functions set/unset blocks on a local keyboard and mouse on the
       // timeInterval interval from a last software event generation.
-      virtual void setSoftKeyboardBlocking(bool block, unsigned int timeInterval);
-      virtual void setSoftMouseBlocking(bool block, unsigned int timeInterval);
+      virtual void setSoftKeyboardBlocking(bool block, ::u32 timeInterval);
+      virtual void setSoftMouseBlocking(bool block, ::u32 timeInterval);
 
       virtual class ::time getLastInputTime() const;
       virtual void correctLastTime(const class ::time & time);
@@ -95,7 +95,7 @@ namespace remoting_windows
       bool m_isSoftKeyboardBlocking;
       bool m_isSoftMouseBlocking;
 
-      static unsigned int m_timeInterval;
+      static ::u32 m_timeInterval;
       static class ::time m_lastInputTime;
       static lockable_critical_section m_lastInputTimeMutex;
 

@@ -209,8 +209,8 @@ typedef struct jpeg_marker_struct FAR * jpeg_saved_marker_ptr;
 struct jpeg_marker_struct {
   jpeg_saved_marker_ptr next;	/* next in ::std::list_base, or NULL */
   unsigned char marker;			/* marker code: JPEG_COM, or JPEG_APP0+n */
-  unsigned int original_length;	/* # bytes of data in the file */
-  unsigned int data_length;	/* # bytes of data saved at data[] */
+  ::u32 original_length;	/* # bytes of data in the file */
+  ::u32 data_length;	/* # bytes of data saved at data[] */
   JOCTET FAR * data;		/* the data contained in the marker */
   /* the marker length word is not counted in data_length or original_length */
 };
@@ -314,7 +314,7 @@ struct jpeg_compress_struct {
    * helper routines to simplify changing parameters.
    */
 
-  unsigned int scale_num, scale_denom; /* fraction by which to scale image */
+  ::u32 scale_num, scale_denom; /* fraction by which to scale image */
 
   JDIMENSION jpeg_width;	/* scaled JPEG image width */
   JDIMENSION jpeg_height;	/* scaled JPEG image height */
@@ -367,7 +367,7 @@ struct jpeg_compress_struct {
    * (in which case the correct restart_interval will be figured
    * for each scan).
    */
-  unsigned int restart_interval; /* MCUs per restart, or 0 for no restart */
+  ::u32 restart_interval; /* MCUs per restart, or 0 for no restart */
   int restart_in_rows;		/* if > 0, MCU rows per restart interval */
 
   /* Parameters controlling emission of special markers. */
@@ -477,7 +477,7 @@ struct jpeg_decompress_struct {
 
   J_COLOR_SPACE out_color_space; /* colorspace for output */
 
-  unsigned int scale_num, scale_denom; /* fraction by which to scale image */
+  ::u32 scale_num, scale_denom; /* fraction by which to scale image */
 
   double output_gamma;		/* image gamma wanted in output */
 
@@ -591,7 +591,7 @@ struct jpeg_decompress_struct {
   unsigned char arith_dc_U[NUM_ARITH_TBLS]; /* U values for DC arith-coding tables */
   unsigned char arith_ac_K[NUM_ARITH_TBLS]; /* Kx values for AC arith-coding tables */
 
-  unsigned int restart_interval; /* MCUs per restart interval, or 0 for no restart */
+  ::u32 restart_interval; /* MCUs per restart interval, or 0 for no restart */
 
   /* These fields record data obtained from optional markers recognized by
    * the JPEG library.
@@ -997,7 +997,7 @@ EXTERN(void) jpeg_set_linear_quality JPP((j_compress_ptr cinfo,
 EXTERN(void) jpeg_default_qtables JPP((j_compress_ptr cinfo,
 				       boolean force_baseline));
 EXTERN(void) jpeg_add_quant_table JPP((j_compress_ptr cinfo, int which_tbl,
-				       const unsigned int *basic_table,
+				       const ::u32 *basic_table,
 				       int scale_factor,
 				       boolean force_baseline));
 EXTERN(int) jpeg_quality_scaling JPP((int quality));
@@ -1028,10 +1028,10 @@ EXTERN(JDIMENSION) jpeg_write_raw_data JPP((j_compress_ptr cinfo,
 /* Write a special marker.  See libjpeg.txt concerning safe usage. */
 EXTERN(void) jpeg_write_marker
 	JPP((j_compress_ptr cinfo, int marker,
-	     const JOCTET * dataptr, unsigned int datalen));
+	     const JOCTET * dataptr, ::u32 datalen));
 /* Same, but piecemeal. */
 EXTERN(void) jpeg_write_m_header
-	JPP((j_compress_ptr cinfo, int marker, unsigned int datalen));
+	JPP((j_compress_ptr cinfo, int marker, ::u32 datalen));
 EXTERN(void) jpeg_write_m_byte
 	JPP((j_compress_ptr cinfo, int val));
 
@@ -1085,7 +1085,7 @@ EXTERN(void) jpeg_calc_output_dimensions JPP((j_decompress_ptr cinfo));
 /* ::innate_subsystem::Control saving of COM and APPn markers into marker_list. */
 EXTERN(void) jpeg_save_markers
 	JPP((j_decompress_ptr cinfo, int marker_code,
-	     unsigned int length_limit));
+	     ::u32 length_limit));
 
 /* Install a special processing method for COM or APPn markers. */
 EXTERN(void) jpeg_set_marker_processor

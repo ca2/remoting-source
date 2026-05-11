@@ -44,9 +44,9 @@ namespace remoting
    class ::remoting_node::ServerConfig : virtual public ::subsystem::LockableInterface
    {
    public:
-      static const unsigned int MINIMAL_POLLING_INTERVAL = 30;
-      static const unsigned int MINIMAL_LOCAL_INPUT_PRIORITY_TIMEOUT = 1;
-      static const unsigned int MINIMAL_QUERY_TIMEOUT = 1;
+      static const ::u32 MINIMAL_POLLING_INTERVAL = 30;
+      static const ::u32 MINIMAL_LOCAL_INPUT_PRIORITY_TIMEOUT = 1;
+      static const ::u32 MINIMAL_QUERY_TIMEOUT = 1;
 
       // FIXME: duplicatad at VncPassCrypt
       static const int VNC_PASSWORD_SIZE = 8;
@@ -197,9 +197,9 @@ namespace remoting
 
       void disconnectExistingClients(bool disconnectExisting);
 
-      void setPollingInterval(unsigned int interval);
+      void setPollingInterval(::u32 interval);
 
-      unsigned int getPollingInterval();
+      ::u32 getPollingInterval();
 
       //
       // Input handling config
@@ -213,9 +213,9 @@ namespace remoting
 
       bool isLocalInputPriorityEnabled();
 
-      unsigned int getLocalInputPriorityTimeout();
+      ::u32 getLocalInputPriorityTimeout();
 
-      void setLocalInputPriorityTimeout(unsigned int value);
+      void setLocalInputPriorityTimeout(::u32 value);
 
       void blockLocalInput(bool enabled);
 
@@ -225,9 +225,9 @@ namespace remoting
       // Query config
       //
 
-      unsigned int getQueryTimeout();
+      ::u32 getQueryTimeout();
 
-      void setQueryTimeout(unsigned int timeout);
+      void setQueryTimeout(::u32 timeout);
 
       bool isDefaultActionAccept();
       void setDefaultActionToAccept(bool accept);
@@ -269,8 +269,8 @@ namespace remoting
       // Other
       //
 
-      unsigned int getVideoRecognitionInterval();
-      void setVideoRecognitionInterval(unsigned int interval);
+      ::u32 getVideoRecognitionInterval();
+      void setVideoRecognitionInterval(::u32 interval);
 
       int  getIdleTimeout();
       void setIdleTimeout(int timeout);
@@ -347,7 +347,7 @@ namespace remoting
       // Polling configuration
       //
 
-      unsigned int m_pollingInterval;
+      ::u32 m_pollingInterval;
 
       //
       // When flag is set server always blocks remote input.
@@ -373,7 +373,7 @@ namespace remoting
       // is enabled).
       //
 
-      unsigned int m_localInputPriorityTimeout;
+      ::u32 m_localInputPriorityTimeout;
 
       bool m_defaultActionAccept;
 
@@ -381,7 +381,7 @@ namespace remoting
       // Timeout for Query IpAccessControl record
       //
 
-      unsigned int m_queryTimeout;
+      ::u32 m_queryTimeout;
 
       //
       // Port mapping config
@@ -409,7 +409,7 @@ namespace remoting
       // Other
       //
 
-      unsigned int m_videoRecognitionInterval;
+      ::u32 m_videoRecognitionInterval;
       bool m_grabTransparentWindows;
 
       // Socket timeout to disconnect inactive clients, in seconds

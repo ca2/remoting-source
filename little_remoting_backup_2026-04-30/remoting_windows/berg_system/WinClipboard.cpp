@@ -46,12 +46,12 @@ void WinClipboard::setHWnd(const ::operating_system::window & operatingsystemwin
 
 bool WinClipboard::getString(::string & str)
 {
-  unsigned int strType = CF_UNICODETEXT;
+  ::u32 strType = CF_UNICODETEXT;
 
   if (sizeof(TCHAR) == 1) {
     strType = CF_TEXT;
   }
-  int uFormat = GetPriorityClipboardFormat(&strType, sizeof(unsigned int));
+  int uFormat = GetPriorityClipboardFormat(&strType, sizeof(::u32));
 
   if (uFormat == 0 || uFormat == -1) {
      return false;

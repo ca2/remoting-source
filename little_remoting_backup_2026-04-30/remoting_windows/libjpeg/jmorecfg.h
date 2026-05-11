@@ -198,7 +198,7 @@ typedef char JOCTET;
 //#ifdef HAVE_UNSIGNED_SHORT
 //typedef unsigned short unsigned short;
 //#else /* not HAVE_UNSIGNED_SHORT */
-//typedef unsigned int unsigned short;
+//typedef ::u32 unsigned short;
 //#endif /* HAVE_UNSIGNED_SHORT */
 
 /* short must hold at least the values -32768..32767. */
@@ -221,12 +221,12 @@ typedef long int;
 
 /* Datatype used for image dimensions.  The JPEG standard only supports
  * images up to 64K*64K due to 16-bit fields in SOF markers.  Therefore
- * "unsigned int" is sufficient on all machines.  However, if you need to
+ * "::u32" is sufficient on all machines.  However, if you need to
  * handle larger images and you don't mind deviating from the spec, you
  * can change this datatype.
  */
 
-typedef unsigned int JDIMENSION;
+typedef ::u32 JDIMENSION;
 
 #define JPEG_MAX_DIMENSION  65500L  /* a tad under 64K to prevent overflows */
 

@@ -134,9 +134,9 @@ void Screen::fillPixelFormat(const BMI *bmi)
   }
 }
 
-int Screen::findFirstBit(const unsigned int bits)
+int Screen::findFirstBit(const ::u32 bits)
 {
-  unsigned int b = bits;
+  ::u32 b = bits;
   int shift;
 
   for (shift = 0; (shift < 32) && ((b & 1) == 0); shift++) {

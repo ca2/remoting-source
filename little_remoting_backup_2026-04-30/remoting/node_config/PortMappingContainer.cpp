@@ -121,8 +121,8 @@ namespace remoting_node
 
    void PortMappingContainer::serialize(DataOutputStream * pdataoutputstream) const
    {
-      _ASSERT((unsigned int)count() == count());
-      pdataoutputstream->writeUInt32((unsigned int)count());
+      _ASSERT((::u32)count() == count());
+      pdataoutputstream->writeUInt32((::u32)count());
 
       ::string string;
 

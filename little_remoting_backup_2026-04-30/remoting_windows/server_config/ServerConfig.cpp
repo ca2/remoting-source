@@ -124,9 +124,9 @@ void ::remoting_node::ServerConfig::serialize(DataOutputStream * pdataoutputstre
 
   output->writeInt8(m_allowLoopbackConnections ? 1 : 0);
 
-  _ASSERT((unsigned int)m_videoClassNames.size() == m_videoClassNames.size());
+  _ASSERT((::u32)m_videoClassNames.size() == m_videoClassNames.size());
   
-  output->writeUInt32((unsigned int)m_videoClassNames.size());
+  output->writeUInt32((::u32)m_videoClassNames.size());
   for (size_t i = 0; i < m_videoClassNames.size(); i++) {
     output->writeUTF8(m_videoClassNames.at(i));
   }
@@ -134,8 +134,8 @@ void ::remoting_node::ServerConfig::serialize(DataOutputStream * pdataoutputstre
   output->writeUInt32(m_videoRecognitionInterval);
   
   output->writeUInt32(m_idleTimeout);
-  _ASSERT((unsigned int)m_videoRects.size() == m_videoRects.size());
-  output->writeUInt32((unsigned int)m_videoRects.size());
+  _ASSERT((::u32)m_videoRects.size() == m_videoRects.size());
+  output->writeUInt32((::u32)m_videoRects.size());
   for (size_t i = 0; i < m_videoRects.size(); i++) {
     ::string s;
      ::remoting::RectSerializer::toString(m_videoRects[i], s);
@@ -617,7 +617,7 @@ void ::remoting_node::ServerConfig::disconnectExistingClients(bool disconnectExi
   m_disconnectClients = disconnectExisting;
 }
 
-void ::remoting_node::ServerConfig::setPollingInterval(unsigned int interval)
+void ::remoting_node::ServerConfig::setPollingInterval(::u32 interval)
 {
   AutoLock lock(&m_objectCS);
   if (interval < MINIMAL_POLLING_INTERVAL) {
@@ -627,7 +627,7 @@ void ::remoting_node::ServerConfig::setPollingInterval(unsigned int interval)
   }
 }
 
-unsigned int ::remoting_node::ServerConfig::getPollingInterval()
+::u32 ::remoting_node::ServerConfig::getPollingInterval()
 {
   AutoLock lock(&m_objectCS);
   return m_pollingInterval;
@@ -657,13 +657,13 @@ bool ::remoting_node::ServerConfig::isLocalInputPriorityEnabled()
   return m_localInputPriority;
 }
 
-unsigned int ::remoting_node::ServerConfig::getLocalInputPriorityTimeout()
+::u32 ::remoting_node::ServerConfig::getLocalInputPriorityTimeout()
 {
   AutoLock lock(&m_objectCS);
   return m_localInputPriorityTimeout;
 }
 
-void ::remoting_node::ServerConfig::setLocalInputPriorityTimeout(unsigned int value)
+void ::remoting_node::ServerConfig::setLocalInputPriorityTimeout(::u32 value)
 {
   AutoLock lock(&m_objectCS);
   if (value < MINIMAL_LOCAL_INPUT_PRIORITY_TIMEOUT) {
@@ -685,13 +685,13 @@ bool ::remoting_node::ServerConfig::isBlockingLocalInput()
   return m_blockLocalInput;
 }
 
-unsigned int ::remoting_node::ServerConfig::getQueryTimeout()
+::u32 ::remoting_node::ServerConfig::getQueryTimeout()
 {
   AutoLock lock(&m_objectCS);
   return m_queryTimeout;
 }
 
-void ::remoting_node::ServerConfig::setQueryTimeout(unsigned int timeout)
+void ::remoting_node::ServerConfig::setQueryTimeout(::u32 timeout)
 {
   AutoLock lock(&m_objectCS);
   if (timeout < MINIMAL_QUERY_TIMEOUT) {
@@ -745,13 +745,13 @@ bool ::remoting_node::ServerConfig::isLoopbackConnectionsAllowed()
   return &m_videoClassNames;
 }
 
-unsigned int ::remoting_node::ServerConfig::getVideoRecognitionInterval()
+::u32 ::remoting_node::ServerConfig::getVideoRecognitionInterval()
 {
   AutoLock lock(&m_objectCS);
   return m_videoRecognitionInterval;
 }
 
-void ::remoting_node::ServerConfig::setVideoRecognitionInterval(unsigned int interval)
+void ::remoting_node::ServerConfig::setVideoRecognitionInterval(::u32 interval)
 {
   AutoLock lock(&m_objectCS);
 

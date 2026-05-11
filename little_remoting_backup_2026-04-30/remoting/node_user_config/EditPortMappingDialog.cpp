@@ -152,7 +152,7 @@ namespace remoting_node
       return true;
    }
 
-   bool EditPortMappingDialog::onCommand(unsigned int cID, unsigned int nID)
+   bool EditPortMappingDialog::onCommand(::u32 cID, ::u32 nID)
    {
       switch (cID) {
          case ::innate_subsystem::e_control_id_ok:

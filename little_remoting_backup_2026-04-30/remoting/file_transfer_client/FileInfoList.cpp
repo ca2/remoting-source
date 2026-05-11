@@ -192,7 +192,7 @@ namespace remoting
          ::pointer < FileInfoList >pcurrent;
          ::pointer < FileInfoList > pprev;
 
-         for (unsigned int i = 0; i < fileinfoa.size(); i++) {
+         for (::u32 i = 0; i < fileinfoa.size(); i++) {
             pcurrent = allocateø FileInfoList(pparticle, *fileinfoa[i]);
             pcurrent->setPrev(pprev);
             if (pprev) {

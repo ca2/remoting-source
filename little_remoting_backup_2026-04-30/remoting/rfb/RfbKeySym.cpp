@@ -47,7 +47,7 @@ namespace remoting
 
    void RfbKeySym::sendModifier(unsigned char virtKey, bool down)
    {
-      unsigned int rfbSym;
+      ::u32 rfbSym;
       bool success = m_keyMap.virtualCodeToKeySym(&rfbSym, virtKey);
       ASSERT(success);
       sendKeySymEvent(rfbSym, down);
@@ -58,10 +58,10 @@ namespace remoting
    }
 
    void RfbKeySym::processKeyEvent(unsigned short virtKey,
-                                   unsigned int addKeyData)
+                                   ::u32 addKeyData)
    {
       m_plogwriter->debug("processKeyEvent() function called: virtKey = %#4.4x, addKeyData"
-                 " = %#x", (unsigned int)virtKey, addKeyData);
+                 " = %#x", (::u32)virtKey, addKeyData);
 
 #ifdef WINDOWS
        // Ignoring win key (when fullscreen mode is off).
@@ -74,7 +74,7 @@ namespace remoting
 #endif
 
       bool down = (addKeyData & 0x80000000) == 0;
-      m_plogwriter->debug("down = %u", (unsigned int)down);
+      m_plogwriter->debug("down = %u", (::u32)down);
 
 
       bool ctrlPressed = m_keyboardstate.isPressed(VK_LCONTROL) ||
@@ -85,10 +85,10 @@ namespace remoting
          m_keyboardstate.isPressed(VK_LSHIFT) || m_keyboardstate.isPressed(VK_RSHIFT);
       bool capsToggled = m_keyboardstate.isPressed(VK_CAPITAL);
       m_plogwriter->debug("ctrl = %u, alt = %u, shift = %u, caps toggled = %u",
-        (unsigned int)ctrlPressed,
-        (unsigned int)altPressed,
-        (unsigned int)shiftPressed,
-        (unsigned int)capsToggled);
+        (::u32)ctrlPressed,
+        (::u32)altPressed,
+        (::u32)shiftPressed,
+        (::u32)capsToggled);
 
       // Without distinguishing between left and right modifiers.
       m_keyboardstate.m_viewerKeyState[virtKey & 255] = down ? 128 : 0;
@@ -99,7 +99,7 @@ namespace remoting
 
       // With distinguishing between left and right modifiers.
       m_keyboardstate.m_serverKeyState[virtKey & 255] = down ? 128 : 0;
-      unsigned int rfbSym;
+      ::u32 rfbSym;
       if (m_keyMap.virtualCodeToKeySym(&rfbSym, virtKey & 255)) {
          // Special case for VK_RETURN that have no self numpad code.
          // FIXME: May be replace this code to the virtualCodeToKeySym() function?
@@ -124,7 +124,7 @@ namespace remoting
                sendKeySymEvent(rfbSym, down);
             } else {
                m_plogwriter->error("Can't translate the %#4.4x unicode character to an"
-                 " rfb symbol to send it", (unsigned int)chars[i]);
+                 " rfb symbol to send it", (::u32)chars[i]);
             }
          }
          if (ctrlPressed && altPressed && needReleaseModifiers) {
@@ -143,7 +143,7 @@ namespace remoting
          m_keyboardstate.isPressed(VK_LMENU) || m_keyboardstate.isPressed(VK_RMENU);
       bool shiftPressed =
          m_keyboardstate.isPressed(VK_LSHIFT) || m_keyboardstate.isPressed(VK_RSHIFT);
-      unsigned int oldCh = (unsigned int)ch;
+      ::u32 oldCh = (::u32)ch;
       if (ctrlPressed && !altPressed && ch < 32) {
          if (ch >= 1 && ch <= 26 && !shiftPressed) {
             ch += 96;
@@ -153,7 +153,7 @@ namespace remoting
          }
          m_plogwriter->debug("The %u char is a control symbol then"
            " it will be increased to %u",
-           oldCh, (unsigned int)ch);
+           oldCh, (::u32)ch);
       }
       return ch;
    }*/
@@ -272,12 +272,12 @@ namespace remoting
    }
 
    void RfbKeySym::processCharEvent(int charCode,
-                                    unsigned int addKeyData)
+                                    ::u32 addKeyData)
    {
       if (m_keyboardstate.m_allowProcessCharEvent) {
          m_plogwriter->debug("processCharEvent() function called with alowed processing:"
                     " charCode = %#4.4x, addKeyData = %#x",
-                    (unsigned int)charCode, addKeyData);
+                    (::u32)charCode, addKeyData);
          // For keyboards with dead keys
          if (m_keyboardstate.m_allowProcessDoubleChar)
          {
@@ -293,13 +293,13 @@ namespace remoting
             m_keyboardstate.m_allowProcessCharEvent = false;
          }
 
-         unsigned int rfbSym;
+         ::u32 rfbSym;
          if (m_keyMap.unicodeCharToKeySym(charCode, &rfbSym)) {
             sendKeySymEvent(rfbSym, true);
             sendKeySymEvent(rfbSym, false);
          } else {
             m_plogwriter->error("Can't translate the %#4.4x unicode character to an"
-                       " rfb symbol to send it", (unsigned int)charCode);
+                       " rfb symbol to send it", (::u32)charCode);
          }
       }
    }
@@ -384,7 +384,7 @@ namespace remoting
 
    void RfbKeySym::releaseModifier(unsigned char modifier)
    {
-      unsigned int rfbSym;
+      ::u32 rfbSym;
       if (m_keyboardstate.isPressed(modifier)) {
          bool success = m_keyMap.virtualCodeToKeySym(&rfbSym, modifier);
          _ASSERT(success);
@@ -418,7 +418,7 @@ namespace remoting
 
    void RfbKeySym::restoreModifier(unsigned char modifier)
    {
-      unsigned int rfbSym;
+      ::u32 rfbSym;
       if (m_keyboardstate.isPressed(modifier))
       {
          bool success = m_keyMap.virtualCodeToKeySym(&rfbSym, modifier);
@@ -437,7 +437,7 @@ namespace remoting
       m_keyboardstate.m_serverKeyState[virtKey] = testedState ? 128 : 0;
 
       if (testedState != srvState) {
-         unsigned int rfbSym;
+         ::u32 rfbSym;
          bool success = m_keyMap.virtualCodeToKeySym(&rfbSym, virtKey);
          _ASSERT(success);
          sendKeySymEvent(rfbSym, testedState);
@@ -445,7 +445,7 @@ namespace remoting
    }
 
 
-   void RfbKeySym::sendKeySymEvent(unsigned int rfbKeySym, bool down)
+   void RfbKeySym::sendKeySymEvent(::u32 rfbKeySym, bool down)
    {
       // // Translate Alt to Meta if Scroll Lock is on.
       // if (rfbKeySym == XK_Alt_L || rfbKeySym == XK_Alt_R) {
@@ -465,7 +465,7 @@ namespace remoting
       sendVerbatimKeySymEvent(rfbKeySym, down);
    }
 
-   void RfbKeySym::sendVerbatimKeySymEvent(unsigned int rfbKeySym, bool down)
+   void RfbKeySym::sendVerbatimKeySymEvent(::u32 rfbKeySym, bool down)
    {
       m_extKeySymListener->onRfbKeySymEvent(rfbKeySym, down);
    }

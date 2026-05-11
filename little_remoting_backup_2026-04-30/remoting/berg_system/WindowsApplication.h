@@ -72,7 +72,7 @@ public:
   /**
    * Posts scopedstrMessage to main window.
    */
-  virtual void postMessage(unsigned int scopedstrMessage, ::wparam wParam = 0, ::lparam lParam = 0);
+  virtual void postMessage(::u32 scopedstrMessage, ::wparam wParam = 0, ::lparam lParam = 0);
 
   /**
    * Adds modeless dialog to application modeless dialog ::list_base to
@@ -101,7 +101,7 @@ public:
   /**
    * Windows prodecure for main application window.
    */
-  static LRESULT CALLBACK wndProc(HWND hWnd, unsigned int msg, ::wparam wparam, ::lparam lparam);
+  static LRESULT CALLBACK wndProc(HWND hWnd, ::u32 msg, ::wparam wparam, ::lparam lparam);
 
   HINSTANCE m_appInstance;
   HWND m_mainWindow;

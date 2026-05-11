@@ -155,7 +155,7 @@ namespace remoting
    void UpdateFilter::getChangedRegion(Region & region, const ::int_rectangle & rectangle)
    {
 
-      const unsigned int bytesPerPixel = m_pframebuffer->getBytesPerPixel();
+      const ::u32 bytesPerPixel = m_pframebuffer->getBytesPerPixel();
       const int bytes_per_scanline = (rectangle.right - rectangle.left) * bytesPerPixel;
 
       const int bytesPerRow = m_pframebuffer->getBytesPerRow();
@@ -226,7 +226,7 @@ namespace remoting
          return;
       }
 
-      const unsigned int bytesPerPixel = m_pframebuffer->getBytesPerPixel();
+      const ::u32 bytesPerPixel = m_pframebuffer->getBytesPerPixel();
 
       ::int_rectangle new_rect;
       int x, y, ay;
@@ -253,8 +253,8 @@ namespace remoting
             unsigned char *n_block_ptr = n_row_ptr;
             unsigned char *o_block_ptr = o_row_ptr;
 
-            const unsigned int blockright = minimum(x + BLOCK_SIZE, rectangle.right);
-            const unsigned int bytesPerBlockRow = (blockright - x) * bytesPerPixel;
+            const ::u32 blockright = minimum(x + BLOCK_SIZE, rectangle.right);
+            const ::u32 bytesPerBlockRow = (blockright - x) * bytesPerPixel;
 
             // Scan this block
             for (ay = y; ay < blockbottom; ay++)
@@ -305,7 +305,7 @@ namespace remoting
 
    void UpdateFilter::updateChangedSubRect(Region & region, const ::int_rectangle & rectangle)
    {
-      const unsigned int bytesPerPixel = m_pframebuffer->getBytesPerPixel();
+      const ::u32 bytesPerPixel = m_pframebuffer->getBytesPerPixel();
       int bytes_in_row = (rectangle.right - rectangle.left) * bytesPerPixel;
       int y, i;
 

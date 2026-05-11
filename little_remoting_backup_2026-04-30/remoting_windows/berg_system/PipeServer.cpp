@@ -33,7 +33,7 @@ DynamicLibrary* PipeServer::m_pdynamiclibraryKernel32 = 0;
 pGetNamedPipeClientProcessId PipeServer::m_GetNamedPipeClientProcessId = 0;
 volatile bool PipeServer::m_initialized = false;
 
-PipeServer::PipeServer(const ::scoped_string & scopedstrName, unsigned int bufferSize,
+PipeServer::PipeServer(const ::scoped_string & scopedstrName, ::u32 bufferSize,
                        SecurityAttributes *secAttr,
                        DWORD milliseconds)
 : m_milliseconds(milliseconds),

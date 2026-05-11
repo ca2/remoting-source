@@ -130,7 +130,7 @@ namespace remoting
       ::int_rectangle_array_base rectanglea;
       ::int_rectangle_array_base::iterator iRect;
       updatecontainer.m_regionChanged.getRects(&rectanglea);
-      unsigned int countChangedRect = (unsigned int)rectanglea.size();
+      ::u32 countChangedRect = (::u32)rectanglea.size();
       _ASSERT(countChangedRect == rectanglea.size());
       m_plogwriter->debug("UpdateHandlerServer: send %u changed rectangles", countChangedRect);
       pblockinggate->writeUInt32(countChangedRect);

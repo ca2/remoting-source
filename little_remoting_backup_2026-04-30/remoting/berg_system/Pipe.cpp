@@ -29,7 +29,7 @@
 #include "subsystem/node/OperatingSystem.h"
 //#include "subsystem/thread/lockable_critical_section.h"
 
-Pipe::Pipe(unsigned int maxPortionSize)
+Pipe::Pipe(::u32 maxPortionSize)
 : m_totalRead(0),
   m_totalWrote(0),
   m_maxPortionSize(maxPortionSize)
@@ -40,7 +40,7 @@ Pipe::~Pipe()
 {
 }
 
-unsigned int Pipe::getMaxPortionSize()
+::u32 Pipe::getMaxPortionSize()
 {
   return m_maxPortionSize;
 }

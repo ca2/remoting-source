@@ -53,12 +53,12 @@ namespace remoting
 
 
 
-      //ReconnectingChannel(unsigned int timeOut, ::subsystem::LogWriter * plogwriter);
+      //ReconnectingChannel(::u32 timeOut, ::subsystem::LogWriter * plogwriter);
       ReconnectingChannel();
       ~ReconnectingChannel() override;
 
 
-      virtual void initialize_reconnecting_channel(unsigned int timeOut, ::subsystem::LogWriter * plogwriter);
+      virtual void initialize_reconnecting_channel(::u32 timeOut, ::subsystem::LogWriter * plogwriter);
 
       memsize read(void *buffer, memsize len) override;
       memsize defer_write(const void *buffer, memsize len) override;

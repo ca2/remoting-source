@@ -295,7 +295,7 @@ SHORT InputInjector::searchVirtKey(WCHAR ch, HKL hklCurrent)
     }
     ::string errMess;
     errMess.formatf("Can't translate the {} character to the scan code",
-                   (unsigned int)ch);
+                   (::u32)ch);
     throw ::subsystem::Exception(errMess);
   }
   if (isDeadKey(vkKeyScanResult, hklCurrent)) {
@@ -305,13 +305,13 @@ SHORT InputInjector::searchVirtKey(WCHAR ch, HKL hklCurrent)
   if (!isOneKeyEventChar(ch, vkKeyScanResult, hklCurrent)) {
     ::string errMess;
     errMess.formatf("Can't get the {} character by one keyboard event",
-                   (unsigned int)ch);
+                   (::u32)ch);
     throw ::subsystem::Exception(errMess);
   }
   // Special trick to get round a problem when printing the ^6 characters
   // instead of estimated 6.
   if (!modifiersPressed) {
-    unsigned short layout = ((unsigned int)hklCurrent & 0xffff0000) >> 16;
+    unsigned short layout = ((::u32)hklCurrent & 0xffff0000) >> 16;
     const unsigned short TURKISH = MAKELANGID(LANG_TURKISH, SUBLANG_DEFAULT);
     const unsigned short NORWEGIAN = MAKELANGID(LANG_NORWEGIAN, SUBLANG_DEFAULT);
     const unsigned short BRAZILIAN = MAKELANGID(LANG_PORTUGUESE, SUBLANG_PORTUGUESE_BRAZILIAN);
