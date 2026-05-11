@@ -36,6 +36,6 @@ typedef ::u64 X11REGION_UINT64;
 typedef signed char X11REGION_INT8;
 typedef signed short X11REGION_INT16;
 typedef signed int X11REGION_INT32;
-typedef signed long long X11REGION_INT64;
+typedef signed ::i64 X11REGION_INT64;
 
 #endif // __X11REGION_INTTYPES_H__
