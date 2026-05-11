@@ -27,7 +27,7 @@
 // #include aaa_<stdio.h>
 
 PortMappingRect::PortMappingRect(int l, int t, int r, int b)
- : ::int_rectangle(l, t, r, b)
+ : ::i32_rectangle(l, t, r, b)
 {
 }
 

@@ -33,13 +33,13 @@ namespace remoting
    {
    }
 
-   void WatermarksController::setNewFbProperties(const ::int_rectangle &  rectangle, const ::innate_subsystem::PixelFormat & pixelformat)
+   void WatermarksController::setNewFbProperties(const ::i32_rectangle &  rectangle, const ::innate_subsystem::PixelFormat & pixelformat)
    {
       setNewPixelFormat(pixelformat);
       setNewFbSize(rectangle);
    }
 
-   void WatermarksController::setNewFbSize(const ::int_rectangle &  rectangle)
+   void WatermarksController::setNewFbSize(const ::i32_rectangle &  rectangle)
    {
       if (m_currentFramebufferRect != rectangle || is_empty())
       {
@@ -71,7 +71,7 @@ namespace remoting
          pframebuffer->setPixelFormat(pixelformat);
 
          PixelConverter pc = PixelConverter();
-         ::int_rectangle rectangle = pframebuffer->getDimension();
+         ::i32_rectangle rectangle = pframebuffer->getDimension();
 
          pc.setPixelFormats(pframebuffer->getPixelFormat(), temp.getPixelFormat());
 
@@ -91,7 +91,7 @@ namespace remoting
       pframebuffer->copyFrom(m_currentRect, &m_overlay, 0, 0);
    }
 
-   const ::int_rectangle WatermarksController::CurrentRect()
+   const ::i32_rectangle WatermarksController::CurrentRect()
    {
       return m_currentRect;
    }
@@ -122,7 +122,7 @@ namespace remoting
       unsigned char* buffer = new unsigned char[bufferSize];
 
 
-      ::int_size size(m_width, m_height);
+      ::i32_size size(m_width, m_height);
       ::innate_subsystem::PixelFormat pixelformat = ::innate_subsystem::StandardPixelFormatFactory::create32bppPixelFormat();
       m_pframebuffer->setPropertiesWithoutResize(size, pixelformat);
       m_overlay.setPropertiesWithoutResize(m_overlay.getDimension(), pixelformat);

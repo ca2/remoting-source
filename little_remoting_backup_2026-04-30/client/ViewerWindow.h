@@ -86,7 +86,7 @@ namespace remoting_client
        // It's size of work-area in windowed mode. It is necessary for restore size of window.
        // WINDOWPLACEMENT m_workArea;
        // It's size of optimal size of work-area in windowed mode.
-       //::int_rectangle m_rcNormal;
+       //::i32_rectangle m_rcNormal;
 
 
        // Flag is set after recv first scopedstrMessage WM_SIZING.
@@ -195,7 +195,7 @@ namespace remoting_client
         void onDisconnect(const ::scoped_string & scopedstrMessage);
         void onAuthError(const ::remoting::AuthException *exception);
         void onError(const ::subsystem::Exception *exception);
-        void onFramebufferUpdate(const ::innate_subsystem::Framebuffer *pframebuffer, const ::int_rectangle &  rectangle);
+        void onFramebufferUpdate(const ::innate_subsystem::Framebuffer *pframebuffer, const ::i32_rectangle &  rectangle);
         void onFramebufferPropChange(const ::innate_subsystem::Framebuffer *pframebuffer);
         void onCutText(const ::scoped_string & cutText);
 
@@ -207,11 +207,11 @@ namespace remoting_client
         // function return default rectangle of viewer window:
         // if size of remote screen is more local desktop, then return rectangle of desktop
         // else return rectangle of remote screen + border
-        bool onCalculateDefaultSize(::int_rectangle & rectangleDefaultSize) override;
+        bool onCalculateDefaultSize(::i32_rectangle & rectangleDefaultSize) override;
 
         void changeCursor(int type);
         void applySettings();
-        //::int_rectangle getFullScreenRect();
+        //::i32_rectangle getFullScreenRect();
 
        void onBeforeFullScreen(bool bRestore) override;
        void onAfterFullScreen(bool bRestore) override;

@@ -474,7 +474,7 @@ namespace remoting_client
          kbdName[2] = _T('?');
 
 
-        ::int_rectangle geometry;
+        ::i32_rectangle geometry;
         int pixelSize = 0;
         m_pdesktopwindow->getServerGeometry(&geometry, &pixelSize);
         ::string str;
@@ -763,7 +763,7 @@ namespace remoting_client
                 int wndWidth = rcWindow.width() - 1;
                 int wndHeight = rcWindow.height();
 
-                ::int_rectangle screen = m_pdesktopwindow->getFramebufferGeometry();
+                ::i32_rectangle screen = m_pdesktopwindow->getFramebufferGeometry();
 
                 if (wndWidth * screen.height() <= wndHeight * screen.width()) {
                     m_pconnectionconfig->setScale(wndWidth, screen.width());
@@ -908,7 +908,7 @@ namespace remoting_client
     //     redraw();
     // }
 
-    // ::int_rectangle ViewerWindow::getFullScreenRect()
+    // ::i32_rectangle ViewerWindow::getFullScreenRect()
     // {
     //
     //
@@ -925,7 +925,7 @@ namespace remoting_client
     //         m_plogwriter->warning("Get monitor info is failed. Use second method (no multi-screen).");
     //         GetWindowRect(GetDesktopWindow(), &fullScreenWindowsRect);
     //     }
-    //     ::int_rectangle fullScreenRect;
+    //     ::i32_rectangle fullScreenRect;
     //     fullScreenRect = fullScreenWindowsRect;
     //
     //
@@ -1179,7 +1179,7 @@ namespace remoting_client
     //     //// Restore pointPosition, style and exstyle of windowed window.
     //     //set_style(get_style() | WS_CAPTION | WS_BORDER | WS_THICKFRAME | WS_MAXIMIZEBOX);
     //     set_ex_style(get_ex_style() & ~WS_EX_TOPMOST);
-    //     //::int_rectangle workArea;
+    //     //::i32_rectangle workArea;
     //     //workArea = m_workArea.rcNormalPosition;
     //     //if (m_rcNormal.height() == workArea.height() ||
     //     //    m_rcNormal.width() == workArea.width()) {
@@ -1348,7 +1348,7 @@ namespace remoting_client
     }
 
 
-   bool ViewerWindow::onCalculateDefaultSize(::int_rectangle & rectangle)
+   bool ViewerWindow::onCalculateDefaultSize(::i32_rectangle & rectangle)
     {
 
        auto & defaultRect = rectangle;
@@ -1358,7 +1358,7 @@ namespace remoting_client
         int widthDesktop  = defaultRect.width();
         int heightDesktop = defaultRect.height();
 
-        ::int_rectangle viewerRect = m_pdesktopwindow->getViewerGeometry();
+        ::i32_rectangle viewerRect = m_pdesktopwindow->getViewerGeometry();
         int serverWidth = viewerRect.width();
         int serverHeight = viewerRect.height();
 
@@ -1472,7 +1472,7 @@ namespace remoting_client
         postMessage(WM_USER_ERROR);
     }
 
-    void ViewerWindow::onFramebufferUpdate(const ::innate_subsystem::Framebuffer *pframebuffer, const ::int_rectangle &  rectangle)
+    void ViewerWindow::onFramebufferUpdate(const ::innate_subsystem::Framebuffer *pframebuffer, const ::i32_rectangle &  rectangle)
     {
         m_pdesktopwindow->updateFramebuffer(pframebuffer, rectangle);
     }
@@ -1508,7 +1508,7 @@ namespace remoting_client
     // {
     //     // If size isn't changed by user, then adjust size.
     //     if (!m_sizeIsChanged) {
-    //         ::int_rectangle defaultSize = calculateDefaultSize();
+    //         ::i32_rectangle defaultSize = calculateDefaultSize();
     //         bool defaultSizeIsChanged = defaultSize.width() != m_rcNormal.width() ||
     //                                     defaultSize.height() != m_rcNormal.height();
     //         // If size is changed, isn't full screen, if window isn't maximized,

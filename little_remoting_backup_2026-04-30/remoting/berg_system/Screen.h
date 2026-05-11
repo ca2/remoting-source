@@ -47,13 +47,13 @@ public:
   // update() function.
   // Desktop dimension is a dimension of windows virtual desktop including
   // all monitors.
-  ::int_size getDesktopDimension();
+  ::i32_size getDesktopDimension();
 
   // Returns a rectangle that was at latest call of the
   // update() function.
   // The rectangle is a rectangle of windows virtual desktop including
   // all monitors (coordinates can be negative).
-  ::int_rectangle getDesktopRect();
+  ::i32_rectangle getDesktopRect();
 
   // This structure can be used by user code.
   struct BMI
@@ -87,7 +87,7 @@ private:
   void fillScreenRect();
 
   ::innate_subsystem::PixelFormat m_pixelformat;
-  ::int_rectangle m_virtDesktopRect;
+  ::i32_rectangle m_virtDesktopRect;
 };
 
 //// __SCREEN_H__

@@ -233,10 +233,10 @@ namespace remoting
                                            &output, m_id, m_pdesktop, m_plogwriter);
          m_plogwriter->debug("UpdateSender has been created for client #{}", m_id);
          ::innate_subsystem::PixelFormat pixelformat;
-         ::int_size sizeFramebuffer;
+         ::i32_size sizeFramebuffer;
          m_pdesktop->getFramebufferProperties(&sizeFramebuffer, &pixelformat);
-         ::int_rectangle rectangleViewport = getViewport(sizeFramebuffer);
-         m_pupdatesender->init(::int_size(rectangleViewport.size()), pixelformat);
+         ::i32_rectangle rectangleViewport = getViewport(sizeFramebuffer);
+         m_pupdatesender->init(::i32_size(rectangleViewport.size()), pixelformat);
          m_plogwriter->debug("UpdateSender has been initialized");
          // ClientInputHandler initialization
          m_pclientinputhandler = new ClientInputHandler(&m_prfbcoderegistrator, this,
@@ -267,7 +267,7 @@ namespace remoting
                                                       rectangleViewport.height());
          m_plogwriter->information("Entering RFB initialization phase 2");
          rfbInitializer.afterAuthPhase(&srvToClCaps, &clToSrvCaps,
-                                       &encCaps, &::int_size(&rectangleViewport), &pixelformat);
+                                       &encCaps, &::i32_size(&rectangleViewport), &pixelformat);
          m_plogwriter->debug("RFB initialization phase 2 completed");
 
          // Start normal phase
@@ -342,10 +342,10 @@ namespace remoting
       //        to compute regions on each mouse move.
 
       ::innate_subsystem::PixelFormat pixelformatStub;
-      ::int_size sizeFramebuffer;
+      ::i32_size sizeFramebuffer;
       m_pdesktop->getFramebufferProperties(&sizeFramebuffer, &pixelformatStub);
 
-      ::int_rectangle rectangleViewport;
+      ::i32_rectangle rectangleViewport;
       bool shareApp;
       Region sharedRegion;
       getViewPortInfo(&sizeFramebuffer, &rectangleViewport, &shareApp, &sharedRegion);
@@ -363,7 +363,7 @@ namespace remoting
       }
    }
 
-   ::int_rectangle RfbClient::getViewport(const ::int_size & sizeFramebuffer)
+   ::i32_rectangle RfbClient::getViewport(const ::i32_size & sizeFramebuffer)
    {
       critical_section_lock al(&m_criticalsectionViewport);
       m_pviewportConst->update(sizeFramebuffer);
@@ -373,7 +373,7 @@ namespace remoting
         m_pviewportDynamic->getViewport());
    }
 
-   void RfbClient::getViewPortInfo(const ::int_size & sizeFramebuffer, ::int_rectangle &rectangleResult,
+   void RfbClient::getViewPortInfo(const ::i32_size & sizeFramebuffer, ::i32_rectangle &rectangleResult,
                                    bool *shareApp, Region & regionShareApp)
    {
       critical_section_lock al(&m_criticalsectionViewport);
@@ -385,10 +385,10 @@ namespace remoting
       }
    }
 
-   void RfbClient::onGetViewPort(::int_rectangle &viewRect, bool *shareApp, Region & regionShareApp)
+   void RfbClient::onGetViewPort(::i32_rectangle &viewRect, bool *shareApp, Region & regionShareApp)
    {
       ::innate_subsystem::PixelFormat pixelformatStub;
-      ::int_size sizeFramebuffer;
+      ::i32_size sizeFramebuffer;
       m_pdesktop->getFramebufferProperties(&sizeFramebuffer, &pixelformatStub);
       getViewPortInfo(&sizeFramebuffer, viewRect, shareApp, regionShareApp);
    }

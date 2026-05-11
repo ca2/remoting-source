@@ -42,7 +42,7 @@ namespace remoting
       return EncodingDefs::RRE;
    }
 
-   void RreEncoder::splitRectangle(const ::int_rectangle &  rectangle,
+   void RreEncoder::splitRectangle(const ::i32_rectangle &  rectangle,
                                    ::int_rectangle_array_base & rectanglea,
                                    const ::innate_subsystem::Framebuffer *serverFb,
                                    const EncodeOptions *options)
@@ -51,12 +51,12 @@ namespace remoting
          for (int x0 = rectangle.left; x0 < rectangle.right; x0 += RECT_SIZE) {
             int x1 = min(x0 + RECT_SIZE, rectangle.right);
             int y1 = min(y0 + RECT_SIZE, rectangle.bottom);
-            rectanglea.add(::int_rectangle(x0, y0, x1, y1));
+            rectanglea.add(::i32_rectangle(x0, y0, x1, y1));
          }
       }
    }
 
-   void RreEncoder::sendRectangle(const ::int_rectangle &  rectangle,
+   void RreEncoder::sendRectangle(const ::i32_rectangle &  rectangle,
                                   const ::innate_subsystem::Framebuffer *serverFb,
                                   const EncodeOptions *options)
    {
@@ -76,7 +76,7 @@ namespace remoting
    }
 
    template <class PIXEL_T>
-   void RreEncoder::rreEncode(const ::int_rectangle &  r,
+   void RreEncoder::rreEncode(const ::i32_rectangle &  r,
                               const ::innate_subsystem::Framebuffer *pframebuffer)
    {
       PIXEL_T *buffer = (PIXEL_T *)pframebuffer->getBuffer();
@@ -102,7 +102,7 @@ namespace remoting
                    (buffer[i * fbWidth + j] & mask) != (buffer[i * fbWidth + j - 1] & mask) ||
                    m_rects.back().top != (i - r.top)) {
                   subrectPixelValue.add(buffer[i * fbWidth + j] & mask);
-                  ::int_rectangle rectangle(0, 0, 1, 1);
+                  ::i32_rectangle rectangle(0, 0, 1, 1);
                   rectangle.set_top_left(j - r.left, i - r.top);
                   m_rects.add(rectangle);
                    } else {

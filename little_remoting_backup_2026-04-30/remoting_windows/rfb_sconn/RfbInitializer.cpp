@@ -71,7 +71,7 @@ namespace remoting
    void RfbInitializer::afterAuthPhase(const CapContainer *srvToClCaps,
                                        const CapContainer *clToSrvCaps,
                                        const CapContainer *encCaps,
-                                       const ::int_size & size,
+                                       const ::i32_size & size,
                                        const ::innate_subsystem::PixelFormat & pixelformat)
    {
       sendServerInit(size, pixelformat);
@@ -280,7 +280,7 @@ namespace remoting
       m_shared = m_input->readUInt8() != 0;
    }
 
-   void RfbInitializer::sendServerInit(const ::int_size & size,
+   void RfbInitializer::sendServerInit(const ::i32_size & size,
                                        const ::innate_subsystem::PixelFormat & pixelformat)
    {
       m_output->writeUInt16((unsigned short)size->width);

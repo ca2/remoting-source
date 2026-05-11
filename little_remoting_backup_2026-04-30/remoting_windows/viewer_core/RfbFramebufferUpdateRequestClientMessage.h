@@ -36,13 +36,13 @@ namespace remoting
    {
    public:
       RfbFramebufferUpdateRequestClientMessage
-        (bool incremental, ::int_rectangle updateRect);
+        (bool incremental, ::i32_rectangle updateRect);
       ~RfbFramebufferUpdateRequestClientMessage();
 
       void send(::remoting::RfbOutputGate *output);
 
    private:
       bool m_incremental;
-      ::int_rectangle m_rect;
+      ::i32_rectangle m_rect;
    };
 } // namespace remoting

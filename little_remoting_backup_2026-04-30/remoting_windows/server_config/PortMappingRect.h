@@ -30,7 +30,7 @@
 #include "acme/prototype/geometry2d/rectangle.h"
 
 
-class PortMappingRect : public ::int_rectangle
+class PortMappingRect : public ::i32_rectangle
 {
 public:
   PortMappingRect(int left, int right, int top, int bottom);

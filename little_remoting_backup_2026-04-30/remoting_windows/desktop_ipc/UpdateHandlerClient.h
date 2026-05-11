@@ -54,7 +54,7 @@ namespace remoting
       virtual bool checkForUpdates(Region & region);
 
    //protected:
-      virtual void getScreenProperties(::innate_subsystem::PixelFormat & pixelformat, ::int_size & size);
+      virtual void getScreenProperties(::innate_subsystem::PixelFormat & pixelformat, ::i32_size & size);
       virtual void sendInit(BlockingGate *pblockinggate);
 
       // To catch update event
