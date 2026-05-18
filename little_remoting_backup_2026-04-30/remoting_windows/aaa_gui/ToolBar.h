@@ -109,7 +109,7 @@ namespace remoting
 
       // setButtonSize() sets the size of the buttons to be added to a toolbar.
       // Button size must be largen the button bitmap.
-      bool setButtonsSize(const ::int_size & size);
+      bool setButtonsSize(const ::i32_size & size);
 
       // autoSize() resizes the toolbar window.
       void autoSize();

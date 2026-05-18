@@ -132,7 +132,7 @@ namespace remoting
             wi.cbSize = sizeof(WINDOWINFO);
             if (GetWindowInfo(videoHWND, &wi))
             {
-               ::int_rectangle rectangleVideo(wi.rcClient.left, wi.rcClient.top, wi.rcClient.right, wi.rcClient.bottom);
+               ::i32_rectangle rectangleVideo(wi.rcClient.left, wi.rcClient.top, wi.rcClient.right, wi.rcClient.bottom);
                if (rectangleVideo.isValid())
                {
                   rectangleVideo.move(-GetSystemMetrics(SM_XVIRTUALSCREEN), -GetSystemMetrics(SM_YVIRTUALSCREEN));
@@ -147,7 +147,7 @@ namespace remoting
    Region WinVideoRegionUpdaterImpl::getRectsByCoords(::int_rectangle_array_base &rectanglea)
    {
       ::int_rectangle_array_base::iterator rIter;
-      ::int_rectangle rectangleVideo;
+      ::i32_rectangle rectangleVideo;
       Region vidRegion;
       for (rIter = rectanglea.begin(); rIter != rectanglea.end(); rIter++)
       {

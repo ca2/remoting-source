@@ -38,21 +38,21 @@ public:
   virtual ~DibFramebuffer();
 
   virtual void setColor(unsigned char reg, unsigned char green, unsigned char blue);
-  virtual void fillRect(const ::int_rectangle &  rectangleTarget, unsigned int color);
+  virtual void fillRect(const ::i32_rectangle &  rectangleTarget, unsigned int color);
 
   virtual bool isEqualTo(const ::innate_subsystem::Framebuffer *pframebuffer);
 
-  virtual bool copyFrom(const ::int_rectangle &  rectangleTarget, const ::innate_subsystem::Framebuffer *pframebufferSource,
+  virtual bool copyFrom(const ::i32_rectangle &  rectangleTarget, const ::innate_subsystem::Framebuffer *pframebufferSource,
                         int srcX, int srcY);
   virtual bool copyFrom(const ::innate_subsystem::Framebuffer *pframebufferSource,
                         int srcX, int srcY);
-  virtual bool overlay(const ::int_rectangle &  rectangleTarget, const ::innate_subsystem::Framebuffer *pframebufferSource,
+  virtual bool overlay(const ::i32_rectangle &  rectangleTarget, const ::innate_subsystem::Framebuffer *pframebufferSource,
                        int srcX, int srcY, const char *andMask);
-  virtual void move(const ::int_rectangle &  rectangleTarget, const int srcX, const int srcY);
-  virtual bool cmpFrom(const ::int_rectangle &  rectangleTarget, const ::innate_subsystem::Framebuffer *pframebufferSource,
+  virtual void move(const ::i32_rectangle &  rectangleTarget, const int srcX, const int srcY);
+  virtual bool cmpFrom(const ::i32_rectangle &  rectangleTarget, const ::innate_subsystem::Framebuffer *pframebufferSource,
                        const int srcX, const int srcY);
 
-  virtual inline ::int_size getDimension() const;
+  virtual inline ::i32_size getDimension() const;
 
   virtual inline ::innate_subsystem::PixelFormat getPixelFormat() const;
 
@@ -63,7 +63,7 @@ public:
   // a session of the DIB section later.
   // The compatibleWindow handle can be zero then the function will take a DC of entire desktop.
   // Note that other function that can change properties will throw ::subsystem::Exception().
-  virtual void setProperties(const ::int_size & sizeNew,
+  virtual void setProperties(const ::i32_size & sizeNew,
     const ::innate_subsystem::PixelFormat & pixelFormat, HWND compatibleWindow);
 
   // This function changes the target DC. In default target DC is a DC that has been
@@ -85,25 +85,25 @@ public:
   // DIB section) to the DIB section.
   // Note that this function does not copy any transparent windows.
   // This function throwing an exception on a failure.
-  void blitToDibSection(const ::int_rectangle &  rectangle);
+  void blitToDibSection(const ::i32_rectangle &  rectangle);
 
   // This function copies a block of bits from a source DC (that has been used to create the
   // DIB section) to the DIB section.
   // Note that this function copies transparent windows too.
   // This function throwing an exception on a failure.
-  void blitTransparentToDibSection(const ::int_rectangle &  rectangle);
+  void blitTransparentToDibSection(const ::i32_rectangle &  rectangle);
 
   // This function copies a block of bits from the DIB section to the source DC
   // (that has been used to create the compatible DIB section).
   // Note that this function does not copy any transparent windows.
   // This function throwing an exception on a failure.
-  void blitFromDibSection(const ::int_rectangle &  rectangle);
+  void blitFromDibSection(const ::i32_rectangle &  rectangle);
 
   // This function copies with strech a block of bits from the DIB section to the source DC
   // (that has been used to create the compatible DIB section).
   // Note that this function does not copy any transparent windows.
   // This function throwing an exception on a failure.
-  void stretchFromDibSection(const ::int_rectangle &  rectangleSource,const ::int_rectangle & rectangleTarget);
+  void stretchFromDibSection(const ::i32_rectangle &  rectangleSource,const ::i32_rectangle & rectangleTarget);
 
 private:
   // This section to reduce access to some function that have been inherited from the
@@ -111,19 +111,19 @@ private:
   // use this functions from a base class its will throw ::subsystem::Exception.
   virtual bool assignProperties(const ::innate_subsystem::Framebuffer *pframebufferSource);
   virtual bool clone(const ::innate_subsystem::Framebuffer *pframebufferSource);
-  virtual bool setDimension(const ::int_size & sizeNew);
-  virtual bool setDimension(const ::int_rectangle &  rectangle);
-  virtual void setEmptyDimension(const ::int_rectangle &  dimByRect);
+  virtual bool setDimension(const ::i32_size & sizeNew);
+  virtual bool setDimension(const ::i32_rectangle &  rectangle);
+  virtual void setEmptyDimension(const ::i32_rectangle &  dimByRect);
   virtual bool setPixelFormat(const ::innate_subsystem::PixelFormat & pixelFormat);
   virtual void setEmptyPixelFmt(const ::innate_subsystem::PixelFormat & pixelformat);
-  virtual bool setProperties(const ::int_size & sizeNew, const ::innate_subsystem::PixelFormat & pixelFormat);
-  virtual bool setProperties(const ::int_rectangle &  dimByRect, const ::innate_subsystem::PixelFormat & pixelFormat);
-  virtual void setPropertiesWithoutResize(const ::int_size & sizeNew, const ::innate_subsystem::PixelFormat & pixelformat);
+  virtual bool setProperties(const ::i32_size & sizeNew, const ::innate_subsystem::PixelFormat & pixelFormat);
+  virtual bool setProperties(const ::i32_rectangle &  dimByRect, const ::innate_subsystem::PixelFormat & pixelFormat);
+  virtual void setPropertiesWithoutResize(const ::i32_size & sizeNew, const ::innate_subsystem::PixelFormat & pixelformat);
   virtual void setBuffer(void *newBuffer);
 
 private:
   // This function updates a DIB section in accord with the ::innate_subsystem::Framebuffer
-  void *updateDibSection(const ::int_size & sizeNew,
+  void *updateDibSection(const ::i32_size & sizeNew,
     const ::innate_subsystem::PixelFormat & pixelFormat,
     HWND compatibleWindow);
   void releaseDibSection();

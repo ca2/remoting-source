@@ -185,7 +185,7 @@ namespace remoting
       newCursorShape.setHotSpot(shapeInfo.HotSpot.x, shapeInfo.HotSpot.y);
 
       unsigned int pitch;
-      ::int_size size;
+      ::i32_size size;
 
       if (shapeInfo.Type == DXGI_OUTDUPL_POINTER_SHAPE_TYPE_MONOCHROME)
       {

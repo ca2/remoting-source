@@ -53,13 +53,13 @@ namespace remoting
       void executeDetection();
       void terminateDetection();
 
-      bool grabFb(const ::int_rectangle & rectangle);
+      bool grabFb(const ::i32_rectangle & rectangle);
 
       virtual ::innate_subsystem::Framebuffer *getScreenBuffer();
 
       // Updates destination (*dst) cursor shape properties and data.
       void updateCursorShape(CursorShape *dst);
-      ::int_point getCursorPosition();
+      ::i32_point getCursorPosition();
 
       bool isValid();
 
@@ -70,7 +70,7 @@ namespace remoting
    private:
       // Implementions of the Win8DuplicationListener listener functions.
       virtual void onFramebufferUpdate(const Region & regionChanged);
-      virtual void onCopyRect(const ::int_rectangle &rectangleTarget, int srcX, int srcY);
+      virtual void onCopyRect(const ::i32_rectangle &rectangleTarget, int srcX, int srcY);
       virtual void onCursorPositionChanged(int x, int y);
       virtual void onCursorShapeChanged();
       virtual void onRecoverableError(const ::scoped_string &scopedstrReason);
@@ -99,7 +99,7 @@ namespace remoting
       ::innate_subsystem::Framebuffer m_pframebuffer;
 
       // Cursor's properties changes at all time. And then it should be safe by a local mutex.
-      ::int_point m_latestCursorPos;
+      ::i32_point m_latestCursorPos;
       Win8CursorShape m_win8CursorShape;
       LONGLONG m_curTimeStamp;
       lockable_critical_section m_cursorMutex;

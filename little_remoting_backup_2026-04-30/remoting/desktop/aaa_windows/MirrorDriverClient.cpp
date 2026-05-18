@@ -93,7 +93,7 @@ namespace remoting
 
    ::innate_subsystem::PixelFormat MirrorDriverClient::getPixelFormat() const { return m_pixelformat; }
 
-   ::int_size MirrorDriverClient::getDimension() const { return m_size; }
+   ::i32_size MirrorDriverClient::getDimension() const { return m_size; }
 
    void *MirrorDriverClient::getBuffer() { return m_screenBuffer; }
 
@@ -256,7 +256,7 @@ namespace remoting
       m_pixelformat.blueShift = 0;
       m_pixelformat.colorDepth = 24;
 
-      ::int_rectangle virtDeskRect = m_screen.getDesktopRect();
+      ::i32_rectangle virtDeskRect = m_screen.getDesktopRect();
       m_size.set(&virtDeskRect);
       m_pointTopLeftCorner.setPoint(virtDeskRect.left, virtDeskRect.top);
    }

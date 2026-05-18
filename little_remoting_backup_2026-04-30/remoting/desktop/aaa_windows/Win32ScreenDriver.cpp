@@ -63,13 +63,13 @@ namespace remoting
       m_hooks.wait();
    }
 
-   ::int_size Win32ScreenDriver::getScreenDimension()
+   ::i32_size Win32ScreenDriver::getScreenDimension()
    {
       critical_section_lock al(framebuffer_critical_section());
-      return ::int_size(&m_pscreengrabber.getScreenRect());
+      return ::i32_size(&m_pscreengrabber.getScreenRect());
    }
 
-   bool Win32ScreenDriver::grabFb(const ::int_rectangle & rectangle)
+   bool Win32ScreenDriver::grabFb(const ::i32_rectangle & rectangle)
    {
       critical_section_lock al(framebuffer_critical_section());
       return m_pscreengrabber.grab(rectangle);

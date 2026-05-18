@@ -27,7 +27,7 @@
 
 namespace remoting
 {
-   Bitmap::Bitmap(const ::int_size & size)
+   Bitmap::Bitmap(const ::i32_size & size)
    : m_bitmap(NULL)
    {
       // Prepare buffer
@@ -41,7 +41,7 @@ namespace remoting
       }
    }
 
-   Bitmap::Bitmap(HDC dc, const ::int_size & size)
+   Bitmap::Bitmap(HDC dc, const ::i32_size & size)
    {
       m_bitmap = CreateCompatibleBitmap(dc, width, height);
    }

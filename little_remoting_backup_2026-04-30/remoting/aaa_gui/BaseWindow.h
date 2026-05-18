@@ -56,7 +56,7 @@ public:
   void hide();
   void enableWindow(bool bEnable);
   void updateWindow();
-  bool setSize(const ::int_size & size);
+  bool setSize(const ::i32_size & size);
   bool setPosition(int xPos, int yPos);
   void setWindowText(const ::scoped_string & text);
 

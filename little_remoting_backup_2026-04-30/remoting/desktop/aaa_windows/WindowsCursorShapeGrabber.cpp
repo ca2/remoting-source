@@ -102,7 +102,7 @@ namespace remoting
 
       const ::innate_subsystem::Framebuffer *pixels = m_cursorshape.getPixels();
 
-      m_cursorshape.setProperties(&::int_size(width, height), pixelFormat);
+      m_cursorshape.setProperties(&::i32_size(width, height), pixelFormat);
 
       ::array_base<char> maskBuff(widthBytes * bmMask.bmHeight);
       if (maskBuff.empty())

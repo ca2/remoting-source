@@ -67,7 +67,7 @@ namespace remoting
       }
    }
 
-   ::int_size Win8ScreenDriver::getScreenDimension()
+   ::i32_size Win8ScreenDriver::getScreenDimension()
    {
       critical_section_lock al(&m_drvImplMutex);
       return m_pwin8screendriveriimpl->getScreenBuffer()->getDimension();
@@ -79,7 +79,7 @@ namespace remoting
       return m_pwin8screendriveriimpl->getScreenBuffer();
    }
 
-   bool Win8ScreenDriver::grabFb(const ::int_rectangle & rectangle)
+   bool Win8ScreenDriver::grabFb(const ::i32_rectangle & rectangle)
    {
       critical_section_lock al(&m_drvImplMutex);
       return m_pwin8screendriveriimpl->grabFb(rectangle);
@@ -130,13 +130,13 @@ namespace remoting
 
    const CursorShape *Win8ScreenDriver::getCursorShape() { return &m_cursorshape; }
 
-   ::int_point Win8ScreenDriver::getCursorPosition()
+   ::i32_point Win8ScreenDriver::getCursorPosition()
    {
       critical_section_lock al(&m_drvImplMutex);
       return m_pwin8screendriveriimpl->getCursorPosition();
    }
 
-   void Win8ScreenDriver::getCopiedRegion(::int_rectangle &rectangleCopy, ::int_point & pointSource)
+   void Win8ScreenDriver::getCopiedRegion(::i32_rectangle &rectangleCopy, ::i32_point & pointSource)
    {
       critical_section_lock al(m_pcriticalsectionFramebuffer);
       m_pcopyrectdetector.detectWindowMovements(rectangleCopy, source);

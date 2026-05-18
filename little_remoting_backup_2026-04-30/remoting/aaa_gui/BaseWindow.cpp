@@ -51,7 +51,7 @@ void BaseWindow::setClass(const ::scoped_string & className)
 }
 
 bool BaseWindow::createWindow(const ::scoped_string & windowName, DWORD style, HWND hWndParent,
-                              int xPos, int yPos, const ::int_size & size)
+                              int xPos, int yPos, const ::i32_size & size)
 {
   if (m_hwnd) {
     return false;
@@ -117,7 +117,7 @@ void BaseWindow::hide()
   ShowWindow(m_hwnd, SW_HIDE);
 }
 
-bool BaseWindow::setSize(const ::int_size & size)
+bool BaseWindow::setSize(const ::i32_size & size)
 {
   _ASSERT(m_hwnd != 0);
   return !!SetWindowPos(m_hwnd, 0, 0, 0, width, height, 

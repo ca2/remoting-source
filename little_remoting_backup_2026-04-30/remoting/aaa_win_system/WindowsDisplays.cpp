@@ -42,7 +42,7 @@ bool CALLBACK WindowsDisplays::monitorEnumProc(HMONITOR hMonitor,
                                                ::lparam dwData)
 {
   WindowsDisplays *_this = (WindowsDisplays *)dwData;
-  ::int_rectangle rectangle(lprcMonitor->left - _this->m_xVirtualScreen,
+  ::i32_rectangle rectangle(lprcMonitor->left - _this->m_xVirtualScreen,
             lprcMonitor->top - _this->m_yVirtualScreen,
             lprcMonitor->right - _this->m_xVirtualScreen,
             lprcMonitor->bottom - _this->m_yVirtualScreen);
@@ -67,7 +67,7 @@ void WindowsDisplays::update()
 }
 
 void WindowsDisplays::getDisplayCoordinates(unsigned char displayNumber,
-                                            ::int_rectangle &prectangle)
+                                            ::i32_rectangle &prectangle)
 {
   critical_section_lock al(&m_displayRectsMutex);
   update();

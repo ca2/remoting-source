@@ -56,7 +56,7 @@ void DibFramebuffer::setColor(unsigned char reg, unsigned char green, unsigned c
   m_fb.setColor(reg, green, blue);
 }
 
-void DibFramebuffer::fillRect(const ::int_rectangle &  rectangleTarget, unsigned int color)
+void DibFramebuffer::fillRect(const ::i32_rectangle &  rectangleTarget, unsigned int color)
 {
   m_fb.fillRect(rectangleTarget, color);
 }
@@ -66,7 +66,7 @@ bool DibFramebuffer::isEqualTo(const ::innate_subsystem::Framebuffer *pframebuff
   return m_fb.isEqualTo(pframebuffer);
 }
 
-bool DibFramebuffer::copyFrom(const ::int_rectangle &  rectangleTarget, const ::innate_subsystem::Framebuffer *pframebufferSource,
+bool DibFramebuffer::copyFrom(const ::i32_rectangle &  rectangleTarget, const ::innate_subsystem::Framebuffer *pframebufferSource,
                               int srcX, int srcY)
 {
   return m_fb.copyFrom(rectangleTarget, pframebufferSource, srcX, srcY);
@@ -77,34 +77,34 @@ bool DibFramebuffer::copyFrom(const ::innate_subsystem::Framebuffer *pframebuffe
   return m_fb.copyFrom(pframebufferSource, srcX, srcY);
 }
 
-bool DibFramebuffer::overlay(const ::int_rectangle &  rectangleTarget, const ::innate_subsystem::Framebuffer *pframebufferSource,
+bool DibFramebuffer::overlay(const ::i32_rectangle &  rectangleTarget, const ::innate_subsystem::Framebuffer *pframebufferSource,
                              int srcX, int srcY, const char *andMask)
 {
   return m_fb.overlay(rectangleTarget, pframebufferSource, srcX, srcY, andMask);
 }
 
-void DibFramebuffer::move(const ::int_rectangle &  rectangleTarget, const int srcX, const int srcY)
+void DibFramebuffer::move(const ::i32_rectangle &  rectangleTarget, const int srcX, const int srcY)
 {
   m_fb.move(rectangleTarget, srcX, srcY);
 }
 
-bool DibFramebuffer::cmpFrom(const ::int_rectangle &  rectangleTarget, const ::innate_subsystem::Framebuffer *pframebufferSource,
+bool DibFramebuffer::cmpFrom(const ::i32_rectangle &  rectangleTarget, const ::innate_subsystem::Framebuffer *pframebufferSource,
                              const int srcX, const int srcY)
 {
   return m_fb.cmpFrom(rectangleTarget, pframebufferSource, srcX, srcY);
 }
 
-bool DibFramebuffer::setDimension(const ::int_size & sizeNew)
+bool DibFramebuffer::setDimension(const ::i32_size & sizeNew)
 {
   throw ::subsystem::Exception("Wrong: You shouln't use the DibFramebuffer::clone() function.");
 }
 
-bool DibFramebuffer::setDimension(const ::int_rectangle &  rectangle)
+bool DibFramebuffer::setDimension(const ::i32_rectangle &  rectangle)
 {
   throw ::subsystem::Exception("Wrong: You shouln't use the DibFramebuffer::clone() function.");
 }
 
-void DibFramebuffer::setEmptyDimension(const ::int_rectangle &  dimByRect)
+void DibFramebuffer::setEmptyDimension(const ::i32_rectangle &  dimByRect)
 {
   throw ::subsystem::Exception("This function is deprecated");
 }
@@ -114,12 +114,12 @@ void DibFramebuffer::setEmptyPixelFmt(const ::innate_subsystem::PixelFormat & pi
   throw ::subsystem::Exception("This function is deprecated");
 }
 
-void DibFramebuffer::setPropertiesWithoutResize(const ::int_size & sizeNew, const ::innate_subsystem::PixelFormat & pixelformat)
+void DibFramebuffer::setPropertiesWithoutResize(const ::i32_size & sizeNew, const ::innate_subsystem::PixelFormat & pixelformat)
 {
   throw ::subsystem::Exception("Wrong: You shouln't use the DibFramebuffer::setPropertiesWithoutResize() function.");
 }
 
-inline ::int_size DibFramebuffer::getDimension() const
+inline ::i32_size DibFramebuffer::getDimension() const
 {
   return m_fb.getDimension();
 }
@@ -134,12 +134,12 @@ inline ::innate_subsystem::PixelFormat DibFramebuffer::getPixelFormat() const
   return m_fb.getPixelFormat();
 }
 
-bool DibFramebuffer::setProperties(const ::int_size & sizeNew, const ::innate_subsystem::PixelFormat & pixelFormat)
+bool DibFramebuffer::setProperties(const ::i32_size & sizeNew, const ::innate_subsystem::PixelFormat & pixelFormat)
 {
   throw ::subsystem::Exception("Wrong: You shouln't use this variant of the DibFramebuffer::setProperties() function.");
 }
 
-bool DibFramebuffer::setProperties(const ::int_rectangle &  dimByRect, const ::innate_subsystem::PixelFormat & pixelFormat)
+bool DibFramebuffer::setProperties(const ::i32_rectangle &  dimByRect, const ::innate_subsystem::PixelFormat & pixelFormat)
 {
   throw ::subsystem::Exception("Wrong: You shouln't use this variant of the DibFramebuffer::setProperties() function.");
 }
@@ -179,31 +179,31 @@ inline int DibFramebuffer::getBytesPerRow() const
   return m_fb.getBytesPerRow();
 }
 
-void DibFramebuffer::blitToDibSection(const ::int_rectangle &  rectangle)
+void DibFramebuffer::blitToDibSection(const ::i32_rectangle &  rectangle)
 {
   checkDibValid();
   m_dibSection->blitToDibSection(rectangle);
 }
 
-void DibFramebuffer::blitTransparentToDibSection(const ::int_rectangle &  rectangle)
+void DibFramebuffer::blitTransparentToDibSection(const ::i32_rectangle &  rectangle)
 {
   checkDibValid();
   m_dibSection->blitTransparentToDibSection(rectangle);
 }
 
-void DibFramebuffer::blitFromDibSection(const ::int_rectangle &  rectangle)
+void DibFramebuffer::blitFromDibSection(const ::i32_rectangle &  rectangle)
 {
   checkDibValid();
   m_dibSection->blitFromDibSection(rectangle);
 }
 
-void DibFramebuffer::stretchFromDibSection(const ::int_rectangle &  rectangleSource,const ::int_rectangle & rectangleTarget)
+void DibFramebuffer::stretchFromDibSection(const ::i32_rectangle &  rectangleSource,const ::i32_rectangle & rectangleTarget)
 {
   checkDibValid();
   m_dibSection->stretchFromDibSection(rectangleSource, rectangleTarget);
 }
 
-void DibFramebuffer::setProperties(const ::int_size & sizeNew,
+void DibFramebuffer::setProperties(const ::i32_size & sizeNew,
                                    const ::innate_subsystem::PixelFormat & pixelFormat,
                                    HWND compatibleWindow)
 {
@@ -212,7 +212,7 @@ void DibFramebuffer::setProperties(const ::int_size & sizeNew,
   m_fb.setBuffer(buffer);
 }
 
-void *DibFramebuffer::updateDibSection(const ::int_size & sizeNew,
+void *DibFramebuffer::updateDibSection(const ::i32_size & sizeNew,
                                       const ::innate_subsystem::PixelFormat & pixelFormat,
                                       HWND compatibleWindow)
 {

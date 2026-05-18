@@ -46,7 +46,7 @@ public:
 
   virtual void setWindow(const ::operating_system::window & operatingsystemwindow);
 
-  void setIcon(HICON *icon, const ::int_size & size);
+  void setIcon(HICON *icon, const ::i32_size & size);
 
 //private:
 

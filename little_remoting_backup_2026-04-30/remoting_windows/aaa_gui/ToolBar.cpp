@@ -159,7 +159,7 @@ namespace remoting
       return !!result;
    }
 
-   bool ToolBar::setButtonsSize(const ::int_size & size)
+   bool ToolBar::setButtonsSize(const ::i32_size & size)
    {
       LRESULT result = SendMessage(m_hWndToolbar, TB_SETBUTTONSIZE,
                                    0, MAKELONG(width, height));

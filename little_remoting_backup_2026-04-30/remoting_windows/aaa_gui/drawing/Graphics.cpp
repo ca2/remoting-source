@@ -111,7 +111,7 @@ namespace remoting
    //    m_yLast = y;
    // }
    //
-   // void Graphics::fill_solid_rectangle(const ::int_rectangle & rectangle, const ::color::color & color)
+   // void Graphics::fill_solid_rectangle(const ::i32_rectangle & rectangle, const ::color::color & color)
    // {
    //
    //    ::Gdiplus::Graphics g(m_hdc);
@@ -144,7 +144,7 @@ namespace remoting
    //    // SetBkColor(m_hdc, oldColor);
    // }
 
-   void Graphics::fillRect(const ::int_rectangle & r, const Brush *pbrush)
+   void Graphics::fillRect(const ::i32_rectangle & r, const Brush *pbrush)
    {
 
       fillRect(r.left, r.top, r.right, r.bottom, pbrush);
@@ -302,7 +302,7 @@ namespace remoting
       m_yLast = y;
    }
 
-   void GraphicsPlus::fill_solid_rectangle(const ::int_rectangle & rectangle, const ::color::color & color)
+   void GraphicsPlus::fill_solid_rectangle(const ::i32_rectangle & rectangle, const ::color::color & color)
    {
 
       //::Gdiplus::Graphics g(m_hdc);
@@ -333,7 +333,7 @@ namespace remoting
       // SetBkColor(m_hdc, oldColor);
    }
 
-   // void Graphics::fillRect(const ::int_rectangle & r, const Brush *pbrush)
+   // void Graphics::fillRect(const ::i32_rectangle & r, const Brush *pbrush)
    // {
    //
    //    fillRect(r.left, r.top, r.right, r.bottom, pbrush);

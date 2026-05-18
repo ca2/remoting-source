@@ -58,7 +58,7 @@ namespace remoting
      // Initialisation
      pframebuffer = new WindowsScreenGrabber;
 
-     ::int_rectangle rectangleGrab, workRect;
+     ::i32_rectangle rectangleGrab, workRect;
      workRect.setRect(100, 100, 500, 500);
      rectangleGrab.setRect(20, 20, 120, 120); // Relative to the workRect
      pframebuffer->setWorkRect(&workRect);
@@ -83,7 +83,7 @@ namespace remoting
       WindowsScreenGrabber(void);
       virtual ~WindowsScreenGrabber(void);
 
-      virtual bool grab(const ::int_rectangle & rectangle);
+      virtual bool grab(const ::i32_rectangle & rectangle);
 
       inline virtual bool getPropertiesChanged();
       inline virtual bool getPixelFormatChanged();
@@ -99,7 +99,7 @@ namespace remoting
 
       virtual bool openDIBSection();
       virtual bool closeDIBSection();
-      virtual bool grabByDIBSection(const ::int_rectangle & rectangle);
+      virtual bool grabByDIBSection(const ::i32_rectangle & rectangle);
 
       // Windows specific variebles
       HDC m_destDC, m_screenDC;
@@ -111,7 +111,7 @@ namespace remoting
       ::happening m_threadStopper;
 
       // private:
-      ::int_size m_dibSectionDim;
+      ::i32_size m_dibSectionDim;
       ::remoting_node::ServerConfig *m_pserverconfig;
 
       // Screen m_screen;

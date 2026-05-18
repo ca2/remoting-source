@@ -43,7 +43,7 @@ namespace remoting
    WindowsUserInput::~WindowsUserInput(void) { delete m_clipboard; }
 
    // FIXME: refactor this horror.
-   void WindowsUserInput::setMouseEvent(const ::int_point pointNewPosition, unsigned char keyFlag)
+   void WindowsUserInput::setMouseEvent(const ::i32_point pointNewPosition, unsigned char keyFlag)
    {
       m_plogwriter->debug("setMouseEvent ({},{}):{}", pointNewPosition.x, pointNewPosition.x, keyFlag);
       if (GetSystemMetrics(SM_SWAPBUTTON))
@@ -194,7 +194,7 @@ namespace remoting
       }
    }
 
-   void WindowsUserInput::getPrimaryDisplayCoords(::int_rectangle & rectangle)
+   void WindowsUserInput::getPrimaryDisplayCoords(::i32_rectangle & rectangle)
    {
       prect->left = 0;
       prect->top = 0;
@@ -203,21 +203,21 @@ namespace remoting
       prect->move(-GetSystemMetrics(SM_XVIRTUALSCREEN), -GetSystemMetrics(SM_YVIRTUALSCREEN));
    }
 
-   void WindowsUserInput::getDisplayNumberCoords(::int_rectangle rectangle, unsigned char dispNumber)
+   void WindowsUserInput::getDisplayNumberCoords(::i32_rectangle rectangle, unsigned char dispNumber)
    {
       m_winDisplays.getDisplayCoordinates(dispNumber, rectangle);
    }
 
    ::int_rectangle_array_base WindowsUserInput::getDisplaysCoords() { return m_winDisplays.getDisplaysCoords(); }
 
-   void WindowsUserInput::getNormalizedRect(::int_rectangle rectangle) { toFbCoordinates(rectangle); }
+   void WindowsUserInput::getNormalizedRect(::i32_rectangle rectangle) { toFbCoordinates(rectangle); }
 
-   void WindowsUserInput::toFbCoordinates(::int_rectangle rectangle)
+   void WindowsUserInput::toFbCoordinates(::i32_rectangle rectangle)
    {
       rectangle.move(-GetSystemMetrics(SM_XVIRTUALSCREEN), -GetSystemMetrics(SM_YVIRTUALSCREEN));
    }
 
-   void WindowsUserInput::getWindowCoords(const ::operating_system::window & operatingsystemwindow, ::int_rectangle rectangle)
+   void WindowsUserInput::getWindowCoords(const ::operating_system::window & operatingsystemwindow, ::i32_rectangle rectangle)
    {
       rectangle.clear();
       RECT rectangle;
@@ -245,7 +245,7 @@ namespace remoting
       HWND hForegr = GetWindow(GetForegroundWindow(), GW_HWNDLAST);
 
       RECT rectangle;
-      ::int_rectangle rectangle;
+      ::i32_rectangle rectangle;
       while (hForegr != NULL)
       {
          GetWindowRect(hForegr, &rectangle);

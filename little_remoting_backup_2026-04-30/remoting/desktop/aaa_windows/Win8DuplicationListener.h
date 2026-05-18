@@ -37,7 +37,7 @@ namespace remoting
       // m_regionChanged in target ::innate_subsystem::Framebuffer coordinates.
       virtual void onFramebufferUpdate(const Region & regionChanged) = 0;
       // rectangleTarget, srcX, srcY in target ::innate_subsystem::Framebuffer coordinates.
-      virtual void onCopyRect(const ::int_rectangle &rectangleTarget, int srcX, int srcY) = 0;
+      virtual void onCopyRect(const ::i32_rectangle &rectangleTarget, int srcX, int srcY) = 0;
 
       virtual void onCursorPositionChanged(int x, int y) = 0;
       virtual void onCursorShapeChanged() = 0;

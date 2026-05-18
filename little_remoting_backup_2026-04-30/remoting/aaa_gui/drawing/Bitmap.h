@@ -39,9 +39,9 @@ namespace remoting
    {
    public:
       // Creates empty bitmap with specified size.
-      Bitmap(const ::int_size & size);
+      Bitmap(const ::i32_size & size);
       // Creates compatible with dc bitmap with specified size.
-      Bitmap(HDC dc, const ::int_size & size);
+      Bitmap(HDC dc, const ::i32_size & size);
       // Creates bitmap from HBITMAP object.
       Bitmap(HBITMAP bitmap);
       // Destroys bitmap object.

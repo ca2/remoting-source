@@ -46,7 +46,7 @@ namespace remoting
 
       bool isAttachedtoDesktop();
 
-      ::int_rectangle getDesktopCoordinates();
+      ::i32_rectangle getDesktopCoordinates();
 
       DXGI_MODE_ROTATION getRotation() const;
 

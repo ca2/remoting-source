@@ -26,7 +26,7 @@
 #include "DibSection.h"
 #include "subsystem/node/SystemException.h"
 
-DibSection::DibSection(const ::innate_subsystem::PixelFormat & pixelformat, const ::int_size & size, HWND compatibleWin)
+DibSection::DibSection(const ::innate_subsystem::PixelFormat & pixelformat, const ::i32_size & size, HWND compatibleWin)
 : m_isOwnTargetDC(false),
   m_targetDC(0),
   m_memDC(0),
@@ -64,27 +64,27 @@ void *DibSection::getBuffer()
   return m_buffer;
 }
 
-void DibSection::blitToDibSection(const ::int_rectangle &  rectangle)
+void DibSection::blitToDibSection(const ::i32_rectangle &  rectangle)
 {
   blitToDibSection(rectangle, SRCCOPY);
 }
 
-void DibSection::blitTransparentToDibSection(const ::int_rectangle &  rectangle)
+void DibSection::blitTransparentToDibSection(const ::i32_rectangle &  rectangle)
 {
   blitToDibSection(rectangle, SRCCOPY | CAPTUREBLT);
 }
 
-void DibSection::blitFromDibSection(const ::int_rectangle &  rectangle)
+void DibSection::blitFromDibSection(const ::i32_rectangle &  rectangle)
 {
   blitFromDibSection(rectangle, SRCCOPY);
 }
 
-void DibSection::stretchFromDibSection(const ::int_rectangle &  rectangleSource,const ::int_rectangle & rectangleTarget)
+void DibSection::stretchFromDibSection(const ::i32_rectangle &  rectangleSource,const ::i32_rectangle & rectangleTarget)
 {
   stretchFromDibSection(rectangleSource, rectangleTarget, SRCCOPY);
 }
 
-void DibSection::blitToDibSection(const ::int_rectangle &  rectangle, DWORD flags)
+void DibSection::blitToDibSection(const ::i32_rectangle &  rectangle, DWORD flags)
 {
   if (BitBlt(m_memDC, rectangle.left, rectangle.top, rectangle.width(), rectangle.height(),
              m_targetDC, rectangle.left + m_srcOffsetX,
@@ -93,7 +93,7 @@ void DibSection::blitToDibSection(const ::int_rectangle &  rectangle, DWORD flag
   }
 }
 
-void DibSection::blitFromDibSection(const ::int_rectangle &  rectangle, DWORD flags)
+void DibSection::blitFromDibSection(const ::i32_rectangle &  rectangle, DWORD flags)
 {
   if (BitBlt(m_targetDC, rectangle.left + m_srcOffsetX, rectangle.top + m_srcOffsetY,
              rectangle.width(), rectangle.height(),
@@ -102,7 +102,7 @@ void DibSection::blitFromDibSection(const ::int_rectangle &  rectangle, DWORD fl
   }
 }
 
-void DibSection::stretchFromDibSection(const ::int_rectangle &  rectangleSource,const ::int_rectangle & rectangleTarget, DWORD flags)
+void DibSection::stretchFromDibSection(const ::i32_rectangle &  rectangleSource,const ::i32_rectangle & rectangleTarget, DWORD flags)
 {
   SetStretchBltMode(m_targetDC, HALFTONE);
   if (StretchBlt(m_targetDC, rectangleSource.left + m_srcOffsetX, rectangleSource.top + m_srcOffsetY,
@@ -113,7 +113,7 @@ void DibSection::stretchFromDibSection(const ::int_rectangle &  rectangleSource,
   }
 }
 
-void DibSection::setupBMIStruct(BITMAPINFO *pBmi, const ::innate_subsystem::PixelFormat & pixelformat, const ::int_size & size)
+void DibSection::setupBMIStruct(BITMAPINFO *pBmi, const ::innate_subsystem::PixelFormat & pixelformat, const ::i32_size & size)
 {
   if (pixelformat.bitsPerPixel == 8) {
     Screen::Palette8bitBMI *paletteBMI = reinterpret_cast<Screen::Palette8bitBMI *>(pBmi);
@@ -146,7 +146,7 @@ void DibSection::setupBMIStruct(BITMAPINFO *pBmi, const ::innate_subsystem::Pixe
   pBmi->bmiHeader.biHeight = -size.cy;
 }
 
-void DibSection::openDIBSection(const ::innate_subsystem::PixelFormat & pixelformat, const ::int_size & size, HWND compatibleWin)
+void DibSection::openDIBSection(const ::innate_subsystem::PixelFormat & pixelformat, const ::i32_size & size, HWND compatibleWin)
 {
   m_targetDC = GetDC(compatibleWin);
   m_isOwnTargetDC = true;
@@ -157,7 +157,7 @@ void DibSection::openDIBSection(const ::innate_subsystem::PixelFormat & pixelfor
     // In this special case is needed to store offset of the desktop, because coordinates
     // of the top level corner may be non zero.
     m_screen.update();
-    ::int_rectangle deskRect = m_screen.getDesktopRect();
+    ::i32_rectangle deskRect = m_screen.getDesktopRect();
     m_srcOffsetX = deskRect.left;
     m_srcOffsetY = deskRect.top;
   }

@@ -65,9 +65,9 @@ namespace remoting
       //void ExLineTo(int x, int y);
 
       // Draws filled rectangle.
-      void fillRect(const ::int_rectangle & r, const Brush *brush);
+      void fillRect(const ::i32_rectangle & r, const Brush *brush);
       void fillRect(int l, int t, int r, int b, const Brush *brush);
-      //void fill_solid_rectangle( const ::int_rectangle & rectangle, const ::color::color & color);
+      //void fill_solid_rectangle( const ::i32_rectangle & rectangle, const ::color::color & color);
 
       // Draws ellipse.
       void ellipse(int l, int t, int r, int b);
@@ -117,9 +117,9 @@ namespace remoting
       //void ExLineTo(int x, int y);
 
       // Draws filled rectangle.
-      //void fillRect(const ::int_rectangle & r, const Brush *brush);
+      //void fillRect(const ::i32_rectangle & r, const Brush *brush);
       //void fillRect(int l, int t, int r, int b, const Brush *brush);
-      void fill_solid_rectangle( const ::int_rectangle & rectangle, const ::color::color & color);
+      void fill_solid_rectangle( const ::i32_rectangle & rectangle, const ::color::color & color);
 
       // Draws ellipse.
       //void ellipse(int l, int t, int r, int b);

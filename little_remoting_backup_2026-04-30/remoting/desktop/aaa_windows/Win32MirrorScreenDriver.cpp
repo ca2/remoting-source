@@ -52,14 +52,14 @@ namespace remoting
       m_mirrorDriver.terminateDetection();
    }
 
-   ::int_size Win32MirrorScreenDriver::getScreenDimension() { return m_mirrorDriver.getScreenDimension(); }
+   ::i32_size Win32MirrorScreenDriver::getScreenDimension() { return m_mirrorDriver.getScreenDimension(); }
 
    ::innate_subsystem::Framebuffer *Win32MirrorScreenDriver::getScreenBuffer()
    {
       return m_mirrorDriver.getScreenBuffer();
    }
 
-   bool Win32MirrorScreenDriver::grabFb(const ::int_rectangle & rectangle) { return m_mirrorDriver.grab(rectangle); }
+   bool Win32MirrorScreenDriver::grabFb(const ::i32_rectangle & rectangle) { return m_mirrorDriver.grab(rectangle); }
 
    bool Win32MirrorScreenDriver::getScreenPropertiesChanged() { return m_mirrorDriver.getPropertiesChanged(); }
 

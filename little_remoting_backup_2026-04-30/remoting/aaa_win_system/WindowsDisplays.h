@@ -37,7 +37,7 @@ public:
   virtual ~WindowsDisplays();
 
   // If a display does not exist now the function return an empty rectangle.
-  void getDisplayCoordinates(unsigned char displayNumber, ::int_rectangle rectangle);
+  void getDisplayCoordinates(unsigned char displayNumber, ::i32_rectangle rectangle);
 
   ::int_rectangle_array_base getDisplaysCoords();
 
