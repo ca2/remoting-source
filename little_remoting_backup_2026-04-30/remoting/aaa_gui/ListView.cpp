@@ -248,10 +248,10 @@ unsigned int ListView::getSelectedItemsCount()
 }
 
 
-::int_array ListView::getSelectedItemsIndexes()
+::i32_array ListView::getSelectedItemsIndexes()
 {
   int i = -1;
-   ::int_array ia;
+   ::i32_array ia;
   for (unsigned int j = 0; j < getSelectedItemsCount(); j++)
      {
      ListView_GetNextItem(m_hwnd, i, LVNI_SELECTED);

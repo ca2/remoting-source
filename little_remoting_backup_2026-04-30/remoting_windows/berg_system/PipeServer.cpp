@@ -91,12 +91,12 @@ NamedPipe *PipeServer::accept()
   if (ConnectNamedPipe(m_serverPipe, &overlapped)) {
     // In success the overlapped ConnectNamedPipe() function must
     // return zero.
-    int errCode = GetLastError();
+    auto lasterror = ::windows::last_error();
     ::string errMess;
     errMess.formatf("ConnectNamedPipe failed, error code = {}", errCode);
     throw ::subsystem::Exception(errMess);
   } else {
-    int errCode = GetLastError();
+    auto lasterror = ::windows::last_error();
     switch(errCode) {
     case ERROR_PIPE_CONNECTED:
       break;
@@ -104,7 +104,7 @@ NamedPipe *PipeServer::accept()
       m_winEvent.wait(m_milliseconds * 1_ms);
       DWORD cbRet; // Fake
       if (!GetOverlappedResult(m_serverPipe, &overlapped, &cbRet, false)) {
-        int errCode = GetLastError();
+        auto lasterror = ::windows::last_error();
         ::string errMess;
         errMess.formatf("GetOverlappedResult() failed after the "
                        "ConnectNamedPipe() call, error code = {}", errCode);
@@ -136,7 +136,7 @@ void PipeServer::close()
     if (DisconnectNamedPipe(hPipe)) {
       m_isConnected = false;
     } else {
-      int errCode = GetLastError();
+      auto lasterror = ::windows::last_error();
       ::string errMess;
       errMess.formatf("DisconnectNamedPipe failed, error code = {}", errCode);
       throw ::subsystem::Exception(errMess);

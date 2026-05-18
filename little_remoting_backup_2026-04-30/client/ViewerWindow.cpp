@@ -160,7 +160,7 @@ namespace remoting_client
 
     bool ViewerWindow::onCreate(void * pCreateStruct)
     {
-        //getControl()->setWindow((HWND) _HWND());
+        //getControl()->setWindow(::as_HWND(this->operating_system_window()));
 
       auto pcursor = createø<::innate_subsystem::CursorInterface>();
       pcursor->initialize_with_system_cursor(::e_cursor_arrow);
@@ -332,7 +332,7 @@ namespace remoting_client
                 m_stopped = true;
                 return true;
             case WM_USER_STOP:
-                SendMessage((HWND) _HWND(), WM_DESTROY, 0, 0);
+                SendMessage(::as_HWND(this->operating_system_window()), WM_DESTROY, 0, 0);
                 return true;
             case WM_USER_FS_WARNING:
                 return onFsWarning();

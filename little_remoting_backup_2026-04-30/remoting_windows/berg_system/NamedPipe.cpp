@@ -51,7 +51,7 @@ void NamedPipe::close()
   critical_section_lock al(&m_hPipeMutex);
   if (m_asServer) {
     if (DisconnectNamedPipe(m_hPipe) == 0) {
-      DWORD errCode = GetLastError();
+      auto lasterror = ::windows::last_error();
       ::string errMess;
       errMess.formatf("DisconnectNamedPipe failed, error code = %u", errCode);
       throw ::subsystem::Exception(errMess);

@@ -159,7 +159,7 @@ public:
   // Sets selected ::list_base view index to output indexes array
   //
 
-  ::int_array getSelectedItemsIndexes();
+  ::i32_array getSelectedItemsIndexes();
 
 //protected:
 
