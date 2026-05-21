@@ -335,7 +335,7 @@
     <ClInclude Include="SocketIPv4Transport.h" />
     <ClInclude Include="Transport.h" />
     <ClInclude Include="TransportFactory.h" />
-    <ClInclude Include="TvnServerInfo.h" />
+    <ClInclude Include="RemotingNodeInfo.h" />
     <ClInclude Include="UpdateLocalConfigCommand.h" />
     <ClInclude Include="UpdateRemoteConfigCommand.h" />
     <ClInclude Include="_.h" />

@@ -217,7 +217,7 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="ResourceStrings.h" />
     <ClInclude Include="ScaleManager.h" />
-    <ClInclude Include="TvnViewer.h" />
+    <ClInclude Include="RemotingClient.h" />
     <ClInclude Include="ViewerCmdLine.h" />
     <ClInclude Include="ViewerCollector.h" />
     <ClInclude Include="ViewerInstance.h" />
@@ -234,8 +234,8 @@
     <None Include="res\ftfile.ico" />
     <None Include="res\nocursor.cur" />
     <None Include="res\smalldot.cur" />
-    <None Include="res\tightvnc.bmp" />
-    <None Include="res\tightvnc48.bmp" />
+    <None Include="res\remoting.bmp" />
+    <None Include="res\remoting48.bmp" />
     <None Include="res\toolbar.bmp" />
   </ItemGroup>
   <ItemGroup>

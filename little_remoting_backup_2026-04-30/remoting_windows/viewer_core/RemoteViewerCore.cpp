@@ -2,9 +2,9 @@
 // All rights reserved.
 //
 //-------------------------------------------------------------------------
-// This file is part of the TightVNC software.  Please visit our Web site:
+// This file is part of the T i g h t V N C software.  Please visit our Web site:
 //
-//                       http://www.tightvnc.com/
+//                       http://www.t i g h t v n c.com/
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -155,12 +155,12 @@ namespace remoting
       m_updateTimeout = 0;
 
       addClientMsgCapability(ClientMsgDefs::CLIENT_CUT_TEXT_UTF8,
-        VendorDefs::TIGHTVNC,
+        VendorDefs::REMOTING,
         Utf8CutTextDefs::CLIENT_CUT_TEXT_UTF8_SIG,
         "UTF-8 clipboard");
 
       addClientMsgCapability(ClientMsgDefs::ENABLE_CUT_TEXT_UTF8,
-        VendorDefs::TIGHTVNC,
+        VendorDefs::REMOTING,
         Utf8CutTextDefs::ENABLE_CUT_TEXT_UTF8_SIG,
         "enable UTF-8 clipboard");
    }
@@ -1030,7 +1030,7 @@ namespace remoting
    ::u32 RemoteViewerCore::receiveServerMessageType()
    {
       // Viewer in common case read first byte (unsigned char) as scopedstrMessage id,
-      // but if first byte is equal to 0xFC then it's TightVNC extension scopedstrMessage and
+      // but if first byte is equal to 0xFC then it's Remoting extension scopedstrMessage and
       // must read next 3 bytes and create ::u32 scopedstrMessage id for processing.
 
       static const unsigned short SERVER_MSG_SPECIAL_TIGHT_CODE = 0xFC;

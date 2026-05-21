@@ -2,9 +2,9 @@
 // All rights reserved.
 //
 //-------------------------------------------------------------------------
-// This file is part of the TightVNC software.  Please visit our Web site:
+// This file is part of the T i g h t V N C software.  Please visit our Web site:
 //
-//                       http://www.tightvnc.com/
+//                       http://www.t i g h t v n c.com/
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -198,7 +198,7 @@ namespace remoting_node_desktop
     return tvnsc.run();
   }
 
-  // No additional applications, run TightVNC server as single application.
+  // No additional applications, run Remoting Node as single application.
   crashHook.setGuiEnabled();
   ServerApplication tvnServer;
       tvnServer.initialize_server_application(::system()->m_hinstanceThis,
@@ -342,7 +342,7 @@ namespace remoting_node_desktop
 //     return tvnsc.run();
 //   }
 //
-//   // No additional applications, run TightVNC server as single application.
+//   // No additional applications, run Remoting Node as single application.
 //   crashHook.setGuiEnabled();
 //   ServerApplication tvnServer(hInstance,
 //     WindowNames::WINDOW_CLASS_NAME,
