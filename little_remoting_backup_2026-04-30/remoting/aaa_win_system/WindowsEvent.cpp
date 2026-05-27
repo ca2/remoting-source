@@ -26,7 +26,7 @@
 #include "::happening.h"
 #include "subsystem/platform/Exception.h"
 
-::happening::::happening(const ::scoped_string & scopedstrName)
+::happening::happening(const ::scoped_string & scopedstrName)
 {
   m_hEvent = CreateEvent(0, false, false, ::wstring(scopedstrName));
   if (m_hEvent == 0) {

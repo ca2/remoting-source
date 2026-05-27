@@ -46,7 +46,7 @@
 //    * Creates class ::time object with specified time value.
 //    * @param timeValue count of milliseconds from unix epoch.
 //    */
-//   class ::time(unsigned long long timeValue);
+//   class ::time(::u64 timeValue);
 //
 //   /**
 //    * Creates class ::time object from windows FILETIME structure.
@@ -57,7 +57,7 @@
 //   /**
 //    * Returns time in milliseconds from unix epoch.
 //    */
-//   unsigned long long getTime() const;
+//   ::u64 getTime() const;
 //
 //   class ::time operator- (const class ::time &d2);
 //   class ::time operator+ (const class ::time &d2);
@@ -94,7 +94,7 @@
 //   static class ::time now();
 //
 // protected:
-//   unsigned long long m_timeValue;
+//   ::u64 m_timeValue;
 // };
 //
 //

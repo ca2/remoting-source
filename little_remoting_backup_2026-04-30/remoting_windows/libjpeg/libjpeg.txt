@@ -854,7 +854,7 @@ jpeg_default_qtables (j_compress_ptr cinfo, boolean force_baseline)
 	(see below).
 
 jpeg_add_quant_table (j_compress_ptr cinfo, int which_tbl,
-		      const unsigned int *basic_table,
+		      const ::u32 *basic_table,
 		      int scale_factor, boolean force_baseline)
 	Allows an arbitrary quantization table to be created.  which_tbl
 	indicates which table slot to fill.  basic_table points to an array
@@ -908,7 +908,7 @@ J_DCT_METHOD dct_method
 	recommended if high quality is a concern.  JDCT_DEFAULT and
 	JDCT_FASTEST are macros configurable by each installation.
 
-unsigned int scale_num, scale_denom
+::u32 scale_num, scale_denom
 	Scale the image by the fraction scale_num/scale_denom.  Default is
 	1/1, or no scaling.  Currently, the supported scaling ratios are
 	M/N with all N from 1 to 16, where M is the destination DCT size,
@@ -941,7 +941,7 @@ boolean optimize_coding
 	TRUE, you need not supply Huffman tables at all, and any you do
 	supply will be overwritten.
 
-unsigned int restart_interval
+::u32 restart_interval
 int restart_in_rows
 	To emit restart markers in the JPEG file, set one of these nonzero.
 	Set restart_interval to specify the exact interval in MCU blocks.
@@ -993,8 +993,8 @@ unsigned char JFIF_minor_version
 	any JFIF 1.02 extension markers.
 
 unsigned char density_unit
-unsigned short X_density
-unsigned short Y_density
+::u16 X_density
+::u16 Y_density
 	The resolution information to be written into the JFIF marker;
 	not used otherwise.  density_unit may be 0 for unknown,
 	1 for dots/inch, or 2 for dots/cm.  The default values are 0,1,1
@@ -1123,8 +1123,8 @@ boolean saw_JFIF_marker			TRUE if a JFIF APP0 marker was seen
   unsigned char JFIF_major_version		Version information from JFIF marker
   unsigned char JFIF_minor_version
   unsigned char density_unit			Resolution data from JFIF marker
-  unsigned short X_density
-  unsigned short Y_density
+  ::u16 X_density
+  ::u16 Y_density
 boolean saw_Adobe_marker		TRUE if an Adobe APP14 marker was seen
   unsigned char Adobe_transform			Color transform code from Adobe marker
 
@@ -1148,7 +1148,7 @@ J_COLOR_SPACE out_color_space
 	currently implemented; you may need to extend jdcolor.c if you want an
 	unusual conversion.
 
-unsigned int scale_num, scale_denom
+::u32 scale_num, scale_denom
 	Scale the image by the fraction scale_num/scale_denom.  Currently,
 	the supported scaling ratios are M/N with all M from 1 to 16, where
 	N is the source DCT size, which is 8 for baseline JPEG.  (The library
@@ -2933,7 +2933,7 @@ This does not count any memory allocated by the application, such as a
 buffer to hold the final output image.
 
 The above figures are valid for 8-bit JPEG data precision and a machine with
-32-bit ints.  For 9-bit to 12-bit JPEG data, double the size of the strip
+32-bit ints.  For 9-bit to 12-bit JPEG data, ::f64 the size of the strip
 buffers and quantization pixel buffer.  The "fixed-size" data will be
 somewhat smaller with 16-bit ints, larger with 64-bit ints.  Also, CMYK
 or other unusual color spaces will require different amounts of space.
@@ -2995,7 +2995,7 @@ On machines with unusual data type sizes, you may be able to improve
 performance or reduce memory space by tweaking the various typedefs in
 jmorecfg.h.  In particular, on some RISC CPUs, access to arrays of "short"s
 is quite slow; consider trading memory for speed by making JCOEF, short, and
-unsigned short be "int" or "unsigned int".  unsigned char is also a candidate to become int.
+::u16 be "int" or "::u32".  unsigned char is also a candidate to become int.
 You probably don't want to make JSAMPLE be int unless you have lots of memory
 to burn.
 

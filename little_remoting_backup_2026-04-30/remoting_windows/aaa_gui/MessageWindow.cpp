@@ -82,7 +82,7 @@ void MessageWindow::destroyWindow()
   }
 }
 
-LRESULT CALLBACK MessageWindow::staticWndProc(const ::operating_system::window & operatingsystemwindow, unsigned int scopedstrMessage,
+LRESULT CALLBACK MessageWindow::staticWndProc(const ::operating_system::window & operatingsystemwindow, ::u32 scopedstrMessage,
                                        ::wparam wParam, ::lparam lParam)
 {
   MessageWindow *_this;

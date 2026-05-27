@@ -26,7 +26,7 @@
 // #include aaa_<tchar.h>
 // #include aaa_<stdio.h>
 
-PortMappingRect::PortMappingRect(int l, int t, int r, int b)
+PortMappingRect::PortMappingRect(::i32 l, ::i32 t, ::i32 r, ::i32 b)
  : ::i32_rectangle(l, t, r, b)
 {
 }
@@ -44,10 +44,10 @@ void PortMappingRect::toString(::string & string) const
   string.format("%dx{}+{}+{}", right - left, bottom - top, left, top);
 }
 
-bool PortMappingRect::parse(const char * psz, PortMappingRect *pout)
+bool PortMappingRect::parse(const_char_pointer psz, PortMappingRect *pout)
 {
-  int width, height, x, y;
-  char c;
+  ::i32 width, height, x, y;
+  ::i8 c;
   if (sscanf(psz, "%dx{}+{}+{}%c", &width, &height, &x, &y, &c) != 4) {
     return false;
   }
@@ -63,7 +63,7 @@ bool PortMappingRect::parse(const char * psz, PortMappingRect *pout)
   return true;
 }
 
-bool PortMappingRect::tryParse(const char * psz)
+bool PortMappingRect::tryParse(const_char_pointer psz)
 {
   return parse(psz, NULL);
 }

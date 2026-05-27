@@ -34,14 +34,14 @@ namespace remoting_client
    class CLASS_DECL_REMOTING RfbPointerEventClientMessage : public RfbClientToServerMessage
    {
    public:
-      RfbPointerEventClientMessage(const unsigned char buttonMask, const ::i32_point &pointPosition);
+      RfbPointerEventClientMessage(const ::u8 buttonMask, const ::i32_point &pointPosition);
       ~RfbPointerEventClientMessage();
 
       void send(::remoting::RfbOutputGate *output);
 
    private:
-      unsigned char m_buttonMask;
-      unsigned short m_xPos;
-      unsigned short m_yPos;
+      ::u8 m_buttonMask;
+      ::u16 m_xPos;
+      ::u16 m_yPos;
    };
 } // namespace remoting_client

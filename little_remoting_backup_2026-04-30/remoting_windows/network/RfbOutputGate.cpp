@@ -28,7 +28,7 @@
 
 namespace remoting
 {
-   ::remoting::RfbOutputGate::::remoting::RfbOutputGate(OutputStream *stream)
+   ::remoting::RfbOutputGate::remoting::RfbOutputGate(OutputStream *stream)
    : DataOutputStream(0)
    {
       m_tunnel = new BufferedOutputStream(stream);

@@ -214,7 +214,7 @@ initial_setup (j_decompress_ptr cinfo)
   /* Make sure image isn't bigger than I can handle */
   if ((long) cinfo->image_height > (long) JPEG_MAX_DIMENSION ||
       (long) cinfo->image_width > (long) JPEG_MAX_DIMENSION)
-    ERREXIT1(cinfo, JERR_IMAGE_TOO_BIG, (unsigned int) JPEG_MAX_DIMENSION);
+    ERREXIT1(cinfo, JERR_IMAGE_TOO_BIG, (::u32) JPEG_MAX_DIMENSION);
 
   /* Only 8 to 12 bits data precision are supported for DCT based JPEG */
   if (cinfo->data_precision < 8 || cinfo->data_precision > 12)

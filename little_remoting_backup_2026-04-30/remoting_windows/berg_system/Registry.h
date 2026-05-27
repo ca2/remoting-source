@@ -30,11 +30,11 @@
 class CLASS_DECL_REMOTING Registry
 {
 public:
-  const static int STRING_TYPE = REG_SZ;
-  const static int EXPAND_STRING_TYPE = REG_EXPAND_SZ;
-  const static int BINARY_TYPE = REG_BINARY;
-  const static int DWORD_TYPE = REG_DWORD;
-  const static int QWORD_TYPE = REG_QWORD;
+  const static ::i32 STRING_TYPE = REG_SZ;
+  const static ::i32 EXPAND_STRING_TYPE = REG_EXPAND_SZ;
+  const static ::i32 BINARY_TYPE = REG_BINARY;
+  const static ::i32 DWORD_TYPE = REG_DWORD;
+  const static ::i32 QWORD_TYPE = REG_QWORD;
 
 public:
   static ::subsystem::registry getCurrentUserKey();

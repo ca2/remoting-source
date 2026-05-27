@@ -35,37 +35,37 @@ public:
   ~ComboBox();
 
   // Adds new item to the end of combo box items ::list_base.
-  int addItem(const ::scoped_string & scopedstrText);
+  ::i32 addItem(const ::scoped_string & scopedstrText);
 
   // Adds new item to the end of combo box items ::list_base.
-  int addItem(const ::scoped_string & scopedstrText, void *tag);
+  ::i32 addItem(const ::scoped_string & scopedstrText, void *tag);
 
   // Inserts new item to the specified pointPosition
-  void insertItem(int index, const ::scoped_string & scopedstrText);
+  void insertItem(::i32 index, const ::scoped_string & scopedstrText);
 
   // Inserts new item to the specified pointPosition
-  void insertItem(int index, const ::scoped_string & scopedstrText, void *tag);
+  void insertItem(::i32 index, const ::scoped_string & scopedstrText, void *tag);
 
   // Returns count of combo box items
-  int getItemsCount() const;
+  ::i32 getItemsCount() const;
 
   // Sets user data (tag) associated with combo box item with specified index
-  void setItemData(int index, void *tag);
+  void setItemData(::i32 index, void *tag);
 
   // Returns user data associated with combo box item with specified index
-  void *getItemData(int index) const;
+  void *getItemData(::i32 index) const;
 
   // Sets text associated with combo box item with specified index
-  ::string getItemText(int index) const;
+  ::string getItemText(::i32 index) const;
 
   // Returns current selected item index
-  int getSelectedItemIndex();
+  ::i32 getSelectedItemIndex();
 
   // Selects item with specified index
-  void setSelectedItem(int index);
+  void setSelectedItem(::i32 index);
 
   // Deletes item from specified location
-  void deleteItem(int index);
+  void deleteItem(::i32 index);
 
   // Removes all combo box items
   void removeAllItems();

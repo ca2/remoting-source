@@ -33,12 +33,12 @@ namespace remoting
    virtual public ::particle
    {
    public:
-      const static int SOLID_TYPE = PS_SOLID;
-      const static int DASH_TYPE = PS_DASH;
-      const static int NULL_TYPE = PS_NULL;
+      const static ::i32 SOLID_TYPE = PS_SOLID;
+      const static ::i32 DASH_TYPE = PS_DASH;
+      const static ::i32 NULL_TYPE = PS_NULL;
 
    public:
-      Pen(int type, int width, COLORREF color);
+      Pen(::i32 type, ::i32 width, COLORREF color);
       virtual ~Pen();
 
    protected:

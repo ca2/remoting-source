@@ -30,8 +30,8 @@
 
 namespace remoting
 {
-   const int StandardJpegCompressor::ALLOC_CHUNK_SIZE = 65536;
-   const int StandardJpegCompressor::DEFAULT_JPEG_QUALITY = 75;
+   const ::i32 StandardJpegCompressor::ALLOC_CHUNK_SIZE = 65536;
+   const ::i32 StandardJpegCompressor::DEFAULT_JPEG_QUALITY = 75;
 
    //
    // Extend jpeg_destination_mgr struct with a pointer to our object.
@@ -121,7 +121,7 @@ namespace remoting
 
    ::string StandardJpegCompressor::get_message(j_common_ptr cinfo)
    {
-      char buffer[JMSG_LENGTH_MAX];
+      ::i8 buffer[JMSG_LENGTH_MAX];
       // Create the scopedstrMessage
       (*cinfo->err->format_message) (cinfo, buffer);
 
@@ -154,7 +154,7 @@ namespace remoting
    {
       if (!m_outputBuffer) {
          size_t newSize = ALLOC_CHUNK_SIZE;
-         m_outputBuffer = (unsigned char *)malloc(newSize);
+         m_outputBuffer = (::u8 *)malloc(newSize);
          m_numBytesAllocated = newSize;
       }
 
@@ -169,7 +169,7 @@ namespace remoting
       size_t oldSize = m_numBytesAllocated;
       size_t newSize = oldSize + ALLOC_CHUNK_SIZE;
 
-      m_outputBuffer = (unsigned char *)realloc(m_outputBuffer, newSize);
+      m_outputBuffer = (::u8 *)realloc(m_outputBuffer, newSize);
       m_numBytesAllocated = newSize;
 
       m_jpeg.cinfo.dest->next_output_byte = &m_outputBuffer[oldSize];
@@ -189,7 +189,7 @@ namespace remoting
    //
 
    void
-   StandardJpegCompressor::setQuality(int level)
+   StandardJpegCompressor::setQuality(::i32 level)
    {
       if (level < 0) {
          level = 0;
@@ -212,7 +212,7 @@ namespace remoting
    void
    StandardJpegCompressor::compress(const void *buf,
                                     const ::innate_subsystem::PixelFormat & fmt,
-                                    int w, int h, int stride)
+                                    ::i32 w, ::i32 h, ::i32 stride)
    {
       bool useQuickConversion =
         (fmt.bitsPerPixel == 32 && fmt.colorDepth == 24 &&
@@ -228,21 +228,21 @@ namespace remoting
 
       jpeg_start_compress(&m_jpeg.cinfo, true);
 
-      const char *src = (const char *)buf;
+      const_char_pointer src = (const_char_pointer )buf;
 
       // We'll pass up to 8 rows to jpeg_write_scanlines().
       JSAMPLE *rgb = new JSAMPLE[w * 3 * 8];
       JSAMPROW rowPointer[8];
-      for (int i = 0; i < 8; i++)
+      for (::i32 i = 0; i < 8; i++)
          rowPointer[i] = &rgb[w * 3 * i];
 
       // Feed the pixels to the JPEG library.
       while (m_jpeg.cinfo.next_scanline < m_jpeg.cinfo.image_height) {
-         int maxRows = m_jpeg.cinfo.image_height - m_jpeg.cinfo.next_scanline;
+         ::i32 maxRows = m_jpeg.cinfo.image_height - m_jpeg.cinfo.next_scanline;
          if (maxRows > 8) {
             maxRows = 8;
          }
-         for (int dy = 0; dy < maxRows; dy++) {
+         for (::i32 dy = 0; dy < maxRows; dy++) {
             if (useQuickConversion) {
                convertRow24(rowPointer[dy], src, fmt, w);
             } else {
@@ -263,14 +263,14 @@ namespace remoting
       return m_numBytesReady;
    }
 
-   const char *StandardJpegCompressor::getOutputData()
+   const_char_pointer StandardJpegCompressor::getOutputData()
    {
-      return (const char *)m_outputBuffer;
+      return (const_char_pointer )m_outputBuffer;
    }
 
    void
    StandardJpegCompressor::convertRow24(JSAMPLE *dst, const void *src,
-                                        const ::innate_subsystem::PixelFormat & fmt, int numPixels)
+                                        const ::innate_subsystem::PixelFormat & fmt, ::i32 numPixels)
    {
       const ::u32 *srcPixels = (const ::u32 *)src;
       while (numPixels--) {
@@ -283,20 +283,20 @@ namespace remoting
 
    void
    StandardJpegCompressor::convertRow(JSAMPLE *dst, const void *src,
-                                      const ::innate_subsystem::PixelFormat & fmt, int numPixels)
+                                      const ::innate_subsystem::PixelFormat & fmt, ::i32 numPixels)
    {
       if (fmt.bitsPerPixel == 32) {
          const ::u32 *srcPixels = (const ::u32 *)src;
-         for (int x = 0; x < numPixels; x++) {
+         for (::i32 x = 0; x < numPixels; x++) {
             ::u32 pixel = *srcPixels++;
             *dst++ = (JSAMPLE)((pixel >> fmt.redShift & fmt.redMax) * 255 / fmt.redMax);
             *dst++ = (JSAMPLE)((pixel >> fmt.greenShift & fmt.greenMax) * 255 / fmt.greenMax);
             *dst++ = (JSAMPLE)((pixel >> fmt.blueShift & fmt.blueMax) * 255 / fmt.blueMax);
          }
       } else { // assuming (fmt.bitsPerPixel == 16)
-         const unsigned short *srcPixels = (const unsigned short *)src;
-         for (int x = 0; x < numPixels; x++) {
-            unsigned short pixel = *srcPixels++;
+         const ::u16 *srcPixels = (const ::u16 *)src;
+         for (::i32 x = 0; x < numPixels; x++) {
+            ::u16 pixel = *srcPixels++;
             *dst++ = (JSAMPLE)((pixel >> fmt.redShift & fmt.redMax) * 255 / fmt.redMax);
             *dst++ = (JSAMPLE)((pixel >> fmt.greenShift & fmt.greenMax) * 255 / fmt.greenMax);
             *dst++ = (JSAMPLE)((pixel >> fmt.blueShift & fmt.blueMax) * 255 / fmt.blueMax);

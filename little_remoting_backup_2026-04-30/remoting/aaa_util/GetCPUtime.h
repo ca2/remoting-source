@@ -27,14 +27,14 @@
 #pragma once
 
 // returns current process time of work in seconds
-double getCPUTime();
+::f64 getCPUTime();
 
 // returns kernel time of work in seconds
-double getKernelTime();
+::f64 getKernelTime();
 
 // returns current processor tick number
-inline unsigned long long rdtsc() {
-  unsigned int lo, hi;
+inline ::u64 rdtsc() {
+  ::u32 lo, hi;
 #ifdef __GNUC__   
   asm  volatile ("rdtsc\n" : "=a" (lo), "=d" (hi));
 #elif _MSC_VER
@@ -51,7 +51,7 @@ inline unsigned long long rdtsc() {
 #else
   #error "Unsupported compiler"
 #endif
-  return ((unsigned long long)hi << 32) | lo;
+  return ((::u64)hi << 32) | lo;
 }
 
 //#endif _GETCPUTIME_H_

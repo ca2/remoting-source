@@ -42,18 +42,18 @@ public:
   //
 
   TabContainer &getTabs() { return m_tabContainer; }
-  Tab *getTab(int index);
+  Tab *getTab(::i32 index);
   void addTab(BaseDialog *dialog, const ::scoped_string & scopedstrCaption);
-  void showTab(int index);
+  void showTab(::i32 index);
   void showTab(const BaseDialog *dialog);
   void deleteAllTabs();
-  void removeTab(int index);
+  void removeTab(::i32 index);
 
   //
   // Return selected tab number
   //
 
-  int getSelectedTabIndex();
+  ::i32 getSelectedTabIndex();
 
   //
   // Tab work rectangle methods

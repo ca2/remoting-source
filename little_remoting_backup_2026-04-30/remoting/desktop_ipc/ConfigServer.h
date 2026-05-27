@@ -48,7 +48,7 @@ namespace remoting
 
    //protected:
       // Internal dispatcher
-      virtual void onRequest(unsigned char reqCode, BlockingGate *pblockinggate);
+      virtual void onRequest(::u8 reqCode, BlockingGate *pblockinggate);
 
       void reloadSettings(BlockingGate *pblockinggate);
       void answerOnSoftInputEnablingReq(BlockingGate *pblockinggate);

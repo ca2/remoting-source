@@ -47,8 +47,8 @@ public:
   void getText(::string & text) const;
   void getTitle(::string & title) const;
 
-  void setIconType(int iconType);
-  int getIconType() const;
+  void setIconType(::i32 iconType);
+  ::i32 getIconType() const;
 
 protected:
   ::string m_text;

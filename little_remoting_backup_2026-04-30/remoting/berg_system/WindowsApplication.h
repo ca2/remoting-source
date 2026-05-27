@@ -43,7 +43,7 @@ virtual public ::particle
 {
 public:
 
-   int m_iExitCode = 0;
+   ::i32 m_iExitCode = 0;
   /**
    * Creates WindowsApplication instance.
    * @param appInstance parameter that passed to WinMain.
@@ -96,7 +96,7 @@ public:
 
   // Runs main messages process cycle. The run() function returns
   // value returned by this function.
-  virtual int processMessages();
+  virtual ::i32 processMessages();
 
   /**
    * Windows prodecure for main application window.

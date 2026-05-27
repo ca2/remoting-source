@@ -55,7 +55,7 @@
 //    * @param commandLine command line to proccess.
 //    * @return true on successful parsing, false otherwise.
 //    */
-//   bool parse(const CommandLineFormat *format, int formatSize,
+//   bool parse(const CommandLineFormat *format, ::i32 formatSize,
 //              const CommandLineArgs *cmdArgs);
 //
 //   /**
@@ -73,7 +73,7 @@
 //    * @param arg output value for argument of key (optional).
 //    * @return true if option at the specified index exists, false otherwise.
 //    */
-//   bool getOption(int index, ::string & key, ::string & arg = 0) const;
+//   bool getOption(::i32 index, ::string & key, ::string & arg = 0) const;
 //
 // protected:
 //   bool matchKey(const ::scoped_string & scopedstrKeyTemplate, ::string & key);

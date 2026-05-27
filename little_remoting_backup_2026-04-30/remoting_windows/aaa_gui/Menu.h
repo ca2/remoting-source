@@ -41,26 +41,26 @@ public:
   void create();
   bool loadMenu(LPCTSTR lpMenuName);
   void createPopupMenu();
-  bool getSubMenu(int nPos, Menu *menu);
+  bool getSubMenu(::i32 nPos, Menu *menu);
   void termMenu();
   
-  int getMenuItemCount();
-  bool appendMenu(const ::scoped_string & strVal, unsigned int uID);
+  ::i32 getMenuItemCount();
+  bool appendMenu(const ::scoped_string & strVal, ::u32 uID);
   bool appendSeparator();
   bool appendSubMenu(const ::scoped_string &  strVal, Menu *pMenu);
 
-  bool insertMenuItem(unsigned int uItem, const ::scoped_string &  strVal, unsigned int uID);
-  bool insertCheckMenuItem(unsigned int uItem, const ::scoped_string &  strVal, unsigned int uID);
-  bool insertSeparator(unsigned int uItem);
-  bool insertSubMenu(unsigned int uItem, const ::scoped_string &  strVal, Menu *pMenu);
+  bool insertMenuItem(::u32 uItem, const ::scoped_string &  strVal, ::u32 uID);
+  bool insertCheckMenuItem(::u32 uItem, const ::scoped_string &  strVal, ::u32 uID);
+  bool insertSeparator(::u32 uItem);
+  bool insertSubMenu(::u32 uItem, const ::scoped_string &  strVal, Menu *pMenu);
 
-  bool enableMenuItem(unsigned int uID, unsigned int uEnable);
-  bool checkedMenuItem(unsigned int uID, bool bEnable);
-  bool deleteMenu(unsigned int uPosition);
+  bool enableMenuItem(::u32 uID, ::u32 uEnable);
+  bool checkedMenuItem(::u32 uID, bool bEnable);
+  bool deleteMenu(::u32 uPosition);
 
-  int findMenuItem(unsigned int uID);
+  ::i32 findMenuItem(::u32 uID);
 
-  bool setDefaultItem(unsigned int uID);
+  bool setDefaultItem(::u32 uID);
 
   void operator= (HMENU hmenu)
   {
@@ -68,10 +68,10 @@ public:
   }
 
 //private:
-  bool appendMenu(unsigned int uFlags, UINT_PTR uIDNewItem, const ::scoped_string & scopedstrNewItem);
-  bool insertMenuItem(unsigned int uItem, bool fByPosition, LPCMENUITEMINFO lpmii);
-  bool modifyMenu(unsigned int uPosition, unsigned int uFlags, LONG_PTR uIDNewItem, LPCTSTR lpNewItem);
-  bool setMenuItem(unsigned int uItem, bool fByPosition, LPMENUITEMINFO lpmii);
+  bool appendMenu(::u32 uFlags, UINT_PTR uIDNewItem, const ::scoped_string & scopedstrNewItem);
+  bool insertMenuItem(::u32 uItem, bool fByPosition, LPCMENUITEMINFO lpmii);
+  bool modifyMenu(::u32 uPosition, ::u32 uFlags, LONG_PTR uIDNewItem, LPCTSTR lpNewItem);
+  bool setMenuItem(::u32 uItem, bool fByPosition, LPMENUITEMINFO lpmii);
 
 //protected:
   HMENU m_menu;

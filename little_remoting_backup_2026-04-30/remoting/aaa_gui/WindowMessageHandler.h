@@ -30,7 +30,7 @@ virtual public ::particle
 {
 public:
   // This function must return true if a scopedstrMessage has been processed.
-  virtual bool processMessage(unsigned int scopedstrMessage, ::wparam wParam, ::lparam lParam) = 0;
+  virtual bool processMessage(::u32 scopedstrMessage, ::wparam wParam, ::lparam lParam) = 0;
 };
 
 //// __WINDOWMESSAGEHANDLER_H__

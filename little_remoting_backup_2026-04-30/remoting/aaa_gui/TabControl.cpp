@@ -35,7 +35,7 @@ TabControl::~TabControl()
   deleteAllTabs();
 }
 
-Tab *TabControl::getTab(int index)
+Tab *TabControl::getTab(::i32 index)
 {
   if ((index < 0) || ((size_t)index > m_tabContainer.size() - 1)) {
     return NULL;
@@ -60,9 +60,9 @@ void TabControl::addTab(BaseDialog *dialog, const ::scoped_string & scopedstrCap
   }
 }
 
-void TabControl::showTab(int index)
+void TabControl::showTab(::i32 index)
 {
-  int selectedIndex = getSelectedTabIndex();
+  ::i32 selectedIndex = getSelectedTabIndex();
   if (selectedIndex >= 0) {
     getTab(selectedIndex)->set_visible(false);
   }
@@ -74,7 +74,7 @@ void TabControl::showTab(const BaseDialog *dialog)
 {
   for (size_t i = 0; i < m_tabContainer.size(); i++) {
     if (m_tabContainer.at(i)->getDialog() == dialog) {
-      showTab((int)i);
+      showTab((::i32)i);
       return;
     }
   }
@@ -91,9 +91,9 @@ void TabControl::deleteAllTabs()
   TabCtrl_DeleteAllItems(operating_system_window());
 }
 
-void TabControl::removeTab(int index)
+void TabControl::removeTab(::i32 index)
 {
-  int i = 0;
+  ::i32 i = 0;
   for (TabContainer::iterator it = m_tabContainer.begin(); it != m_tabContainer.end(); it++) {
     if (i == index) {
       delete *it;
@@ -105,9 +105,9 @@ void TabControl::removeTab(int index)
   }
 }
 
-int TabControl::getSelectedTabIndex()
+::i32 TabControl::getSelectedTabIndex()
 {
-  int page = TabCtrl_GetCurSel(operating_system_window());
+  ::i32 page = TabCtrl_GetCurSel(operating_system_window());
   return page;
 }
 

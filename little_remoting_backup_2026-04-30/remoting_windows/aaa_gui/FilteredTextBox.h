@@ -47,7 +47,7 @@ protected:
   virtual bool isStringValid(const ::scoped_string & scopedstrString);
   virtual LRESULT onKeyDown(::wparam code, ::lparam params);
 
-  static LRESULT CALLBACK windowProc(const ::operating_system::window & operatingsystemwindow, unsigned int uMsg, ::wparam wParam, ::lparam lParam);
+  static LRESULT CALLBACK windowProc(const ::operating_system::window & operatingsystemwindow, ::u32 uMsg, ::wparam wParam, ::lparam lParam);
 
 protected:
   LONG_PTR m_oldWindowProc;

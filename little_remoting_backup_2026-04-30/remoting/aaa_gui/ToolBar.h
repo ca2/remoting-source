@@ -37,8 +37,8 @@ namespace remoting
       ToolBar();
       virtual ~ToolBar();
 
-      static const int TB_Style_sep = 0;
-      static const int TB_Style_gap = 1;
+      static const ::i32 TB_Style_sep = 0;
+      static const ::i32 TB_Style_gap = 1;
 
       /////////////////////////////////////////////////////////
       // Auto mode procedures
@@ -47,7 +47,7 @@ namespace remoting
       // setViewAutoButtons()
       // It used only for auto buttons creation from
       // bitmap and making gaps or separators.
-      void setViewAutoButtons(int iButton, int style);
+      void setViewAutoButtons(::i32 iButton, ::i32 style);
 
       // loadToolBarfromRes()
       // This procedure will load a toolbar image from resource
@@ -73,39 +73,39 @@ namespace remoting
       // create() creates a windows toolbar. dwStyle is a combination of
       // the toolbar control and button styles. It returns true if successful,
       // or false otherwise.
-      bool create(int tbID, HWND parentHwnd,
+      bool create(::i32 tbID, HWND parentHwnd,
            DWORD dwStyle = WS_CHILD | WS_VISIBLE | TBSTYLE_FLAT);
 
       // addBitmap() adds one or more images from resources to
       // the ::list_base of button images available for a toolbar.
       // Returns the index of the first new image if successful,
       // or -1 otherwise.
-      LRESULT addBitmap(int nButtons, unsigned int bitmapID);
+      LRESULT addBitmap(::i32 nButtons, ::u32 bitmapID);
 
       // addSystemBitmap() adds the system-defined button bitmaps to the ::list_base
       // of the toolbar button specifying by stdBitmapID. Returns the index of
       // the first new image if successful, or -1 otherwise.
-      LRESULT addSystemBitmap(unsigned int stdBitmapID);
+      LRESULT addSystemBitmap(::u32 stdBitmapID);
 
       // addNButton() adds nButtons buttons to a toolbar.
-      bool addNButton(int nButtons, LPTBBUTTON tbb);
+      bool addNButton(::i32 nButtons, LPTBBUTTON tbb);
 
       // addButton() adds one button.
-      bool addButton(int iBitmap, int idCommand, unsigned char state=TBSTATE_ENABLED,
-                     unsigned char style=TBSTYLE_BUTTON,  unsigned int dwData=0, int iString=0);
+      bool addButton(::i32 iBitmap, ::i32 idCommand, ::u8 state=TBSTATE_ENABLED,
+                     ::u8 style=TBSTYLE_BUTTON,  ::u32 dwData=0, ::i32 iString=0);
 
       // checkButton() checks or unchecks a given button in a toolbar control.
-      bool checkButton(int idButton, bool check);
+      bool checkButton(::i32 idButton, bool check);
 
       // enableButton() enables or disables the specified button
       // in the toolbar.
-      bool enableButton(int idButton, bool enable);
+      bool enableButton(::i32 idButton, bool enable);
 
       // pressButton() presses or releases the specified button in the toolbar.
-      bool pressButton(int idButton, bool press);
+      bool pressButton(::i32 idButton, bool press);
 
       // getButtonRect() gets the bounding rectangle of a button in a toolbar.
-      bool getButtonRect(int nIndex, LPRECT buttonRect);
+      bool getButtonRect(::i32 nIndex, LPRECT buttonRect);
 
       // setButtonSize() sets the size of the buttons to be added to a toolbar.
       // Button size must be largen the button bitmap.
@@ -115,10 +115,10 @@ namespace remoting
       void autoSize();
 
       // getButtonsHeight() retrieves the height of the toolbar buttons.
-      int getButtonsHeight();
+      ::i32 getButtonsHeight();
 
       // getButtonsWidth() retrieves the width of the toolbar buttons.
-      int getButtonsWidth();
+      ::i32 getButtonsWidth();
 
       // isVisible() check the toolbar window on visible.
       bool isVisible();
@@ -131,21 +131,21 @@ namespace remoting
 
       // getTotalWidth() returns the total size of all buttons and
       // separators in the toolbar.
-      int getTotalWidth();
+      ::i32 getTotalWidth();
 
       // getHeight() returns the toolbar window height.
-      int height();
+      ::i32 height();
 
       // getState() gets button state
-      LRESULT getState(int idButton);
+      LRESULT getState(::i32 idButton);
 
    private:
-      int m_initialStr;
-      int m_numberTB;
+      ::i32 m_initialStr;
+      ::i32 m_numberTB;
       DWORD m_id;
-      int m_width, m_height;
+      ::i32 m_width, m_height;
       HWND m_hWndToolbar;
 
-      ::map<int, int> m_autoButtons;
+      ::map<::i32, ::i32> m_autoButtons;
    };
 }

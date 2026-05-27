@@ -31,7 +31,7 @@ ListView::ListView() :
   m_compareItem = 0;
 }
 
-void ListView::addColumn(int index, const ::scoped_string & scopedstrCaption, int width, int fmt)
+void ListView::addColumn(::i32 index, const ::scoped_string & scopedstrCaption, ::i32 width, ::i32 fmt)
 {
   //
   // Create LV_COLUMN struct
@@ -52,12 +52,12 @@ void ListView::addColumn(int index, const ::scoped_string & scopedstrCaption, in
   ListView_InsertColumn(m_hwnd, index, &lvColumn);
 }
 
-void ListView::addColumn(int index, const ::scoped_string & scopedstrCaption, int width)
+void ListView::addColumn(::i32 index, const ::scoped_string & scopedstrCaption, ::i32 width)
 {
   addColumn(index, scopedstrCaption, width, LVCFMT_LEFT);
 }
 
-ListViewItem ListView::getItem(int index)
+ListViewItem ListView::getItem(::i32 index)
 {
   // Output structure
   ListViewItem item;
@@ -94,12 +94,12 @@ ListViewItem ListView::getItem(int index)
   return item;
 }
 
-void ListView::addItem(int index, const ::scoped_string & scopedstrCaption)
+void ListView::addItem(::i32 index, const ::scoped_string & scopedstrCaption)
 {
   addItem(index, scopedstrCaption, NULL);
 }
 
-void ListView::addItem(int index, const ::scoped_string & scopedstrCaption, ::lparam tag)
+void ListView::addItem(::i32 index, const ::scoped_string & scopedstrCaption, ::lparam tag)
 {
   //
   // Prepare LVITEM structure
@@ -120,7 +120,7 @@ void ListView::addItem(int index, const ::scoped_string & scopedstrCaption, ::lp
   ListView_InsertItem(m_hwnd, &lvI);
 }
 
-void ListView::addItem(int index, const ::scoped_string & scopedstrCaption, ::lparam tag, int imageIndex)
+void ListView::addItem(::i32 index, const ::scoped_string & scopedstrCaption, ::lparam tag, ::i32 imageIndex)
 {
   //
   // Prepare LVITEM structure
@@ -141,7 +141,7 @@ void ListView::addItem(int index, const ::scoped_string & scopedstrCaption, ::lp
   ListView_InsertItem(m_hwnd, &lvI);
 }
 
-void ListView::eraseItem(int i)
+void ListView::eraseItem(::i32 i)
 {
   ListView_DeleteItem(operating_system_window(), i);
 }
@@ -151,7 +151,7 @@ void ListView::clear()
   ListView_DeleteAllItems(m_hwnd);
 }
 
-void ListView::setSubItemText(int index, int subIndex, const ::scoped_string & scopedstrCaption)
+void ListView::setSubItemText(::i32 index, ::i32 subIndex, const ::scoped_string & scopedstrCaption)
 {
   //
   // Prepare LVITEM structure
@@ -170,7 +170,7 @@ void ListView::setSubItemText(int index, int subIndex, const ::scoped_string & s
   SendMessage(m_hwnd, LVM_SETITEM, 0, (::lparam)&lvI);
 }
 
-void ListView::setItemData(int index, ::lparam tag)
+void ListView::setItemData(::i32 index, ::lparam tag)
 {
   //
   // Prepare LVITEM structure
@@ -190,7 +190,7 @@ void ListView::setItemData(int index, ::lparam tag)
   SendMessage(m_hwnd, LVM_SETITEM, 0, (::lparam)&lvI);
 }
 
-::lparam ListView::getItemData(int index)
+::lparam ListView::getItemData(::i32 index)
 {
   return getItem(index).tag;
 }
@@ -198,7 +198,7 @@ void ListView::setItemData(int index, ::lparam tag)
 ListViewItem ListView::getSelectedItem()
 {
   ListViewItem item;
-  int index = getSelectedIndex();
+  ::i32 index = getSelectedIndex();
   if (index == -1) {
     item.index = -1;
     item.tag = NULL;
@@ -208,13 +208,13 @@ ListViewItem ListView::getSelectedItem()
   return item;
 }
 
-int ListView::getSelectedIndex()
+::i32 ListView::getSelectedIndex()
 {
-  int iSelect = ListView_GetNextItem(m_hwnd, -1, LVNI_SELECTED);
+  ::i32 iSelect = ListView_GetNextItem(m_hwnd, -1, LVNI_SELECTED);
   return iSelect;
 }
 
-void ListView::selectItem(int index)
+void ListView::selectItem(::i32 index)
 {
   ::wparam itemIndex = (::wparam)index;
   ListView_SetItemState(m_hwnd, -1, 0, LVIS_SELECTED);
@@ -242,7 +242,7 @@ void ListView::allowMultiSelection(bool allow)
   }
 }
 
-unsigned int ListView::getSelectedItemsCount()
+::u32 ListView::getSelectedItemsCount()
 {
   return ListView_GetSelectedCount(m_hwnd);
 }
@@ -250,9 +250,9 @@ unsigned int ListView::getSelectedItemsCount()
 
 ::i32_array ListView::getSelectedItemsIndexes()
 {
-  int i = -1;
+  ::i32 i = -1;
    ::i32_array ia;
-  for (unsigned int j = 0; j < getSelectedItemsCount(); j++)
+  for (::u32 j = 0; j < getSelectedItemsCount(); j++)
      {
      ListView_GetNextItem(m_hwnd, i, LVNI_SELECTED);
     ia.add(i);
@@ -260,10 +260,10 @@ unsigned int ListView::getSelectedItemsCount()
    return ia;
 }
 
-void ListView::sort(int columnIndex, PFNLVCOMPARE compareItem)
+void ListView::sort(::i32 columnIndex, PFNLVCOMPARE compareItem)
 {
   // Update parameters of sorting.
-  int oldSortColumnIndex = m_sortColumnIndex;
+  ::i32 oldSortColumnIndex = m_sortColumnIndex;
   m_sortColumnIndex = columnIndex;
 
   // make decision about order
@@ -304,7 +304,7 @@ void ListView::sort()
     // use sortColumnIndex (lParamSort) as an index of column and
     // as a flag: positive for ascending order,
     // negative for descending order
-    int sortColumnIndex = m_sortColumnIndex + 1;
+    ::i32 sortColumnIndex = m_sortColumnIndex + 1;
     if (!m_sortAscending) {
       sortColumnIndex = -sortColumnIndex;
     }

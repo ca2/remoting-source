@@ -224,7 +224,7 @@ namespace remoting_node_desktop
          ::remoting::WallpaperUtil wallpaperutil;
          wallpaperutil.initialize_wallpaper_util(m_pconfigurator, m_plogwriter);
 
-         // int retCode = OperatingSystemApplication::run();
+         // ::i32 retCode = OperatingSystemApplication::run();
          OperatingSystemApplication::run();
          m_plogwriter->information("Desktop server terminated with return code = {}", this->getExitCode());
          // return retCode;

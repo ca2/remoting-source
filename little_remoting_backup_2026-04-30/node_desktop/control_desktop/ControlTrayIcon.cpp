@@ -185,7 +185,7 @@ namespace remoting_control_desktop
       ///
       setForegroundWindow();
 
-      int action = TrackPopupMenu(hMenu,
+      ::i32 action = TrackPopupMenu(hMenu,
                                   TPM_NONOTIFY | TPM_RETURNCMD | TPM_RIGHTBUTTON,
                                   pos.x, pos.y, 0, ::as_HWND(operating_system_window()), NULL);
 

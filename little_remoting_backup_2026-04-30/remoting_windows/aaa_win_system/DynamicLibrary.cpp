@@ -58,7 +58,7 @@ void DynamicLibrary::init(const ::scoped_string & scopedstrFilename)
   }
 }
 
-FARPROC DynamicLibrary::getProcAddress(const char *procName)
+FARPROC DynamicLibrary::getProcAddress(const_char_pointer procName)
 {
   _ASSERT(m_module != 0);
 

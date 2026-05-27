@@ -59,9 +59,9 @@ public:
   struct BMI
   {
     BITMAPINFOHEADER bmiHeader;
-    unsigned int red;
-    unsigned int green;
-    unsigned int blue;
+    ::u32 red;
+    ::u32 green;
+    ::u32 blue;
   };
 
   struct Palette8bitBMI
@@ -82,7 +82,7 @@ public:
 private:
   void fillPixelFormat(const BMI *bmi);
   // Find pointPosition of first true bit
-  static inline int findFirstBit(const unsigned int bits);
+  static inline ::i32 findFirstBit(const ::u32 bits);
 
   void fillScreenRect();
 

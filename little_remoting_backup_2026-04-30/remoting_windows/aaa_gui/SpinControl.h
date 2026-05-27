@@ -35,9 +35,9 @@ public:
   ~SpinControl();
 
   void setBuddy(::innate_subsystem::Control *buddyControl);
-  void setRange(short lower, short upper);
-  void setRange32(int lower, int upper);
-  void setAccel(unsigned int nSec, unsigned int nInc);
+  void setRange(::i16 lower, ::i16 upper);
+  void setRange32(::i32 lower, ::i32 upper);
+  void setAccel(::u32 nSec, ::u32 nInc);
 
   //
   // Auto acceleration methods
@@ -49,9 +49,9 @@ public:
 
   void autoAccelerationHandler(LPNMUPDOWN scopedstrMessage);
   void enableAutoAcceleration(bool enabled);
-  void setAutoAccelerationParams(const ::array_base<int> *limitters,
-                                 const ::array_base<int> *deltas,
-                                 int maxDelta);
+  void setAutoAccelerationParams(const ::array_base<::i32> *limitters,
+                                 const ::array_base<::i32> *deltas,
+                                 ::i32 maxDelta);
 protected:
   ::innate_subsystem::Control *m_buddy;
 
@@ -60,9 +60,9 @@ protected:
   //
 
   bool m_isAutoAccelerationEnabled;
-  ::array_base<int> m_limitters;
-  ::array_base<int> m_deltas;
-  int m_maxDelta;
+  ::array_base<::i32> m_limitters;
+  ::array_base<::i32> m_deltas;
+  ::i32 m_maxDelta;
 };
 
 

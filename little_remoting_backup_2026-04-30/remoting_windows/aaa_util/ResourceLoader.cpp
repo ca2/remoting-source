@@ -47,7 +47,7 @@ HICON ResourceLoader::loadIcon(const ::scoped_string & scopedstriconName)
   return LoadIcon(m_appInstance, ::wstring(scopedstriconName));
 }
 
-bool ResourceLoader::loadString(unsigned int id, ::string & str)
+bool ResourceLoader::loadString(::u32 id, ::string & str)
 {
   //_ASSERT(string != 0);
   str= "(Undef)";
@@ -63,7 +63,7 @@ bool ResourceLoader::loadString(unsigned int id, ::string & str)
 
 
   // Id of string-group, based from 0.
-  int resId = (id / 16) + 1;
+  ::i32 resId = (id / 16) + 1;
   HRSRC resHnd = FindResource(m_appInstance,
                               MAKEINTRESOURCE(resId),
                               RT_STRING);
@@ -72,11 +72,11 @@ bool ResourceLoader::loadString(unsigned int id, ::string & str)
     LPVOID lockRes = LockResource(hGlobal);
 
     WCHAR *lpStr = reinterpret_cast<WCHAR *>(lockRes);
-    for (unsigned int i = 0; i < (id % 16); i++) {
-      lpStr += 1 + static_cast<unsigned short>(lpStr[0]);
+    for (::u32 i = 0; i < (id % 16); i++) {
+      lpStr += 1 + static_cast<::u16>(lpStr[0]);
     }
 
-    unsigned short strLen = static_cast<unsigned short>(lpStr[0]);
+    ::u16 strLen = static_cast<::u16>(lpStr[0]);
 
     ::array_base<WCHAR> strBuff;
     strBuff.resize(strLen + 1);
@@ -93,7 +93,7 @@ bool ResourceLoader::loadString(unsigned int id, ::string & str)
   return true;
 }
 
-HACCEL ResourceLoader::loadAccelerator(unsigned int id)
+HACCEL ResourceLoader::loadAccelerator(::u32 id)
 {
   return LoadAccelerators(m_appInstance,
                           MAKEINTRESOURCE(id)); 
@@ -104,7 +104,7 @@ HCURSOR ResourceLoader::loadStandardCursor(const ::scoped_string & scopedstrid)
   return LoadCursor(0, ::wstring(scopedstrid));
 }
 
-HCURSOR ResourceLoader::loadCursor(unsigned int id)
+HCURSOR ResourceLoader::loadCursor(::u32 id)
 {
   return LoadCursor(m_appInstance, MAKEINTRESOURCE(id));
 }

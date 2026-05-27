@@ -56,7 +56,7 @@ void WindowsApplication::run()
   }
 }
 
-int WindowsApplication::processMessages()
+::i32 WindowsApplication::processMessages()
 {
   MSG msg;
   bool ret;
@@ -70,7 +70,7 @@ int WindowsApplication::processMessages()
     }
   }
 
-  return (int)msg.wParam;
+  return (::i32)msg.wParam;
 }
 
 void WindowsApplication::createWindow(const ::scoped_string & scopedstrClassName)

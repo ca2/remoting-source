@@ -192,7 +192,7 @@
 
 /*
  * Compile with -DMAXSEG_64K if the alloc function cannot allocate more
- * than 64k bytes at a time (needed on systems with 16-bit int).
+ * than 64k bytes at a time (needed on systems with 16-bit ::i32).
  */
 #ifdef SYS16BIT
 #  define MAXSEG_64K
@@ -241,16 +241,16 @@
 #endif
 
 #ifdef Z_SOLO
-   typedef unsigned long z_size_t;
+   typedef ulong z_size_t;
 #else
-#  define z_longlong long long
+#  define z_longlong ::i64
 #  if defined(NO_SIZE_T)
-     typedef unsigned NO_SIZE_T z_size_t;
+     typedef ::u32 NO_SIZE_T z_size_t;
 #  elif defined(STDC)
 #    include <stddef.h>
      typedef size_t z_size_t;
 #  else
-     typedef unsigned long z_size_t;
+     typedef ulong z_size_t;
 #  endif
 #  undef z_longlong
 #endif
@@ -394,10 +394,10 @@
 #endif
 
 #if !defined(__MACTYPES__)
-typedef unsigned char  Byte;  /* 8 bits */
+typedef ::u8  Byte;  /* 8 bits */
 #endif
-typedef unsigned int   uInt;  /* 16 bits or more */
-typedef unsigned long  uLong; /* 32 bits or more */
+typedef ::u32   uInt;  /* 16 bits or more */
+typedef ulong  uLong; /* 32 bits or more */
 
 #ifdef SMALL_MEDIUM
    /* Borland C/C++ and some old MSC versions ignore FAR inside typedef */
@@ -405,8 +405,8 @@ typedef unsigned long  uLong; /* 32 bits or more */
 #else
    typedef Byte  FAR Bytef;
 #endif
-typedef char  FAR charf;
-typedef int   FAR intf;
+typedef ::i8  FAR charf;
+typedef ::i32   FAR intf;
 typedef uInt  FAR uIntf;
 typedef uLong FAR uLongf;
 
@@ -423,18 +423,18 @@ typedef uLong FAR uLongf;
 #if !defined(Z_U4) && !defined(Z_SOLO) && defined(STDC)
 #  include <limits.h>
 #  if (UINT_MAX == 0xffffffffUL)
-#    define Z_U4 unsigned
+#    define Z_U4 ::u32
 #  elif (ULONG_MAX == 0xffffffffUL)
-#    define Z_U4 unsigned long
+#    define Z_U4 ulong
 #  elif (USHRT_MAX == 0xffffffffUL)
-#    define Z_U4 unsigned short
+#    define Z_U4 ::u16
 #  endif
 #endif
 
 #ifdef Z_U4
    typedef Z_U4 z_crc_t;
 #else
-   typedef unsigned long z_crc_t;
+   typedef ulong z_crc_t;
 #endif
 
 #ifdef HAVE_UNISTD_H    /* may be set to #if 1 by ./configure */

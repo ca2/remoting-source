@@ -42,7 +42,7 @@ namespace remoting
       TcpConnection(::subsystem::LogWriter * plogwriter);
       virtual ~TcpConnection();
 
-      void bind(const ::scoped_string & scopedstrHost, unsigned short port);
+      void bind(const ::scoped_string & scopedstrHost, ::u16 port);
       void bind(::subsystem::SocketIPv4Interface *socket);
       void bind(::remoting::RfbInputGate *input, ::remoting::RfbOutputGate *output);
 
@@ -53,7 +53,7 @@ namespace remoting
       ::remoting::RfbOutputGate *getOutput() const;
    ;;private:
       ::string m_host;
-      unsigned short m_port;
+      ::u16 m_port;
       ::pointer < ::subsystem::SocketIPv4Interface > m_psocket;
       bool m_socketOwner;
       ::pointer < ::subsystem::SocketStream > m_psocketstream;

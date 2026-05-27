@@ -143,13 +143,13 @@ namespace remoting_control_desktop
 
       // Run configuration dialog and exit.
       if (cmdLineParser.hasConfigAppFlag() || cmdLineParser.hasConfigServiceFlag()) {
-         int iExitCode =  runConfigurator(cmdLineParser.hasConfigServiceFlag(), cmdLineParser.hasDontElevateFlag());
+         ::i32 iExitCode =  runConfigurator(cmdLineParser.hasConfigServiceFlag(), cmdLineParser.hasDontElevateFlag());
          setExitCode(iExitCode);
          return;
       }
 
       if (cmdLineParser.hasCheckServicePasswords()) {
-         int iExitCode = checkServicePasswords(cmdLineParser.hasDontElevateFlag());
+         ::i32 iExitCode = checkServicePasswords(cmdLineParser.hasDontElevateFlag());
          setExitCode(iExitCode);
          return;
       }
@@ -159,14 +159,14 @@ namespace remoting_control_desktop
          m_pconfigurator->setServiceFlag(true);
          m_pconfigurator->load();
          ::remoting_node::ServerConfig * pserverconfig = m_pconfigurator->getServerConfig();
-         unsigned char cryptedPass[8];
+         ::u8 cryptedPass[8];
          if (cmdLineParser.hasSetControlPasswordFlag()) {
             getCryptedPassword(cryptedPass, cmdLineParser.getControlPassword());
-            pserverconfig->setControlPassword((const unsigned char *)cryptedPass);
+            pserverconfig->setControlPassword((const ::u8 *)cryptedPass);
             pserverconfig->useControlAuth(true);
          } else {
             getCryptedPassword(cryptedPass, cmdLineParser.getPrimaryVncPassword());
-            pserverconfig->setPrimaryPassword((const unsigned char *)cryptedPass);
+            pserverconfig->setPrimaryPassword((const ::u8 *)cryptedPass);
             pserverconfig->useAuthentication(true);
          }
          m_pconfigurator->save();
@@ -174,7 +174,7 @@ namespace remoting_control_desktop
          return;
       }
 
-      int retCode = 0;
+      ::i32 retCode = 0;
 
       // If we are in the "-controlservice -slave" mode, make sure there are no
       // other "service slaves" in this session, exit if there is one already.
@@ -227,7 +227,7 @@ namespace remoting_control_desktop
          } else if (cmdLineParser.hasSharePrimaryFlag()) {
             pcommand = new SharePrimaryCommand(m_pcontrolproxy);
          } else if (cmdLineParser.hasShareDisplay()) {
-            unsigned char displayNumber = cmdLineParser.getShareDisplayNumber();
+            ::u8 displayNumber = cmdLineParser.getShareDisplayNumber();
             pcommand = new ShareDisplayCommand(m_pcontrolproxy, displayNumber);
          } else if (cmdLineParser.hasShareWindow()) {
             ::string shareWindowName;
@@ -290,8 +290,8 @@ return;
       ::string pipeName;
       ControlPipeName::createPipeName(controlService, pipeName, &m_plogwriter);
 
-      int numTriesRemaining = slave ? 10 : 1;
-      int msDelayBetweenTries = 2000;
+      ::i32 numTriesRemaining = slave ? 10 : 1;
+      ::i32 msDelayBetweenTries = 2000;
 
       while (numTriesRemaining-- > 0) {
          try {
@@ -355,7 +355,7 @@ return;
       }
    }
 
-   int ControlApplication::runControlInterface(bool showIcon)
+   ::i32 ControlApplication::runControlInterface(bool showIcon)
    {
       m_trayIcon = new ControlTrayIcon(m_pconfigurator,  m_pcontrolproxy, this, this, showIcon);
 
@@ -371,17 +371,17 @@ return;
       return getExitCode();
    }
 
-   int ControlApplication::runControlCommand(::subsystem::Command *command)
+   ::i32 ControlApplication::runControlCommand(::subsystem::Command *command)
    {
       ::remoting_node::ControlCommand ctrlCmd(command);
 
       ctrlCmd.execute();
 
-      int errorCode = ctrlCmd.executionResultOk() ? 0 : 1;
+      ::i32 errorCode = ctrlCmd.executionResultOk() ? 0 : 1;
       return errorCode;
    }
 
-   int ControlApplication::runConfigurator(bool configService, bool isRunAsRequested)
+   ::i32 ControlApplication::runConfigurator(bool configService, bool isRunAsRequested)
    {
       // If not enough rights to configurate service, then restart application requesting
       // admin access rights.
@@ -430,18 +430,18 @@ return;
       return confDialog.showModal();
    }
 
-   void ControlApplication::getCryptedPassword(unsigned char cryptedPass[8], const ::scoped_string & scopedstrPlainTextPassString)
+   void ControlApplication::getCryptedPassword(::u8 cryptedPass[8], const ::scoped_string & scopedstrPlainTextPassString)
    {
       // Get a copy of the password truncated at 8 characters.
       ::string plainTextPass(scopedstrPlainTextPassString);
       //plainTextPass.getSubstring(&plainTextPass, 0, 7);
       plainTextPass.truncate(8);
-      // Convert from TCHAR[] to char[].
+      // Convert from TCHAR[] to ::i8[].
       // FIXME: Check exception catching.
       ::string ansiPass(&plainTextPass);
 
       // Convert to a byte array.
-      unsigned char byteArray[8] = {0, 0, 0, 0, 0, 0, 0, 0};
+      ::u8 byteArray[8] = {0, 0, 0, 0, 0, 0, 0, 0};
       size_t len = ::minimum(ansiPass.length(), (size_t)8);
       memcpy(byteArray, ansiPass, len);
 
@@ -449,7 +449,7 @@ return;
       ::subsystem::VncPassCrypt::getEncryptedPass(cryptedPass, byteArray);
    }
 
-   int ControlApplication::checkServicePasswords(bool isRunAsRequested)
+   ::i32 ControlApplication::checkServicePasswords(bool isRunAsRequested)
    {
       // FIXME: code duplication.
       if (MainSubsystem().OperatingSystem().isUserAnAdmin() == false) {
@@ -501,7 +501,7 @@ return;
       bool askToChangeAdmAuth = false;
       SetPasswordsDialog dialog(askToChangeRfbAuth, askToChangeAdmAuth);
       if (dialog.showModal() == ::innate_subsystem::e_control_id_ok) {
-         unsigned char cryptedPass[8];
+         ::u8 cryptedPass[8];
          bool useRfbAuth = dialog.getUseRfbPass();
          bool dontUseRfbAuth = dialog.getRfbPassForClear();
          // Note: The state !useRfbAuth && !dontUseRfbAuth is valid and means "do not change

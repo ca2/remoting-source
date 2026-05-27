@@ -67,11 +67,11 @@ void BalloonTip::getTitle(::string & title) const
   title = m_title;
 }
 
-void BalloonTip::setIconType(int iconType)
+void BalloonTip::setIconType(::i32 iconType)
 {
 }
 
-int BalloonTip::getIconType() const
+::i32 BalloonTip::getIconType() const
 {
   return 0;
 }

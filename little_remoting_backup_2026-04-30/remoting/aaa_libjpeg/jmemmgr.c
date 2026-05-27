@@ -59,19 +59,19 @@ extern char * getenv JPP((const char * name));
  * There isn't any really portable way to determine the worst-case alignment
  * requirement.  This module assumes that the alignment requirement is
  * multiples of sizeof(ALIGN_TYPE).
- * By default, we define ALIGN_TYPE as double.  This is necessary on some
+ * By default, we define ALIGN_TYPE as ::f64.  This is necessary on some
  * workstations (where doubles really do need 8-byte alignment) and will work
  * fine on nearly everything.  If your machine has lesser alignment needs,
  * you can save a few bytes by making ALIGN_TYPE smaller.
  * The only place I know of where this will NOT work is certain Macintosh
- * 680x0 compilers that define double as a 10-byte IEEE extended float.
+ * 680x0 compilers that define ::f64 as a 10-byte IEEE extended ::f32.
  * Doing 10-byte alignment is counterproductive because longwords won't be
  * aligned well.  Put "#define ALIGN_TYPE long" in jconfig.h if you have
  * such a compiler.
  */
 
 #ifndef ALIGN_TYPE		/* so can override from jconfig.h */
-#define ALIGN_TYPE  double
+#define ALIGN_TYPE  ::f64
 #endif
 
 

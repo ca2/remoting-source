@@ -35,7 +35,7 @@ namespace remoting
    {
    }
 
-   int Decoder::getCode() const
+   ::i32 Decoder::getCode() const
    {
       return m_encoding;
    }
@@ -45,7 +45,7 @@ namespace remoting
       return isPseudo(getCode());
    }
 
-   bool Decoder::isPseudo(int encoding)
+   bool Decoder::isPseudo(::i32 encoding)
    {
       switch (encoding) {
          case EncodingDefs::RAW:

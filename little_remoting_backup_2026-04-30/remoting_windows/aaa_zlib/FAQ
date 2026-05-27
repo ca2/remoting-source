@@ -242,7 +242,7 @@ The lastest zlib FAQ is at http://zlib.net/zlib_faq.html
 
     Yes.  inflate() and deflate() will process any amount of data correctly.
     Each call of inflate() or deflate() is limited to input and output chunks
-    of the maximum value that can be stored in the compiler's "unsigned int"
+    of the maximum value that can be stored in the compiler's "::u32"
     type, but there is no limit to the number of chunks.  Note however that the
     strm.total_in and strm_total_out counters may be limited to 4 GB.  These
     counters are provided as a convenience and are not used internally by
@@ -275,7 +275,7 @@ The lastest zlib FAQ is at http://zlib.net/zlib_faq.html
         http://www.ijs.si/software/snprintf/
 
     Note that you should be using the most recent version of zlib.  Versions
-    1.1.3 and before were subject to a double-free vulnerability, and versions
+    1.1.3 and before were subject to a ::f64-free vulnerability, and versions
     1.2.1 and 1.2.2 were subject to an access exception when decompressing
     invalid compressed data.
 

@@ -33,19 +33,19 @@ namespace remoting
    class CLASS_DECL_REMOTING EncodingDefs
    {
    public:
-      static const int RAW = 0;
-      static const int COPYRECT = 1;
-      static const int RRE = 2;
-      static const int HEXTILE = 5;
-      static const int TIGHT = 7;
-      static const int ZRLE = 16;
+      static const ::i32 RAW = 0;
+      static const ::i32 COPYRECT = 1;
+      static const ::i32 RRE = 2;
+      static const ::i32 HEXTILE = 5;
+      static const ::i32 TIGHT = 7;
+      static const ::i32 ZRLE = 16;
 
-      static const char *const SIG_RAW;
-      static const char *const SIG_COPYRECT;
-      static const char *const SIG_RRE;
-      static const char *const SIG_HEXTILE;
-      static const char *const SIG_TIGHT;
-      static const char *const SIG_ZRLE;
+      static const_char_pointer const SIG_RAW;
+      static const_char_pointer const SIG_COPYRECT;
+      static const_char_pointer const SIG_RRE;
+      static const_char_pointer const SIG_HEXTILE;
+      static const_char_pointer const SIG_TIGHT;
+      static const_char_pointer const SIG_ZRLE;
    };
 
    //
@@ -55,44 +55,44 @@ namespace remoting
    class CLASS_DECL_REMOTING PseudoEncDefs
    {
    public:
-      static const int COMPR_LEVEL_0 = -256;
-      static const int COMPR_LEVEL_1 = -255;
-      static const int COMPR_LEVEL_2 = -254;
-      static const int COMPR_LEVEL_3 = -253;
-      static const int COMPR_LEVEL_4 = -252;
-      static const int COMPR_LEVEL_5 = -251;
-      static const int COMPR_LEVEL_6 = -250;
-      static const int COMPR_LEVEL_7 = -249;
-      static const int COMPR_LEVEL_8 = -248;
-      static const int COMPR_LEVEL_9 = -247;
+      static const ::i32 COMPR_LEVEL_0 = -256;
+      static const ::i32 COMPR_LEVEL_1 = -255;
+      static const ::i32 COMPR_LEVEL_2 = -254;
+      static const ::i32 COMPR_LEVEL_3 = -253;
+      static const ::i32 COMPR_LEVEL_4 = -252;
+      static const ::i32 COMPR_LEVEL_5 = -251;
+      static const ::i32 COMPR_LEVEL_6 = -250;
+      static const ::i32 COMPR_LEVEL_7 = -249;
+      static const ::i32 COMPR_LEVEL_8 = -248;
+      static const ::i32 COMPR_LEVEL_9 = -247;
 
-      static const int X_CURSOR = -240;
-      static const int RICH_CURSOR = -239;
-      static const int POINTER_POS = -232;
+      static const ::i32 X_CURSOR = -240;
+      static const ::i32 RICH_CURSOR = -239;
+      static const ::i32 POINTER_POS = -232;
 
-      static const int LAST_RECT = -224;
-      static const int DESKTOP_SIZE = -223;
-      static const int DESKTOP_CONFIGURATION = -222;
+      static const ::i32 LAST_RECT = -224;
+      static const ::i32 DESKTOP_SIZE = -223;
+      static const ::i32 DESKTOP_CONFIGURATION = -222;
 
-      static const int QUALITY_LEVEL_0 = -32;
-      static const int QUALITY_LEVEL_1 = -31;
-      static const int QUALITY_LEVEL_2 = -30;
-      static const int QUALITY_LEVEL_3 = -29;
-      static const int QUALITY_LEVEL_4 = -28;
-      static const int QUALITY_LEVEL_5 = -27;
-      static const int QUALITY_LEVEL_6 = -26;
-      static const int QUALITY_LEVEL_7 = -25;
-      static const int QUALITY_LEVEL_8 = -24;
-      static const int QUALITY_LEVEL_9 = -23;
+      static const ::i32 QUALITY_LEVEL_0 = -32;
+      static const ::i32 QUALITY_LEVEL_1 = -31;
+      static const ::i32 QUALITY_LEVEL_2 = -30;
+      static const ::i32 QUALITY_LEVEL_3 = -29;
+      static const ::i32 QUALITY_LEVEL_4 = -28;
+      static const ::i32 QUALITY_LEVEL_5 = -27;
+      static const ::i32 QUALITY_LEVEL_6 = -26;
+      static const ::i32 QUALITY_LEVEL_7 = -25;
+      static const ::i32 QUALITY_LEVEL_8 = -24;
+      static const ::i32 QUALITY_LEVEL_9 = -23;
 
-      static const char *const SIG_COMPR_LEVEL;
-      static const char *const SIG_X_CURSOR;
-      static const char *const SIG_RICH_CURSOR;
-      static const char *const SIG_POINTER_POS;
-      static const char *const SIG_LAST_RECT;
-      static const char *const SIG_DESKTOP_SIZE;
-      static const char *const SIG_QUALITY_LEVEL;
-      static const char* const SIG_DESKTOP_CONFIGURATION;
+      static const_char_pointer const SIG_COMPR_LEVEL;
+      static const_char_pointer const SIG_X_CURSOR;
+      static const_char_pointer const SIG_RICH_CURSOR;
+      static const_char_pointer const SIG_POINTER_POS;
+      static const_char_pointer const SIG_LAST_RECT;
+      static const_char_pointer const SIG_DESKTOP_SIZE;
+      static const_char_pointer const SIG_QUALITY_LEVEL;
+      static const_char_pointer const SIG_DESKTOP_CONFIGURATION;
    };
 
    //// __RFB_ENCODING_DEFS_H_INCLUDED__

@@ -48,7 +48,7 @@ namespace remoting
    // void Window::replaceWindowProc(WNDPROC wndProc)
    // {
    // }
-   LRESULT CALLBACK Window::s_window_procedure(HWND hWnd, unsigned int scopedstrMessage, ::wparam wParam, ::lparam lParam)
+   LRESULT CALLBACK Window::s_window_procedure(HWND hWnd, ::u32 scopedstrMessage, ::wparam wParam, ::lparam lParam)
    {
       auto p = (Window *)GetWindowLongPtr(hWnd, GWLP_USERDATA);
       LRESULT lresult = 0;
@@ -88,7 +88,7 @@ namespace remoting
 
 
    }
-   void Window::post_message(unsigned int scopedstrMessage, ::wparam wparam, ::lparam lparam)
+   void Window::post_message(::u32 scopedstrMessage, ::wparam wparam, ::lparam lparam)
    {
 
       ::PostMessage(m_hwnd, scopedstrMessage, wparam.m_number, lparam.m_lparam);
@@ -103,7 +103,7 @@ namespace remoting
       m_defWindowProc = nullptr;
    }
 
-   bool Window::window_procedure(LRESULT & lresult, unsigned int scopedstrMessage, ::wparam wparam, ::lparam lparam)
+   bool Window::window_procedure(LRESULT & lresult, ::u32 scopedstrMessage, ::wparam wparam, ::lparam lparam)
    {
 
       return false;
@@ -126,7 +126,7 @@ namespace remoting
 
    ::string Window::getText()
    {
-      int length = (int)SendMessage(m_hwnd, WM_GETTEXTLENGTH, 0, 0);
+      ::i32 length = (::i32)SendMessage(m_hwnd, WM_GETTEXTLENGTH, 0, 0);
       ::array_base<TCHAR> buf(length + 1);
       GetWindowText(m_hwnd, buf.data(), length + 1);
       return buf.data();
@@ -246,14 +246,14 @@ void Window::setText(const ::scoped_string & scopedstrText)
   SetWindowText(m_hwnd, ::wstring(scopedstrText));
 }
 
-void Window::setSignedInt(int value)
+void Window::setSignedInt(::i32 value)
 {
   ::string text;
   text.formatf("{}", value);
   setText(text);
 }
 
-void Window::setUnsignedInt(unsigned int value)
+void Window::setUnsignedInt(::u32 value)
 {
   ::string text;
   text.formatf("%u", value);

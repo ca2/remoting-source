@@ -29,7 +29,7 @@
 //#include "file_lib/::file::item.h"
 #include "acme/input_output/DataCopy.h"
 
-::remoting_node::ServerConfig::::remoting_node::ServerConfig()
+::remoting_node::ServerConfig::remoting_node::ServerConfig()
 : m_rfbPort(5900), m_httpPort(5800),
   m_disconnectAction(DA_DO_NOTHING), m_logLevel(0), m_useControlAuth(false),
   m_controlAuthAlwaysChecking(false),
@@ -59,7 +59,7 @@
 {
 }
 
-::remoting_node::ServerConfig::::remoting_node::ServerConfig(::remoting_node::ServerConfig& other)
+::remoting_node::ServerConfig::remoting_node::ServerConfig(::remoting_node::ServerConfig& other)
 {
   DataCopy datacopy;
    DataOutputStream outputstream(&datacopy);
@@ -271,7 +271,7 @@ void ::remoting_node::ServerConfig::setLogFileDir(const ::scoped_string & scoped
   m_logFilePath = scopedstrLogFilePath;
 }
 
-IpAccessRule::ActionType ::remoting_node::ServerConfig::getActionByAddress(unsigned long ip)
+IpAccessRule::ActionType ::remoting_node::ServerConfig::getActionByAddress(ulong ip)
 {
   AutoLock l(this);
 
@@ -317,7 +317,7 @@ void ::remoting_node::ServerConfig::setControlAuthAlwaysChecking(bool value)
   m_controlAuthAlwaysChecking = value;
 }
 
-void ::remoting_node::ServerConfig::setRfbPort(int port)
+void ::remoting_node::ServerConfig::setRfbPort(::i32 port)
 {
   AutoLock lock(&m_objectCS);
   if (port > 65535) {
@@ -329,13 +329,13 @@ void ::remoting_node::ServerConfig::setRfbPort(int port)
   }
 }
 
-int ::remoting_node::ServerConfig::getRfbPort()
+::i32 ::remoting_node::ServerConfig::getRfbPort()
 {
   AutoLock lock(&m_objectCS);
   return m_rfbPort;
 }
 
-void ::remoting_node::ServerConfig::setHttpPort(int port)
+void ::remoting_node::ServerConfig::setHttpPort(::i32 port)
 {
   AutoLock lock(&m_objectCS);
   if (port > 65535) {
@@ -347,7 +347,7 @@ void ::remoting_node::ServerConfig::setHttpPort(int port)
   }
 }
 
-int ::remoting_node::ServerConfig::getHttpPort()
+::i32 ::remoting_node::ServerConfig::getHttpPort()
 {
   AutoLock lock(&m_objectCS);
   return m_httpPort;
@@ -425,14 +425,14 @@ void ::remoting_node::ServerConfig::acceptRfbConnections(bool accept)
   m_acceptRfbConnections = accept;
 }
 
-void ::remoting_node::ServerConfig::getPrimaryPassword(unsigned char *password)
+void ::remoting_node::ServerConfig::getPrimaryPassword(::u8 *password)
 {
   AutoLock lock(&m_objectCS);
 
   memcpy(password, m_primaryPassword, VNC_PASSWORD_SIZE);
 }
 
-void ::remoting_node::ServerConfig::setPrimaryPassword(const unsigned char *value)
+void ::remoting_node::ServerConfig::setPrimaryPassword(const ::u8 *value)
 {
   AutoLock lock(&m_objectCS);
 
@@ -441,14 +441,14 @@ void ::remoting_node::ServerConfig::setPrimaryPassword(const unsigned char *valu
   memcpy((void *)&m_primaryPassword[0], (void *)value, VNC_PASSWORD_SIZE);
 }
 
-void ::remoting_node::ServerConfig::getReadOnlyPassword(unsigned char *password)
+void ::remoting_node::ServerConfig::getReadOnlyPassword(::u8 *password)
 {
   AutoLock lock(&m_objectCS);
 
   memcpy(password, m_readonlyPassword, VNC_PASSWORD_SIZE);
 }
 
-void ::remoting_node::ServerConfig::setReadOnlyPassword(const unsigned char *value)
+void ::remoting_node::ServerConfig::setReadOnlyPassword(const ::u8 *value)
 {
   AutoLock lock(&m_objectCS);
 
@@ -457,14 +457,14 @@ void ::remoting_node::ServerConfig::setReadOnlyPassword(const unsigned char *val
   memcpy((void *)&m_readonlyPassword[0], (void *)value, VNC_PASSWORD_SIZE);
 }
 
-void ::remoting_node::ServerConfig::getControlPassword(unsigned char *password)
+void ::remoting_node::ServerConfig::getControlPassword(::u8 *password)
 {
   AutoLock lock(&m_objectCS);
 
   memcpy(password, m_controlPassword, VNC_PASSWORD_SIZE);
 }
 
-void ::remoting_node::ServerConfig::setControlPassword(const unsigned char *password)
+void ::remoting_node::ServerConfig::setControlPassword(const ::u8 *password)
 {
   AutoLock lock(&m_objectCS);
 
@@ -563,13 +563,13 @@ void ::remoting_node::ServerConfig::enableAppletParamInUrl(bool enabled)
   m_enableAppletParamInUrl = enabled;
 }
 
-int ::remoting_node::ServerConfig::getLogLevel()
+::i32 ::remoting_node::ServerConfig::getLogLevel()
 {
   AutoLock lock(&m_objectCS);
   return m_logLevel;
 }
 
-void ::remoting_node::ServerConfig::setLogLevel(int logLevel)
+void ::remoting_node::ServerConfig::setLogLevel(::i32 logLevel)
 {
   AutoLock lock(&m_objectCS);
   if (logLevel < 0) {
@@ -763,13 +763,13 @@ void ::remoting_node::ServerConfig::setVideoRecognitionInterval(::u32 interval)
   return &m_videoRects;
 }
 
-int ::remoting_node::ServerConfig::getIdleTimeout()
+::i32 ::remoting_node::ServerConfig::getIdleTimeout()
 {
   AutoLock lock(&m_objectCS);
   return m_idleTimeout;
 }
 
-void ::remoting_node::ServerConfig::setIdleTimeout(int timeout)
+void ::remoting_node::ServerConfig::setIdleTimeout(::i32 timeout)
 {
   AutoLock lock(&m_objectCS);
   m_idleTimeout = timeout;

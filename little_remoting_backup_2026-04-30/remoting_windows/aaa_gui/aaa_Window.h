@@ -56,10 +56,10 @@
 //      ~Window() override;
 //
 //      virtual void setWindow(const ::operating_system::window & operatingsystemwindow);
-//      virtual void post_message(unsigned int scopedstrMessage, ::wparam wparam=0, ::lparam lparam=0);
+//      virtual void post_message(::u32 scopedstrMessage, ::wparam wparam=0, ::lparam lparam=0);
 //
-//      static LRESULT CALLBACK s_window_procedure(HWND hWnd, unsigned int scopedstrMessage, ::wparam wParam, ::lparam lParam);
-//      virtual bool window_procedure(LRESULT & lresult, unsigned int scopedstrMessage, ::wparam wparam, ::lparam lparam);
+//      static LRESULT CALLBACK s_window_procedure(HWND hWnd, ::u32 scopedstrMessage, ::wparam wParam, ::lparam lParam);
+//      virtual bool window_procedure(LRESULT & lresult, ::u32 scopedstrMessage, ::wparam wparam, ::lparam lparam);
 //
 //      virtual void subclass_window();
 //      virtual void unsubclass_window();
@@ -170,8 +170,8 @@
 //      //
 //
 //      virtual void setText(const ::scoped_string & scopedstrText);
-//      virtual void setSignedInt(int value);
-//      virtual void setUnsignedInt(unsigned int value);
+//      virtual void setSignedInt(::i32 value);
+//      virtual void setUnsignedInt(::u32 value);
 //
 //      //
 //      // Sets text vertical alignment
@@ -208,8 +208,8 @@
 //      //
 //
 //      //void replaceWindowProc(WNDPROC wndProc);
-//      //    static LRESULT CALLBACK s_control_window_procedure(HWND hWnd, unsigned int scopedstrMessage, ::wparam wParam, ::lparam lParam);
-//      //    virtual bool control_window_procedure(LRESULT & lresult, unsigned int scopedstrMessage, ::wparam wparam, ::lparam lparam);
+//      //    static LRESULT CALLBACK s_control_window_procedure(HWND hWnd, ::u32 scopedstrMessage, ::wparam wParam, ::lparam lParam);
+//      //    virtual bool control_window_procedure(LRESULT & lresult, ::u32 scopedstrMessage, ::wparam wparam, ::lparam lparam);
 //      // virtual void subclass_control();
 //      //    virtual void unsubclass_control();
 //      //protected:
@@ -250,8 +250,8 @@
 //   //    //
 //   //
 //   //    virtual void setText(const ::scoped_string & scopedstrText);
-//   //    virtual void setSignedInt(int value);
-//   //    virtual void setUnsignedInt(unsigned int value);
+//   //    virtual void setSignedInt(::i32 value);
+//   //    virtual void setUnsignedInt(::u32 value);
 //   //
 //   //    //
 //   //    // Sets text vertical alignment
@@ -288,8 +288,8 @@
 //   //    //
 //   //
 //   //    //void replaceWindowProc(WNDPROC wndProc);
-//   //    //    static LRESULT CALLBACK s_control_window_procedure(HWND hWnd, unsigned int scopedstrMessage, ::wparam wParam, ::lparam lParam);
-//   //    //    virtual bool control_window_procedure(LRESULT & lresult, unsigned int scopedstrMessage, ::wparam wparam, ::lparam lparam);
+//   //    //    static LRESULT CALLBACK s_control_window_procedure(HWND hWnd, ::u32 scopedstrMessage, ::wparam wParam, ::lparam lParam);
+//   //    //    virtual bool control_window_procedure(LRESULT & lresult, ::u32 scopedstrMessage, ::wparam wparam, ::lparam lparam);
 //   //    // virtual void subclass_control();
 //   //    //    virtual void unsubclass_control();
 //   //    //protected:

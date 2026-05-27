@@ -77,7 +77,7 @@ initial_setup (j_compress_ptr cinfo)
   /* Make sure image isn't bigger than I can handle */
   if ((long) cinfo->jpeg_height > (long) JPEG_MAX_DIMENSION ||
       (long) cinfo->jpeg_width > (long) JPEG_MAX_DIMENSION)
-    ERREXIT1(cinfo, JERR_IMAGE_TOO_BIG, (unsigned int) JPEG_MAX_DIMENSION);
+    ERREXIT1(cinfo, JERR_IMAGE_TOO_BIG, (::u32) JPEG_MAX_DIMENSION);
 
   /* Only 8 to 12 bits data precision are supported for DCT based JPEG */
   if (cinfo->data_precision < 8 || cinfo->data_precision > 12)
@@ -462,7 +462,7 @@ per_scan_setup (j_compress_ptr cinfo)
   /* Note that count must fit in 16 bits, so we provide limiting. */
   if (cinfo->restart_in_rows > 0) {
     long nominal = (long) cinfo->restart_in_rows * (long) cinfo->MCUs_per_row;
-    cinfo->restart_interval = (unsigned int) MIN(nominal, 65535L);
+    cinfo->restart_interval = (::u32) MIN(nominal, 65535L);
   }
 }
 

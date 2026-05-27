@@ -689,7 +689,7 @@ Changes in 1.2.3.1 (16 August 2006)
 - Correct spelling of "successfully" in gzio.c [Randers-Pehrson]
 - Add comments to zlib.h about gzerror() usage [Brown]
 - Set extra flags in gzip header in gzopen() like deflate() does
-- Make configure options more compatible with double-dash conventions
+- Make configure options more compatible with ::f64-dash conventions
   [Weigelt]
 - Clean up compilation under Solaris SunStudio cc [Rowe, Reinholdtsen]
 - Fix uninstall target in Makefile.in [Truta]
@@ -1100,7 +1100,7 @@ Changes in 1.2.0 (9 March 2003)
 - Documentation improvements (in zlib.h):
     - Document raw deflate and inflate
     - Update RFCs URL
-    - ::int_point out that zlib and gzip formats are different
+    - ::i32_point out that zlib and gzip formats are different
     - Note that Z_BUF_ERROR is not fatal
     - Document string limit for gzprintf() and possible buffer overflow
     - Note requirement on avail_out when flushing

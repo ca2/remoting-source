@@ -43,8 +43,8 @@ public:
   // Create window with windowName and setted style
   // other parameters can by changed
   bool createWindow(const ::scoped_string & windowName, DWORD style, HWND hWndParent = 0,
-                    int xPos = CW_USEDEFAULT, int yPos = CW_USEDEFAULT,
-                    int width = CW_USEDEFAULT, int height = CW_USEDEFAULT);
+                    ::i32 xPos = CW_USEDEFAULT, ::i32 yPos = CW_USEDEFAULT,
+                    ::i32 width = CW_USEDEFAULT, ::i32 height = CW_USEDEFAULT);
   bool destroyWindow();
 
   // setClass()
@@ -57,7 +57,7 @@ public:
   void enableWindow(bool bEnable);
   void updateWindow();
   bool setSize(const ::i32_size & size);
-  bool setPosition(int xPos, int yPos);
+  bool setPosition(::i32 xPos, ::i32 yPos);
   void setWindowText(const ::scoped_string & text);
 
   // loadIcon()
@@ -85,35 +85,35 @@ public:
 
   // set or kill timer, with identifactor ident
   // and time in milliseconds
-  void setTimer(UINT_PTR ident, unsigned int time);
+  void setTimer(UINT_PTR ident, ::u32 time);
   void killTimer(UINT_PTR ident);
 
   // set foreground window
   void setForegroundWindow();
 
   // post scopedstrMessage to this window
-  void postMessage(unsigned int Msg, ::wparam wParam = 0, ::lparam lParam = 0);
+  void postMessage(::u32 Msg, ::wparam wParam = 0, ::lparam lParam = 0);
 
   void getClientRect(RECT *rc);
-  void getBorderSize(int *width, int *height);
+  void getBorderSize(::i32 *width, ::i32 *height);
 
-  virtual bool wndProc(unsigned int scopedstrMessage, ::wparam wParam, ::lparam lParam);
+  virtual bool wndProc(::u32 scopedstrMessage, ::wparam wParam, ::lparam lParam);
 
-  static const int MOUSE_LDOWN  = 1;
-  static const int MOUSE_MDOWN  = 2;
-  static const int MOUSE_RDOWN  = 4;
-  static const int MOUSE_WUP    = 8;
-  static const int MOUSE_WDOWN  = 16;
+  static const ::i32 MOUSE_LDOWN  = 1;
+  static const ::i32 MOUSE_MDOWN  = 2;
+  static const ::i32 MOUSE_RDOWN  = 4;
+  static const ::i32 MOUSE_WUP    = 8;
+  static const ::i32 MOUSE_WDOWN  = 16;
 
 private:
   // This function may be implement in child class.
   // Here is stub function, always returned false.
   virtual bool onCommand(::wparam wParam, ::lparam lParam);
-  virtual bool onNotify(int idCtrl, LPNMHDR pnmh);
+  virtual bool onNotify(::i32 idCtrl, LPNMHDR pnmh);
   virtual bool onSysCommand(::wparam wParam, ::lparam lParam);
-  virtual bool onMessage(unsigned int scopedstrMessage, ::wparam wParam, ::lparam lParam);
-  virtual bool onMouse(unsigned char mouseButtons, unsigned short wheelSpeed, POINT pointPosition);
-  virtual bool onMouseEx(unsigned int message, int iButtonMask, unsigned short wspeed, POINT pointPosition);
+  virtual bool onMessage(::u32 scopedstrMessage, ::wparam wParam, ::lparam lParam);
+  virtual bool onMouse(::u8 mouseButtons, ::u16 wheelSpeed, POINT pointPosition);
+  virtual bool onMouseEx(::u32 message, ::i32 iButtonMask, ::u16 wspeed, POINT pointPosition);
 
 //protected:
   //::operating_system::window m_operatingsystemwindow;

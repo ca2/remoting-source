@@ -35,7 +35,7 @@
   fromStringStorage(::string(""));
 }
 
-::string::string(const ::array_base<char> *utf8Buffer)
+::string::string(const ::array_base<::i8> *utf8Buffer)
 {
  = utf8Buffer;
 }
@@ -54,12 +54,12 @@
 {
 }
 
-void ::string::setString(const ::array_base<char> *utf8Buffer)
+void ::string::setString(const ::array_base<::i8> *utf8Buffer)
 {
   m_buffer = *utf8Buffer;
 }
 
-const char *::string::getString() const
+const_char_pointer ::string::getString() const
 {
   return &m_buffer.front();
 }
@@ -86,11 +86,11 @@ void ::string::fromStringStorage(const ::scoped_string & src)
   const WCHAR *uniString = src;
   size_t uniLength = src.length();
 #endif
-  int constrSrcSize = (int)uniLength + 1;
+  ::i32 constrSrcSize = (::i32)uniLength + 1;
   _ASSERT(constrSrcSize == uniLength + 1);
 
   // From UNICODE to UTF8
-  int dstRequiredSize = WideCharToMultiByte(CP_UTF8, 0, uniString,
+  ::i32 dstRequiredSize = WideCharToMultiByte(CP_UTF8, 0, uniString,
                                             constrSrcSize, NULL, 0,
                                             0, 0);
 
@@ -106,9 +106,9 @@ void ::string::fromStringStorage(const ::scoped_string & src)
 void ::string::toStringStorage(::string & dst)
 {
   // 1) From UTF8 to UNICODE
-  int constrSize = (int)getSize();
+  ::i32 constrSize = (::i32)getSize();
   _ASSERT(constrSize == getSize());
-  int dstReqSizeInSym = MultiByteToWideChar(CP_UTF8, 0, &m_buffer.front(),
+  ::i32 dstReqSizeInSym = MultiByteToWideChar(CP_UTF8, 0, &m_buffer.front(),
                                             constrSize, 0, 0);
   if (dstReqSizeInSym == 0) {
     throw ::subsystem::Exception("Cannot convert a string from the UTF8 format");

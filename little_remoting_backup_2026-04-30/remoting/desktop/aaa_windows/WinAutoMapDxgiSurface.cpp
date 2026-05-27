@@ -31,7 +31,7 @@ namespace remoting
 {
 
 
-   WinAutoMapDxgiSurface::WinAutoMapDxgiSurface(WinDxgiSurface *surface, unsigned int mapFlags) : m_surface(surface)
+   WinAutoMapDxgiSurface::WinAutoMapDxgiSurface(WinDxgiSurface *surface, ::u32 mapFlags) : m_surface(surface)
    {
       HRESULT hr = m_surface->getSurface()->Map(&m_mappedRect, mapFlags);
       if (FAILED(hr))
@@ -53,7 +53,7 @@ namespace remoting
       return (size_t)m_mappedRect.Pitch;
    }
 
-   char *WinAutoMapDxgiSurface::getBuffer() const { return (char *)m_mappedRect.pBits; }
+   char_pointer WinAutoMapDxgiSurface::getBuffer() const { return (char_pointer )m_mappedRect.pBits; }
 
 
 } // namespace remoting

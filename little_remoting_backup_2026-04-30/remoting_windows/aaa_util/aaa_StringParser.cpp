@@ -26,10 +26,10 @@
 
 // #include aaa_<stdio.h>
 
-bool MainSubsystem().StringParser().parseInt(const ::scoped_string & scopedstrStr, int *out)
+bool MainSubsystem().StringParser().parseInt(const ::scoped_string & scopedstrStr, ::i32 *out)
 {
-  int value = 0;
-  char c;
+  ::i32 value = 0;
+  ::i8 c;
   if(_sscanf(::string(scopedstrStr).c_str(), L"%d%c", &value, &c) != 1) {
     return false;
   }
@@ -40,22 +40,22 @@ bool MainSubsystem().StringParser().parseInt(const ::scoped_string & scopedstrSt
   return true;
 }
 
-bool MainSubsystem().StringParser().parseUInt(const ::scoped_string & scopedstrStr, unsigned int *out)
+bool MainSubsystem().StringParser().parseUInt(const ::scoped_string & scopedstrStr, ::u32 *out)
 {
   // Check the minus sign manually because _tcstoul does not fail on it.
   if (scopedstrStr == "-") {
     return false;
   }
 
-  char *ptr = 0;
+  char_pointer ptr = 0;
   errno = 0;
-  unsigned long ulongValue = _atoul(::string(scopedstrStr).c_str(), &ptr, 10);
+  ulong ulongValue = _atoul(::string(scopedstrStr).c_str(), &ptr, 10);
   if (errno != 0 || ptr == 0 || *ptr != _T('\0')) {
     return false;
   }
 
-  unsigned int uintValue = (unsigned int)ulongValue;
-  if ((unsigned long)uintValue != ulongValue) {
+  ::u32 uintValue = (::u32)ulongValue;
+  if ((ulong)uintValue != ulongValue) {
     return false;
   }
 
@@ -66,10 +66,10 @@ bool MainSubsystem().StringParser().parseUInt(const ::scoped_string & scopedstrS
   return true;
 }
 
-bool MainSubsystem().StringParser().parseUInt64(const ::scoped_string & scopedstrStr, unsigned long long *out)
+bool MainSubsystem().StringParser().parseUInt64(const ::scoped_string & scopedstrStr, ::u64 *out)
 {
-  unsigned long long value = 0;
-  char c;
+  ::u64 value = 0;
+  ::i8 c;
   if(_sscanf(::string(scopedstrStr).c_str(), L"%llu%c", &value, &c) != 1) {
     return false;
   }
@@ -85,10 +85,10 @@ bool StringParser::tryParseInt(const ::scoped_string & scopedstrStr)
   return parseInt(scopedstrStr, NULL);
 }
 
-bool MainSubsystem().StringParser().parseHex(const ::scoped_string & scopedstrStr, unsigned int *out)
+bool MainSubsystem().StringParser().parseHex(const ::scoped_string & scopedstrStr, ::u32 *out)
 {
-  char c;
-  unsigned int val;
+  ::i8 c;
+  ::u32 val;
   if (_stscanf(::wstring(scopedstrStr).c_str(), L"%x%c", &val, &c) != 1) {
     return false;
   }
@@ -98,28 +98,28 @@ bool MainSubsystem().StringParser().parseHex(const ::scoped_string & scopedstrSt
   return true;
 }
 
-bool MainSubsystem().StringParser().parseByteHex(const ::scoped_string & scopedstrStr, unsigned char *out)
+bool MainSubsystem().StringParser().parseByteHex(const ::scoped_string & scopedstrStr, ::u8 *out)
 {
-  char c;
-  int val = 0;
+  ::i8 c;
+  ::i32 val = 0;
   if (_stscanf(::wstring(scopedstrStr).c_str(), L"%x%c", &val, &c) != 1) {
     return false;
   }
   if (out != NULL) {
-    *out = (unsigned char)val;
+    *out = (::u8)val;
   }
   return true;
 }
 
-bool MainSubsystem().StringParser().parseByte(const ::scoped_string & scopedstrStr, unsigned char *out)
+bool MainSubsystem().StringParser().parseByte(const ::scoped_string & scopedstrStr, ::u8 *out)
 {
-  char c;
-  int val = 0;
+  ::i8 c;
+  ::i32 val = 0;
   if (_sscanf(::wstring(scopedstrStr).c_str(), L"%d%c", &val, &c) != 1) {
     return false;
   }
   if (out != NULL) {
-    *out = (unsigned char)val;
+    *out = (::u8)val;
   }
   return true;
 }

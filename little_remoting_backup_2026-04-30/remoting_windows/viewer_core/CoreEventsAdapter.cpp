@@ -49,7 +49,7 @@ namespace remoting
 
    }
 
-   void CoreEventsAdapter::onConnecting(int iPhase)
+   void CoreEventsAdapter::onConnecting(::i32 iPhase)
    {
 
 

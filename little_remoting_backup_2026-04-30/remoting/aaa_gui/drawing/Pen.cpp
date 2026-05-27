@@ -29,7 +29,7 @@
 
 namespace remoting
 {
-   Pen::Pen(int type, int width, COLORREF color)
+   Pen::Pen(::i32 type, ::i32 width, COLORREF color)
    : m_pen(NULL)
    {
       m_pen = CreatePen(type, width, color);

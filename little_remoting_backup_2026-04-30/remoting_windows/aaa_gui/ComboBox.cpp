@@ -34,45 +34,45 @@ ComboBox::~ComboBox()
 {
 }
 
-int ComboBox::addItem(const ::scoped_string & scopedstrText)
+::i32 ComboBox::addItem(const ::scoped_string & scopedstrText)
 {
   return ComboBox_AddString(m_hwnd, ::wstring(scopedstrText).c_str());
 }
 
-int ComboBox::addItem(const ::scoped_string & scopedstrText, void *tag)
+::i32 ComboBox::addItem(const ::scoped_string & scopedstrText, void *tag)
 {
-  int index = addItem(scopedstrText);
+  ::i32 index = addItem(scopedstrText);
   setItemData(index, tag);
   return index;
 }
 
-void ComboBox::insertItem(int index, const ::scoped_string & scopedstrText)
+void ComboBox::insertItem(::i32 index, const ::scoped_string & scopedstrText)
 {
   ComboBox_InsertString(m_hwnd, index, ::wstring(scopedstrText).c_str());
 }
 
-void ComboBox::insertItem(int index, const ::scoped_string & scopedstrText, void *tag)
+void ComboBox::insertItem(::i32 index, const ::scoped_string & scopedstrText, void *tag)
 {
   insertItem(index, scopedstrText);
   setItemData(index, tag);
 }
 
-int ComboBox::getItemsCount() const
+::i32 ComboBox::getItemsCount() const
 {
   return ComboBox_GetCount(m_hwnd);
 }
 
-void ComboBox::setItemData(int index, void *tag)
+void ComboBox::setItemData(::i32 index, void *tag)
 {
   ComboBox_SetItemData(m_hwnd, index, (::lparam)tag);
 }
 
-void *ComboBox::getItemData(int index) const
+void *ComboBox::getItemData(::i32 index) const
 {
   return (void *)ComboBox_GetItemData(m_hwnd, index);
 }
 
-::string ComboBox::getItemText(int index) const
+::string ComboBox::getItemText(::i32 index) const
 {
   size_t length = ComboBox_GetLBTextLen(m_hwnd, index);
   ::string str;
@@ -84,17 +84,17 @@ void *ComboBox::getItemData(int index) const
    return str;
 }
 
-int ComboBox::getSelectedItemIndex()
+::i32 ComboBox::getSelectedItemIndex()
 {
   return ComboBox_GetCurSel(m_hwnd);
 }
 
-void ComboBox::setSelectedItem(int index)
+void ComboBox::setSelectedItem(::i32 index)
 {
   ComboBox_SetCurSel(m_hwnd, index);
 }
 
-void ComboBox::deleteItem(int index)
+void ComboBox::deleteItem(::i32 index)
 {
   ComboBox_DeleteString(m_hwnd, index);
 }

@@ -56,7 +56,7 @@ namespace remoting_node
    }
 
 
-   bool VideoRegionsConfigDialog::_002OnUpDown(int iControl, int iPos, int iDelta)
+   bool VideoRegionsConfigDialog::_002OnUpDown(::i32 iControl, ::i32 iPos, ::i32 iDelta)
    {
 
       if (iControl == IDC_VIDEO_RECOGNITION_INTERVAL_SPIN)
@@ -111,7 +111,7 @@ namespace remoting_node
       ::string_array *videoClasses = m_pserverconfig->getVideoClassNames();
       ::int_rectangle_array_base *rectangleaVideo = m_pserverconfig->getVideoRects();
       ::string textAreaData;
-      char endLine[3] = {13, 10, 0};
+      ::i8 endLine[3] = {13, 10, 0};
       {
          AutoLock al(m_pserverconfig);
          textAreaData= "";
@@ -119,7 +119,7 @@ namespace remoting_node
             textAreaData+= videoClasses->at(i);
             textAreaData+=endLine;
          }
-         char buffer[32];
+         ::i8 buffer[32];
          _itoa(m_pserverconfig->getVideoRecognitionInterval(), buffer, 10);
          m_videoRecognitionInterval.setText(buffer);
       }
@@ -170,7 +170,7 @@ namespace remoting_node
       delimiters.add("\t");
       delimiters.add(",");
       delimiters.add(";");
-      //char delimiters[] = " \n\r\t,;";
+      //::i8 delimiters[] = " \n\r\t,;";
 
       {
          ::string_array_base chunks;
@@ -223,7 +223,7 @@ namespace remoting_node
 
       vriss = m_videoRecognitionInterval.getText();
 
-      int interval;
+      ::i32 interval;
       MainSubsystem().StringParser().parseInt(vriss, &interval);
       m_pserverconfig->setVideoRecognitionInterval((::u32)interval);
 
@@ -237,13 +237,13 @@ namespace remoting_node
       dialog_item(m_videoRecognitionInterval, IDC_VIDEO_RECOGNITION_INTERVAL);
       dialog_item(m_videoRecognitionIntervalSpin, IDC_VIDEO_RECOGNITION_INTERVAL_SPIN);
 
-      int limitersTmp[] = {50, 200};
-      int deltasTmp[] = {5, 10};
+      ::i32 limitersTmp[] = {50, 200};
+      ::i32 deltasTmp[] = {5, 10};
 
-      ::array_base<int> limitters(limitersTmp, limitersTmp + sizeof(limitersTmp) /
-                                                            sizeof(int));
-      ::array_base<int> deltas(deltasTmp, deltasTmp + sizeof(deltasTmp) /
-                                                     sizeof(int));
+      ::array_base<::i32> limitters(limitersTmp, limitersTmp + sizeof(limitersTmp) /
+                                                            sizeof(::i32));
+      ::array_base<::i32> deltas(deltasTmp, deltasTmp + sizeof(deltasTmp) /
+                                                     sizeof(::i32));
 
       m_videoRecognitionIntervalSpin.setBuddy(&m_videoRecognitionInterval);
       m_videoRecognitionIntervalSpin.setAccel(0, 1);
@@ -252,7 +252,7 @@ namespace remoting_node
       m_videoRecognitionIntervalSpin.enableAutoAcceleration(true);
    }
 
-   void VideoRegionsConfigDialog::onRecognitionIntervalSpinChangePos(int iControl, int iPos, int iDelta)
+   void VideoRegionsConfigDialog::onRecognitionIntervalSpinChangePos(::i32 iControl, ::i32 iPos, ::i32 iDelta)
    {
       if (iControl == IDC_VIDEO_RECOGNITION_INTERVAL_SPIN)
       {

@@ -32,13 +32,13 @@ class CLASS_DECL_REMOTING StringParser
 {
 public:
   static bool tryParseInt(const ::scoped_string & scopedstrStr);
-  static bool parseInt(const ::scoped_string & scopedstrStr, int *out);
+  static bool parseInt(const ::scoped_string & scopedstrStr, ::i32 *out);
   // FIXME: it returns true on values that greater then 0xFFFFFFFF.
-  static bool parseUInt(const ::scoped_string & scopedstrStr, unsigned int *out);
-  static bool parseUInt64(const ::scoped_string & scopedstrStr, unsigned long long *out);
-  static bool parseHex(const ::scoped_string & scopedstrStr, unsigned int *out);
-  static bool parseByte(const ::scoped_string & scopedstrStr, unsigned char *out);
-  static bool parseByteHex(const ::scoped_string & scopedstrStr, unsigned char *out);
+  static bool parseUInt(const ::scoped_string & scopedstrStr, ::u32 *out);
+  static bool parseUInt64(const ::scoped_string & scopedstrStr, ::u64 *out);
+  static bool parseHex(const ::scoped_string & scopedstrStr, ::u32 *out);
+  static bool parseByte(const ::scoped_string & scopedstrStr, ::u8 *out);
+  static bool parseByteHex(const ::scoped_string & scopedstrStr, ::u8 *out);
 };
 
 

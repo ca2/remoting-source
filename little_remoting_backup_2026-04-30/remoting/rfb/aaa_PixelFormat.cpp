@@ -26,7 +26,7 @@
 
 // #include aaa_<string.h>
 
-::innate_subsystem::PixelFormat::::innate_subsystem::PixelFormat()
+::innate_subsystem::PixelFormat::innate_subsystem::PixelFormat()
 {
   memset(this, 0, sizeof(::innate_subsystem::PixelFormat));
 }
@@ -34,8 +34,8 @@
 void ::innate_subsystem::PixelFormat::initBigEndianByNative()
 {
   union {
-    char test;
-    int i;
+    ::i8 test;
+    ::i32 i;
   } testBigEndian;
   testBigEndian.i = 1;
   bigEndian = (testBigEndian.test == 0);

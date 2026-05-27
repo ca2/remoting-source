@@ -61,7 +61,7 @@ namespace remoting
       }
    }
 
-   unsigned int WinVideoRegionUpdaterImpl::getInterval()
+   ::u32 WinVideoRegionUpdaterImpl::getInterval()
    {
       ::remoting_node::ServerConfig *pserverconfig = m_pconfigurator->getServerConfig();
       return pserverconfig->getVideoRecognitionInterval();
@@ -94,7 +94,7 @@ namespace remoting
       {
          class ::time timeStart = class ::time::now();
          tmpRegion.add(getRectsByClass(classNames));
-         unsigned int millis = (class ::time::now() - timeStart).getTime();
+         ::u32 millis = (class ::time::now() - timeStart).getTime();
          m_plogwriter->debug(L"WinVideoRegionUpdaterImpl::getRectsByClass call took {} ms", millis);
       }
       if (!rectanglea.empty())
@@ -115,7 +115,7 @@ namespace remoting
       ::array_base<HWND>::iterator hwndIter;
       Region vidRegion;
 
-      for (int i = 0; i < classNames.size(); ++i)
+      for (::i32 i = 0; i < classNames.size(); ++i)
       {
          m_plogwriter->debug(L"WinVideoRegionUpdaterImpl: getRectsByClass : classname: {} ", classNames[i]);
       }

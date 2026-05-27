@@ -118,11 +118,11 @@ EXTERN(long) jpeg_mem_available JPP((j_common_ptr cinfo,
 
 #ifdef USE_MSDOS_MEMMGR		/* DOS-specific junk */
 
-typedef unsigned short XMSH;	/* type of extended-memory handles */
-typedef unsigned short EMSH;	/* type of expanded-memory handles */
+typedef ::u16 XMSH;	/* type of extended-memory handles */
+typedef ::u16 EMSH;	/* type of expanded-memory handles */
 
 typedef union {
-  short file_handle;		/* DOS file handle if it's a temp file */
+  ::i16 file_handle;		/* DOS file handle if it's a temp file */
   XMSH xms_handle;		/* handle if it's a chunk of XMS */
   EMSH ems_handle;		/* handle if it's a chunk of EMS */
 } handle_union;
@@ -153,17 +153,17 @@ typedef struct backing_store_struct {
 #ifdef USE_MSDOS_MEMMGR
   /* For the MS-DOS manager (jmemdos.c), we need: */
   handle_union handle;		/* reference to backing-store storage object */
-  char temp_name[TEMP_NAME_LENGTH]; /* name if it's a file */
+  ::i8 temp_name[TEMP_NAME_LENGTH]; /* name if it's a file */
 #else
 #ifdef USE_MAC_MEMMGR
   /* For the Mac manager (jmemmac.c), we need: */
-  short temp_file;		/* file reference number to temp file */
+  ::i16 temp_file;		/* file reference number to temp file */
   FSSpec tempSpec;		/* the FSSpec for the temp file */
-  char temp_name[TEMP_NAME_LENGTH]; /* name if it's a file */
+  ::i8 temp_name[TEMP_NAME_LENGTH]; /* name if it's a file */
 #else
   /* For a typical implementation with temp files, we need: */
   FILE * temp_file;		/* stdio reference to temp file */
-  char temp_name[TEMP_NAME_LENGTH]; /* name of temp file */
+  ::i8 temp_name[TEMP_NAME_LENGTH]; /* name of temp file */
 #endif
 #endif
 } backing_store_info;

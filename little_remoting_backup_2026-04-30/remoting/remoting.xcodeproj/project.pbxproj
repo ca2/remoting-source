@@ -295,7 +295,7 @@
 		9A3740842F81656200E892B1 /* _.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = _.h; sourceTree = "<group>"; };
 		9A3740852F81656200E892B1 /* _.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = _.cpp; sourceTree = "<group>"; };
 		9A37408B2F81656200E892B1 /* Dimension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Dimension.h; sourceTree = "<group>"; };
-		9A37408D2F81656200E892B1 /* ::int_point.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ::int_point.h; sourceTree = "<group>"; };
+		9A37408D2F81656200E892B1 /* ::i32_point.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ::i32_point.h; sourceTree = "<group>"; };
 		9A37408E2F81656200E892B1 /* Rect.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Rect.h; sourceTree = "<group>"; };
 		9A37408F2F81656200E892B1 /* RectSerializer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RectSerializer.h; sourceTree = "<group>"; };
 		9A3740902F81656200E892B1 /* RectSerializer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RectSerializer.cpp; sourceTree = "<group>"; };
@@ -732,7 +732,7 @@
 				9A3740842F81656200E892B1 /* _.h */,
 				9A3740852F81656200E892B1 /* _.cpp */,
 				9A37408B2F81656200E892B1 /* Dimension.h */,
-				9A37408D2F81656200E892B1 /* ::int_point.h */,
+				9A37408D2F81656200E892B1 /* ::i32_point.h */,
 				9A37408E2F81656200E892B1 /* Rect.h */,
 				9A37408F2F81656200E892B1 /* RectSerializer.h */,
 				9A3740902F81656200E892B1 /* RectSerializer.cpp */,

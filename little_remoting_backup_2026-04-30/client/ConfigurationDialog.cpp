@@ -78,7 +78,7 @@ namespace remoting_client
     void ConfigurationDialog::onLogLevelChange()
     {
         ::string text;
-        int logLevel;
+        ::i32 logLevel;
         text = m_textboxVerbLvl.getText();
         MainSubsystem().StringParser().parseInt(text, &logLevel);
         if (logLevel != 0) {
@@ -220,7 +220,7 @@ namespace remoting_client
         auto config = m_premoting->m_pviewerconfig;
 
         ::string text;
-        int intVal;
+        ::i32 intVal;
 
         text = m_textboxReverseConn.getText();
         MainSubsystem().StringParser().parseInt(text, &intVal);
@@ -230,7 +230,7 @@ namespace remoting_client
         MainSubsystem().StringParser().parseInt(text, &intVal);
         config->setLogLevel((enum_trace_level)intVal);
 
-        int oldLimit = config->getHistoryLimit();
+        ::i32 oldLimit = config->getHistoryLimit();
         text=m_textboxNumberConn.getText();
         MainSubsystem().StringParser().parseInt(text, &intVal);
         config->setHistoryLimit(intVal);

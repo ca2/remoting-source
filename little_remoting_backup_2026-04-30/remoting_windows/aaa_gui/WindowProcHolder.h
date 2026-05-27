@@ -34,9 +34,9 @@ public:
   virtual ~WindowProcHolder();
 
 protected:
-  virtual LRESULT windowProc(HWND hWnd, unsigned int uMsg, ::wparam wParam, ::lparam lParam, bool *useDefWindowProc) = 0;
+  virtual LRESULT windowProc(HWND hWnd, ::u32 uMsg, ::wparam wParam, ::lparam lParam, bool *useDefWindowProc) = 0;
 
-  static LRESULT CALLBACK defWindowProc(HWND hWnd, unsigned int uMsg, ::wparam wParam, ::lparam lParam);
+  static LRESULT CALLBACK defWindowProc(HWND hWnd, ::u32 uMsg, ::wparam wParam, ::lparam lParam);
 
   friend class NotifyIconWindow;
 };

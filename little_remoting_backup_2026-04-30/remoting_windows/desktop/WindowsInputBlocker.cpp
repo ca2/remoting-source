@@ -199,7 +199,7 @@ namespace remoting_windows
       return true;
    }
 
-   LRESULT CALLBACK WindowsInputBlocker::lowLevelKeyboardFilterProc(int nCode, WPARAM wParam, LPARAM lParam)
+   LRESULT CALLBACK WindowsInputBlocker::lowLevelKeyboardFilterProc(::i32 nCode, WPARAM wParam, LPARAM lParam)
    {
       if (nCode == HC_ACTION) {
          KBDLLHOOKSTRUCT *hookStruct = (KBDLLHOOKSTRUCT *)lParam;
@@ -211,7 +211,7 @@ namespace remoting_windows
       return CallNextHookEx(m_hKeyboardHook, nCode, wParam, lParam);
    }
 
-   LRESULT CALLBACK WindowsInputBlocker::lowLevelMouseFilterProc(int nCode, WPARAM wParam, LPARAM lParam)
+   LRESULT CALLBACK WindowsInputBlocker::lowLevelMouseFilterProc(::i32 nCode, WPARAM wParam, LPARAM lParam)
    {
       if (nCode == HC_ACTION) {
          MSLLHOOKSTRUCT *hookStruct = (MSLLHOOKSTRUCT *)lParam;
@@ -223,7 +223,7 @@ namespace remoting_windows
       return CallNextHookEx(m_hMouseHook, nCode, wParam, lParam);
    }
 
-   LRESULT CALLBACK WindowsInputBlocker::lowLevelSoftKeyboardFilterProc(int nCode, WPARAM wParam, LPARAM lParam)
+   LRESULT CALLBACK WindowsInputBlocker::lowLevelSoftKeyboardFilterProc(::i32 nCode, WPARAM wParam, LPARAM lParam)
    {
       if (nCode == HC_ACTION) {
          KBDLLHOOKSTRUCT *hookStruct = (KBDLLHOOKSTRUCT *)lParam;
@@ -235,7 +235,7 @@ namespace remoting_windows
       return CallNextHookEx(m_hSoftKeyboardHook, nCode, wParam, lParam);
    }
 
-   LRESULT CALLBACK WindowsInputBlocker::lowLevelSoftMouseFilterProc(int nCode, WPARAM wParam, LPARAM lParam)
+   LRESULT CALLBACK WindowsInputBlocker::lowLevelSoftMouseFilterProc(::i32 nCode, WPARAM wParam, LPARAM lParam)
    {
       if (nCode == HC_ACTION) {
          MSLLHOOKSTRUCT *hookStruct = (MSLLHOOKSTRUCT *)lParam;

@@ -27,7 +27,7 @@
 
 #include "subsystem/thread/Thread.h"
 
-ServiceControlManagerClientException::ServiceControlManagerClientException(int scmErrCode)
+ServiceControlManagerClientException::ServiceControlManagerClientException(::i32 scmErrCode)
 : SystemException("[::subsystem::Exception description is not avaliable]")
 {
   switch (scmErrCode) {
@@ -43,7 +43,7 @@ ServiceControlManagerClientException::ServiceControlManagerClientException(int s
   m_scmErrCode = scmErrCode;
 }
 
-int ServiceControlManagerClientException::getServiceControlManagerErrorCode() const
+::i32 ServiceControlManagerClientException::getServiceControlManagerErrorCode() const
 {
   return m_scmErrCode;
 }
@@ -124,7 +124,7 @@ void ServiceControlManagerClient::removeService(const ::scoped_string & scopedst
 
   // Wait until service entry will be removed.
 
-  int triesCount = 0;
+  ::i32 triesCount = 0;
   while (true) {
     SC_HANDLE service = OpenService(m_managerHandle, ::wstring(scopedstrName), SERVICE_ALL_ACCESS);
     if (service == 0) {
@@ -159,8 +159,8 @@ void ServiceControlManagerClient::startService(const ::scoped_string & scopedstr
     }
 
     if (waitCompletion) {
-      int numChecks = 10;
-      int msDelayBetweenChecks = 1000;
+      ::i32 numChecks = 10;
+      ::i32 msDelayBetweenChecks = 1000;
 
       while ((state = getServiceState(serviceHandle)) != SERVICE_RUNNING) {
         if (--numChecks <= 0) {
@@ -198,8 +198,8 @@ void ServiceControlManagerClient::stopService(const ::scoped_string & scopedstrN
     }
 
     if (waitCompletion) {
-      int numChecks = 10;
-      int msDelayBetweenChecks = 1000;
+      ::i32 numChecks = 10;
+      ::i32 msDelayBetweenChecks = 1000;
 
       while ((state = getServiceState(serviceHandle)) != SERVICE_STOPPED) {
         if (--numChecks <= 0) {

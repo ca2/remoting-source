@@ -79,7 +79,7 @@ namespace remoting_client
       init();
    }
 
-   RemoteViewerCore::RemoteViewerCore(const ::scoped_string & scopedstrHost, unsigned short port,
+   RemoteViewerCore::RemoteViewerCore(const ::scoped_string & scopedstrHost, ::u16 port,
                                       CoreEventsAdapter *adapter,
                                       ::subsystem::LogWriter * plogwriter,
                                       bool sharedFlag)
@@ -232,7 +232,7 @@ namespace remoting_client
    }
 
    void RemoteViewerCore::start(const ::scoped_string & scopedstrHost,
-                                unsigned short port,
+                                ::u16 port,
                                 CoreEventsAdapter *adapter,
                                 bool sharedFlag)
    {
@@ -321,7 +321,7 @@ namespace remoting_client
          pixelformat = m_pixelformatViewer;
       }
 
-      int bitsPerPixel = m_pixelformatViewer.bitsPerPixel;
+      ::i32 bitsPerPixel = m_pixelformatViewer.bitsPerPixel;
       if (bitsPerPixel != 8 && bitsPerPixel != 16 && bitsPerPixel != 32) {
          throw ::subsystem::Exception("Only 8, 16 or 32 bits per pixel supported!");
       }
@@ -356,7 +356,7 @@ namespace remoting_client
       m_pupdaterequestsenderProperty->setIsIncremental(!forceUpdate);
    }
 
-   void RemoteViewerCore::deferUpdateRequests(const int& milliseconds)
+   void RemoteViewerCore::deferUpdateRequests(const ::i32& milliseconds)
    {
       m_updateTimeout = milliseconds;
       m_pupdaterequestsenderProperty->setTimeout(milliseconds);
@@ -427,7 +427,7 @@ namespace remoting_client
       m_plogwriter->debug("Key event: {}, {} is sent", downFlag, key);
    }
 
-   void RemoteViewerCore::sendPointerEvent(unsigned char buttonMask,
+   void RemoteViewerCore::sendPointerEvent(::u8 buttonMask,
                                            const ::i32_point &pointPosition)
    {
       // If core isn't connected, then m_output may be isn't initialized.
@@ -437,7 +437,7 @@ namespace remoting_client
       }
 
       m_plogwriter->debug("Sending pointer event 0x%X, ({}, {})...",
-                         static_cast<int>(buttonMask), pointPosition.x, pointPosition.y);
+                         static_cast<::i32>(buttonMask), pointPosition.x, pointPosition.y);
       // send pointPosition to server
       RfbPointerEventClientMessage pointerMessage(buttonMask, pointPosition);
       pointerMessage.send(m_output);
@@ -445,7 +445,7 @@ namespace remoting_client
       m_pfbupdatenotifier->updatePointerPos(pointPosition);
 
       m_plogwriter->debug("Pointer event: 0x%X, ({}, {}) is sent",
-                        static_cast<int>(buttonMask), pointPosition.x, pointPosition.y);
+                        static_cast<::i32>(buttonMask), pointPosition.x, pointPosition.y);
    }
 
    void RemoteViewerCore::sendCutTextEvent(const ::scoped_string & cutText)
@@ -469,7 +469,7 @@ namespace remoting_client
       m_plogwriter->debug("Clipboard cut text: \"{}\" is sent", cutText);
    }
 
-   void RemoteViewerCore::setPreferredEncoding(int encodingType)
+   void RemoteViewerCore::setPreferredEncoding(::i32 encodingType)
    {
       m_decoderStore.setPreferredEncoding(encodingType);
       sendEncodings();
@@ -498,10 +498,10 @@ namespace remoting_client
       }
    }
 
-   void RemoteViewerCore::setCompressionLevel(int newLevel)
+   void RemoteViewerCore::setCompressionLevel(::i32 newLevel)
    {
       bool needUpdate = false;
-      for (int level = CompressionLevel::COMPRESSION_LEVEL_MIN;
+      for (::i32 level = CompressionLevel::COMPRESSION_LEVEL_MIN;
            level <= CompressionLevel::COMPRESSION_LEVEL_MAX;
            level++)
          if (level != newLevel)
@@ -518,10 +518,10 @@ namespace remoting_client
       }
    }
 
-   void RemoteViewerCore::setJpegQualityLevel(int newLevel)
+   void RemoteViewerCore::setJpegQualityLevel(::i32 newLevel)
    {
       bool needUpdate = false;
-      for (int level = JpegQualityLevel::JPEG_QUALITY_LEVEL_MIN;
+      for (::i32 level = JpegQualityLevel::JPEG_QUALITY_LEVEL_MIN;
            level <= JpegQualityLevel::JPEG_QUALITY_LEVEL_MAX;
            level++)
          if (level != newLevel)
@@ -580,7 +580,7 @@ namespace remoting_client
       pixelFormat.colorDepth = m_input->readUInt8();
       pixelFormat.bigEndian = !!m_input->readUInt8();
       // now, supported only true color
-      int trueColour = m_input->readUInt8();
+      ::i32 trueColour = m_input->readUInt8();
       if (trueColour == false) {
          m_plogwriter->error("Not supported palette. Flag \"True colour\" is not set.");
       }
@@ -617,7 +617,7 @@ namespace remoting_client
    void RemoteViewerCore::authenticate()
    {
       m_plogwriter->debug("Negotiating security type...");
-      int authenticationType = negotiateSecurityType();
+      ::i32 authenticationType = negotiateSecurityType();
       m_plogwriter->information("Authentication type accepted: {} ({})",
                        getAuthenticationTypeName(authenticationType),
                        authenticationType);
@@ -667,7 +667,7 @@ namespace remoting_client
       m_isTightEnabled = enabled;
    }
 
-   int RemoteViewerCore::negotiateSecurityType()
+   ::i32 RemoteViewerCore::negotiateSecurityType()
    {
       m_plogwriter->debug("Reading ::list_base of security types...");
       // read ::list_base of security types
@@ -693,7 +693,7 @@ namespace remoting_client
 
       // select type security
       m_plogwriter->debug("Selecting auth-handler");
-      int typeSelected = selectSecurityType(&secTypes, &m_authHandlers, m_isTightEnabled);
+      ::i32 typeSelected = selectSecurityType(&secTypes, &m_authHandlers, m_isTightEnabled);
       m_plogwriter->information("Security type is selected: {}", typeSelected);
       if (typeSelected == ::remoting::SecurityDefs::TIGHT) {
          m_plogwriter->information("Tight pcapabilitiesmanager is enable");
@@ -721,7 +721,7 @@ namespace remoting_client
          if (type != 0)
             secTypes->add(type);
       } else { // m_minor >= 7
-         int secTypesNumber = m_input->readUInt8();
+         ::i32 secTypesNumber = m_input->readUInt8();
          if (secTypesNumber != 0) {
             secTypes->resize(secTypesNumber);
             for (::array_base<::u32>::iterator i = secTypes->begin(); i != secTypes->end(); i++)
@@ -754,7 +754,7 @@ namespace remoting_client
       return "Unknown type";
    }
 
-   int RemoteViewerCore::selectSecurityType(const ::array_base<::u32> *secTypes,
+   ::i32 RemoteViewerCore::selectSecurityType(const ::array_base<::u32> *secTypes,
                                             const ::map<::u32, AuthHandler *> *authHandlers,
                                   const bool isTightEnabled) const
    {
@@ -811,7 +811,7 @@ namespace remoting_client
       m_plogwriter->debug("Tunneling is init");
    }
 
-   int RemoteViewerCore::initAuthentication()
+   ::i32 RemoteViewerCore::initAuthentication()
    {
       m_plogwriter->debug("Initialization of tight-authentication...");
       ::u32 authTypesNumber = m_input->readUInt32();
@@ -839,7 +839,7 @@ namespace remoting_client
          throw ::subsystem::Exception("No security types supported. "
                          "Server sent security types, but we do not support any of their.");
       }
-      int typeSelected = authTypes[0];
+      ::i32 typeSelected = authTypes[0];
       m_plogwriter->debug("Selected type of authentication: {}", typeSelected);
 
       m_output->writeUInt32(typeSelected);
@@ -1048,15 +1048,15 @@ namespace remoting_client
 
    ::u32 RemoteViewerCore::receiveServerMessageType()
    {
-      // Viewer in common case read first byte (unsigned char) as scopedstrMessage id,
+      // Viewer in common case read first byte (::u8) as scopedstrMessage id,
       // but if first byte is equal to 0xFC then it's Remoting extension scopedstrMessage and
       // must read next 3 bytes and create ::u32 scopedstrMessage id for processing.
 
-      static const unsigned short SERVER_MSG_SPECIAL_TIGHT_CODE = 0xFC;
+      static const ::u16 SERVER_MSG_SPECIAL_TIGHT_CODE = 0xFC;
 
       ::u32 msgType = m_input->readUInt8();
       if (msgType == SERVER_MSG_SPECIAL_TIGHT_CODE) {
-         for (int i = 0; i < 3; i++) {
+         for (::i32 i = 0; i < 3; i++) {
             msgType <<= 8;
             msgType += m_input->readUInt8();
          }
@@ -1071,11 +1071,11 @@ namespace remoting_client
       // read padding: one byte
       m_input->readUInt8();
 
-      unsigned short numberOfRectangles = m_input->readUInt16();
+      ::u16 numberOfRectangles = m_input->readUInt16();
       m_plogwriter->debug("number of rectangles: {}", numberOfRectangles);
 
       bool isLastRect = false;
-      for (int rectangle = 0; rectangle < numberOfRectangles && !isLastRect; rectangle++) {
+      for (::i32 rectangle = 0; rectangle < numberOfRectangles && !isLastRect; rectangle++) {
          m_plogwriter->debug("Receiving rectangle #{}...", rectangle);
          isLastRect = receiveFbUpdateRectangle();
       }
@@ -1101,7 +1101,7 @@ namespace remoting_client
       rectangle.set_width(m_input->readUInt16());
       rectangle.set_height(m_input->readUInt16());
 
-      int encodingType = m_input->readInt32();
+      ::i32 encodingType = m_input->readInt32();
 
       m_plogwriter->debug("Rectangle: ({}, {}), ({}, {}). Type is {}",
                         rectangle.left, rectangle.top, rectangle.right, rectangle.bottom, encodingType);
@@ -1137,7 +1137,7 @@ namespace remoting_client
    }
 
    void RemoteViewerCore::processPseudoEncoding(const ::i32_rectangle &  rectangle,
-                                                int encodingType)
+                                                ::i32 encodingType)
    {
       switch (encodingType) {
          case ::remoting::PseudoEncDefs::DESKTOP_SIZE:
@@ -1152,12 +1152,12 @@ namespace remoting_client
          {
             m_plogwriter->debug("New rich cursor");
 
-            unsigned short width = rectangle.width();
-            unsigned short height = rectangle.height();
-            unsigned char bytesPerPixel = m_pframebuffer->getBytesPerPixel();
+            ::u16 width = rectangle.width();
+            ::u16 height = rectangle.height();
+            ::u8 bytesPerPixel = m_pframebuffer->getBytesPerPixel();
 
-            ::array_base<unsigned char> cursor;
-            ::array_base<unsigned char> bitmask;
+            ::array_base<::u8> cursor;
+            ::array_base<::u8> bitmask;
 
             size_t cursorLen = width * height * bytesPerPixel;
             if (cursorLen != 0) {
@@ -1199,12 +1199,12 @@ namespace remoting_client
       // read padding: 1 byte
       m_input->readUInt8();
 
-      unsigned short firstColour = m_input->readUInt16();
-      unsigned short numberOfColours = m_input->readUInt16();
+      ::u16 firstColour = m_input->readUInt16();
+      ::u16 numberOfColours = m_input->readUInt16();
       for (size_t i = 0; i < numberOfColours; i++) {
-         unsigned short red = m_input->readUInt16();
-         unsigned short green = m_input->readUInt16();
-         unsigned short blue = m_input->readUInt16();
+         ::u16 red = m_input->readUInt16();
+         ::u16 green = m_input->readUInt16();
+         ::u16 blue = m_input->readUInt16();
       }
    }
 
@@ -1231,7 +1231,7 @@ namespace remoting_client
       m_input->readUInt8();
 
       ::u32 length = m_input->readUInt32();
-      ::array_base<char> buffer(length + 1);
+      ::array_base<::i8> buffer(length + 1);
       m_input->readFully(buffer.data(), length);
       buffer[length] = '\0';
       ::string cutText;
@@ -1251,7 +1251,7 @@ namespace remoting_client
    void RemoteViewerCore::receiveServerCutTextUtf8()
    {
       ::u32 length = m_input->readUInt32();
-      ::array_base<char> buffer(length + 1);
+      ::array_base<::i8> buffer(length + 1);
       m_input->readFully(buffer.data(), length);
       buffer[length] = '\0';
       ::string cutText;
@@ -1270,7 +1270,7 @@ namespace remoting_client
       }
    }
 
-   bool RemoteViewerCore::isRfbProtocolString(const char protocol[12]) const
+   bool RemoteViewerCore::isRfbProtocolString(const ::i8 protocol[12]) const
    {
       // Format protocol version "RFB XXX.YYY\n"
       // where XXX is major version and YYY is minor version of protocol
@@ -1296,7 +1296,7 @@ namespace remoting_client
 
    void RemoteViewerCore::handshake()
    {
-      char serverProtocol[13];
+      ::i8 serverProtocol[13];
       serverProtocol[12] = 0;
       m_input->readFully(serverProtocol, 12);
 
@@ -1361,8 +1361,8 @@ namespace remoting_client
       m_output->flush();
       m_plogwriter->debug("Shared flag is set");
 
-      unsigned short width = m_input->readUInt16();
-      unsigned short height = m_input->readUInt16();
+      ::u16 width = m_input->readUInt16();
+      ::u16 height = m_input->readUInt16();
       ::i32_size screenDimension(width, height);
       ::innate_subsystem::PixelFormat serverPixelFormat = readPixelFormat();
 
@@ -1372,7 +1372,7 @@ namespace remoting_client
       }
 
       ::u32 sizeInBytes = m_input->readUInt32();
-      ::array_base<char> buffer(sizeInBytes + 1);
+      ::array_base<::i8> buffer(sizeInBytes + 1);
       m_input->read(buffer.data(), sizeInBytes);
       buffer[sizeInBytes] = '\0';
       ::string ansiStr;
@@ -1398,9 +1398,9 @@ namespace remoting_client
     */
    void RemoteViewerCore::readCapabilities()
    {
-      int nServerMessageTypes = m_input->readUInt16();
-      int nClientMessageTypes = m_input->readUInt16();
-      int nEncodingTypes = m_input->readUInt16();
+      ::i32 nServerMessageTypes = m_input->readUInt16();
+      ::i32 nClientMessageTypes = m_input->readUInt16();
+      ::i32 nEncodingTypes = m_input->readUInt16();
       m_input->readUInt16(); //padding
 
       m_plogwriter->debug("Server scopedstrMessage types (capability):");
@@ -1437,14 +1437,14 @@ namespace remoting_client
       m_input->readFully(cap.nameSignature, RfbCapabilityInfo::nameSigSize);
 
       // transform information for the log and log him
-      char vendorSignature[RfbCapabilityInfo::vendorSigSize + 1];
+      ::i8 vendorSignature[RfbCapabilityInfo::vendorSigSize + 1];
       memcpy(vendorSignature, cap.vendorSignature, RfbCapabilityInfo::vendorSigSize);
       vendorSignature[RfbCapabilityInfo::vendorSigSize] = 0;
       ::string vendorSignatureAnsiString(vendorSignature);
       ::string vendorSignatureString;
       vendorSignatureString = vendorSignatureAnsiString;
 
-      char nameSignature[RfbCapabilityInfo::nameSigSize + 1];
+      ::i8 nameSignature[RfbCapabilityInfo::nameSigSize + 1];
       memcpy(nameSignature, cap.nameSignature, RfbCapabilityInfo::nameSigSize);
       nameSignature[RfbCapabilityInfo::nameSigSize] = 0;
       ::string nameSignatureAnsiString(nameSignature);
@@ -1460,8 +1460,8 @@ namespace remoting_client
 
    void RemoteViewerCore::addAuthCapability(AuthHandler *authHandler,
                                             ::u32 code,
-                                            const char *vendorSignature,
-                                            const char *nameSignature,
+                                            const_char_pointer vendorSignature,
+                                            const_char_pointer pszNameSignature,
                                             const ::string description)
    {
       m_authCaps.add(code, vendorSignature, nameSignature, description);
@@ -1470,8 +1470,8 @@ namespace remoting_client
 
    void RemoteViewerCore::addServerMsgCapability(ServerMessageListener *listener,
                                                  ::u32 code,
-                                                 const char *vendorSignature,
-                                                 const char *nameSignature,
+                                                 const_char_pointer vendorSignature,
+                                                 const_char_pointer pszNameSignature,
                                                  const ::string description)
    {
       m_serverMsgCaps.add(code, vendorSignature, nameSignature, description);
@@ -1479,18 +1479,18 @@ namespace remoting_client
    }
 
    void RemoteViewerCore::addClientMsgCapability(::u32 code,
-                                                 const char *vendorSignature,
-                                                 const char *nameSignature,
+                                                 const_char_pointer vendorSignature,
+                                                 const_char_pointer pszNameSignature,
                                                  const ::string description)
    {
       m_clientMsgCaps.add(code, vendorSignature, nameSignature, description);
    }
 
    void RemoteViewerCore::addEncodingCapability(Decoder *decoder,
-                                                int priorityEncoding,
+                                                ::i32 priorityEncoding,
                                                 ::u32 code,
-                                                const char *vendorSignature,
-                                                const char *nameSignature,
+                                                const_char_pointer vendorSignature,
+                                                const_char_pointer pszNameSignature,
                                                 const ::string description)
    {
       m_encodingCaps.add(code, vendorSignature, nameSignature, description);
@@ -1522,7 +1522,7 @@ namespace remoting_client
       m_serverMsgHandlers[code] = listener;
    }
 
-   void RemoteViewerCore::registerDecoderHandler(::u32 code, Decoder *decoder, int priority)
+   void RemoteViewerCore::registerDecoderHandler(::u32 code, Decoder *decoder, ::i32 priority)
    {
       m_decoderHandlers[code] = decoder;
       m_decoderPriority[code] = priority;

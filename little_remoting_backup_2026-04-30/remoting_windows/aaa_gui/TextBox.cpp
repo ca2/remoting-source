@@ -28,7 +28,7 @@ TextBox::~TextBox()
 {
 }
 
-void TextBox::setCaretPos(int h, int v)
+void TextBox::setCaretPos(::i32 h, ::i32 v)
 {
   SendMessage(m_hwnd, EM_LINESCROLL, h, v);
 }
@@ -43,21 +43,21 @@ void TextBox::setTextLengthLimit(size_t n)
   SendMessage(m_hwnd, EM_SETLIMITTEXT, n, 0);
 }
 
-int TextBox::getCurrentLineIndex()
+::i32 TextBox::getCurrentLineIndex()
 {
-  return (int)SendMessage(m_hwnd, EM_LINEINDEX, -1, 0);
+  return (::i32)SendMessage(m_hwnd, EM_LINEINDEX, -1, 0);
 }
 
-int TextBox::getLineCount()
+::i32 TextBox::getLineCount()
 {
-  return (int)SendMessage(m_hwnd, EM_GETLINECOUNT, 0, 0);
+  return (::i32)SendMessage(m_hwnd, EM_GETLINECOUNT, 0, 0);
 }
 
 //
 // FIXME: Unimplemented
 //
 
-int TextBox::getCaretPos()
+::i32 TextBox::getCaretPos()
 {
   return 0;
 }

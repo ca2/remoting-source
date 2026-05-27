@@ -66,8 +66,8 @@ namespace remoting
 
       ::innate_subsystem::Framebuffer m_overlay;
 
-      int m_height;
-      int m_width;
+      ::i32 m_height;
+      ::i32 m_width;
    };
 
 

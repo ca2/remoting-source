@@ -5,7 +5,7 @@
 #define HAVE_PROTOTYPES
 #define HAVE_UNSIGNED_CHAR
 #define HAVE_UNSIGNED_SHORT
-/* #define void char */
+/* #define void char_pointer /
 /* #define const */
 #undef CHAR_IS_UNSIGNED
 #define HAVE_STDDEF_H
@@ -16,9 +16,9 @@
 #undef NEED_SHORT_EXTERNAL_NAMES
 #undef INCOMPLETE_TYPES_BROKEN
 
-/* Define "boolean" as unsigned char, not enum, per Windows custom */
+/* Define "boolean" as ::u8, not enum, per Windows custom */
 #ifndef __RPCNDR_H__		/* don't conflict if rpcndr.h already read */
-typedef unsigned char boolean;
+typedef ::u8 boolean;
 #endif
 #ifndef false			/* in case these macros already exist */
 #define false	0		/* values of boolean */

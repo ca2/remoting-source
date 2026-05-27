@@ -91,7 +91,7 @@ namespace remoting_node_desktop
 
    }
 
-   int QueryConnectionApplication::execute(const ::scoped_string & scopedstrPeerAddr, bool acceptByDefault, ::u32 timeOutSec)
+   ::i32 QueryConnectionApplication::execute(const ::scoped_string & scopedstrPeerAddr, bool acceptByDefault, ::u32 timeOutSec)
    {
       // Prepare command for execution.
 
@@ -112,8 +112,8 @@ namespace remoting_node_desktop
       ::subsystem::LogWriter * plogwriter = nullptr; // Zero ::subsystem::LogWriter.
       ::pointer < ::subsystem::Process > pprocess;
 
-      int defaultRetCode = acceptByDefault ? 0 : 1;
-      int retCode = defaultRetCode;
+      ::i32 defaultRetCode = acceptByDefault ? 0 : 1;
+      ::i32 retCode = defaultRetCode;
 
       // Run command in separate process.
       ::remoting_node::Configurator* conf = m_pconfigurator;

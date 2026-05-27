@@ -51,7 +51,7 @@ public:
    *
    * @fixme stub.
    */
-  PipeServer(const ::scoped_string & scopedstrName, unsigned int bufferSize,
+  PipeServer(const ::scoped_string & scopedstrName, ::u32 bufferSize,
              SecurityAttributes *secAttr = 0,
              DWORD milliseconds = INFINITE);
   /**
@@ -104,7 +104,7 @@ private:
   DWORD m_milliseconds;
   SecurityAttributes *m_psecurityattributes;
   HANDLE m_serverPipe;
-  unsigned int m_bufferSize;
+  ::u32 m_bufferSize;
 };
 
 //// __PIPESERVER_H__

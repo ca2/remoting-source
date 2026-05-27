@@ -94,7 +94,7 @@ namespace remoting
       // This timer sets by IdleTimeout value from server config
       // and resets on mouse or keyboard event
       ::subsystem::DemandTimer m_demandtimerIdle;
-      int m_idleTimeout;
+      ::i32 m_idleTimeout;
 
 
       RfbClient(::remoting_node::NewConnectionEvents *newConnectionEvents, ::subsystem::SocketIPv4Interface *socket,
@@ -103,7 +103,7 @@ namespace remoting
                 bool isOutgoing, ::u32 id,
                 const ViewPortState *constViewPort,
                 const ViewPortState *dynViewPort,
-                int idleTimeout,
+                ::i32 idleTimeout,
                 ::subsystem::LogWriter * plogwriter);
 
       virtual ~RfbClient();
@@ -150,7 +150,7 @@ namespace remoting
 
       // This class is layer between WinDesktop and ClientInputHandler.
       virtual void onKeyboardEvent(::u32 keySym, bool down);
-      virtual void onMouseEvent(unsigned short x, unsigned short y, unsigned char buttonMask);
+      virtual void onMouseEvent(::u16 x, ::u16 y, ::u8 buttonMask);
 
       void setClientState(ClientState newState);
 

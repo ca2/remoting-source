@@ -495,7 +495,7 @@ void FileTransferRequestHandler::md5Requested()
     AutoLock l(m_output);
 
     m_output->writeUInt32(FTMessage::MD5_REPLY);
-    m_output->writeFully((const char *)md5calculator.getHash(), 16);
+    m_output->writeFully((const_char_pointer )md5calculator.getHash(), 16);
 
     m_output->flush();
   }
@@ -582,7 +582,7 @@ void FileTransferRequestHandler::uploadDataRequested()
   compressionLevel = m_input->readUInt8();
   compressedSize = m_input->readUInt32();
   uncompressedSize = m_input->readUInt32();
-  std::vector<char> buffer(compressedSize);
+  std::vector<::i8> buffer(compressedSize);
   if (compressedSize != 0) {
     m_input->readFully(&buffer.front(), compressedSize);
   }
@@ -777,7 +777,7 @@ void FileTransferRequestHandler::downloadDataRequested()
     throw FileTransferException("No active download at the moment");
   }
 
-  std::vector<char> buffer(dataSize);
+  std::vector<::i8> buffer(dataSize);
 
   DWORD read = 0;
 
@@ -849,7 +849,7 @@ void FileTransferRequestHandler::downloadDataRequested()
       m_output->writeFully(&buffer.front(), uncompressedSize);
     }
   } else {
-    m_output->writeFully((const char *)m_deflater.getOutput(), compressedSize);
+    m_output->writeFully((const_char_pointer )m_deflater.getOutput(), compressedSize);
   }
 
   m_output->flush();

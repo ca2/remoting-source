@@ -79,7 +79,7 @@ namespace remoting
             break;
          default:
             ::string errMess;
-            errMess.formatf("Unknown {} protocol code received", (int)reqCode);
+            errMess.formatf("Unknown {} protocol code received", (::i32)reqCode);
             throw ::subsystem::Exception(errMess);
             break;
       }
@@ -88,7 +88,7 @@ namespace remoting
    {
       ::u32 length = prfbinputgate->readUInt32();
 
-      ::array_base<char> charBuff(length + 1);
+      ::array_base<::i8> charBuff(length + 1);
 
       prfbinputgate->readFully(charBuff.data(), length);
       charBuff[length] = '\0';
@@ -134,7 +134,7 @@ namespace remoting
          if (m_hasNewClip && !isTerminating() && !m_viewOnly) {
 
             try {
-               const char * data;
+               const_char_pointer data;
                size_t length;
                critical_section_lock al(m_output);
                if (m_isUtf8ClipboardEnabled) {

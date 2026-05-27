@@ -51,7 +51,7 @@ void BaseWindow::setClass(const ::scoped_string & className)
 }
 
 bool BaseWindow::createWindow(const ::scoped_string & windowName, DWORD style, HWND hWndParent,
-                              int xPos, int yPos, const ::i32_size & size)
+                              ::i32 xPos, ::i32 yPos, const ::i32_size & size)
 {
   if (m_hwnd) {
     return false;
@@ -124,7 +124,7 @@ bool BaseWindow::setSize(const ::i32_size & size)
                         SWP_NOMOVE | SWP_NOZORDER | SWP_NOACTIVATE);
 }
 
-bool BaseWindow::setPosition(int xPos, int yPos)
+bool BaseWindow::setPosition(::i32 xPos, ::i32 yPos)
 {
   _ASSERT(m_hwnd != 0);
   return !!SetWindowPos(m_hwnd, 0, xPos, yPos, 0, 0, 
@@ -191,7 +191,7 @@ void BaseWindow::updateWindow()
   UpdateWindow(m_hwnd);
 }
 
-void BaseWindow::setTimer(UINT_PTR ident, unsigned int time)
+void BaseWindow::setTimer(UINT_PTR ident, ::u32 time)
 {
   _ASSERT(m_hwnd != 0);
   SetTimer(m_hwnd, ident, time, 0);
@@ -208,7 +208,7 @@ bool BaseWindow::onCommand(::wparam wParam, ::lparam lParam)
   return false;
 }
 
-bool BaseWindow::onNotify(int idCtrl, LPNMHDR pnmh)
+bool BaseWindow::onNotify(::i32 idCtrl, LPNMHDR pnmh)
 {
   return false;
 }
@@ -218,12 +218,12 @@ bool BaseWindow::onSysCommand(::wparam wParam, ::lparam lParam)
   return false;
 }
 
-bool BaseWindow::onMessage(unsigned int scopedstrMessage, ::wparam wParam, ::lparam lParam)
+bool BaseWindow::onMessage(::u32 scopedstrMessage, ::wparam wParam, ::lparam lParam)
 {
   return false;
 }
 
-bool BaseWindow::wndProc(unsigned int scopedstrMessage, ::wparam wParam, ::lparam lParam)
+bool BaseWindow::wndProc(::u32 scopedstrMessage, ::wparam wParam, ::lparam lParam)
 {
     if (scopedstrMessage == WM_LBUTTONDOWN)
     {
@@ -235,7 +235,7 @@ bool BaseWindow::wndProc(unsigned int scopedstrMessage, ::wparam wParam, ::lpara
     case WM_COMMAND:
       return onCommand(wParam, lParam);
     case WM_NOTIFY:
-      return onNotify((int)wParam, (LPNMHDR)lParam);
+      return onNotify((::i32)wParam, (LPNMHDR)lParam);
     case WM_SYSCOMMAND:
       return onSysCommand(wParam, lParam);
     case WM_LBUTTONDOWN:
@@ -249,7 +249,7 @@ bool BaseWindow::wndProc(unsigned int scopedstrMessage, ::wparam wParam, ::lpara
     {
 
 
-      unsigned char mouseButtons = 0;
+      ::u8 mouseButtons = 0;
 
       mouseButtons |= LOWORD(wParam) & MK_RBUTTON ? MOUSE_RDOWN : 0;
       mouseButtons |= LOWORD(wParam) & MK_MBUTTON ? MOUSE_MDOWN : 0;
@@ -261,10 +261,10 @@ bool BaseWindow::wndProc(unsigned int scopedstrMessage, ::wparam wParam, ::lpara
       point.x = points.x;
       point.y = points.y;
 
-      unsigned short wheelSpeed = 0; 
+      ::u16 wheelSpeed = 0; 
       if (scopedstrMessage == WM_MOUSEWHEEL) {
         // Get speed wheel and set mouse button.
-        signed short wheelSignedSpeed = static_cast<signed short>(HIWORD(wParam));
+        ::i16 wheelSignedSpeed = static_cast<::i16>(HIWORD(wParam));
         if (wheelSignedSpeed < 0) {
           mouseButtons |= MOUSE_WDOWN;
           wheelSpeed = - wheelSignedSpeed * 24 / WHEEL_DELTA;
@@ -296,7 +296,7 @@ bool BaseWindow::wndProc(unsigned int scopedstrMessage, ::wparam wParam, ::lpara
           
 
       // Notify window about mouse-event.
-      return onMouse(mouseButtons, static_cast<unsigned short>(wheelSpeed), point);
+      return onMouse(mouseButtons, static_cast<::u16>(wheelSpeed), point);
     }
   }
   return onMessage(scopedstrMessage, wParam, lParam);
@@ -335,12 +335,12 @@ void BaseWindow::redraw(const RECT & rectArea)
   }
 }
 
-bool BaseWindow::onMouse(unsigned char msg, unsigned short wspeed, POINT pt)
+bool BaseWindow::onMouse(::u8 msg, ::u16 wspeed, POINT pt)
 {
   return false;
 }
 
-bool BaseWindow::onMouseEx(unsigned int message, int iButtonMask, unsigned short wspeed, POINT pt)
+bool BaseWindow::onMouseEx(::u32 message, ::i32 iButtonMask, ::u16 wspeed, POINT pt)
 {
     return false;
 
@@ -353,7 +353,7 @@ void BaseWindow::setForegroundWindow()
   SetForegroundWindow(m_hwnd);
 }
 
-void BaseWindow::postMessage(unsigned int Msg, ::wparam wParam, ::lparam lParam)
+void BaseWindow::postMessage(::u32 Msg, ::wparam wParam, ::lparam lParam)
 {
   _ASSERT(m_hwnd != 0);
 
@@ -367,7 +367,7 @@ void BaseWindow::getClientRect(RECT *rc)
   GetClientRect(m_hwnd, rc);
 }
 
-void BaseWindow::getBorderSize(int *width, int *height)
+void BaseWindow::getBorderSize(::i32 *width, ::i32 *height)
 {
   _ASSERT(m_hwnd != 0);
 

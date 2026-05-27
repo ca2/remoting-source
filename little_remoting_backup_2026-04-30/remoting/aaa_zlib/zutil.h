@@ -36,24 +36,24 @@
    define "local" for the non-static meaning of "static", for readability
    (compile with -Dlocal if your debugger can't find static symbols) */
 
-typedef unsigned char  uch;
+typedef ::u8  uch;
 typedef uch FAR uchf;
-typedef unsigned short ush;
+typedef ::u16 ush;
 typedef ush FAR ushf;
-typedef unsigned long  ulg;
+typedef ulong  ulg;
 
 #if !defined(Z_U8) && !defined(Z_SOLO) && defined(STDC)
 #  include <limits.h>
 #  if (ULONG_MAX == 0xffffffffffffffff)
-#    define Z_U8 unsigned long
+#    define Z_U8 ulong
 #  elif (ULLONG_MAX == 0xffffffffffffffff)
-#    define Z_U8 unsigned long long
+#    define Z_U8 ::u64
 #  elif (UINT_MAX == 0xffffffffffffffff)
-#    define Z_U8 unsigned
+#    define Z_U8 ::u32
 #  endif
 #endif
 
-extern z_const char * const z_errmsg[10]; /* indexed by 2-zlib_error */
+extern z_const_char_pointer const z_errmsg[10]; /* indexed by 2-zlib_error */
 /* (size given to avoid silly warnings with Visual C++) */
 
 #define ERR_MSG(err) z_errmsg[Z_NEED_DICT-(err)]
@@ -96,7 +96,7 @@ extern z_const char * const z_errmsg[10]; /* indexed by 2-zlib_error */
 #      if (__STDC__ == 1) && (defined(__LARGE__) || defined(__COMPACT__))
          /* Allow compilation with ANSI keywords only enabled */
          void _Cdecl farfree( void *block );
-         void *_Cdecl farmalloc( unsigned long nbytes );
+         void *_Cdecl farmalloc( ulong nbytes );
 #      else
 #        include <alloc.h>
 #      endif
@@ -233,15 +233,15 @@ extern z_const char * const z_errmsg[10]; /* indexed by 2-zlib_error */
 #  endif
 #else
    void ZLIB_INTERNAL zmemcpy OF((Bytef* dest, const Bytef* source, uInt len));
-   int ZLIB_INTERNAL zmemcmp OF((const Bytef* s1, const Bytef* s2, uInt len));
+   ::i32 ZLIB_INTERNAL zmemcmp OF((const Bytef* s1, const Bytef* s2, uInt len));
    void ZLIB_INTERNAL zmemzero OF((Bytef* dest, uInt len));
 #endif
 
 /* Diagnostic functions */
 #ifdef ZLIB_DEBUG
 #  include <stdio.h>
-   extern int ZLIB_INTERNAL z_verbose;
-   extern void ZLIB_INTERNAL z_error OF((char *m));
+   extern ::i32 ZLIB_INTERNAL z_verbose;
+   extern void ZLIB_INTERNAL z_error OF((char_pointer m));
 #  define Assert(cond,msg) {if(!(cond)) z_error(msg);}
 #  define Trace(x) {if (z_verbose>=0) fprintf x ;}
 #  define Tracev(x) {if (z_verbose>0) fprintf x ;}
@@ -258,8 +258,8 @@ extern z_const char * const z_errmsg[10]; /* indexed by 2-zlib_error */
 #endif
 
 #ifndef Z_SOLO
-   voidpf ZLIB_INTERNAL zcalloc OF((voidpf opaque, unsigned items,
-                                    unsigned size));
+   voidpf ZLIB_INTERNAL zcalloc OF((voidpf opaque, ::u32 items,
+                                    ::u32 size));
    void ZLIB_INTERNAL zcfree  OF((voidpf opaque, voidpf ptr));
 #endif
 

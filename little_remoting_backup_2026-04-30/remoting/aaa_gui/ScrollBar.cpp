@@ -124,7 +124,7 @@ bool ScrollBar::_showHorzScroll(bool show)
   return result;
 }
 
-void ScrollBar::setHorzRange(int imin, int imax, int istep) 
+void ScrollBar::setHorzRange(::i32 imin, ::i32 imax, ::i32 istep) 
 {
   m_hMin  = imin;
   m_hMax  = imax;
@@ -143,7 +143,7 @@ void ScrollBar::setHorzRange(int imin, int imax, int istep)
   }
 }
 
-void ScrollBar::setVertRange(int imin, int imax, int istep) {
+void ScrollBar::setVertRange(::i32 imin, ::i32 imax, ::i32 istep) {
   m_vMin  = imin;
   m_vMax  = imax;
   m_vStep = istep;
@@ -161,7 +161,7 @@ void ScrollBar::setVertRange(int imin, int imax, int istep) {
   }
 }
 
-void ScrollBar::setVertPos(int iPos) {
+void ScrollBar::setVertPos(::i32 iPos) {
   if (!m_isVirtualScroll) {
     SCROLLINFO si;
 
@@ -175,7 +175,7 @@ void ScrollBar::setVertPos(int iPos) {
   }
 }
 
-void ScrollBar::setHorzPos(int iPos) {
+void ScrollBar::setHorzPos(::i32 iPos) {
   if (!m_isVirtualScroll) {
     SCROLLINFO si;
 
@@ -189,8 +189,8 @@ void ScrollBar::setHorzPos(int iPos) {
   }
 }
 
-void ScrollBar::moveUpVert(int iPercent) {
-  int iShift = m_vStep; 
+void ScrollBar::moveUpVert(::i32 iPercent) {
+  ::i32 iShift = m_vStep; 
 
   if (iPercent) {
     iShift = iShift * iPercent / 100;
@@ -206,8 +206,8 @@ void ScrollBar::moveUpVert(int iPercent) {
   return setVertPos(m_vPos);
 }
 
-void ScrollBar::moveDownVert(int iPercent) {
-  int iShift = m_vStep;
+void ScrollBar::moveDownVert(::i32 iPercent) {
+  ::i32 iShift = m_vStep;
 
   if (iPercent) {
     iShift = iShift * iPercent / 100;
@@ -223,8 +223,8 @@ void ScrollBar::moveDownVert(int iPercent) {
   return setVertPos(m_vPos);
 }
 
-void ScrollBar::moveLeftHorz(int iPercent) {
-  int iShift = m_hStep;
+void ScrollBar::moveLeftHorz(::i32 iPercent) {
+  ::i32 iShift = m_hStep;
 
   if (iPercent) {
     iShift = iShift * iPercent / 100;
@@ -240,8 +240,8 @@ void ScrollBar::moveLeftHorz(int iPercent) {
   return setHorzPos(m_hPos);
 }
 
-void ScrollBar::moveRightHorz(int iPercent) {
-  int iShift = m_vStep;
+void ScrollBar::moveRightHorz(::i32 iPercent) {
+  ::i32 iShift = m_vStep;
 
   if (iPercent) {
     iShift = iShift * iPercent / 100;
@@ -257,20 +257,20 @@ void ScrollBar::moveRightHorz(int iPercent) {
   return setHorzPos(m_hPos);
 }
 
-int ScrollBar::getVertPos() {
+::i32 ScrollBar::getVertPos() {
   return m_vPos;
 }
 
-int ScrollBar::getHorzPos() {
+::i32 ScrollBar::getHorzPos() {
   return m_hPos;
 }
 
-int ScrollBar::getVerticalSize()
+::i32 ScrollBar::getVerticalSize()
 {
   return GetSystemMetrics(SM_CXVSCROLL);
 }
 
-int ScrollBar::getHorizontalSize()
+::i32 ScrollBar::getHorizontalSize()
 {
   return GetSystemMetrics(SM_CXHSCROLL);
 }

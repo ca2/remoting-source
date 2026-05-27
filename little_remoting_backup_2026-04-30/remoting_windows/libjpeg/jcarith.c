@@ -34,7 +34,7 @@ typedef struct {
   int last_dc_val[MAX_COMPS_IN_SCAN]; /* last DC coef for each component */
   int dc_context[MAX_COMPS_IN_SCAN]; /* context index for DC conditioning */
 
-  unsigned int restarts_to_go;	/* MCUs left in this restart interval */
+  ::u32 restarts_to_go;	/* MCUs left in this restart interval */
   int next_restart_num;		/* next restart number to write (0-7) */
 
   /* Pointers to statistics areas (these workspaces have image lifespan) */
@@ -392,7 +392,7 @@ encode_mcu_DC_first (j_compress_ptr cinfo, JBLOCKARRAY MCU_data)
 
     /* Sections F.1.4.1 & F.1.4.4.1: Encoding of DC coefficients */
 
-    /* Table F.4: ::int_point to statistics bin S0 for DC coefficient coding */
+    /* Table F.4: ::i32_point to statistics bin S0 for DC coefficient coding */
     st = entropy->dc_stats[tbl] + entropy->dc_context[ci];
 
     /* Figure F.4: Encode_DC_DIFF */
@@ -725,7 +725,7 @@ encode_mcu (j_compress_ptr cinfo, JBLOCKARRAY MCU_data)
 
     tbl = compptr->dc_tbl_no;
 
-    /* Table F.4: ::int_point to statistics bin S0 for DC coefficient coding */
+    /* Table F.4: ::i32_point to statistics bin S0 for DC coefficient coding */
     st = entropy->dc_stats[tbl] + entropy->dc_context[ci];
 
     /* Figure F.4: Encode_DC_DIFF */

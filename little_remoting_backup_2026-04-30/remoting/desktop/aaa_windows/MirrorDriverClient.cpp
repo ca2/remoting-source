@@ -263,7 +263,7 @@ namespace remoting
 
    void MirrorDriverClient::setAttachToDesktop(bool value)
    {
-      if (!m_regkeyDevice.setValueAsInt32("Attach.ToDesktop", (int)value))
+      if (!m_regkeyDevice.setValueAsInt32("Attach.ToDesktop", (::i32)value))
       {
          throw ::subsystem::Exception("Can't set the Attach.ToDesktop.");
       }
@@ -292,7 +292,7 @@ namespace remoting
          if (code < 0)
          {
             ::string errMess;
-            errMess.formatf("1st ChangeDisplaySettingsEx() failed with code {}", (int)code);
+            errMess.formatf("1st ChangeDisplaySettingsEx() failed with code {}", (::i32)code);
             throw ::subsystem::Exception(errMess);
          }
          m_plogwriter->information("CommitDisplayChanges(2): \"{}\"", m_deviceInfo.DeviceName);
@@ -300,7 +300,7 @@ namespace remoting
          if (code < 0)
          {
             ::string errMess;
-            errMess.formatf("2nd ChangeDisplaySettingsEx() failed with code {}", (int)code);
+            errMess.formatf("2nd ChangeDisplaySettingsEx() failed with code {}", (::i32)code);
             throw ::subsystem::Exception(errMess);
          }
       }
@@ -310,7 +310,7 @@ namespace remoting
          if (code < 0)
          {
             ::string errMess;
-            errMess.formatf("ChangeDisplaySettingsEx() failed with code {}", (int)code);
+            errMess.formatf("ChangeDisplaySettingsEx() failed with code {}", (::i32)code);
             throw ::subsystem::Exception(errMess);
          }
       }
@@ -367,7 +367,7 @@ namespace remoting
       if (!m_isDriverConnected)
       {
          GETCHANGESBUF buf = {0};
-         int res = ExtEscape(m_driverDC, dmf_esc_usm_pipe_map, 0, 0, sizeof(buf), (LPSTR)&buf);
+         ::i32 res = ExtEscape(m_driverDC, dmf_esc_usm_pipe_map, 0, 0, sizeof(buf), (LPSTR)&buf);
          if (res <= 0)
          {
             ::string errMess;
@@ -393,7 +393,7 @@ namespace remoting
          buf.buffer = m_changesBuffer;
          buf.Userbuffer = m_screenBuffer;
 
-         int res = ExtEscape(m_driverDC, dmf_esc_usm_pipe_unmap, sizeof(buf), (LPSTR)&buf, 0, 0);
+         ::i32 res = ExtEscape(m_driverDC, dmf_esc_usm_pipe_unmap, sizeof(buf), (LPSTR)&buf, 0, 0);
          if (res <= 0)
          {
             m_plogwriter->error("Can't unmap buffer: error code = {}", res);
@@ -402,7 +402,7 @@ namespace remoting
       }
    }
 
-   bool MirrorDriverClient::processMessage(unsigned int scopedstrMessage, ::wparam wParam, ::lparam lParam)
+   bool MirrorDriverClient::processMessage(::u32 scopedstrMessage, ::wparam wParam, ::lparam lParam)
    {
       if (scopedstrMessage == WM_DISPLAYCHANGE)
       {
@@ -420,7 +420,7 @@ namespace remoting
       {
          m_messagewindowPropertyChangeListener.createWindow(this);
          m_plogwriter->information("Mirror driver client window has been created (hwnd = {})",
-                                   (int)m_messagewindowPropertyChangeListener.getHWND());
+                                   (::i32)m_messagewindowPropertyChangeListener.getHWND());
       }
 
       m_initListener.set_happening();

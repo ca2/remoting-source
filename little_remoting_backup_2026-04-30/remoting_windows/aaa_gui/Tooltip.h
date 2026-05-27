@@ -46,8 +46,8 @@ public:
   virtual ::string getText() const = 0;
   virtual ::string getTitle() const = 0;
 
-  virtual void setIconType(int iconType) = 0;
-  virtual int getIconType() const = 0;
+  virtual void setIconType(::i32 iconType) = 0;
+  virtual ::i32 getIconType() const = 0;
 };
 
 

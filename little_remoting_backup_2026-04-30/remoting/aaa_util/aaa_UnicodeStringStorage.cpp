@@ -27,22 +27,22 @@
 #include "subsystem/platform/Exception.h"
 //#include aaa_<crtdbg.h>
 
-::wstring::::wstring()
+::wstring::wstring()
 {
  = L"";
 }
 
-::wstring::::wstring(const WCHAR *string)
+::wstring::wstring(const WCHAR *string)
 {
  = string;
 }
 
-::wstring::::wstring(const ::scoped_string & string)
+::wstring::wstring(const ::scoped_string & string)
 {
   fromStringStorage(string);
 }
 
-::wstring::::wstring(const ::wstring &stringBuffer)
+::wstring::wstring(const ::wstring &stringBuffer)
 {
   *this = stringBuffer;
 }
@@ -85,13 +85,13 @@ bool ::wstring::is_empty() const
 void ::wstring::fromStringStorage(const ::scoped_string & src)
 {
 #ifndef _UNICODE
-  int constrCharCount = (int)(src->length() + 1);
+  ::i32 constrCharCount = (::i32)(src->length() + 1);
   _ASSERT(constrCharCount == src->length() + 1);
   m_buffer.resize(constrCharCount);
   MultiByteToWideChar(CP_ACP, 0, src->getString(),
                       constrCharCount, // Size in bytes
                       &m_buffer.front(),
-                      static_cast<int>(m_buffer.size()) // Size in WCHAR
+                      static_cast<::i32>(m_buffer.size()) // Size in WCHAR
                       );
 #else
  = src;
@@ -102,15 +102,15 @@ void ::wstring::toStringStorage(::string & dst)
 {
   dst-= "";
 #ifndef _UNICODE
-  int symbolCount = (int)m_buffer.size();
+  ::i32 symbolCount = (::i32)m_buffer.size();
   _ASSERT(symbolCount == m_buffer.size());
 
-  int dstBuffSize = WideCharToMultiByte(CP_ACP, 0, getString(), symbolCount, 0, 0, 0, 0);
+  ::i32 dstBuffSize = WideCharToMultiByte(CP_ACP, 0, getString(), symbolCount, 0, 0, 0, 0);
   if (dstBuffSize <= 0) {
     return;
   }
   // Allocate space for the requred size
-  ::array_base<char> ansiBuffer(dstBuffSize);
+  ::array_base<::i8> ansiBuffer(dstBuffSize);
 
   // Convert to ansi
   if (WideCharToMultiByte(CP_ACP, 0, getString(), symbolCount,

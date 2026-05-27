@@ -25,7 +25,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="::int_point.h">
+    <ClInclude Include="::i32_point.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Region.h">

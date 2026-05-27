@@ -49,7 +49,7 @@ namespace remoting
       virtual Region getVideoRegion();
       void updateVideoRegion();
       void getClassNamesAndRectsFromConfig(::string_array &classNames, ::int_rectangle_array_base &rectanglea);
-      unsigned int WinVideoRegionUpdaterImpl::getInterval();
+      ::u32 WinVideoRegionUpdaterImpl::getInterval();
       Region getRectsByClass(::string_array classNames);
       Region getRectsByCoords(::int_rectangle_array_base &rectanglea);
 

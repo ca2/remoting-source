@@ -145,7 +145,7 @@
 #define C2_SHIFT  (BITS_IN_JSAMPLE-HIST_C2_BITS)
 
 
-typedef unsigned short histcell;	/* histogram cell; prefer an unsigned type */
+typedef ::u16 histcell;	/* histogram cell; prefer an unsigned type */
 
 typedef histcell FAR * histptr;	/* for pointers to histogram cells */
 

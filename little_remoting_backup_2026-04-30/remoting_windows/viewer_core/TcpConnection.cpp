@@ -48,7 +48,7 @@ namespace remoting
       m_isEstablished = false;
    }
 
-   void TcpConnection::bind(const ::scoped_string & scopedstrHost, unsigned short port)
+   void TcpConnection::bind(const ::scoped_string & scopedstrHost, ::u16 port)
    {
       critical_section_lock al(&m_connectLock);
       if (m_wasBound) {

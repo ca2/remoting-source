@@ -28,7 +28,7 @@
 
 namespace remoting
 {
-   CompressionLevel::CompressionLevel(::subsystem::LogWriter * plogwriter, int compression)
+   CompressionLevel::CompressionLevel(::subsystem::LogWriter * plogwriter, ::i32 compression)
    : PseudoDecoder(plogwriter)
    {
       m_encoding = levelToEncoding(compression);
@@ -38,7 +38,7 @@ namespace remoting
    {
    }
 
-   int CompressionLevel::levelToEncoding(int compressionLevel)
+   ::i32 CompressionLevel::levelToEncoding(::i32 compressionLevel)
    {
       switch (compressionLevel) {
          case 0: return PseudoEncDefs::COMPR_LEVEL_0;

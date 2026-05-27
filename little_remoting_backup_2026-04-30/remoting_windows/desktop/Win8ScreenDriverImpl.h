@@ -77,8 +77,8 @@ namespace remoting_windows
    private:
       // Implementions of the Win8DuplicationListener listener functions.
       virtual void onFramebufferUpdate(const ::remoting::Region & regionChanged);
-      virtual void onCopyRect(const ::i32_rectangle &rectangleTarget, int srcX, int srcY);
-      virtual void onCursorPositionChanged(int x, int y);
+      virtual void onCopyRect(const ::i32_rectangle &rectangleTarget, ::i32 srcX, ::i32 srcY);
+      virtual void onCursorPositionChanged(::i32 x, ::i32 y);
       virtual void onCursorShapeChanged();
       virtual void onRecoverableError(const ::scoped_string &scopedstrReason);
       virtual void onCriticalError(const ::scoped_string &scopedstrReason);

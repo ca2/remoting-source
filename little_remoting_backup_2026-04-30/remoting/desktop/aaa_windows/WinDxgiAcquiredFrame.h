@@ -37,7 +37,7 @@ namespace remoting
    class CLASS_DECL_REMOTING WinDxgiAcquiredFrame
    {
    public:
-      WinDxgiAcquiredFrame(WinDxgiOutputDuplication *outDupl, unsigned int timeOutMilliSec);
+      WinDxgiAcquiredFrame(WinDxgiOutputDuplication *outDupl, ::u32 timeOutMilliSec);
       virtual ~WinDxgiAcquiredFrame();
 
       bool wasTimeOut();

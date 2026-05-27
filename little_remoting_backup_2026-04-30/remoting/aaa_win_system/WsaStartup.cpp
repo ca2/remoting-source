@@ -26,7 +26,7 @@
 #include "WsaStartup.h"
 #include "subsystem/platform/Exception.h"
 
-WsaStartup::WsaStartup(unsigned char minorVer, unsigned char majorVer)
+WsaStartup::WsaStartup(::u8 minorVer, ::u8 majorVer)
 {
   WSAData wsaData;
   if (WSAStartup(MAKEWORD(majorVer, minorVer), &wsaData) != 0) {

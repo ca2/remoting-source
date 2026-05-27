@@ -101,7 +101,7 @@ namespace remoting_node_desktop
        *
        * @return application exit code.
        */
-      //virtual int run();
+      //virtual ::i32 run();
       //void on_server_task_run() override;
 
       /**
@@ -113,10 +113,10 @@ namespace remoting_node_desktop
 
    //private:
       // This is a callback function that calls when the log can be initialized.
-      virtual void onLogInit(const ::scoped_string & scopedstrLogDir, const ::scoped_string & scopedstrFileName, unsigned char logLevel);
+      virtual void onLogInit(const ::scoped_string & scopedstrLogDir, const ::scoped_string & scopedstrFileName, ::u8 logLevel);
 
       // This is a callback function that calls when log properties have changed.
-      virtual void onChangeLogProps(const ::scoped_string & scopedstrNewLogDir, unsigned char newLevel);
+      virtual void onChangeLogProps(const ::scoped_string & scopedstrNewLogDir, ::u8 newLevel);
 
 
       virtual void main_node(const ::file::path & path);

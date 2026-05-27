@@ -30,7 +30,7 @@ PipeClient::PipeClient()
 {
 }
 
-NamedPipe *PipeClient::connect(const ::scoped_string & scopedstrName, unsigned int maxPortionSize)
+NamedPipe *PipeClient::connect(const ::scoped_string & scopedstrName, ::u32 maxPortionSize)
 {
   ::string pipeName;
   pipeName.formatf("\\\\.\\pipe\\{}", ::string(scopedstrName).c_str());

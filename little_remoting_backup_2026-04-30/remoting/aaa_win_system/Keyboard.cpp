@@ -25,21 +25,21 @@
 //#include "acme/_operating_system.h"
 #include "Keyboard.h"
 
-void Keyboard::getState(unsigned char state[256])
+void Keyboard::getState(::u8 state[256])
 {
   if (!GetKeyboardState(state)) {
     throw SystemException();
   }
 }
 
-void Keyboard::setState(unsigned char state[256])
+void Keyboard::setState(::u8 state[256])
 {
   if (!SetKeyboardState(state)) {
     throw SystemException();
   }
 }
 
-bool Keyboard::isKeyPressed(unsigned char vkCode)
+bool Keyboard::isKeyPressed(::u8 vkCode)
 {
   return (GetAsyncKeyState(vkCode) & 0x8000) != 0;
 }

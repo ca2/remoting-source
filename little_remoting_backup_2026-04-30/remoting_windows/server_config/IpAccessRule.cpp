@@ -40,13 +40,13 @@ void IpAccessRule::toString(::string & output) const
 {
   if (!m_lastIp.is_empty()) {
     output.format("{}-{}:{}", m_firstIp, m_lastIp,
-                   (int)m_action);
+                   (::i32)m_action);
   } else {
-     output.format("{}:{}", m_firstIp, (int)m_action);
+     output.format("{}:{}", m_firstIp, (::i32)m_action);
   }
 }
 
-bool IpAccessRule::parse(const char * pszString, IpAccessRule *rule)
+bool IpAccessRule::parse(const_char_pointer pszString, IpAccessRule *rule)
 {
   if (!parseIpRange(pszString, rule)) {
      if (!parseIp(pszString, rule))
@@ -60,11 +60,11 @@ bool IpAccessRule::parse(const char * pszString, IpAccessRule *rule)
   return true;
 }
 
-bool IpAccessRule::parseIp(const char * pszString, IpAccessRule *rule)
+bool IpAccessRule::parseIp(const_char_pointer pszString, IpAccessRule *rule)
 {
-  char firstIp[16];
-  int action;
-  char c;
+  ::i8 firstIp[16];
+  ::i32 action;
+  ::i8 c;
 
   if (sscanf(pszString, "%15[0123456789.]:{}%c", &firstIp, &action, &c) != 2) {
     return false;
@@ -83,12 +83,12 @@ bool IpAccessRule::parseIp(const char * pszString, IpAccessRule *rule)
   return true;
 }
 
-bool IpAccessRule::parseIpRange(const char * pszString, IpAccessRule *rule)
+bool IpAccessRule::parseIpRange(const_char_pointer pszString, IpAccessRule *rule)
 {
-  char firstIp[16];
-  char lastIp[16];
-  int action;
-  char c;
+  ::i8 firstIp[16];
+  ::i8 lastIp[16];
+  ::i32 action;
+  ::i8 c;
 
   if (sscanf(pszString, "%15[0123456789.]-%15[0123456789.]:{}%c", &firstIp, &lastIp, &action, &c) != 3) {
     return false;
@@ -108,12 +108,12 @@ bool IpAccessRule::parseIpRange(const char * pszString, IpAccessRule *rule)
   return true;
 }
 
-bool IpAccessRule::parseSubnet(const char * pszString, IpAccessRule *rule)
+bool IpAccessRule::parseSubnet(const_char_pointer pszString, IpAccessRule *rule)
 {
-  char pattern[16];
-  char subnet[16];
-  int action;
-  char c;
+  ::i8 pattern[16];
+  ::i8 subnet[16];
+  ::i32 action;
+  ::i8 c;
 
   if (sscanf(pszString, "%15[0123456789.]/%15[0123456789.]:{}%c", &pattern, &subnet, &action, &c) != 3) {
     return false;
@@ -137,12 +137,12 @@ void IpAccessRule::getLastIp(::string & lastIp) const
   lastIp = m_lastIp;
 }
 
-void IpAccessRule::setFirstIp(const char * pszFirstIp)
+void IpAccessRule::setFirstIp(const_char_pointer pszFirstIp)
 {
   m_firstIp= pszFirstIp;
 }
 
-void IpAccessRule::setLastIp(const char * pszLastIp)
+void IpAccessRule::setLastIp(const_char_pointer pszLastIp)
 {
   m_lastIp= pszLastIp;
 }
@@ -158,16 +158,16 @@ bool IpAccessRule::operator == (const IpAccessRule & other) const
 }
 
 //
-// TODO: Create own inet_addr method that will support char strings
+// TODO: Create own inet_addr method that will support ::i8 strings
 //
 
-bool IpAccessRule::isIncludingAddress(unsigned long ip) const
+bool IpAccessRule::isIncludingAddress(ulong ip) const
 {
   ::string firstIpAnsi(m_firstIp);
   ::string lastIpAnsi(m_lastIp);
 
-  unsigned long firstIp = MainSubsystem().internet_address4(firstIpAnsi);
-  unsigned long lastIp  = firstIp;
+  ulong firstIp = MainSubsystem().internet_address4(firstIpAnsi);
+  ulong lastIp  = firstIp;
 
   if (m_lastIp.has_character()) {
      lastIp = MainSubsystem().internet_address4(lastIpAnsi);
@@ -184,7 +184,7 @@ bool IpAccessRule::isIncludingAddress(unsigned long ip) const
   return false;
 }
 
-bool IpAccessRule::isIpAddressStringValid(const char * pszString)
+bool IpAccessRule::isIpAddressStringValid(const_char_pointer pszString)
 {
   
    //::string ipStorage();
@@ -207,14 +207,14 @@ bool IpAccessRule::isIpAddressStringValid(const char * pszString)
   return true;
 }
 
-int IpAccessRule::compareIp(unsigned long ip1, unsigned long ip2)
+::i32 IpAccessRule::compareIp(ulong ip1, ulong ip2)
 {
   if (ip1 == ip2) {
     return 0;
   }
 
-  unsigned long l1 = MainSubsystem().host_to_network_long(ip1);
-  unsigned long l2 = MainSubsystem().host_to_network_long(ip2);
+  ulong l1 = MainSubsystem().host_to_network_long(ip1);
+  ulong l2 = MainSubsystem().host_to_network_long(ip2);
 
   if (l1 > l2) {
     return 1;
@@ -223,20 +223,20 @@ int IpAccessRule::compareIp(unsigned long ip1, unsigned long ip2)
   return -1;
 }
 
-bool IpAccessRule::tryParseIPPart(const char * pszString)
+bool IpAccessRule::tryParseIPPart(const_char_pointer pszString)
 {
   auto len = ::string_get_length(pszString);
   if (len < 1 || strspn(pszString, "0123456789") != len)
     return false;	// not a non-negative number
   if (len > 4) // length is more than 4 symbols
     return false;
-  int value = atoi(pszString);
+  ::i32 value = atoi(pszString);
   if (value > 255)
     return false;	// not a number in the range 0..255
   return true;
 }
 
-void IpAccessRule::getIpRange(const char * pszIp, const char * pszNetmask,
+void IpAccessRule::getIpRange(const_char_pointer pszIp, const_char_pointer pszNetmask,
                               ::string * firstIp, ::string * lastIp) {
   ::string ipStorage(pszIp);
   ::string netmaskStorage(pszNetmask);
@@ -247,21 +247,21 @@ void IpAccessRule::getIpRange(const char * pszIp, const char * pszNetmask,
   ::string ipAnsi(ipStorage);
   ::string netmaskAnsi(netmaskStorage);
 
-  unsigned long ipAddr = MainSubsystem().internet_address4(ipAnsi);
-  unsigned long netmaskAddr = MainSubsystem().internet_address4(netmaskAnsi);
-  unsigned long subnetAddr = ipAddr & netmaskAddr;
-  unsigned long broadcastAddr = subnetAddr | (~netmaskAddr);
+  ulong ipAddr = MainSubsystem().internet_address4(ipAnsi);
+  ulong netmaskAddr = MainSubsystem().internet_address4(netmaskAnsi);
+  ulong subnetAddr = ipAddr & netmaskAddr;
+  ulong broadcastAddr = subnetAddr | (~netmaskAddr);
 
 
   *firstIp = MainSubsystem().internet_address4_as_string(subnetAddr);
   //in_addr addr = {0};
 
-  //memcpy(&addr, &subnetAddr, sizeof(unsigned long));
+  //memcpy(&addr, &subnetAddr, sizeof(ulong));
   //::string subnetworkAnsi(inet_ntoa(addr));
   //subnetworkAnsi.toStringStorage(firstIp);
 
   *lastIp = MainSubsystem().internet_address4_as_string(broadcastAddr);
-  //memcpy(&addr, &broadcastAddr, sizeof(unsigned long));
+  //memcpy(&addr, &broadcastAddr, sizeof(ulong));
   //::string broadcastAnsi(inet_ntoa(addr));
   //broadcastAnsi.toStringStorage(lastIp);
 }

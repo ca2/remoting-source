@@ -90,7 +90,7 @@ HRESULT ThemeLib::CloseThemeData(HTHEME hTheme)
 }
 
 HRESULT ThemeLib::DrawThemeBackground(HTHEME hTheme, HDC hdc,
-                                      int iPartId, int iStateId,
+                                      ::i32 iPartId, ::i32 iStateId,
                                       const RECT *pRect,
                                       const RECT *pClipRect)
 {
@@ -102,9 +102,9 @@ HTHEME ThemeLib::OpenThemeData(const ::operating_system::window & operatingsyste
   return s_OpenThemeData(hwnd, pszClassList);
 }
 
-HRESULT ThemeLib::DrawThemeText(HTHEME hTheme, HDC hdc, int iPartId,
-                                int iStateId, LPCWSTR pszText,
-                                int iCharCount, DWORD dwTextFlags,
+HRESULT ThemeLib::DrawThemeText(HTHEME hTheme, HDC hdc, ::i32 iPartId,
+                                ::i32 iStateId, LPCWSTR pszText,
+                                ::i32 iCharCount, DWORD dwTextFlags,
                                 DWORD dwTextFlags2, const RECT *pRect)
 {
   return s_DrawThemeText(hTheme, hdc, iPartId, iStateId, pszText,
@@ -112,7 +112,7 @@ HRESULT ThemeLib::DrawThemeText(HTHEME hTheme, HDC hdc, int iPartId,
 }
 
 HRESULT ThemeLib::GetThemeBackgroundContentRect(HTHEME hTheme,  HDC hdc,
-                                                int iPartId, int iStateId,
+                                                ::i32 iPartId, ::i32 iStateId,
                                                 const RECT *pBoundingRect,
                                                 RECT *pContentRect)
 {

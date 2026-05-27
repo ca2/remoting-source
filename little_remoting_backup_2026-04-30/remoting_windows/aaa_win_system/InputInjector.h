@@ -47,14 +47,14 @@ public:
    * @param vkCode virtual code of key.
    * @throws SystemException on fail.
    */
-  void injectKeyPress(unsigned char vkCode);
+  void injectKeyPress(::u8 vkCode);
 
   /**
    * Syntezises key released event.
    * @param vkCode virtual code of key.
    * @throws SystemException on fail.
    */
-  void injectKeyRelease(unsigned char vkCode);
+  void injectKeyRelease(::u8 vkCode);
 
   /**
    * Syntezises key event (press or release).
@@ -62,10 +62,10 @@ public:
    * @param release if true then sybtezises release event, otherwise, press.
    * @throws SystemException on fail.
    */
-  void injectKeyEvent(unsigned char vkCode, bool release, bool extended = false);
+  void injectKeyEvent(::u8 vkCode, bool release, bool extended = false);
 
   /**
-   * Syntezises char press or release event.
+   * Syntezises ::i8 press or release event.
    * @param ch target unicode character.
    * @param release if set to true then release event will be emulated, otherwise,
    * press event.
@@ -82,22 +82,22 @@ private:
   // Returns true if the vkCode value is a dead key in keyboardLayout layout.
   bool isDeadKey(SHORT scanResult, HKL keyboardLayout);
 
-  // Returns true if the printed char can get by one key event sending.
+  // Returns true if the printed ::i8 can get by one key event sending.
   // Else returns false e.g. for uppercase french e with ogonek that may be get
-  // only by a sequence keyevenst with a dead char, but the lower case
+  // only by a sequence keyevenst with a dead ::i8, but the lower case
   // e can be get by one pressing of the "7" key.
   bool isOneKeyEventChar(WCHAR ch, SHORT scanResult, HKL keyboardLayout);
 
   // Returns true if characters differs when the modifier state is on and off.
-  bool isDifferentWith(unsigned char modifier, unsigned char modStateValueOfOn,
-                       unsigned char virtKey, HKL keyboardLayout);
+  bool isDifferentWith(::u8 modifier, ::u8 modStateValueOfOn,
+                       ::u8 virtKey, HKL keyboardLayout);
 
   // Return true if key generates the same symbol with pressed the Shift key
   // and without.
-  bool isInvariantToShift(unsigned char virtKey, HKL keyboardLayout);
+  bool isInvariantToShift(::u8 virtKey, HKL keyboardLayout);
 
-  // Return true if the char is the same with the CAPS or without.
-  bool isResistantToCaps(unsigned char virtKey, HKL keyboardLayout);
+  // Return true if the ::i8 is the same with the CAPS or without.
+  bool isResistantToCaps(::u8 virtKey, HKL keyboardLayout);
 
   // Returns true if the ch symbol is a ascii symbol.
   bool isAscii(WCHAR ch);
@@ -114,7 +114,7 @@ private:
   /**
    * Array of extended virtual codes.
    */
-  static const unsigned char EXTENDED_KEYS[];
+  static const ::u8 EXTENDED_KEYS[];
 
   bool m_controlIsPressed;
   bool m_menuIsPressed;

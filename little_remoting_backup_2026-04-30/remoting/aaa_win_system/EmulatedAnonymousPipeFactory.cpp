@@ -31,7 +31,7 @@
 
 
 
-EmulatedAnonymousPipeFactory::EmulatedAnonymousPipeFactory(unsigned int bufferSize, ::subsystem::LogWriter * plogwriter)
+EmulatedAnonymousPipeFactory::EmulatedAnonymousPipeFactory(::u32 bufferSize, ::subsystem::LogWriter * plogwriter)
 : m_bufferSize(bufferSize),
   m_plogwriter(plogwriter)
 {
@@ -72,9 +72,9 @@ void EmulatedAnonymousPipeFactory::generatePipes(NamedPipe **serverPipe, bool se
 ::string EmulatedAnonymousPipeFactory::getUniqPipeName()
 {
    ::string result;
-  srand((unsigned)::time(0));
-  for (int i = 0; i < 20; i++) {
-    result += (char) ('a' + rand() % ('z' - 'a'));
+  srand((::u32)::time(0));
+  for (::i32 i = 0; i < 20; i++) {
+    result += (::i8) ('a' + rand() % ('z' - 'a'));
   }
    return result;
 }

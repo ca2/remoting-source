@@ -61,7 +61,7 @@ namespace remoting_client
    void LoginDialog::enableConnect()
    {
       ::string str;
-      int iSelected = m_server.getSelectedItemIndex();
+      ::i32 iSelected = m_server.getSelectedItemIndex();
       if (iSelected == -1)
       {
          str = m_server.getText();
@@ -84,7 +84,7 @@ namespace remoting_client
       conHistory->load();
       for (size_t i = 0; i < conHistory->getHostCount(); i++)
       {
-         m_server.insertItem(static_cast<int>(i), conHistory->getHost(i));
+         m_server.insertItem(static_cast<::i32>(i), conHistory->getHost(i));
       }
       m_server.setText(currentServer);
       if (m_server.getItemsCount())
@@ -225,7 +225,7 @@ namespace remoting_client
             //        // select item in ComboBox with ::list_base of history
             // case CBN_SELENDOK:
             //{
-            //    int selectedItemIndex = m_server.getSelectedItemIndex();
+            //    ::i32 selectedItemIndex = m_server.getSelectedItemIndex();
             //    if (selectedItemIndex < 0) {
             //        return false;
             //    }

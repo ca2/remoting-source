@@ -31,9 +31,9 @@ namespace remoting
    : m_bitmap(NULL)
    {
       // Prepare buffer
-      int bpp = 32;
+      ::i32 bpp = 32;
       size_t size = width * height * (bpp / 8);
-      ::array_base<unsigned char> bits(size);
+      ::array_base<::u8> bits(size);
       if (width != 0 && height != 0) {
          memset(bits.data(), 0, size);
          // Create bitmap handle
@@ -58,7 +58,7 @@ namespace remoting
       }
    }
 
-   int Bitmap::width() const
+   ::i32 Bitmap::width() const
    {
       BITMAP bitmap;
       if (GetObject(m_bitmap, sizeof(BITMAP), &bitmap) == 0) {
@@ -67,7 +67,7 @@ namespace remoting
       return bitmap.bmWidth;
    }
 
-   int Bitmap::height() const
+   ::i32 Bitmap::height() const
    {
       BITMAP bitmap;
       if (GetObject(m_bitmap, sizeof(BITMAP), &bitmap) == 0) {

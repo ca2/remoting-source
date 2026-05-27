@@ -28,7 +28,7 @@ namespace remoting_windows
 {
 
 
-   ::remoting::UpdateListener::::remoting::UpdateListener(void) {}
+   ::remoting::UpdateListener::remoting::UpdateListener(void) {}
 
    ::remoting::UpdateListener::~::remoting::UpdateListener(void) {}
 

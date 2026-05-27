@@ -41,11 +41,11 @@ namespace remoting
    {
    public:
       // Surface will be created by the ID3D11Texture2D's QueryInterface() function call.
-      WinAutoMapDxgiSurface(WinDxgiSurface *surface, unsigned int mapFlags);
+      WinAutoMapDxgiSurface(WinDxgiSurface *surface, ::u32 mapFlags);
       virtual ~WinAutoMapDxgiSurface();
 
       size_t getStride() const;
-      char *getBuffer() const;
+      char_pointer getBuffer() const;
 
    private:
       WinDxgiSurface *m_surface;

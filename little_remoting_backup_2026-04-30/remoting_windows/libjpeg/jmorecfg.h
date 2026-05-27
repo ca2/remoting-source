@@ -38,7 +38,7 @@
  * To meet the letter of the JPEG spec, set this to 255.  However, darn
  * few applications need more than 4 channels (maybe 5 for CMYK + alpha
  * mask).  We recommend 10 as a reasonable compromise; use 4 if you are
- * really short on memory.  (Each allowed component costs a hundred or so
+ * really ::i16 on memory.  (Each allowed component costs a hundred or so
  * bytes of storage, whether actually used in an image or not.)
  */
 
@@ -48,34 +48,34 @@
 /*
  * Basic data types.
  * You may need to change these if you have a machine with unusual data
- * type sizes; for example, "char" not 8 bits, "short" not 16 bits,
- * or "long" not 32 bits.  We don't care whether "int" is 16 or 32 bits,
+ * type sizes; for example, "::i8" not 8 bits, "::i16" not 16 bits,
+ * or "long" not 32 bits.  We don't care whether "::i32" is 16 or 32 bits,
  * but it had better be at least 16.
  */
 
 /* Representation of a single sample (pixel element value).
  * We frequently allocate large arrays of these, so it's important to keep
- * them small.  But if you have memory to burn and access to char or short
+ * them small.  But if you have memory to burn and access to ::i8 or ::i16
  * arrays is very slow on your hardware, you might want to change these.
  */
 
 #if BITS_IN_JSAMPLE == 8
 /* JSAMPLE should be the smallest type that will hold the values 0..255.
- * You can use a signed char by having GETJSAMPLE mask it with 0xFF.
+ * You can use a signed ::i8 by having GETJSAMPLE mask it with 0xFF.
  */
 
 #ifdef HAVE_UNSIGNED_CHAR
 
-typedef unsigned char JSAMPLE;
-#define GETJSAMPLE(value)  ((int) (value))
+typedef ::u8 JSAMPLE;
+#define GETJSAMPLE(value)  ((::i32) (value))
 
 #else /* not HAVE_UNSIGNED_CHAR */
 
-typedef char JSAMPLE;
+typedef ::i8 JSAMPLE;
 #ifdef CHAR_IS_UNSIGNED
-#define GETJSAMPLE(value)  ((int) (value))
+#define GETJSAMPLE(value)  ((::i32) (value))
 #else
-#define GETJSAMPLE(value)  ((int) (value) & 0xFF)
+#define GETJSAMPLE(value)  ((::i32) (value) & 0xFF)
 #endif /* CHAR_IS_UNSIGNED */
 
 #endif /* HAVE_UNSIGNED_CHAR */
@@ -88,11 +88,11 @@ typedef char JSAMPLE;
 
 #if BITS_IN_JSAMPLE == 9
 /* JSAMPLE should be the smallest type that will hold the values 0..511.
- * On nearly all machines "short" will do nicely.
+ * On nearly all machines "::i16" will do nicely.
  */
 
-typedef short JSAMPLE;
-#define GETJSAMPLE(value)  ((int) (value))
+typedef ::i16 JSAMPLE;
+#define GETJSAMPLE(value)  ((::i32) (value))
 
 #define MAXJSAMPLE	511
 #define CENTERJSAMPLE	256
@@ -102,11 +102,11 @@ typedef short JSAMPLE;
 
 #if BITS_IN_JSAMPLE == 10
 /* JSAMPLE should be the smallest type that will hold the values 0..1023.
- * On nearly all machines "short" will do nicely.
+ * On nearly all machines "::i16" will do nicely.
  */
 
-typedef short JSAMPLE;
-#define GETJSAMPLE(value)  ((int) (value))
+typedef ::i16 JSAMPLE;
+#define GETJSAMPLE(value)  ((::i32) (value))
 
 #define MAXJSAMPLE	1023
 #define CENTERJSAMPLE	512
@@ -116,11 +116,11 @@ typedef short JSAMPLE;
 
 #if BITS_IN_JSAMPLE == 11
 /* JSAMPLE should be the smallest type that will hold the values 0..2047.
- * On nearly all machines "short" will do nicely.
+ * On nearly all machines "::i16" will do nicely.
  */
 
-typedef short JSAMPLE;
-#define GETJSAMPLE(value)  ((int) (value))
+typedef ::i16 JSAMPLE;
+#define GETJSAMPLE(value)  ((::i32) (value))
 
 #define MAXJSAMPLE	2047
 #define CENTERJSAMPLE	1024
@@ -130,11 +130,11 @@ typedef short JSAMPLE;
 
 #if BITS_IN_JSAMPLE == 12
 /* JSAMPLE should be the smallest type that will hold the values 0..4095.
- * On nearly all machines "short" will do nicely.
+ * On nearly all machines "::i16" will do nicely.
  */
 
-typedef short JSAMPLE;
-#define GETJSAMPLE(value)  ((int) (value))
+typedef ::i16 JSAMPLE;
+#define GETJSAMPLE(value)  ((::i32) (value))
 
 #define MAXJSAMPLE	4095
 #define CENTERJSAMPLE	2048
@@ -143,12 +143,12 @@ typedef short JSAMPLE;
 
 
 /* Representation of a DCT frequency coefficient.
- * This should be a signed value of at least 16 bits; "short" is usually OK.
- * Again, we allocate large arrays of these, but you can change to int
- * if you have memory to burn and "short" is really slow.
+ * This should be a signed value of at least 16 bits; "::i16" is usually OK.
+ * Again, we allocate large arrays of these, but you can change to ::i32
+ * if you have memory to burn and "::i16" is really slow.
  */
 
-typedef short JCOEF;
+typedef ::i16 JCOEF;
 
 
 /* Compressed datastreams are represented as arrays of JOCTET.
@@ -159,12 +159,12 @@ typedef short JCOEF;
 
 #ifdef HAVE_UNSIGNED_CHAR
 
-typedef unsigned char JOCTET;
+typedef ::u8 JOCTET;
 #define GETJOCTET(value)  (value)
 
 #else /* not HAVE_UNSIGNED_CHAR */
 
-typedef char JOCTET;
+typedef ::i8 JOCTET;
 #ifdef CHAR_IS_UNSIGNED
 #define GETJOCTET(value)  (value)
 #else
@@ -181,39 +181,39 @@ typedef char JOCTET;
  * typedefs live at a different point on the speed/space tradeoff curve.)
  */
 
-/* unsigned char must hold at least the values 0..255. */
+/* ::u8 must hold at least the values 0..255. */
 
 //#ifdef HAVE_UNSIGNED_CHAR
-////typedef unsigned char unsigned char;
+////typedef ::u8 ::u8;
 //#else /* not HAVE_UNSIGNED_CHAR */
 //#ifdef CHAR_IS_UNSIGNED
-////typedef char unsigned char;
+////typedef ::i8 ::u8;
 //#else /* not CHAR_IS_UNSIGNED */
-////typedef short unsigned char;
+////typedef ::i16 ::u8;
 //#endif /* CHAR_IS_UNSIGNED */
 //#endif /* HAVE_UNSIGNED_CHAR */
 
-/* unsigned short must hold at least the values 0..65535. */
+/* ::u16 must hold at least the values 0..65535. */
 
 //#ifdef HAVE_UNSIGNED_SHORT
-//typedef unsigned short unsigned short;
+//typedef ::u16 ::u16;
 //#else /* not HAVE_UNSIGNED_SHORT */
-//typedef ::u32 unsigned short;
+//typedef ::u32 ::u16;
 //#endif /* HAVE_UNSIGNED_SHORT */
 
-/* short must hold at least the values -32768..32767. */
+/* ::i16 must hold at least the values -32768..32767. */
 
-//#ifndef XMD_H			/* X11/xmd.h correctly defines short */
-//typedef short short;
+//#ifndef XMD_H			/* X11/xmd.h correctly defines ::i16 */
+//typedef ::i16 ::i16;
 //#endif
 
-/* int must hold at least signed 32-bit values. */
+/* ::i32 must hold at least signed 32-bit values. */
 
-#ifndef XMD_H			/* X11/xmd.h correctly defines int */
+#ifndef XMD_H			/* X11/xmd.h correctly defines ::i32 */
 #ifndef _BASETSD_H_		/* Microsoft defines it in basetsd.h */
 #ifndef _BASETSD_H		/* MinGW is slightly different */
 #ifndef QGLOBAL_H		/* Qt defines it in qglobal.h */
-typedef long int;
+typedef long ::i32;
 #endif
 #endif
 #endif
@@ -306,7 +306,7 @@ typedef void noreturn_t;
 #ifndef HAVE_BOOLEAN
 #if defined false || defined true || defined QGLOBAL_H
 /* Qt3 defines false and true as "const" variables in qglobal.h */
-typedef int boolean;
+typedef ::i32 boolean;
 #ifndef false			/* in case these macros already exist */
 #define false	0		/* values of boolean */
 #endif
@@ -417,29 +417,29 @@ typedef enum { false = 0, true = 1 } boolean;
 #endif
 
 
-/* On some machines (notably 68000 series) "int" is 32 bits, but multiplying
+/* On some machines (notably 68000 series) "::i32" is 32 bits, but multiplying
  * two 16-bit shorts is faster than multiplying two ints.  Define MULTIPLIER
- * as short on such a machine.  MULTIPLIER must be at least 16 bits wide.
+ * as ::i16 on such a machine.  MULTIPLIER must be at least 16 bits wide.
  */
 
 #ifndef MULTIPLIER
-#define MULTIPLIER  int		/* type for fastest integer multiply */
+#define MULTIPLIER  ::i32		/* type for fastest integer multiply */
 #endif
 
 
-/* FAST_FLOAT should be either float or double, whichever is done faster
+/* FAST_FLOAT should be either ::f32 or ::f64, whichever is done faster
  * by your compiler.  (Note that this type is only used in the floating point
  * DCT routines, so it only matters if you've defined DCT_FLOAT_SUPPORTED.)
- * Typically, float is faster in ANSI C compilers, while double is faster in
- * pre-ANSI compilers (because they insist on converting to double anyway).
- * The code below therefore chooses float if we have ANSI-style prototypes.
+ * Typically, ::f32 is faster in ANSI C compilers, while ::f64 is faster in
+ * pre-ANSI compilers (because they insist on converting to ::f64 anyway).
+ * The code below therefore chooses ::f32 if we have ANSI-style prototypes.
  */
 
 #ifndef FAST_FLOAT
 #ifdef HAVE_PROTOTYPES
-#define FAST_FLOAT  float
+#define FAST_FLOAT  ::f32
 #else
-#define FAST_FLOAT  double
+#define FAST_FLOAT  ::f64
 #endif
 #endif
 

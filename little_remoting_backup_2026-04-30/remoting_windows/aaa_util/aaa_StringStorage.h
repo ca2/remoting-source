@@ -85,14 +85,14 @@
 //
 //   /**
 //    * Tests if string ends with specified character.
-//    * @param postfix char to test.
+//    * @param postfix ::i8 to test.
 //    * @return true if string ends with postfix.
 //    */
 //   bool endsWith(TCHAR postfix) const;
 //
 //   /**
 //    * Tests if string begins with specified character.
-//    * @param prefix char to test.
+//    * @param prefix ::i8 to test.
 //    * @return true if string begins with prefix.
 //    */
 //   bool beginsWith(TCHAR prefix) const;
@@ -114,9 +114,9 @@
 //   void appendString(const ::scoped_string & scopedstrString);
 //
 //   /**
-//    * Adds char to the end of this string.
+//    * Adds ::i8 to the end of this string.
 //    * @fixme rename string method to append or appendChar.
-//    * @param c char to be added.
+//    * @param c ::i8 to be added.
 //    */
 //   void appendChar(TCHAR c);
 //

@@ -40,7 +40,7 @@ namespace remoting
    DecoderStore::~DecoderStore()
    {
       try {
-         for (::map<int, ::pair<int, Decoder *> >::iterator i = m_decoders.begin();
+         for (::map<::i32, ::pair<::i32, Decoder *> >::iterator i = m_decoders.begin();
               i != m_decoders.end();
               i++) {
             m_plogwriter->debug("Decoder '{}' destroyed", i->m_element2.m_element2->getCode());
@@ -53,7 +53,7 @@ namespace remoting
       }
    }
 
-   Decoder *DecoderStore::getDecoder(int decoderId)
+   Decoder *DecoderStore::getDecoder(::i32 decoderId)
    {
       if (m_decoders.count(decoderId))
          return m_decoders[decoderId].m_element2;
@@ -61,13 +61,13 @@ namespace remoting
          return 0;
    }
 
-   ::array_base<int> DecoderStore::getDecoderIds()
+   ::array_base<::i32> DecoderStore::getDecoderIds()
    {
       // this method returned ::list_base of decoders, sorted by priority.
       // in first pointPosition is preffered encoding.
-      ::array_base<::pair<int, int> > decoders;
+      ::array_base<::pair<::i32, ::i32> > decoders;
 
-      for (::map<int, ::pair <int, Decoder *> >::iterator i = m_decoders.begin();
+      for (::map<::i32, ::pair <::i32, Decoder *> >::iterator i = m_decoders.begin();
            i != m_decoders.end();
            i++) {
          // preferred encoding is skipping
@@ -90,11 +90,11 @@ namespace remoting
          return (pair1.m_element2 <=> pair2.m_element2) > 0;
 
            });
-      ::array_base<int> sortedDecoders;
+      ::array_base<::i32> sortedDecoders;
       auto priorityEnc = m_decoders.find(m_preferredEncoding);
       if (priorityEnc != m_decoders.end())
          sortedDecoders.add(priorityEnc->m_element1);
-      for (::array_base<::pair<int, int> >::iterator i = decoders.begin();
+      for (::array_base<::pair<::i32, ::i32> >::iterator i = decoders.begin();
            i != decoders.end();
            i++) {
          sortedDecoders.add(i->m_element2);
@@ -104,7 +104,7 @@ namespace remoting
       return sortedDecoders;
    }
 
-   bool DecoderStore::addDecoder(Decoder *decoder, int priority)
+   bool DecoderStore::addDecoder(Decoder *decoder, ::i32 priority)
    {
       m_plogwriter->debug("Decoder {} added", decoder->getCode());
       if (m_decoders.count(decoder->getCode()) == 0) {
@@ -115,7 +115,7 @@ namespace remoting
       return false;
    }
 
-   bool DecoderStore::removeDecoder(int decoderId)
+   bool DecoderStore::removeDecoder(::i32 decoderId)
    {
       if (m_decoders.count(decoderId)) {
          m_plogwriter->debug("Decoder '{}' destroyed (removed from ::list_base)",
@@ -127,7 +127,7 @@ namespace remoting
       return false;
    }
 
-   void DecoderStore::setPreferredEncoding(int encodingType)
+   void DecoderStore::setPreferredEncoding(::i32 encodingType)
    {
       m_plogwriter->debug("Decoder store: preferred encoding is \"{}\".", encodingType);
       m_preferredEncoding = encodingType;

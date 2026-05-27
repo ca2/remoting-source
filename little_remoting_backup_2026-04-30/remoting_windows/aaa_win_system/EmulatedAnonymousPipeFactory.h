@@ -33,7 +33,7 @@
 class CLASS_DECL_REMOTING EmulatedAnonymousPipeFactory
 {
 public:
-  EmulatedAnonymousPipeFactory(unsigned int bufferSize, ::subsystem::LogWriter * plogwriter);
+  EmulatedAnonymousPipeFactory(::u32 bufferSize, ::subsystem::LogWriter * plogwriter);
   virtual ~EmulatedAnonymousPipeFactory();
 
   void generatePipes(NamedPipe **serverPipe, bool serverInheritable,
@@ -43,7 +43,7 @@ public:
   ::string getUniqPipeName();
 
   ::pointer < ::subsystem::LogWriter > m_plogwriter;
-  unsigned int m_bufferSize;
+  ::u32 m_bufferSize;
 };
 
 //// __EMULATEDANONYMOUSPIPEFACTORY_H__

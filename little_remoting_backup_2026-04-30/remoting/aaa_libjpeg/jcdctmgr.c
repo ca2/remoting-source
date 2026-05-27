@@ -28,7 +28,7 @@ typedef struct {
 
 #ifdef DCT_FLOAT_SUPPORTED
   /* Same as above for the floating-point case. */
-  float_DCT_method_ptr do_float_dct[MAX_COMPONENTS];
+  f32_DCT_method_ptr do_f32_dct[MAX_COMPONENTS];
 #endif
 } my_fdct_controller;
 
@@ -45,7 +45,7 @@ typedef my_fdct_controller * my_fdct_ptr;
 typedef union {
   DCTELEM int_array[DCTSIZE2];
 #ifdef DCT_FLOAT_SUPPORTED
-  FAST_FLOAT float_array[DCTSIZE2];
+  FAST_FLOAT f32_array[DCTSIZE2];
 #endif
 } divisor_table;
 
@@ -138,7 +138,7 @@ forward_DCT_float (j_compress_ptr cinfo, jpeg_component_info * compptr,
 {
   /* This routine is heavily used, so it's worth coding it tightly. */
   my_fdct_ptr fdct = (my_fdct_ptr) cinfo->fdct;
-  float_DCT_method_ptr do_dct = fdct->do_float_dct[compptr->component_index];
+  f32_DCT_method_ptr do_dct = fdct->do_f32_dct[compptr->component_index];
   FAST_FLOAT * divisors = (FAST_FLOAT *) compptr->dct_table;
   FAST_FLOAT workspace[DCTSIZE2]; /* work area for FDCT subroutine */
   JDIMENSION bi;
@@ -335,7 +335,7 @@ start_pass_fdctmgr (j_compress_ptr cinfo)
 #endif
 #ifdef DCT_FLOAT_SUPPORTED
       case JDCT_FLOAT:
-	fdct->do_float_dct[ci] = jpeg_fdct_float;
+	fdct->do_f32_dct[ci] = jpeg_fdct_float;
 	method = JDCT_FLOAT;
 	break;
 #endif
@@ -405,7 +405,7 @@ start_pass_fdctmgr (j_compress_ptr cinfo)
 #ifdef DCT_FLOAT_SUPPORTED
     case JDCT_FLOAT:
       {
-	/* For float AA&N IDCT method, divisors are equal to quantization
+	/* For ::f32 AA&N IDCT method, divisors are equal to quantization
 	 * coefficients scaled by scalefactor[row]*scalefactor[col], where
 	 *   scalefactor[0] = 1
 	 *   scalefactor[k] = cos(k*PI/16) * sqrt(2)    for k=1..7
@@ -415,7 +415,7 @@ start_pass_fdctmgr (j_compress_ptr cinfo)
 	 */
 	FAST_FLOAT * fdtbl = (FAST_FLOAT *) compptr->dct_table;
 	int row, col;
-	static const double aanscalefactor[DCTSIZE] = {
+	static const ::f64 aanscalefactor[DCTSIZE] = {
 	  1.0, 1.387039845, 1.306562965, 1.175875602,
 	  1.0, 0.785694958, 0.541196100, 0.275899379
 	};
@@ -424,7 +424,7 @@ start_pass_fdctmgr (j_compress_ptr cinfo)
 	for (row = 0; row < DCTSIZE; row++) {
 	  for (col = 0; col < DCTSIZE; col++) {
 	    fdtbl[i] = (FAST_FLOAT)
-	      (1.0 / ((double) qtbl->quantval[i] *
+	      (1.0 / ((::f64) qtbl->quantval[i] *
 		      aanscalefactor[row] * aanscalefactor[col] *
 		      (compptr->component_needed ? 16.0 : 8.0)));
 	    i++;

@@ -59,7 +59,7 @@ void Shell::runAsAdmin(const ::file::path & pathToFile, const ::scoped_string & 
 
 void Shell::open(const ::scoped_string & scopedstrFile, const ::scoped_string & scopedstrParameters, const ::scoped_string & scopedstrworkDirectory)
 {
-  int ret = (int)ShellExecute(0, L"open", ::wstring(scopedstrFile), ::wstring(scopedstrParameters), ::wstring(scopedstrworkDirectory), SW_SHOW);
+  ::i32 ret = (::i32)ShellExecute(0, L"open", ::wstring(scopedstrFile), ::wstring(scopedstrParameters), ::wstring(scopedstrworkDirectory), SW_SHOW);
 
   if (ret <= 32) {
     throw SystemException(ret);

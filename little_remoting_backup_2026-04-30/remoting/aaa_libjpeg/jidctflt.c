@@ -55,7 +55,7 @@
 
 
 /* Dequantize a coefficient by multiplying it by the multiplier-table
- * entry; produce a float result.
+ * entry; produce a ::f32 result.
  */
 
 #define DEQUANTIZE(coef,quantval)  (((FAST_FLOAT) (coef)) * (quantval))
@@ -188,7 +188,7 @@ jpeg_idct_float (j_decompress_ptr cinfo, jpeg_component_info * compptr,
 
     /* Even part */
 
-    /* Prepare range-limit and float->int conversion */
+    /* Prepare range-limit and ::f32->int conversion */
     z5 = wsptr[0] + (((FAST_FLOAT) RANGE_CENTER) + ((FAST_FLOAT) 0.5));
     tmp10 = z5 + wsptr[4];
     tmp11 = z5 - wsptr[4];
@@ -220,7 +220,7 @@ jpeg_idct_float (j_decompress_ptr cinfo, jpeg_component_info * compptr,
     tmp5 = tmp11 - tmp6;
     tmp4 = tmp10 - tmp5;
 
-    /* Final output stage: float->int conversion and range-limit */
+    /* Final output stage: ::f32->int conversion and range-limit */
 
     outptr[0] = range_limit[(int) (tmp0 + tmp7) & RANGE_MASK];
     outptr[7] = range_limit[(int) (tmp0 - tmp7) & RANGE_MASK];

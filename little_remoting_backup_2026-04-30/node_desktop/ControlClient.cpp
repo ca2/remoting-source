@@ -95,7 +95,7 @@ namespace remoting_node_desktop
       {
          m_authPassed = true;
       }
-      int i = 0;
+      ::i32 i = 0;
       try
       {
          while (!isTerminating())
@@ -266,11 +266,11 @@ namespace remoting_node_desktop
 
    void ControlClient::authMsgRcdv()
    {
-      unsigned char challenge[16];
-      unsigned char response[16];
+      ::u8 challenge[16];
+      ::u8 response[16];
 
-      srand((unsigned)time(0));
-      for (int i = 0; i < sizeof(challenge); i++)
+      srand((::u32)time(0));
+      for (::i32 i = 0; i < sizeof(challenge); i++)
       {
          challenge[i] = rand() & 0xff;
       }
@@ -284,7 +284,7 @@ namespace remoting_node_desktop
       //
 
       ::remoting_node::ServerConfig * pserverconfig = m_pconfigurator->getServerConfig();
-      unsigned char cryptPassword[8];
+      ::u8 cryptPassword[8];
       pserverconfig->getControlPassword(cryptPassword);
 
       bool isAuthSucceed = m_pcontrolappauthenticator->authenticate(cryptPassword, challenge, response);
@@ -413,9 +413,9 @@ namespace remoting_node_desktop
    }
 
 
-   bool allZeroes(unsigned char p[::subsystem::VncPassCrypt::VNC_PASSWORD_SIZE])
+   bool allZeroes(::u8 p[::subsystem::VncPassCrypt::VNC_PASSWORD_SIZE])
    {
-      for (int i = 0; i < ::subsystem::VncPassCrypt::VNC_PASSWORD_SIZE; i++)
+      for (::i32 i = 0; i < ::subsystem::VncPassCrypt::VNC_PASSWORD_SIZE; i++)
       {
          if (p[i] != 0)
          {
@@ -431,7 +431,7 @@ namespace remoting_node_desktop
       ::remoting_node::ServerConfig cfg;
       cfg.deserialize(m_pcontrolgate);
       ::remoting_node::ServerConfig *old = m_pconfigurator->getServerConfig();
-      unsigned char tmp[::subsystem::VncPassCrypt::VNC_PASSWORD_SIZE];
+      ::u8 tmp[::subsystem::VncPassCrypt::VNC_PASSWORD_SIZE];
 
       if (cfg.hasPrimaryPassword())
       {
@@ -498,7 +498,7 @@ namespace remoting_node_desktop
 
       ::remoting_node::ServerConfig cfg = *m_pconfigurator->getServerConfig();
 
-      unsigned char zeroes[::subsystem::VncPassCrypt::VNC_PASSWORD_SIZE] = {};
+      ::u8 zeroes[::subsystem::VncPassCrypt::VNC_PASSWORD_SIZE] = {};
       if (cfg.hasControlPassword())
          cfg.setControlPassword(zeroes);
       if (cfg.hasPrimaryPassword())
@@ -519,7 +519,7 @@ namespace remoting_node_desktop
 
    void ControlClient::shareDisplayIdMsgRcvd()
    {
-      unsigned char displayNumber = m_pcontrolgate->readUInt8();
+      ::u8 displayNumber = m_pcontrolgate->readUInt8();
       m_pcontrolgate->writeUInt32(::remoting_control_desktop::ControlProto::REPLY_OK);
 
       ::remoting::ViewPortState dynViewPort;

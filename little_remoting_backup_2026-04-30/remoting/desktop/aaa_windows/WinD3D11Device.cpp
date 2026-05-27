@@ -33,9 +33,9 @@ namespace remoting
 
 
    typedef HRESULT(WINAPI *D3D11CreateDeviceFunType)(
-      _In_opt_ IDXGIAdapter *pAdapter, D3D_DRIVER_TYPE DriverType, HMODULE Software, unsigned int Flags,
-      _In_reads_opt_(FeatureLevels) CONST D3D_FEATURE_LEVEL *pFeatureLevels, unsigned int FeatureLevels,
-      unsigned int SDKVersion, _Out_opt_ ID3D11Device **ppDevice, _Out_opt_ D3D_FEATURE_LEVEL *pFeatureLevel,
+      _In_opt_ IDXGIAdapter *pAdapter, D3D_DRIVER_TYPE DriverType, HMODULE Software, ::u32 Flags,
+      _In_reads_opt_(FeatureLevels) CONST D3D_FEATURE_LEVEL *pFeatureLevels, ::u32 FeatureLevels,
+      ::u32 SDKVersion, _Out_opt_ ID3D11Device **ppDevice, _Out_opt_ D3D_FEATURE_LEVEL *pFeatureLevel,
       _Out_opt_ ID3D11DeviceContext **ppImmediateContext);
 
    WinD3D11Device::WinD3D11Device(::subsystem::LogWriter * plogwriter) :
@@ -50,18 +50,18 @@ namespace remoting
 
       // Driver types supported
       D3D_DRIVER_TYPE driverTypes[] = {D3D_DRIVER_TYPE_HARDWARE};
-      unsigned int driverTypeCount = ARRAYSIZE(driverTypes);
+      ::u32 driverTypeCount = ARRAYSIZE(driverTypes);
 
       // Feature levels supported
       D3D_FEATURE_LEVEL featureLevels[] = {D3D_FEATURE_LEVEL_11_0, D3D_FEATURE_LEVEL_10_1, D3D_FEATURE_LEVEL_10_0,
                                            D3D_FEATURE_LEVEL_9_1};
-      unsigned int featureLevelCount = ARRAYSIZE(featureLevels);
+      ::u32 featureLevelCount = ARRAYSIZE(featureLevels);
 
       D3D_FEATURE_LEVEL featureLevel;
 
       // Create device
       HRESULT hr;
-      for (unsigned int iDriverType = 0; iDriverType < driverTypeCount; ++iDriverType)
+      for (::u32 iDriverType = 0; iDriverType < driverTypeCount; ++iDriverType)
       {
          m_plogwriter->debug("Creating of (%u) driverType device", iDriverType);
          hr = d3d11CreateDevice(0, driverTypes[iDriverType], 0, 0, featureLevels, featureLevelCount, D3D11_SDK_VERSION,
@@ -131,9 +131,9 @@ namespace remoting
 
    ID3D11DeviceContext *WinD3D11Device::getContext() { return m_context; }
 
-   void WinD3D11Device::copySubresourceRegion(ID3D11Texture2D *dstTexture2D, int dstX, int dstY,
+   void WinD3D11Device::copySubresourceRegion(ID3D11Texture2D *dstTexture2D, ::i32 dstX, ::i32 dstY,
                                               ID3D11Texture2D *srcTexture2D, const ::i32_rectangle &rectangleSource,
-                                              unsigned int front, unsigned int back)
+                                              ::u32 front, ::u32 back)
    {
       D3D11_BOX box;
       box.left = rectangleSource.left;

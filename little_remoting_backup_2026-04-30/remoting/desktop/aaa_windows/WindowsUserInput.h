@@ -48,20 +48,20 @@ namespace remoting
                  ::subsystem::LogWriter * plogwriter);
 
       virtual void setNewClipboard(const ::scoped_string &newClipboard);
-      virtual void setMouseEvent(const ::i32_point pointNewPosition, unsigned char keyFlag);
-      virtual void setKeyboardEvent(unsigned int keySym, bool down);
+      virtual void setMouseEvent(const ::i32_point pointNewPosition, ::u8 keyFlag);
+      virtual void setKeyboardEvent(::u32 keySym, bool down);
 
       virtual void getCurrentUserInfo(::string &desktopName, ::string &userName);
-      virtual void getDisplayNumberCoords(::i32_rectangle & rectangle, unsigned char dispNumber);
+      virtual void getDisplayNumberCoords(::i32_rectangle & rectangle, ::u8 dispNumber);
       virtual ::int_rectangle_array_base WindowsUserInput::getDisplaysCoords();
       virtual void getNormalizedRect(::i32_rectangle & rectangle);
       virtual void getPrimaryDisplayCoords(::i32_rectangle & rectangle);
       virtual void getWindowCoords(const ::operating_system::window & operatingsystemwindow, ::i32_rectangle & rectangle);
       virtual ::operating_system::window getWindowHandleByName(const ::scoped_string &windowName);
-      virtual void getApplicationRegion(unsigned int procId, ::remoting::Region & region);
-      virtual bool isApplicationInFocus(unsigned int procId);
+      virtual void getApplicationRegion(::u32 procId, ::remoting::Region & region);
+      virtual bool isApplicationInFocus(::u32 procId);
 
-      virtual void initKeyFlag(unsigned char initValue) { m_prevKeyFlag = initValue; }
+      virtual void initKeyFlag(::u8 initValue) { m_prevKeyFlag = initValue; }
 
    //protected:
       void toFbCoordinates(::i32_rectangle & rectangle);
@@ -73,7 +73,7 @@ namespace remoting
       ::subsystem::Keymap m_keyMap;
       ::subsystem::InputInjector m_inputInjector;
 
-      unsigned char m_prevKeyFlag;
+      ::u8 m_prevKeyFlag;
 
       ::pointer < ::subsystem::LogWriter > m_plogwriter;
    };

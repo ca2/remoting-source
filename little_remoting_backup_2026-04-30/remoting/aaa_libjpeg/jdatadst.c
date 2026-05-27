@@ -125,7 +125,7 @@ empty_mem_output_buffer (j_compress_ptr cinfo)
   JOCTET * nextbuffer;
   my_mem_dest_ptr dest = (my_mem_dest_ptr) cinfo->dest;
 
-  /* Try to allocate new buffer with double size */
+  /* Try to allocate new buffer with ::f64 size */
   nextsize = dest->bufsize * 2;
   nextbuffer = (JOCTET *) malloc(nextsize);
 

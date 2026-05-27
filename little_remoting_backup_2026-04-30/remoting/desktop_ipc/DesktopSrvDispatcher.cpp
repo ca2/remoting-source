@@ -96,15 +96,15 @@ namespace remoting
          try
          {
             m_plogwriter->debug("DesktopSrvDispatcher reading code");
-            unsigned char code = m_pcontrolgate->readUInt8();
+            ::u8 code = m_pcontrolgate->readUInt8();
             m_plogwriter->debug("DesktopSrvDispatcher, code {} recieved", code);
-            ::map<unsigned char, ClientListener *>::iterator iter = m_handlers.find(code);
+            ::map<::u8, ClientListener *>::iterator iter = m_handlers.find(code);
             if (iter == m_handlers.end())
             {
                ::string errMess;
                errMess.formatf("Unhandled {} code has been "
                                "received from a client",
-                               (int)code);
+                               (::i32)code);
                throw ::subsystem::Exception(errMess);
             }
             (*iter).m_element2->onRequest(code, m_pcontrolgate);
@@ -126,7 +126,7 @@ namespace remoting
       m_plogwriter->debug("The DesktopServerApplication dispatcher has been stopped");
    }
 
-   void DesktopSrvDispatcher::registerNewHandle(unsigned char code, ClientListener *listener)
+   void DesktopSrvDispatcher::registerNewHandle(::u8 code, ClientListener *listener)
    {
       m_handlers[code] = listener;
    }

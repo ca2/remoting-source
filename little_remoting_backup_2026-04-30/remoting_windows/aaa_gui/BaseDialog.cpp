@@ -72,7 +72,7 @@ void BaseDialog::setResourceId(DWORD id)
   m_resourceId = id;
 }
 
-void BaseDialog::setDefaultPushButton(unsigned int buttonId)
+void BaseDialog::setDefaultPushButton(::u32 buttonId)
 {
   SendMessage(m_hwnd, DM_SETDEFID, buttonId, 0);
 }
@@ -82,7 +82,7 @@ void BaseDialog::setParent(::innate_subsystem::Control *pwindowParent)
   m_pwindowParent = pwindowParent;
 }
 
-int BaseDialog::show()
+::i32 BaseDialog::show()
 {
   if (m_hwnd == NULL) {
     create();
@@ -97,7 +97,7 @@ void BaseDialog::hide()
   set_visible(false);
 }
 
-void BaseDialog::closeDialog(int code)
+void BaseDialog::closeDialog(::i32 code)
 {
   // Destroy dialog
   if (!m_isModal) {
@@ -132,14 +132,14 @@ void BaseDialog::create()
 
 
 
-int BaseDialog::showModal()
+::i32 BaseDialog::showModal()
 {
-  int result = 0;
+  ::i32 result = 0;
   if (m_hwnd == NULL) {
     m_isModal = true;
      HINSTANCE hinstance = remoting_impact_hinstance();
     HWND parentWindow = (m_pwindowParent != NULL) ? m_pwindowParent->operating_system_window() : NULL;
-    result = (int)DialogBoxParam(hinstance,
+    result = (::i32)DialogBoxParam(hinstance,
                                  getResouceName(),
                                  parentWindow, dialogProc, (::lparam)this);
   } else {
@@ -173,11 +173,11 @@ bool BaseDialog::onDrawItem(::wparam controlID, LPDRAWITEMSTRUCT dis)
   return true;
 }
 
-void BaseDialog::onMessageReceived(unsigned int uMsg, ::wparam wParam, ::lparam lParam)
+void BaseDialog::onMessageReceived(::u32 uMsg, ::wparam wParam, ::lparam lParam)
 {
 }
 
-INT_PTR CALLBACK BaseDialog::dialogProc(const ::operating_system::window & operatingsystemwindow, unsigned int uMsg, ::wparam wParam, ::lparam lParam)
+INT_PTR CALLBACK BaseDialog::dialogProc(const ::operating_system::window & operatingsystemwindow, ::u32 uMsg, ::wparam wParam, ::lparam lParam)
 {
 
    BaseDialog * pbasedialog = nullptr;
@@ -205,7 +205,7 @@ INT_PTR CALLBACK BaseDialog::dialogProc(const ::operating_system::window & opera
 
 }
 
-bool BaseDialog::dialog_procedure(INT_PTR & iptrResult, unsigned int message, ::wparam wparam, ::lparam lparam)
+bool BaseDialog::dialog_procedure(INT_PTR & iptrResult, ::u32 message, ::wparam wparam, ::lparam lparam)
 {
 
    bool bResult = false;
@@ -284,12 +284,12 @@ bool BaseDialog::onInitDialog()
   return false;
 }
 
-bool BaseDialog::onNotify(unsigned int controlID, ::lparam data)
+bool BaseDialog::onNotify(::u32 controlID, ::lparam data)
 {
   return false;
 }
 
-bool BaseDialog::onCommand(unsigned int controlID, unsigned int notificationID)
+bool BaseDialog::onCommand(::u32 controlID, ::u32 notificationID)
 {
   return false;
 }

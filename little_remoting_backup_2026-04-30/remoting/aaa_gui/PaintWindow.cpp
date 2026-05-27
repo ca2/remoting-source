@@ -24,7 +24,7 @@
 #include "framework.h"
 #include "PaintWindow.h"
 
-::innate_subsystem::PaintWindow::::innate_subsystem::PaintWindow()
+::innate_subsystem::PaintWindow::innate_subsystem::PaintWindow()
  : m_bIsDraw(false)
 {
 }
@@ -46,7 +46,7 @@ void ::innate_subsystem::PaintWindow::onPaint()
 {
 }
 
-bool ::innate_subsystem::PaintWindow::wndProc(unsigned int scopedstrMessage, ::wparam wParam, ::lparam lParam)
+bool ::innate_subsystem::PaintWindow::wndProc(::u32 scopedstrMessage, ::wparam wParam, ::lparam lParam)
 {
   if (scopedstrMessage == WM_PAINT) {
     m_hdc = BeginPaint(m_hwnd, &m_paintStruct);

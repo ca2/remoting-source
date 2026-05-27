@@ -83,8 +83,8 @@ namespace remoting
 
    void RfbInitializer::initVersion()
    {
-      char initVersionMsg[] = "RFB 003.008\n";
-      char clientVersionMsg[13];
+      ::i8 initVersionMsg[] = "RFB 003.008\n";
+      ::i8 clientVersionMsg[13];
       size_t msgLen = 12;
       m_output->writeFully(initVersionMsg, msgLen);
       m_input->readFully(clientVersionMsg, msgLen);
@@ -118,7 +118,7 @@ namespace remoting
       m_client->getSocketAddr(&sockAddr);
       struct sockaddr_in addrIn = sockAddr.getSockAddr();
 
-      bool isLoopback = (unsigned long)addrIn.sin_addr.S_un.S_addr == 16777343;
+      bool isLoopback = (ulong)addrIn.sin_addr.S_un.S_addr == 16777343;
 
       ::remoting_node::ServerConfig *pserverconfig = m_pconfigurator->getServerConfig();
       if (isLoopback && !pserverconfig->isLoopbackConnectionsAllowed()) {
@@ -172,14 +172,14 @@ namespace remoting
 
    void RfbInitializer::doVncAuth()
    {
-      unsigned char challenge[16];
-      srand((unsigned)time(0));
-      for (int i = 0; i < sizeof(challenge); i++) {
+      ::u8 challenge[16];
+      srand((::u32)time(0));
+      for (::i32 i = 0; i < sizeof(challenge); i++) {
          challenge[i] = rand() & 0xff;
       }
 
       m_output->writeFully(challenge, sizeof(challenge));
-      unsigned char response[16];
+      ::u8 response[16];
       m_input->readFully(response, sizeof(response));
       // Checking for a ban after auth.
       checkForBan();
@@ -194,7 +194,7 @@ namespace remoting
       }
 
       if (hasPrim) {
-         unsigned char crypPrimPass[8];
+         ::u8 crypPrimPass[8];
          pserverconfig->getPrimaryPassword(crypPrimPass);
          VncPassCrypt passCrypt;
          passCrypt.updatePlain(crypPrimPass);
@@ -203,7 +203,7 @@ namespace remoting
          }
       }
       if (hasRdly) {
-         unsigned char crypReadOnlyPass[8];
+         ::u8 crypReadOnlyPass[8];
          pserverconfig->getReadOnlyPassword(crypReadOnlyPass);
          VncPassCrypt passCrypt;
          passCrypt.updatePlain(crypReadOnlyPass);
@@ -244,7 +244,7 @@ namespace remoting
             m_output->writeUInt8(primSecType);
             m_output->writeUInt8(SecurityDefs::TIGHT);
             // Read what the client has actually selected.
-            unsigned char clientSecType = m_input->readUInt8();
+            ::u8 clientSecType = m_input->readUInt8();
             if (clientSecType == SecurityDefs::TIGHT) {
                m_tightEnabled = true;
                doTightAuth();
@@ -283,19 +283,19 @@ namespace remoting
    void RfbInitializer::sendServerInit(const ::i32_size & size,
                                        const ::innate_subsystem::PixelFormat & pixelformat)
    {
-      m_output->writeUInt16((unsigned short)size->width);
-      m_output->writeUInt16((unsigned short)size->height);
+      m_output->writeUInt16((::u16)size->width);
+      m_output->writeUInt16((::u16)size->height);
       // Pixel format
-      m_output->writeUInt8((unsigned char)pixelformat.bitsPerPixel);
-      m_output->writeUInt8((unsigned char)pixelformat.colorDepth);
-      m_output->writeUInt8((unsigned char)pixelformat.bigEndian);
+      m_output->writeUInt8((::u8)pixelformat.bitsPerPixel);
+      m_output->writeUInt8((::u8)pixelformat.colorDepth);
+      m_output->writeUInt8((::u8)pixelformat.bigEndian);
       m_output->writeUInt8(1);
-      m_output->writeUInt16((unsigned short)pixelformat.redMax);
-      m_output->writeUInt16((unsigned short)pixelformat.greenMax);
-      m_output->writeUInt16((unsigned short)pixelformat.blueMax);
-      m_output->writeUInt8((unsigned char)pixelformat.redShift);
-      m_output->writeUInt8((unsigned char)pixelformat.greenShift);
-      m_output->writeUInt8((unsigned char)pixelformat.blueShift);
+      m_output->writeUInt16((::u16)pixelformat.redMax);
+      m_output->writeUInt16((::u16)pixelformat.greenMax);
+      m_output->writeUInt16((::u16)pixelformat.blueMax);
+      m_output->writeUInt8((::u8)pixelformat.redShift);
+      m_output->writeUInt8((::u8)pixelformat.greenShift);
+      m_output->writeUInt8((::u8)pixelformat.blueShift);
       // Padding
       m_output->writeUInt8(0);
       m_output->writeUInt16(0);
@@ -330,7 +330,7 @@ namespace remoting
       encCaps->sendCaps(m_output);
    }
 
-   ::u32 RfbInitializer::getProtocolMinorVersion(const char str[12])
+   ::u32 RfbInitializer::getProtocolMinorVersion(const ::i8 str[12])
    {
       if ( str[0] != 'R' || str[1] != 'F' || str[2] != 'B' || str[3] != ' ' ||
            !isdigit(str[4]) || !isdigit(str[5]) || !isdigit(str[6]) ||

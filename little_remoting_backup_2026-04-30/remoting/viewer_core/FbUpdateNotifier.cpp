@@ -215,9 +215,9 @@ namespace remoting_client
    }
 
    void FbUpdateNotifier::setNewCursor(const ::i32_point &pointHotspot,
-                                       unsigned short width, unsigned short height,
-                                       const ::array_base<unsigned char> *cursor,
-                                       const ::array_base<unsigned char> *bitmask)
+                                       ::u16 width, ::u16 height,
+                                       const ::array_base<::u8> *cursor,
+                                       const ::array_base<::u8> *bitmask)
    {
       {
          critical_section_lock al(m_pcriticalsectionFramebuffer);

@@ -38,7 +38,7 @@ jpeg_calc_jpeg_dimensions (j_compress_ptr cinfo)
    * and we need some space for multiplication by block_size.
    */
   if (((long) cinfo->image_width >> 24) || ((long) cinfo->image_height >> 24))
-    ERREXIT1(cinfo, JERR_IMAGE_TOO_BIG, (unsigned int) JPEG_MAX_DIMENSION);
+    ERREXIT1(cinfo, JERR_IMAGE_TOO_BIG, (::u32) JPEG_MAX_DIMENSION);
 
 #ifdef DCT_SCALING_SUPPORTED
 

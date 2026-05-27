@@ -42,21 +42,21 @@ public:
    * @param state [out] array of 256 virtual key states.
    * @throws SystemException on error.
    */
-  static void getState(unsigned char state[256]);
+  static void getState(::u8 state[256]);
 
   /**
    * Sets current keyboard state.
    * @param state array of 256 virtual key states.
    * @throws SystemException on error.
    */
-  static void setState(unsigned char state[256]);
+  static void setState(::u8 state[256]);
 
   /**
    * Check if specified key is in pressed state.
    * @param vkCode virtual code of key.
    * @return true if key is pressed, false if released.
    */
-  static bool isKeyPressed(unsigned char vkCode);
+  static bool isKeyPressed(::u8 vkCode);
 
 };
 

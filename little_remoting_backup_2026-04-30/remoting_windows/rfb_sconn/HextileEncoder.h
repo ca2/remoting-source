@@ -39,7 +39,7 @@ namespace remoting
       HextileEncoder(::remoting::PixelConverter * ppixelconverter, DataOutputStream * pdataoutputstream);
       virtual ~HextileEncoder();
 
-      virtual int getCode() const;
+      virtual ::i32 getCode() const;
 
       virtual void sendRectangle(const ::i32_rectangle & rectangle, const ::innate_subsystem::Framebuffer *serverFb,
                                  const EncodeOptions *options);

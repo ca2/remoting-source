@@ -50,7 +50,7 @@ namespace remoting_node
       static const ::u32 MINIMAL_QUERY_TIMEOUT = 1;
 
       // FIXME: duplicatad at VncPassCrypt
-      ///static const int ::subsystem::VncPassCrypt::VNC_PASSWORD_SIZE = 8;
+      ///static const ::i32 ::subsystem::VncPassCrypt::VNC_PASSWORD_SIZE = 8;
 
       //
       // Enum defines server action when last client disconnects
@@ -109,11 +109,11 @@ namespace remoting_node
       bool getControlAuthAlwaysChecking();
       void setControlAuthAlwaysChecking(bool value);
 
-      void setRfbPort(int port);
-      int getRfbPort();
+      void setRfbPort(::i32 port);
+      ::i32 getRfbPort();
 
-      void setHttpPort(int port);
-      int getHttpPort();
+      void setHttpPort(::i32 port);
+      ::i32 getHttpPort();
 
       //
       // Other server options access methods
@@ -141,14 +141,14 @@ namespace remoting_node
       bool isAcceptingRfbConnections();
       void acceptRfbConnections(bool accept);
 
-      void getPrimaryPassword(unsigned char *password);
-      void setPrimaryPassword(const unsigned char *value);
+      void getPrimaryPassword(::u8 *password);
+      void setPrimaryPassword(const ::u8 *value);
 
-      void getReadOnlyPassword(unsigned char *password);
-      void setReadOnlyPassword(const unsigned char *value);
+      void getReadOnlyPassword(::u8 *password);
+      void setReadOnlyPassword(const ::u8 *value);
 
-      void getControlPassword(unsigned char *password);
-      void setControlPassword(const unsigned char *password);
+      void getControlPassword(::u8 *password);
+      void setControlPassword(const ::u8 *password);
 
       bool hasPrimaryPassword();
       bool hasReadOnlyPassword();
@@ -178,9 +178,9 @@ namespace remoting_node
 
       void enableAppletParamInUrl(bool enabled);
 
-      int getLogLevel();
+      ::i32 getLogLevel();
 
-      void setLogLevel(int logLevel);
+      void setLogLevel(::i32 logLevel);
 
       //
       // Sharing configuration
@@ -249,7 +249,7 @@ namespace remoting_node
       // to lock and unlock server configuration.
       IpAccessControl *getAccessControl();
 
-      IpAccessRule::ActionType getActionByAddress(unsigned long ip);
+      IpAccessRule::ActionType getActionByAddress(ulong ip);
 
       void allowLoopbackConnections(bool allow);
 
@@ -273,8 +273,8 @@ namespace remoting_node
       ::u32 getVideoRecognitionInterval();
       void setVideoRecognitionInterval(::u32 interval);
 
-      int  getIdleTimeout();
-      void setIdleTimeout(int timeout);
+      ::i32  getIdleTimeout();
+      void setIdleTimeout(::i32 timeout);
 
       void saveLogToAllUsersPath(bool enabled);
       bool isSaveLogToAllUsersPathFlagEnabled();
@@ -297,8 +297,8 @@ namespace remoting_node
       // Server port numbers
       //
 
-      int m_rfbPort;
-      int m_httpPort;
+      ::i32 m_rfbPort;
+      ::i32 m_httpPort;
 
       //
       // Other server options members group
@@ -321,9 +321,9 @@ namespace remoting_node
       bool m_acceptRfbConnections;
       bool m_acceptHttpConnections;
 
-      unsigned char m_primaryPassword[::subsystem::VncPassCrypt::VNC_PASSWORD_SIZE];
-      unsigned char m_readonlyPassword[::subsystem::VncPassCrypt::VNC_PASSWORD_SIZE];
-      unsigned char m_controlPassword[::subsystem::VncPassCrypt::VNC_PASSWORD_SIZE];
+      ::u8 m_primaryPassword[::subsystem::VncPassCrypt::VNC_PASSWORD_SIZE];
+      ::u8 m_readonlyPassword[::subsystem::VncPassCrypt::VNC_PASSWORD_SIZE];
+      ::u8 m_controlPassword[::subsystem::VncPassCrypt::VNC_PASSWORD_SIZE];
 
       //
       // Configurator from Administration tab
@@ -332,7 +332,7 @@ namespace remoting_node
       bool m_useAuthentication;
       bool m_onlyLoopbackConnections;
       bool m_enableAppletParamInUrl;
-      int m_logLevel;
+      ::i32 m_logLevel;
       bool m_useControlAuth;
       bool m_controlAuthAlwaysChecking;
 
@@ -414,7 +414,7 @@ namespace remoting_node
       bool m_grabTransparentWindows;
 
       // Socket timeout to disconnect inactive clients, in seconds
-      int m_idleTimeout;
+      ::i32 m_idleTimeout;
 
       // Flag that determiates where log file directory will be.
       bool m_saveLogToAllUsersPath;

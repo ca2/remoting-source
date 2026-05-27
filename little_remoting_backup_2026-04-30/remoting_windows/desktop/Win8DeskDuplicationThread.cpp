@@ -68,10 +68,10 @@ namespace remoting_windows
 
    void Win8DeskDuplication::execute()
    {
-      const int ACQUIRE_TIMEOUT = 20;
+      const ::i32 ACQUIRE_TIMEOUT = 20;
       try
       {
-         ::array_base<int> timeouts;
+         ::array_base<::i32> timeouts;
          ::array_base<class ::time> begins;
          timeouts.resize(m_outDupl.size());
          begins.resize(m_outDupl.size());
@@ -92,8 +92,8 @@ namespace remoting_windows
                   else
                   {
                      DXGI_OUTDUPL_FRAME_INFO *info = acquiredFrame.getFrameInfo();
-                     int accum_frames = info->AccumulatedFrames;
-                     double dt = begins[i].elapsed().floating_millisecond(); // in milliseconds
+                     ::i32 accum_frames = info->AccumulatedFrames;
+                     ::f64 dt = begins[i].elapsed().floating_millisecond(); // in milliseconds
                      m_plogwriter->debug("Acquire frame for output: {} for %f ms, accumulated {} frames", i,
                                          dt + ACQUIRE_TIMEOUT * timeouts[i], accum_frames);
                      timeouts[i] = 0;
@@ -117,7 +117,7 @@ namespace remoting_windows
                      catch (WinDxException &e)
                      {
                         m_plogwriter->debug("Error on cursor processing: {}, (%x)", e.get_message(),
-                                            (int)e.getErrorCode());
+                                            (::i32)e.getErrorCode());
                      } // Cursor
                   }
                }
@@ -130,14 +130,14 @@ namespace remoting_windows
       {
          ::string errMess;
          errMess.formatf("Win8DeskDuplication:: Catched WinDxRecoverableException: {}, (%x)", e.get_message(),
-                         (int)e.getErrorCode());
+                         (::i32)e.getErrorCode());
          setRecoverableError(errMess);
       }
       catch (WinDxCriticalException &e)
       {
          ::string errMess;
          errMess.formatf("Win8DeskDuplication:: Catched WinDxCriticalException: {}, (%x)", e.get_message(),
-                         (int)e.getErrorCode());
+                         (::i32)e.getErrorCode());
          setRecoverableError(errMess); //?????????
          setCriticalError(errMess);
       }
@@ -187,8 +187,8 @@ namespace remoting_windows
          // Translate the rectangle and point to the frame buffer coordinates.
          destinationRect.offset(targetRect.left, targetRect.top);
          sourceRect.offset(targetRect.left, targetRect.top);
-         int x = sourceRect.left;
-         int y = sourceRect.top;
+         ::i32 x = sourceRect.left;
+         ::i32 y = sourceRect.top;
          m_targetFb->move(destinationRect, x, y);
 
          m_duplListener->onCopyRect(destinationRect, x, y);
@@ -238,7 +238,7 @@ namespace remoting_windows
          m_plogwriter->debug("Destination dirty rectangle = {}, {}, %dx{}", rectangleTarget.left, rectangleTarget.top, rectangleTarget.width(),
                              rectangleTarget.height());
 
-         sizeStage.cx = static_cast<int>(autoMapSurface.getStride() / 4);
+         sizeStage.cx = static_cast<::i32>(autoMapSurface.getStride() / 4);
          m_pframebufferAuxiliaryProperty->setPropertiesWithoutResize(sizeStage, m_targetFb->getPixelFormat());
          m_pframebufferAuxiliaryProperty->setBuffer(autoMapSurface.getBuffer());
          switch (rotation)
@@ -277,10 +277,10 @@ namespace remoting_windows
    void Win8DeskDuplication::rotateRectInsideStage(::i32_rectangle &rectangleToTranspose, const ::i32_size &sizeStage,
                                                    DXGI_MODE_ROTATION rotation)
    {
-      int left = rectangleToTranspose.left;
-      int top = rectangleToTranspose.top;
-      int width = rectangleToTranspose.width();
-      int height = rectangleToTranspose.height();
+      ::i32 left = rectangleToTranspose.left;
+      ::i32 top = rectangleToTranspose.top;
+      ::i32 width = rectangleToTranspose.width();
+      ::i32 height = rectangleToTranspose.height();
       switch (rotation)
       {
          case DXGI_MODE_ROTATION_UNSPECIFIED:

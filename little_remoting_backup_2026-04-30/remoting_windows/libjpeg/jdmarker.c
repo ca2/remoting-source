@@ -97,12 +97,12 @@ typedef struct {
   jpeg_marker_parser_method process_APPn[16];
 
   /* Limit on marker data length to save for each marker type */
-  unsigned int length_limit_COM;
-  unsigned int length_limit_APPn[16];
+  ::u32 length_limit_COM;
+  ::u32 length_limit_APPn[16];
 
   /* Status of COM/APPn marker saving */
   jpeg_saved_marker_ptr cur_marker;	/* NULL if not processing a marker */
-  unsigned int bytes_read;		/* data bytes read so far in marker */
+  ::u32 bytes_read;		/* data bytes read so far in marker */
   /* Note: cur_marker is not linked into marker_list until it's all read. */
 } my_marker_reader;
 
@@ -153,12 +153,12 @@ typedef my_marker_reader * my_marker_ptr;
 		  V = GETJOCTET(*next_input_byte++); )
 
 /* As above, but read two bytes interpreted as an unsigned 16-bit integer.
- * V should be declared unsigned int or perhaps int.
+ * V should be declared ::u32 or perhaps int.
  */
 #define INPUT_2BYTES(cinfo,V,action)  \
 	MAKESTMT( MAKE_BYTE_AVAIL(cinfo,action); \
 		  bytes_in_buffer--; \
-		  V = ((unsigned int) GETJOCTET(*next_input_byte++)) << 8; \
+		  V = ((::u32) GETJOCTET(*next_input_byte++)) << 8; \
 		  MAKE_BYTE_AVAIL(cinfo,action); \
 		  bytes_in_buffer--; \
 		  V += GETJOCTET(*next_input_byte++); )
@@ -533,7 +533,7 @@ get_dqt (j_decompress_ptr cinfo)
 {
   int length, count, i;
   int n, prec;
-  unsigned int tmp;
+  ::u32 tmp;
   JQUANT_TBL *quant_ptr;
   const int *natural_order;
   INPUT_VARS(cinfo);
@@ -592,7 +592,7 @@ get_dqt (j_decompress_ptr cinfo)
       else
 	INPUT_BYTE(cinfo, tmp, return FALSE);
       /* We convert the zigzag-order table to natural array order. */
-      quant_ptr->quantval[natural_order[i]] = (unsigned short) tmp;
+      quant_ptr->quantval[natural_order[i]] = (::u16) tmp;
     }
 
     if (cinfo->err->trace_level >= 2) {
@@ -622,7 +622,7 @@ get_dri (j_decompress_ptr cinfo)
 /* Process a DRI marker */
 {
   int length;
-  unsigned int tmp;
+  ::u32 tmp;
   INPUT_VARS(cinfo);
 
   INPUT_2BYTES(cinfo, length, return FALSE);
@@ -646,7 +646,7 @@ get_lse (j_decompress_ptr cinfo)
 /* Process an LSE marker */
 {
   int length;
-  unsigned int tmp;
+  ::u32 tmp;
   int cid;
   INPUT_VARS(cinfo);
 
@@ -717,7 +717,7 @@ get_lse (j_decompress_ptr cinfo)
 
 LOCAL(void)
 examine_app0 (j_decompress_ptr cinfo, JOCTET FAR * data,
-	      unsigned int datalen, int remaining)
+	      ::u32 datalen, int remaining)
 /* Examine first few bytes from an APP0.
  * Take appropriate action if it is a JFIF marker.
  * datalen is # of bytes at data[], remaining is length of rest of marker data.
@@ -793,13 +793,13 @@ examine_app0 (j_decompress_ptr cinfo, JOCTET FAR * data,
 
 LOCAL(void)
 examine_app14 (j_decompress_ptr cinfo, JOCTET FAR * data,
-	       unsigned int datalen, int remaining)
+	       ::u32 datalen, int remaining)
 /* Examine first few bytes from an APP14.
  * Take appropriate action if it is an Adobe marker.
  * datalen is # of bytes at data[], remaining is length of rest of marker data.
  */
 {
-  unsigned int version, flags0, flags1, transform;
+  ::u32 version, flags0, flags1, transform;
 
   if (datalen >= APP14_DATA_LEN &&
       GETJOCTET(data[0]) == 0x41 &&
@@ -828,7 +828,7 @@ get_interesting_appn (j_decompress_ptr cinfo)
 {
   int length;
   JOCTET b[APPN_DATA_LEN];
-  unsigned int i, numtoread;
+  ::u32 i, numtoread;
   INPUT_VARS(cinfo);
 
   INPUT_2BYTES(cinfo, length, return FALSE);
@@ -838,7 +838,7 @@ get_interesting_appn (j_decompress_ptr cinfo)
   if (length >= APPN_DATA_LEN)
     numtoread = APPN_DATA_LEN;
   else if (length > 0)
-    numtoread = (unsigned int) length;
+    numtoread = (::u32) length;
   else
     numtoread = 0;
   for (i = 0; i < numtoread; i++)
@@ -875,7 +875,7 @@ save_marker (j_decompress_ptr cinfo)
 {
   my_marker_ptr marker = (my_marker_ptr) cinfo->marker;
   jpeg_saved_marker_ptr cur_marker = marker->cur_marker;
-  unsigned int bytes_read, data_length;
+  ::u32 bytes_read, data_length;
   JOCTET FAR * data;
   int length = 0;
   INPUT_VARS(cinfo);
@@ -886,20 +886,20 @@ save_marker (j_decompress_ptr cinfo)
     length -= 2;
     if (length >= 0) {		/* watch out for bogus length word */
       /* figure out how much we want to save */
-      unsigned int limit;
+      ::u32 limit;
       if (cinfo->unread_marker == (int) M_COM)
 	limit = marker->length_limit_COM;
       else
 	limit = marker->length_limit_APPn[cinfo->unread_marker - (int) M_APP0];
-      if ((unsigned int) length < limit)
-	limit = (unsigned int) length;
+      if ((::u32) length < limit)
+	limit = (::u32) length;
       /* allocate and initialize the marker item */
       cur_marker = (jpeg_saved_marker_ptr)
 	(*cinfo->mem->alloc_large) ((j_common_ptr) cinfo, JPOOL_IMAGE,
 				    SIZEOF(struct jpeg_marker_struct) + limit);
       cur_marker->next = NULL;
       cur_marker->marker = (unsigned char) cinfo->unread_marker;
-      cur_marker->original_length = (unsigned int) length;
+      cur_marker->original_length = (::u32) length;
       cur_marker->data_length = limit;
       /* data area is just beyond the jpeg_marker_struct */
       data = cur_marker->data = (JOCTET FAR *) (cur_marker + 1);
@@ -1443,7 +1443,7 @@ jinit_marker_reader (j_decompress_ptr cinfo)
 
 GLOBAL(void)
 jpeg_save_markers (j_decompress_ptr cinfo, int marker_code,
-		   unsigned int length_limit)
+		   ::u32 length_limit)
 {
   my_marker_ptr marker = (my_marker_ptr) cinfo->marker;
   long maxlength;
@@ -1454,7 +1454,7 @@ jpeg_save_markers (j_decompress_ptr cinfo, int marker_code,
    */
   maxlength = cinfo->mem->max_alloc_chunk - SIZEOF(struct jpeg_marker_struct);
   if (((long) length_limit) > maxlength)
-    length_limit = (unsigned int) maxlength;
+    length_limit = (::u32) maxlength;
 
   /* Choose processor routine to use.
    * APP0/APP14 have special requirements.

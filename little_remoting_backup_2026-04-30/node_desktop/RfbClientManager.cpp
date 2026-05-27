@@ -177,7 +177,7 @@ namespace remoting_node_desktop
 
       if (!client->isOutgoing())
       {
-         action = pserverconfig->getActionByAddress((unsigned long)addr_in.sin_addr.S_un.S_addr);
+         action = pserverconfig->getActionByAddress((ulong)addr_in.sin_addr.S_un.S_addr);
       }
       else
       {
@@ -196,7 +196,7 @@ namespace remoting_node_desktop
 
          auto queryRetVal = papp->execute(peerHost, pserverconfig->isDefaultActionAccept(), pserverconfig->getQueryTimeout());
 
-         // int queryRetVal = QueryConnectionApplication::execute(
+         // ::i32 queryRetVal = QueryConnectionApplication::execute(
          //    peerHost,
          //    pserverconfig->isDefaultActionAccept(),
          //    pserverconfig->getQueryTimeout());
@@ -448,7 +448,7 @@ namespace remoting_node_desktop
       critical_section_lock al(&m_clientListLocker);
 
       ::remoting_node::ServerConfig * pserverconfig = m_pconfigurator->getServerConfig();
-      int timeout = 1000 * pserverconfig->getIdleTimeout();
+      ::i32 timeout = 1000 * pserverconfig->getIdleTimeout();
 
       m_plogwriter->error("Set socket idle timeout, {} ms", timeout);
 

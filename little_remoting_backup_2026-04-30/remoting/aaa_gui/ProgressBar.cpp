@@ -45,7 +45,7 @@ void ProgressBar::setPos(WORD pos)
 }
 
 
-bool ProgressBar::window_procedure(LRESULT & lresult, unsigned int scopedstrMessage, ::wparam wparam, ::lparam lparam)
+bool ProgressBar::window_procedure(LRESULT & lresult, ::u32 scopedstrMessage, ::wparam wparam, ::lparam lparam)
 {
 
    if (scopedstrMessage == WM_USER+327)

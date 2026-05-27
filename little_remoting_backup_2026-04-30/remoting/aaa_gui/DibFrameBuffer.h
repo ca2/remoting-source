@@ -37,20 +37,20 @@ public:
   DibFramebuffer();
   virtual ~DibFramebuffer();
 
-  virtual void setColor(unsigned char reg, unsigned char green, unsigned char blue);
-  virtual void fillRect(const ::i32_rectangle &  rectangleTarget, unsigned int color);
+  virtual void setColor(::u8 reg, ::u8 green, ::u8 blue);
+  virtual void fillRect(const ::i32_rectangle &  rectangleTarget, ::u32 color);
 
   virtual bool isEqualTo(const ::innate_subsystem::Framebuffer *pframebuffer);
 
   virtual bool copyFrom(const ::i32_rectangle &  rectangleTarget, const ::innate_subsystem::Framebuffer *pframebufferSource,
-                        int srcX, int srcY);
+                        ::i32 srcX, ::i32 srcY);
   virtual bool copyFrom(const ::innate_subsystem::Framebuffer *pframebufferSource,
-                        int srcX, int srcY);
+                        ::i32 srcX, ::i32 srcY);
   virtual bool overlay(const ::i32_rectangle &  rectangleTarget, const ::innate_subsystem::Framebuffer *pframebufferSource,
-                       int srcX, int srcY, const char *andMask);
-  virtual void move(const ::i32_rectangle &  rectangleTarget, const int srcX, const int srcY);
+                       ::i32 srcX, ::i32 srcY, const_char_pointer andMask);
+  virtual void move(const ::i32_rectangle &  rectangleTarget, const ::i32 srcX, const ::i32 srcY);
   virtual bool cmpFrom(const ::i32_rectangle &  rectangleTarget, const ::innate_subsystem::Framebuffer *pframebufferSource,
-                       const int srcX, const int srcY);
+                       const ::i32 srcX, const ::i32 srcY);
 
   virtual inline ::i32_size getDimension() const;
 
@@ -70,16 +70,16 @@ public:
   // got from a compatible window on object creation. This function can be call many times.
   void setTargetDC(HDC targetDC);
 
-  virtual unsigned char getBitsPerPixel() const;
+  virtual ::u8 getBitsPerPixel() const;
 
-  virtual unsigned char getBytesPerPixel() const;
+  virtual ::u8 getBytesPerPixel() const;
 
   virtual inline void *getBuffer() const;
 
-  virtual void *getBufferPtr(int x, int y) const;
+  virtual void *getBufferPtr(::i32 x, ::i32 y) const;
 
-  virtual inline int getBufferSize() const;
-  virtual inline int getBytesPerRow() const;
+  virtual inline ::i32 getBufferSize() const;
+  virtual inline ::i32 getBytesPerRow() const;
 
   // This function copies a block of bits from a source DC (that has been used to create the
   // DIB section) to the DIB section.

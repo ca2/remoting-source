@@ -35,7 +35,7 @@
 
 typedef struct
 {
-  int index;
+  ::i32 index;
   ::lparam tag;
    ::pointer < particle > m_pparticle;
 } ListViewItem;
@@ -55,45 +55,45 @@ public:
   // Adds new column to ::list_base view
   //
 
-  void addColumn(int index, const ::scoped_string & scopedstrCaption, int width, int fmt);
-  void addColumn(int index, const ::scoped_string & scopedstrCaption, int width);
+  void addColumn(::i32 index, const ::scoped_string & scopedstrCaption, ::i32 width, ::i32 fmt);
+  void addColumn(::i32 index, const ::scoped_string & scopedstrCaption, ::i32 width);
 
   //
   // Returns ::list_base view item structure with specified index
   //
 
-  ListViewItem getItem(int index);
+  ListViewItem getItem(::i32 index);
 
   //
   // Returns ::list_base view items count
   //
 
-  int getCount() { return ListView_GetItemCount(m_hwnd); }
+  ::i32 getCount() { return ListView_GetItemCount(m_hwnd); }
 
   //
   // Inserts new item to ::list_base view with specified index and caption
   //
 
-  void addItem(int index, const ::scoped_string & scopedstrCaption);
+  void addItem(::i32 index, const ::scoped_string & scopedstrCaption);
 
   //
   // Inserts new item to ::list_base view with specified index, caption
   // and user data(tag)
   //
 
-  void addItem(int index, const ::scoped_string & scopedstrCaption, ::lparam tag);
+  void addItem(::i32 index, const ::scoped_string & scopedstrCaption, ::lparam tag);
 
   //
   // Inserts new item to ::list_base view
   //
 
-  void addItem(int index, const ::scoped_string & scopedstrCaption, ::lparam tag, int imageIndex);
+  void addItem(::i32 index, const ::scoped_string & scopedstrCaption, ::lparam tag, ::i32 imageIndex);
 
   //
   // Removes item with specified index from ::list_base view
   //
 
-  void eraseItem(int i);
+  void eraseItem(::i32 i);
 
   //
   // Removes all ::list_base view items from ::list_base view
@@ -105,19 +105,19 @@ public:
   // Changes text of ::list_base view item subitem
   //
 
-  void setSubItemText(int index, int subIndex, const ::scoped_string & scopedstrCaption);
+  void setSubItemText(::i32 index, ::i32 subIndex, const ::scoped_string & scopedstrCaption);
 
   //
   // Changes user data (tag) of ::list_base view item with specified index
   //
 
-  void setItemData(int index, ::lparam tag);
+  void setItemData(::i32 index, ::lparam tag);
 
   //
   // Returns user data of ::list_base view item with specified index
   //
 
-  ::lparam getItemData(int index);
+  ::lparam getItemData(::i32 index);
 
   //
   // Returns first selected ::list_base view item 
@@ -129,13 +129,13 @@ public:
   // Returns index of first selected ::list_base view item
   //
 
-  int getSelectedIndex();
+  ::i32 getSelectedIndex();
 
   //
   // Selectes ::list_base view item with specified index
   //
 
-  void selectItem(int index);
+  void selectItem(::i32 index);
 
   //
   // Changes full row select style of ::list_base view
@@ -153,7 +153,7 @@ public:
   // Returns count of selected items in ::list_base view
   //
 
-  unsigned int getSelectedItemsCount();
+  ::u32 getSelectedItemsCount();
 
   //
   // Sets selected ::list_base view index to output indexes array
@@ -178,7 +178,7 @@ public:
   //
   // For example, you need to call this method, if user changed parameters of sorting.
   //
-  void sort(int columnIndex, PFNLVCOMPARE compareItem);
+  void sort(::i32 columnIndex, PFNLVCOMPARE compareItem);
 
   //
   // This method sort ::list_base of item by column m_sortColumIndex.
@@ -195,7 +195,7 @@ private:
   // Is ::list_base view not sorted, then m_sortClumnIndex is negative,
   // else him contained index of column.
   //
-  int m_sortColumnIndex;
+  ::i32 m_sortColumnIndex;
 
   //
   // This pointer to compareFunction. By default is 0.

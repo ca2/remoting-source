@@ -40,7 +40,7 @@ public:
   // function calling.
   // @param hRead is a read handle getting by the CreatePipe()
   // function calling but is not the same as for hWrite.
-  AnonymousPipe(HANDLE hWrite, HANDLE hRead, unsigned int maxPortionSize, ::subsystem::LogWriter * plogwriter);
+  AnonymousPipe(HANDLE hWrite, HANDLE hRead, ::u32 maxPortionSize, ::subsystem::LogWriter * plogwriter);
   virtual ~AnonymousPipe();
 
   /**
@@ -87,7 +87,7 @@ public:
   void assignHandlesFor(HANDLE hTargetProc, bool neededToClose,
                         bool keepCloseRight = false);
 
-  void setTimeOut(unsigned int timeOut);
+  void setTimeOut(::u32 timeOut);
 
 private:
   void checkPipeHandle(HANDLE handle);
@@ -95,7 +95,7 @@ private:
   HANDLE m_hWrite;
   HANDLE m_hRead;
   bool m_neededToClose;
-  unsigned int m_iTimeout;
+  ::u32 m_iTimeout;
 
   lockable_critical_section m_hPipeMutex;
   ::happening m_readEvent;

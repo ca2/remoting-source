@@ -27,7 +27,7 @@
 
 namespace remoting
 {
-   RfbSetEncodingsClientMessage::RfbSetEncodingsClientMessage(const ::array_base<int> & encodings)
+   RfbSetEncodingsClientMessage::RfbSetEncodingsClientMessage(const ::array_base<::i32> & encodings)
    {
       m_encodings = encodings;
    }
@@ -43,9 +43,9 @@ namespace remoting
       output->writeUInt8(0); // padding 1 byte
 
       // output count of encoding and out code of all encodings
-      output->writeUInt16(static_cast<unsigned short>(m_encodings.size()));
+      output->writeUInt16(static_cast<::u16>(m_encodings.size()));
 
-      for (::array_base<int>::iterator i = m_encodings.begin();
+      for (::array_base<::i32>::iterator i = m_encodings.begin();
            i != m_encodings.end();
            i++) {
          output->writeInt32(*i);

@@ -32,26 +32,26 @@ class PortMapping
 {
 public:
   PortMapping();
-  PortMapping(int nport, PortMappingRect nrect);
+  PortMapping(::i32 nport, PortMappingRect nrect);
   PortMapping(const PortMapping &other);
   virtual ~PortMapping();
 
   PortMapping &operator=(const PortMapping &other);
   bool isEqualTo(const PortMapping *other) const;
 
-  void setPort(int nport);
+  void setPort(::i32 nport);
   void setRect(PortMappingRect nrect);
 
-  int getPort() const;
+  ::i32 getPort() const;
   PortMappingRect getRect() const;
 
   void toString(::string & string) const;
 
 public:
-  static bool parse(const char * psz,  PortMapping *mapping);
+  static bool parse(const_char_pointer psz,  PortMapping *mapping);
 
 protected:
-  int m_port;
+  ::i32 m_port;
 
   PortMappingRect m_rect;
 };

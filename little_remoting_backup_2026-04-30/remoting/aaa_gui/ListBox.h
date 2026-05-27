@@ -36,19 +36,19 @@ public:
 public:
   void addString(const ::scoped_string & scopedstrStr);
   void addString(const ::scoped_string & scopedstrStr, void *tag);
-  ::string getItemText(int index);
-  void setItemText(int index, const ::scoped_string & scopedstrStr);
-  void insertString(int index, const ::scoped_string & scopedstrStr);
-  void insertString(int index, const ::scoped_string & scopedstrStr, ::lparam data);
+  ::string getItemText(::i32 index);
+  void setItemText(::i32 index, const ::scoped_string & scopedstrStr);
+  void insertString(::i32 index, const ::scoped_string & scopedstrStr);
+  void insertString(::i32 index, const ::scoped_string & scopedstrStr, ::lparam data);
   void appendString(const ::scoped_string & scopedstrStr, ::lparam data);
-  void setItemData(int index, ::lparam data);
-  void removeString(int index);
-  int getSelectedIndex();
-  int getTopIndex();
-  void setTopIndex(int index);
-  void setSelectedIndex(int index);
-  ::lparam getItemData(int index);
-  int getCount();
+  void setItemData(::i32 index, ::lparam data);
+  void removeString(::i32 index);
+  ::i32 getSelectedIndex();
+  ::i32 getTopIndex();
+  void setTopIndex(::i32 index);
+  void setSelectedIndex(::i32 index);
+  ::lparam getItemData(::i32 index);
+  ::i32 getCount();
   void clear();
 };
 

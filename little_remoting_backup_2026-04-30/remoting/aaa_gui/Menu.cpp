@@ -82,42 +82,42 @@ void Menu::createPopupMenu()
   m_bCreated = true;
 }
 
-int Menu::getMenuItemCount()
+::i32 Menu::getMenuItemCount()
 {
   _ASSERT(m_menu != 0);
 
   return GetMenuItemCount(m_menu);
 }
 
-bool Menu::appendMenu(unsigned int uFlags, UINT_PTR uIDNewItem, const ::scoped_string & scopedstrNewItem)
+bool Menu::appendMenu(::u32 uFlags, UINT_PTR uIDNewItem, const ::scoped_string & scopedstrNewItem)
 {
   _ASSERT(m_menu != 0);
 
   return !!AppendMenu(m_menu, uFlags, uIDNewItem, ::wstring(scopedstrNewItem).c_str());
 }
 
-bool Menu::insertMenuItem(unsigned int uItem, bool fByPosition, LPCMENUITEMINFO lpmii)
+bool Menu::insertMenuItem(::u32 uItem, bool fByPosition, LPCMENUITEMINFO lpmii)
 {
   _ASSERT(m_menu != 0);
 
   return !!InsertMenuItem(m_menu, uItem, fByPosition, lpmii);
 }
 
-bool Menu::modifyMenu(unsigned int uPosition, unsigned int uFlags, LONG_PTR uIDNewItem, LPCTSTR lpNewItem)
+bool Menu::modifyMenu(::u32 uPosition, ::u32 uFlags, LONG_PTR uIDNewItem, LPCTSTR lpNewItem)
 {
   _ASSERT(m_menu != 0);
 
   return !!ModifyMenu(m_menu, uPosition, uFlags, uIDNewItem, lpNewItem);
 }
 
-bool Menu::deleteMenu(unsigned int uPosition)
+bool Menu::deleteMenu(::u32 uPosition)
 {
   _ASSERT(m_menu != 0);
 
   return !!DeleteMenu(m_menu, uPosition, MF_BYPOSITION);
 }
 
-bool Menu::getSubMenu(int nPos, Menu *menu)
+bool Menu::getSubMenu(::i32 nPos, Menu *menu)
 {
   HMENU tmenu;
 
@@ -129,14 +129,14 @@ bool Menu::getSubMenu(int nPos, Menu *menu)
   return (!tmenu?false:true);
 }
 
-bool Menu::enableMenuItem(unsigned int uID, unsigned int uEnable)
+bool Menu::enableMenuItem(::u32 uID, ::u32 uEnable)
 {
   _ASSERT(m_menu != 0);
 
   return !!EnableMenuItem(m_menu, uID, uEnable);
 }
 
-bool Menu::setMenuItem(unsigned int uItem, bool fByPosition, LPMENUITEMINFO lpmii)
+bool Menu::setMenuItem(::u32 uItem, bool fByPosition, LPMENUITEMINFO lpmii)
 {
   _ASSERT(m_menu != 0);
 
@@ -159,11 +159,11 @@ Menu::~Menu()
   }
 }
 
-int Menu::findMenuItem(unsigned int uID)
+::i32 Menu::findMenuItem(::u32 uID)
 {
   _ASSERT(m_menu != 0);
 
-  for (int i = 0; i < getMenuItemCount(); i++) {
+  for (::i32 i = 0; i < getMenuItemCount(); i++) {
     if (GetMenuItemID(m_menu, i) == uID) {
       return i;
     }
@@ -171,7 +171,7 @@ int Menu::findMenuItem(unsigned int uID)
   return -1;
 }
 
-bool Menu::appendMenu(const ::scoped_string & scopedstrData, unsigned int uID)
+bool Menu::appendMenu(const ::scoped_string & scopedstrData, ::u32 uID)
 {
   return appendMenu(MF_STRING, uID, scopedstrData);
 }
@@ -186,7 +186,7 @@ bool Menu::appendSubMenu(const ::scoped_string & scopedstrData, Menu *pMenu)
   return appendMenu(MF_POPUP, (UINT_PTR)pMenu->getMenu(), scopedstrData);
 }
 
-bool Menu::insertMenuItem(unsigned int uItem, const ::scoped_string & scopedstrData, unsigned int uID)
+bool Menu::insertMenuItem(::u32 uItem, const ::scoped_string & scopedstrData, ::u32 uID)
 {
   MENUITEMINFO mii;
 
@@ -201,7 +201,7 @@ bool Menu::insertMenuItem(unsigned int uItem, const ::scoped_string & scopedstrD
   return insertMenuItem(uItem, true, (LPMENUITEMINFO)&mii);
 }
 
-bool Menu::insertCheckMenuItem(unsigned int uItem, const ::scoped_string & scopedstrData, unsigned int uID)
+bool Menu::insertCheckMenuItem(::u32 uItem, const ::scoped_string & scopedstrData, ::u32 uID)
 {
   MENUITEMINFO mii;
 ::wstring wstrData(scopedstrData);
@@ -214,20 +214,20 @@ bool Menu::insertCheckMenuItem(unsigned int uItem, const ::scoped_string & scope
   return insertMenuItem(uItem, true, (LPMENUITEMINFO)&mii);
 }
 
-bool Menu::checkedMenuItem(unsigned int uID, bool bEnable)
+bool Menu::checkedMenuItem(::u32 uID, bool bEnable)
 {
   _ASSERT(m_menu != 0);
 
-  int pos = findMenuItem(uID);
+  ::i32 pos = findMenuItem(uID);
   if (pos == -1) {
     return false;
   }
-  unsigned int command = bEnable ? MF_CHECKED : MF_UNCHECKED;
+  ::u32 command = bEnable ? MF_CHECKED : MF_UNCHECKED;
   DWORD res = CheckMenuItem(m_menu, pos, MF_BYPOSITION | command);
   return (res == -1) ? false : true;
 }
 
-bool Menu::insertSeparator(unsigned int uItem)
+bool Menu::insertSeparator(::u32 uItem)
 {
   MENUITEMINFO mii;
 
@@ -237,7 +237,7 @@ bool Menu::insertSeparator(unsigned int uItem)
   return insertMenuItem(uItem, true, (LPMENUITEMINFO)&mii);
 }
 
-bool Menu::insertSubMenu(unsigned int uItem, const ::scoped_string & scopedstrData, Menu *pMenu)
+bool Menu::insertSubMenu(::u32 uItem, const ::scoped_string & scopedstrData, Menu *pMenu)
 {
   MENUITEMINFO mii;
 
@@ -248,7 +248,7 @@ bool Menu::insertSubMenu(unsigned int uItem, const ::scoped_string & scopedstrDa
   return insertMenuItem(uItem, true, (LPMENUITEMINFO)&mii);
 }
 
-bool Menu::setDefaultItem(unsigned int uID)
+bool Menu::setDefaultItem(::u32 uID)
 {
   _ASSERT(m_menu != 0);
 

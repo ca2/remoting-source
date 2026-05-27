@@ -40,30 +40,30 @@ void ListBox::addString(const ::scoped_string & scopedstrStr)
 void ListBox::addString(const ::scoped_string & scopedstrStr, void *tag)
 {
   LRESULT lresult = SendMessage(m_hwnd, LB_ADDSTRING, 0, (::lparam)::wstring(scopedstrStr).c_str());
-  int i = (int)lresult;
+  ::i32 i = (::i32)lresult;
   _ASSERT(i == lresult);
   setItemData(i, (::lparam)tag);
 }
 
-void ListBox::removeString(int index)
+void ListBox::removeString(::i32 index)
 {
-  int top = getTopIndex();
+  ::i32 top = getTopIndex();
   SendMessage(m_hwnd, LB_DELETESTRING, index, NULL);
   setTopIndex(top);
 }
 
-int ListBox::getTopIndex()
+::i32 ListBox::getTopIndex()
 {
-  return (int)SendMessage(m_hwnd, LB_GETTOPINDEX, NULL, NULL);
+  return (::i32)SendMessage(m_hwnd, LB_GETTOPINDEX, NULL, NULL);
 }
 
-void ListBox::setTopIndex(int index)
+void ListBox::setTopIndex(::i32 index)
 {
   SendMessage(m_hwnd, LB_SETTOPINDEX, index, NULL);
 }
 
 
-::string ListBox::getItemText(int index)
+::string ListBox::getItemText(::i32 index)
 {
   size_t length = SendMessage(m_hwnd, LB_GETTEXTLEN, index, NULL);
   _ASSERT(length <= 65536);
@@ -72,12 +72,12 @@ void ListBox::setTopIndex(int index)
   return buffer.data();
 }
 
-void ListBox::setItemText(int index, const ::scoped_string & scopedstrStr)
+void ListBox::setItemText(::i32 index, const ::scoped_string & scopedstrStr)
 {
-  int si = getSelectedIndex();
-  int top = getTopIndex();
+  ::i32 si = getSelectedIndex();
+  ::i32 top = getTopIndex();
   LRESULT lresult = SendMessage(m_hwnd, LB_GETTOPINDEX, NULL, NULL);
-  unsigned int topIndex = (unsigned int)lresult;
+  ::u32 topIndex = (::u32)lresult;
   _ASSERT(topIndex == lresult);
   ::lparam data = getItemData(index);
   removeString(index);
@@ -91,38 +91,38 @@ void ListBox::setItemText(int index, const ::scoped_string & scopedstrStr)
 void ListBox::appendString(const ::scoped_string & scopedstrStr, ::lparam data)
 {
   LRESULT lresult = SendMessage(m_hwnd, LB_ADDSTRING, 0, (::lparam)::wstring(scopedstrStr).c_str());
-  int index = (int)lresult;
+  ::i32 index = (::i32)lresult;
   _ASSERT(index == lresult);
   setItemData(index, data);
 }
 
-void ListBox::insertString(int index, const ::scoped_string & scopedstrStr)
+void ListBox::insertString(::i32 index, const ::scoped_string & scopedstrStr)
 {
   SendMessage(m_hwnd, LB_INSERTSTRING, index, (::lparam)::wstring(scopedstrStr).c_str());
 }
 
-void ListBox::insertString(int index, const ::scoped_string & scopedstrStr, ::lparam data)
+void ListBox::insertString(::i32 index, const ::scoped_string & scopedstrStr, ::lparam data)
 {
   LRESULT lresult = SendMessage(m_hwnd, LB_INSERTSTRING, index, (::lparam)::wstring(scopedstrStr).c_str());
-  int i = (int)lresult;
+  ::i32 i = (::i32)lresult;
   _ASSERT(i == lresult);
   setItemData(i, data);
 }
 
-void ListBox::setItemData(int index, ::lparam data)
+void ListBox::setItemData(::i32 index, ::lparam data)
 {
   SendMessage(m_hwnd, LB_SETITEMDATA, index, data);
 }
 
-::lparam ListBox::getItemData(int index)
+::lparam ListBox::getItemData(::i32 index)
 {
   return SendMessage(m_hwnd, LB_GETITEMDATA, index, NULL);
 }
 
-int ListBox::getCount()
+::i32 ListBox::getCount()
 {
   LRESULT lresult = SendMessage(m_hwnd, LB_GETCOUNT, NULL, NULL);
-  int result = (int)lresult;
+  ::i32 result = (::i32)lresult;
   _ASSERT(result == lresult);
   return result;
 }
@@ -132,15 +132,15 @@ void ListBox::clear()
   SendMessage(m_hwnd, LB_RESETCONTENT, NULL, NULL);
 }
 
-int ListBox::getSelectedIndex()
+::i32 ListBox::getSelectedIndex()
 {
   LRESULT lresult = SendMessage(m_hwnd, LB_GETCURSEL, NULL, NULL);
-  int index = (int)lresult;
+  ::i32 index = (::i32)lresult;
   _ASSERT(index == lresult);
   return (index == LB_ERR) ? -1 : index;
 }
 
-void ListBox::setSelectedIndex(int index)
+void ListBox::setSelectedIndex(::i32 index)
 {
   SendMessage(m_hwnd, LB_SETCURSEL, index, NULL);
 }

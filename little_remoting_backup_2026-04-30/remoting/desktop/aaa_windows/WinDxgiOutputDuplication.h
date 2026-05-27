@@ -61,7 +61,7 @@ namespace remoting
 
       // Throws WinDxException on an error.
       // Modifies cursorShape with new data.
-      void getFrameCursorShape(CursorShape *cursorShape, unsigned int pointerShapeBufferSize,
+      void getFrameCursorShape(CursorShape *cursorShape, ::u32 pointerShapeBufferSize,
                                ::subsystem::LogWriter * plogwriter);
 
    private:

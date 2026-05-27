@@ -97,7 +97,7 @@ namespace remoting_control_desktop
          throw CommandLineFormatException();
       }
 
-      if (hasConfigServiceFlag() && ((int)m_foundKeys.size() > (optionSpecified(DONT_ELEVATE) ? 2 : 1))) {
+      if (hasConfigServiceFlag() && ((::i32)m_foundKeys.size() > (optionSpecified(DONT_ELEVATE) ? 2 : 1))) {
          throw CommandLineFormatException();
       }
 
@@ -267,7 +267,7 @@ namespace remoting_control_desktop
       return optionSpecified(SHARE_APP);
    }
 
-   unsigned char ControlCommandLine::getShareDisplayNumber()
+   ::u8 ControlCommandLine::getShareDisplayNumber()
    {
       return m_displayNumber;
    }

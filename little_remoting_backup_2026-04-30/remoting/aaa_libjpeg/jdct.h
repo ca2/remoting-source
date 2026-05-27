@@ -17,7 +17,7 @@
 /*
  * A forward DCT routine is given a pointer to an input sample array and
  * a pointer to a work area of type DCTELEM[]; the DCT is to be performed
- * in-place in that buffer.  Type DCTELEM is int for 8-bit samples, int
+ * in-place in that buffer.  Type DCTELEM is ::i32 for 8-bit samples, ::i32
  * for 12-bit samples.  (NOTE: Floating-point DCT implementations use an
  * array of type FAST_FLOAT, instead.)
  * The input data is to be fetched from the sample array starting at a
@@ -33,15 +33,15 @@
  */
 
 #if BITS_IN_JSAMPLE == 8
-typedef int DCTELEM;		/* 16 or 32 bits is fine */
+typedef ::i32 DCTELEM;		/* 16 or 32 bits is fine */
 #else
-typedef int DCTELEM;		/* must have 32 bits */
+typedef ::i32 DCTELEM;		/* must have 32 bits */
 #endif
 
 typedef JMETHOD(void, forward_DCT_method_ptr, (DCTELEM * data,
 					       JSAMPARRAY sample_data,
 					       JDIMENSION start_col));
-typedef JMETHOD(void, float_DCT_method_ptr, (FAST_FLOAT * data,
+typedef JMETHOD(void, f32_DCT_method_ptr, (FAST_FLOAT * data,
 					     JSAMPARRAY sample_data,
 					     JDIMENSION start_col));
 
@@ -63,12 +63,12 @@ typedef JMETHOD(void, float_DCT_method_ptr, (FAST_FLOAT * data,
  * Each IDCT routine has its own ideas about the best dct_table element type.
  */
 
-typedef MULTIPLIER ISLOW_MULT_TYPE; /* short or int, whichever is faster */
+typedef MULTIPLIER ISLOW_MULT_TYPE; /* ::i16 or ::i32, whichever is faster */
 #if BITS_IN_JSAMPLE == 8
-typedef MULTIPLIER IFAST_MULT_TYPE; /* 16 bits is OK, use short if faster */
+typedef MULTIPLIER IFAST_MULT_TYPE; /* 16 bits is OK, use ::i16 if faster */
 #define IFAST_SCALE_BITS  2	/* fractional bits in scale factors */
 #else
-typedef int IFAST_MULT_TYPE;	/* need 32 bits for scaled quantizers */
+typedef ::i32 IFAST_MULT_TYPE;	/* need 32 bits for scaled quantizers */
 #define IFAST_SCALE_BITS  13	/* fractional bits in scale factors */
 #endif
 typedef FAST_FLOAT FLOAT_MULT_TYPE; /* preferred floating type */
@@ -76,7 +76,7 @@ typedef FAST_FLOAT FLOAT_MULT_TYPE; /* preferred floating type */
 
 /*
  * Each IDCT routine is responsible for range-limiting its results and
- * converting them to unsigned form (0..MAXJSAMPLE).  The raw outputs could
+ * converting them to ::u32 form (0..MAXJSAMPLE).  The raw outputs could
  * be quite far out of range if the input data is corrupt, so a bulletproof
  * range-limiting step is required.  We use a mask-and-table-lookup method
  * to do the combined operations quickly, assuming that RANGE_CENTER
@@ -342,13 +342,13 @@ EXTERN(void) jpeg_idct_1x2
  * Macros for handling fixed-point arithmetic; these are used by many
  * but not all of the DCT/IDCT modules.
  *
- * All values are expected to be of type int.
+ * All values are expected to be of type ::i32.
  * Fractional constants are scaled left by CONST_BITS bits.
  * CONST_BITS is defined within each module using these macros,
  * and may differ from one module to the next.
  */
 
-#define ONE	((int) 1)
+#define ONE	((::i32) 1)
 #define CONST_SCALE (ONE << CONST_BITS)
 
 /* Convert a positive real constant to an integer scaled by CONST_SCALE.
@@ -356,9 +356,9 @@ EXTERN(void) jpeg_idct_1x2
  * thus causing a lot of useless floating-point operations at run time.
  */
 
-#define FIX(x)	((int) ((x) * CONST_SCALE + 0.5))
+#define FIX(x)	((::i32) ((x) * CONST_SCALE + 0.5))
 
-/* Multiply an int variable by an int constant to yield an int result.
+/* Multiply an ::i32 variable by an ::i32 constant to yield an ::i32 result.
  * This macro is used only when the two inputs will actually be no more than
  * 16 bits wide, so that a 16x16->32 bit multiply can be used instead of a
  * full 32x32 multiply.  This provides a useful speedup on many machines.
@@ -367,11 +367,11 @@ EXTERN(void) jpeg_idct_1x2
  * correct combination of casts.
  */
 
-#ifdef SHORTxSHORT_32		/* may work if 'int' is 32 bits */
-#define MULTIPLY16C16(var,const)  (((short) (var)) * ((short) (const)))
+#ifdef SHORTxSHORT_32		/* may work if '::i32' is 32 bits */
+#define MULTIPLY16C16(var,const)  (((::i16) (var)) * ((::i16) (const)))
 #endif
 #ifdef SHORTxLCONST_32		/* known to work with Microsoft C 6.0 */
-#define MULTIPLY16C16(var,const)  (((short) (var)) * ((int) (const)))
+#define MULTIPLY16C16(var,const)  (((::i16) (var)) * ((::i32) (const)))
 #endif
 
 #ifndef MULTIPLY16C16		/* default definition */
@@ -380,8 +380,8 @@ EXTERN(void) jpeg_idct_1x2
 
 /* Same except both inputs are variables. */
 
-#ifdef SHORTxSHORT_32		/* may work if 'int' is 32 bits */
-#define MULTIPLY16V16(var1,var2)  (((short) (var1)) * ((short) (var2)))
+#ifdef SHORTxSHORT_32		/* may work if '::i32' is 32 bits */
+#define MULTIPLY16V16(var1,var2)  (((::i16) (var1)) * ((::i16) (var2)))
 #endif
 
 #ifndef MULTIPLY16V16		/* default definition */
@@ -389,7 +389,7 @@ EXTERN(void) jpeg_idct_1x2
 #endif
 
 /* Like RIGHT_SHIFT, but applies to a DCTELEM.
- * We assume that int right shift is unsigned if int right shift is.
+ * We assume that ::i32 right shift is ::u32 if ::i32 right shift is.
  */
 
 #ifdef RIGHT_SHIFT_IS_UNSIGNED

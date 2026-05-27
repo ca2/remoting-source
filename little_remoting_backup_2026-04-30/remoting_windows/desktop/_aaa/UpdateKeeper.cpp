@@ -28,9 +28,9 @@ namespace remoting_windows
 {
 
 
-   ::remoting::UpdateKeeper::::remoting::UpdateKeeper() {}
+   ::remoting::UpdateKeeper::remoting::UpdateKeeper() {}
 
-   ::remoting::UpdateKeeper::::remoting::UpdateKeeper(const ::i32_rectangle &borderRect) { m_rectangleBorder.set(borderRect); }
+   ::remoting::UpdateKeeper::remoting::UpdateKeeper(const ::i32_rectangle &borderRect) { m_rectangleBorder.set(borderRect); }
 
    ::remoting::UpdateKeeper::~::remoting::UpdateKeeper(void) {}
 

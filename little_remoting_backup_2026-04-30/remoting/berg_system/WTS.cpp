@@ -436,7 +436,7 @@ HANDLE WindowsSubsystem().WTS().duplicateUserImpersonationToken(HANDLE token, DW
     return name;
   }
 
-  unsigned char* data = new unsigned char[tokenSize];
+  ::u8* data = new ::u8[tokenSize];
   GetTokenInformation(token, TokenUser, data, tokenSize, &tokenSize); // 3- GetTokenInformation
   TOKEN_USER* pUser = (TOKEN_USER*)data;
   PSID pSID = pUser->User.Sid;

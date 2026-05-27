@@ -85,9 +85,9 @@ namespace remoting
          croppedRect = rectangleFramebuffer;
       }
 
-      char *dstPtr = (char *)m_pframebuffer->getBufferPtr(croppedRect.left, croppedRect.top);
-      size_t offset = dstPtr - (char *)m_pframebuffer->getBuffer();
-      char *srcPtr = (char *)m_pmirrordriverclient->getBuffer();
+      char_pointer dstPtr = (char_pointer )m_pframebuffer->getBufferPtr(croppedRect.left, croppedRect.top);
+      size_t offset = dstPtr - (char_pointer )m_pframebuffer->getBuffer();
+      char_pointer srcPtr = (char_pointer )m_pmirrordriverclient->getBuffer();
       if (srcPtr == 0)
       {
          return false;
@@ -152,7 +152,7 @@ namespace remoting
    {
       Region m_regionChanged;
       ::i32_rectangle rectangleChanged;
-      unsigned long currentCounter = 0;
+      ulong currentCounter = 0;
 
       while (!isTerminating())
       {
@@ -166,7 +166,7 @@ namespace remoting
                if (changesBuf != 0)
                {
                   currentCounter = changesBuf->counter;
-                  for (unsigned long i = m_lastCounter; i != currentCounter; i++, i %= MAXCHANGES_BUF)
+                  for (ulong i = m_lastCounter; i != currentCounter; i++, i %= MAXCHANGES_BUF)
                   {
                      rectangleChanged.fromWindowsRect(&changesBuf->pointrect[i].rectangle);
                      if (rectangleChanged.isValid())

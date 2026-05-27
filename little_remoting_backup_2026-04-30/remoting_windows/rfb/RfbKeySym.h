@@ -41,11 +41,11 @@ namespace remoting
       virtual ~RfbKeySym();
 
       // This function doesn't distinguish between left and right modifiers.
-      void sendModifier(unsigned char virtKey, bool down);
+      void sendModifier(::u8 virtKey, bool down);
 
-      void processKeyEvent(unsigned short virtKey, ::u32 addKeyData);
-      bool vkCodeToString(unsigned short virtKey, bool isKeyDown, ::wstring *res);
-      void processCharEvent(int charCode, ::u32 addKeyData);
+      void processKeyEvent(::u16 virtKey, ::u32 addKeyData);
+      bool vkCodeToString(::u16 virtKey, bool isKeyDown, ::wstring *res);
+      void processCharEvent(::i32 charCode, ::u32 addKeyData);
       // Checks a new modifiers state after focus restoration and sends difference
       void processFocusRestoration();
       // This function release all modifiers unconditionally.
@@ -64,11 +64,11 @@ namespace remoting
       // by taking into account the isRightHint flag.
       // If virtKey is not a modifier, the function returns virtKey value without
       // changing.
-      unsigned char distinguishLeftRightModifier(unsigned char virtKey,
+      ::u8 distinguishLeftRightModifier(::u8 virtKey,
                                                  bool isRightHint);
 
       // Checks virtKey state with the server side state and sends difference
-      void checkAndSendDiff(unsigned char virtKey, unsigned char state);
+      void checkAndSendDiff(::u8 virtKey, ::u8 state);
 
       // Send one key event (Alt translated to Meta if Scroll Lock is on).
       virtual void sendKeySymEvent(::u32 rfbKeySym, bool down);
@@ -77,17 +77,17 @@ namespace remoting
       virtual void sendVerbatimKeySymEvent(::u32 rfbKeySym, bool down);
 
       // helper functions
-      //int GettingCharFromCtrlSymbol(int ctrlSymbol);
+      //::i32 GettingCharFromCtrlSymbol(::i32 ctrlSymbol);
       // E.g if pressed Ctrl + Alt + A
-      // Try found char without modificators
+      // Try found ::i8 without modificators
       // #ifdef WINDOWS
-      //   bool TryTranslateNotPrintableToUnicode(unsigned short virtKey, HKL currentLayout, WCHAR *unicodeChar);
+      //   bool TryTranslateNotPrintableToUnicode(::u16 virtKey, HKL currentLayout, WCHAR *unicodeChar);
       //
       // #endif
       void releaseMeta();
       void restoreMeta();
-      void releaseModifier(unsigned char modifier);
-      void restoreModifier(unsigned char modifier);
+      void releaseModifier(::u8 modifier);
+      void restoreModifier(::u8 modifier);
       void releaseModifiers();
       void restoreModifiers();
 

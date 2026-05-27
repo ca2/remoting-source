@@ -37,6 +37,6 @@ namespace remoting
                         const ::scoped_string & password);
 
       // TODO: removed duplicate code: ::remoting_node::ServerConfig.h
-      static const int VNC_PASSWORD_SIZE = 8;
+      static const ::i32 VNC_PASSWORD_SIZE = 8;
    };
 } // namespace remoting

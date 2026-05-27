@@ -57,11 +57,11 @@ void CurrentConsoleProcess::start()
 
   m_plogwriter->debug("sti: cb = {}, hStdError = %p, hStdInput = %p,"
              " hStdOutput = %p, dwFlags = %u",
-             (unsigned int)sti.cb,
+             (::u32)sti.cb,
              (void *)sti.hStdError,
              (void *)sti.hStdInput,
              (void *)sti.hStdOutput,
-             (unsigned int)sti.dwFlags);
+             (::u32)sti.dwFlags);
 
   try {
     HANDLE userToken = WindowsSubsystem().WTS().duplicateCurrentProcessUserToken(m_connectRdpSession, m_plogwriter);
@@ -71,7 +71,7 @@ void CurrentConsoleProcess::start()
     m_plogwriter->debug("Try CreateProcessAsUser({} 0, {}, 0, 0, {}, NORMAL_PRIORITY_CLASS, 0, 0,"
                " sti, pi)",
                (void *)userToken, commandLine,
-               (int)m_handlesIsInherited);
+               (::i32)m_handlesIsInherited);
     if (CreateProcessAsUser(userToken, 0, (LPTSTR)::wstring(commandLine).c_str(),
       0, 0, m_handlesIsInherited, NORMAL_PRIORITY_CLASS, 0, 0, &sti,
       &pi) == 0) {

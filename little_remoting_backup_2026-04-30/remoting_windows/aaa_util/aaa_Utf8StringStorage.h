@@ -34,20 +34,20 @@
 //{
 //private:
 //
-//   ::array_base<char> m_buffer;
+//   ::array_base<::i8> m_buffer;
 //
 //public:
 //  ::string();
-//  ::string(const ::array_base<char> *utf8Buffer);
+//  ::string(const ::array_base<::i8> *utf8Buffer);
 //  ::string(const ::scoped_string & string);
 //  ::string(const ::string &string);
 //  ~::string();
 //
 //  // Sets internal buffer by an external utf8 string.
-//  void= const ::array_base<char> *utf8Buffer;
+//  void= const ::array_base<::i8> *utf8Buffer;
 //
 //  // Returns pointer to the string.
-//  const char *getString() const;
+//  const_char_pointer getString() const;
 //
 //  // Returns size of string in bytes, including terminating null character.
 //  memsize getSize() const;

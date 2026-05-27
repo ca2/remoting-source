@@ -350,7 +350,7 @@ void ::string::format(const ::scoped_string & scopedstrFormat, ...)
   va_list vl;
 
   va_start(vl, format);
-  int count = _vsctprintf(format, vl);
+  ::i32 count = _vsctprintf(format, vl);
   va_end(vl);
 
   resizeBuffer(count + 1);

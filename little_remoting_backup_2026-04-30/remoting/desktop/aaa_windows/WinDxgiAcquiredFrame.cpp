@@ -31,7 +31,7 @@ namespace remoting
 // The header including of this cpp file must be at last place to avoid build conflicts.
 #include "../WinDxgiAcquiredFrame.h"
 
-   WinDxgiAcquiredFrame::WinDxgiAcquiredFrame(WinDxgiOutputDuplication *outDupl, unsigned int timeOutMilliSec) :
+   WinDxgiAcquiredFrame::WinDxgiAcquiredFrame(WinDxgiOutputDuplication *outDupl, ::u32 timeOutMilliSec) :
        m_wasTimeOut(false), m_desktopResource(0), m_outDupl(*outDupl)
    {
       ZeroMemory(&m_frameInfo, sizeof(m_frameInfo));

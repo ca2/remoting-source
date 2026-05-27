@@ -611,7 +611,7 @@ namespace remoting_node
          ::memory ipacStringBuffer;
 
          ipacStringBuffer.set_size(maxBufSize + 1);
-         auto p = (char *)ipacStringBuffer.data();
+         auto p = (char_pointer )ipacStringBuffer.data();
          strcpy(p, storage);
          //_tcscpy_s(&ipacStringBuffer.front(), maxBufSize, storage);
          auto pch = strtok(p, ",");
@@ -698,7 +698,7 @@ namespace remoting_node
       }
       if (m_pserverconfig->hasPrimaryPassword())
       {
-         unsigned char password[::subsystem::VncPassCrypt::VNC_PASSWORD_SIZE];
+         ::u8 password[::subsystem::VncPassCrypt::VNC_PASSWORD_SIZE];
 
          m_pserverconfig->getPrimaryPassword(&password[0]);
 
@@ -713,7 +713,7 @@ namespace remoting_node
       }
       if (m_pserverconfig->hasReadOnlyPassword())
       {
-         unsigned char password[::subsystem::VncPassCrypt::VNC_PASSWORD_SIZE];
+         ::u8 password[::subsystem::VncPassCrypt::VNC_PASSWORD_SIZE];
 
          m_pserverconfig->getReadOnlyPassword(&password[0]);
 
@@ -728,7 +728,7 @@ namespace remoting_node
       }
       if (m_pserverconfig->hasControlPassword())
       {
-         unsigned char password[::subsystem::VncPassCrypt::VNC_PASSWORD_SIZE];
+         ::u8 password[::subsystem::VncPassCrypt::VNC_PASSWORD_SIZE];
 
          m_pserverconfig->getControlPassword(&password[0]);
 
@@ -935,7 +935,7 @@ namespace remoting_node
       }
 
       memsize passSize = 8;
-      unsigned char buffer[::subsystem::VncPassCrypt::VNC_PASSWORD_SIZE] = {0};
+      ::u8 buffer[::subsystem::VncPassCrypt::VNC_PASSWORD_SIZE] = {0};
 
       if (!sm->getBinaryData("Password", (void *)&buffer, &passSize))
       {
@@ -1031,7 +1031,7 @@ namespace remoting_node
       else
       {
          m_isConfigLoadedPartly = true;
-         m_pserverconfig->setIdleTimeout((int)uintVal);
+         m_pserverconfig->setIdleTimeout((::i32)uintVal);
       }
       if (!sm->getBoolean("GrabTransparentWindows", &boolVal))
       {

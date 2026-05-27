@@ -39,19 +39,19 @@
 typedef HRESULT (__stdcall *PFNCLOSETHEMEDATA)(HTHEME hTheme);
 
 typedef HRESULT (__stdcall *PFNDRAWTHEMEBACKGROUND)(HTHEME hTheme, HDC hdc,
-                                                    int iPartId, int iStateId,
+                                                    ::i32 iPartId, ::i32 iStateId,
                                                     const RECT *pRect,
                                                     const RECT *pClipRect);
 
 typedef HTHEME (__stdcall *PFNOPENTHEMEDATA)(const ::operating_system::window & operatingsystemwindow, LPCWSTR pszClassList);
 
-typedef HRESULT (__stdcall *PFNDRAWTHEMETEXT)(HTHEME hTheme, HDC hdc, int iPartId,
-                                              int iStateId, LPCWSTR pszText,
-                                              int iCharCount, DWORD dwTextFlags,
+typedef HRESULT (__stdcall *PFNDRAWTHEMETEXT)(HTHEME hTheme, HDC hdc, ::i32 iPartId,
+                                              ::i32 iStateId, LPCWSTR pszText,
+                                              ::i32 iCharCount, DWORD dwTextFlags,
                                               DWORD dwTextFlags2, const RECT *pRect);
 
 typedef HRESULT (__stdcall *PFNGETTHEMEBACKGROUNDCONTENTRECT)(HTHEME hTheme,  HDC hdc,
-                                                              int iPartId, int iStateId,
+                                                              ::i32 iPartId, ::i32 iStateId,
                                                               const RECT *pBoundingRect,
                                                               RECT *pContentRect);
 
@@ -69,19 +69,19 @@ public:
   static HRESULT CloseThemeData(HTHEME hTheme);
 
   static HRESULT DrawThemeBackground(HTHEME hTheme, HDC hdc,
-                                     int iPartId, int iStateId,
+                                     ::i32 iPartId, ::i32 iStateId,
                                      const RECT *pRect,
                                      const RECT *pClipRect);
 
   static HTHEME OpenThemeData(const ::operating_system::window & operatingsystemwindow, LPCWSTR pszClassList);
 
-  static HRESULT DrawThemeText(HTHEME hTheme, HDC hdc, int iPartId,
-                               int iStateId, LPCWSTR pszText,
-                               int iCharCount, DWORD dwTextFlags,
+  static HRESULT DrawThemeText(HTHEME hTheme, HDC hdc, ::i32 iPartId,
+                               ::i32 iStateId, LPCWSTR pszText,
+                               ::i32 iCharCount, DWORD dwTextFlags,
                                DWORD dwTextFlags2, const RECT *pRect);
 
   static HRESULT GetThemeBackgroundContentRect(HTHEME hTheme,  HDC hdc,
-                                               int iPartId, int iStateId,
+                                               ::i32 iPartId, ::i32 iStateId,
                                                const RECT *pBoundingRect,
                                                RECT *pContentRect);
 

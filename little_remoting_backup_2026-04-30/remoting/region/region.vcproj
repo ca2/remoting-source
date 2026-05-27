@@ -571,11 +571,11 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath=".\::int_size.h"
+				RelativePath=".\::i32_size.h"
 				>
 			</File>
 			<File
-				RelativePath=".\::int_point.h"
+				RelativePath=".\::i32_point.h"
 				>
 			</File>
 			<File

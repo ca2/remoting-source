@@ -32,10 +32,10 @@ namespace remoting
 
    struct _windows_input_blocker_t
    {
-      static LRESULT CALLBACK lowLevelKeyboardFilterProc(int nCode, WPARAM wParam, LPARAM lParam);
-      static LRESULT CALLBACK lowLevelSoftKeyboardFilterProc(int nCode, WPARAM wParam, LPARAM lParam);
-      static LRESULT CALLBACK lowLevelMouseFilterProc(int nCode, WPARAM wParam, LPARAM lParam);
-      static LRESULT CALLBACK lowLevelSoftMouseFilterProc(int nCode, WPARAM wParam, WPARAM lParam);
+      static LRESULT CALLBACK lowLevelKeyboardFilterProc(::i32 nCode, WPARAM wParam, LPARAM lParam);
+      static LRESULT CALLBACK lowLevelSoftKeyboardFilterProc(::i32 nCode, WPARAM wParam, LPARAM lParam);
+      static LRESULT CALLBACK lowLevelMouseFilterProc(::i32 nCode, WPARAM wParam, LPARAM lParam);
+      static LRESULT CALLBACK lowLevelSoftMouseFilterProc(::i32 nCode, WPARAM wParam, WPARAM lParam);
 
       HHOOK m_hKeyboardHook = nullptr;
       HHOOK m_hSoftKeyboardHook = nullptr;
@@ -54,7 +54,7 @@ namespace remoting
    // HHOOK WindowsInputBlocker::m_hSoftMouseHook = 0;
 
    //class ::time WindowsInputBlocker::m_lastInputTime;
-   //unsigned int WindowsInputBlocker::m_timeInterval = INFINITE;
+   //::u32 WindowsInputBlocker::m_timeInterval = INFINITE;
    //lockable_critical_section WindowsInputBlocker::m_lastInputTimeMutex;
 
    WindowsInputBlocker *WindowsInputBlocker::s_pwindowsinputblocker = 0;
@@ -123,7 +123,7 @@ s      resume();
       PostThreadMessage(getThreadId(), 0, 0, 0);
    }
 
-   void WindowsInputBlocker::setSoftKeyboardBlocking(bool block, unsigned int timeInterval)
+   void WindowsInputBlocker::setSoftKeyboardBlocking(bool block, ::u32 timeInterval)
    {
       if (block)
       {
@@ -133,7 +133,7 @@ s      resume();
       PostThreadMessage(getThreadId(), 0, 0, 0);
    }
 
-   void WindowsInputBlocker::setSoftMouseBlocking(bool block, unsigned int timeInterval)
+   void WindowsInputBlocker::setSoftMouseBlocking(bool block, ::u32 timeInterval)
    {
       if (block)
       {
@@ -243,7 +243,7 @@ s      resume();
       return true;
    }
 
-   LRESULT CALLBACK WindowsInputBlocker::lowLevelKeyboardFilterProc(int nCode, ::wparam wParam, ::lparam lParam)
+   LRESULT CALLBACK WindowsInputBlocker::lowLevelKeyboardFilterProc(::i32 nCode, ::wparam wParam, ::lparam lParam)
    {
       if (nCode == HC_ACTION)
       {
@@ -257,7 +257,7 @@ s      resume();
       return CallNextHookEx(m_hKeyboardHook, nCode, wParam, lParam);
    }
 
-   LRESULT CALLBACK WindowsInputBlocker::lowLevelMouseFilterProc(int nCode, ::wparam wParam, ::lparam lParam)
+   LRESULT CALLBACK WindowsInputBlocker::lowLevelMouseFilterProc(::i32 nCode, ::wparam wParam, ::lparam lParam)
    {
       if (nCode == HC_ACTION)
       {
@@ -271,7 +271,7 @@ s      resume();
       return CallNextHookEx(m_hMouseHook, nCode, wParam, lParam);
    }
 
-   LRESULT CALLBACK WindowsInputBlocker::lowLevelSoftKeyboardFilterProc(int nCode, ::wparam wParam, ::lparam lParam)
+   LRESULT CALLBACK WindowsInputBlocker::lowLevelSoftKeyboardFilterProc(::i32 nCode, ::wparam wParam, ::lparam lParam)
    {
       if (nCode == HC_ACTION)
       {
@@ -285,7 +285,7 @@ s      resume();
       return CallNextHookEx(m_hSoftKeyboardHook, nCode, wParam, lParam);
    }
 
-   LRESULT CALLBACK WindowsInputBlocker::lowLevelSoftMouseFilterProc(int nCode, ::wparam wParam, ::lparam lParam)
+   LRESULT CALLBACK WindowsInputBlocker::lowLevelSoftMouseFilterProc(::i32 nCode, ::wparam wParam, ::lparam lParam)
    {
       if (nCode == HC_ACTION)
       {

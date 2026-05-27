@@ -27,11 +27,11 @@
 
 namespace remoting
 {
-   ::remoting::RfbInputGate::::remoting::RfbInputGate(Channel *stream)
+   ::remoting::RfbInputGate::remoting::RfbInputGate(Channel *stream)
    : DataInputStream(stream)
    {
    }
-   ::remoting::RfbInputGate::::remoting::RfbInputGate(InputStream *stream)
+   ::remoting::RfbInputGate::remoting::RfbInputGate(InputStream *stream)
    : DataInputStream(stream)
    {
    }

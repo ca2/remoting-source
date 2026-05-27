@@ -59,25 +59,25 @@ namespace remoting
       //void setExPen(FLOAT fWidth, const ::color::color & color);
 
       // Moves cursor to specified pointPosition.
-      void moveTo(int x, int y);
+      void moveTo(::i32 x, ::i32 y);
       // Draws line from current pointPosition to specified line.
-      void lineTo(int x, int y);
-      //void ExLineTo(int x, int y);
+      void lineTo(::i32 x, ::i32 y);
+      //void ExLineTo(::i32 x, ::i32 y);
 
       // Draws filled rectangle.
       void fillRect(const ::i32_rectangle & r, const Brush *brush);
-      void fillRect(int l, int t, int r, int b, const Brush *brush);
+      void fillRect(::i32 l, ::i32 t, ::i32 r, ::i32 b, const Brush *brush);
       //void fill_solid_rectangle( const ::i32_rectangle & rectangle, const ::color::color & color);
 
       // Draws ellipse.
-      void ellipse(int l, int t, int r, int b);
+      void ellipse(::i32 l, ::i32 t, ::i32 r, ::i32 b);
       // Draws rectance.
-      void rectangle(int l, int t, int r, int b);
+      void rectangle(::i32 l, ::i32 t, ::i32 r, ::i32 b);
 
       // Draws bitmap.
-      void drawBitmap(const Bitmap *bitmap, int x, int y, int w, int h);
+      void drawBitmap(const Bitmap *bitmap, ::i32 x, ::i32 y, ::i32 w, ::i32 h);
       // Draws text.
-      void drawText(const ::scoped_string & scopedstrText, int cchText, RECT *rectangle, unsigned int format);
+      void drawText(const ::scoped_string & scopedstrText, ::i32 cchText, RECT *rectangle, ::u32 format);
 
       //protected:
       //DeviceContext *m_dc;
@@ -111,31 +111,31 @@ namespace remoting
       void setPen(FLOAT fWidth, const ::color::color & color);
 
       // Moves cursor to specified pointPosition.
-      void moveTo(int x, int y);
+      void moveTo(::i32 x, ::i32 y);
       // Draws line from current pointPosition to specified line.
-      void lineTo(int x, int y);
-      //void ExLineTo(int x, int y);
+      void lineTo(::i32 x, ::i32 y);
+      //void ExLineTo(::i32 x, ::i32 y);
 
       // Draws filled rectangle.
       //void fillRect(const ::i32_rectangle & r, const Brush *brush);
-      //void fillRect(int l, int t, int r, int b, const Brush *brush);
+      //void fillRect(::i32 l, ::i32 t, ::i32 r, ::i32 b, const Brush *brush);
       void fill_solid_rectangle( const ::i32_rectangle & rectangle, const ::color::color & color);
 
       // Draws ellipse.
-      //void ellipse(int l, int t, int r, int b);
+      //void ellipse(::i32 l, ::i32 t, ::i32 r, ::i32 b);
       // Draws rectance.
-      //void rectangle(int l, int t, int r, int b);
+      //void rectangle(::i32 l, ::i32 t, ::i32 r, ::i32 b);
 
       // Draws bitmap.
-      //void drawBitmap(const Bitmap *bitmap, int x, int y, int w, int h);
+      //void drawBitmap(const Bitmap *bitmap, ::i32 x, ::i32 y, ::i32 w, ::i32 h);
       // Draws text.
-      //void drawText(const ::scoped_string & scopedstrText, int cchText, RECT *rectangle, unsigned int format);
+      //void drawText(const ::scoped_string & scopedstrText, ::i32 cchText, RECT *rectangle, ::u32 format);
 
       //protected:
       Gdiplus::Graphics * m_pgraphics;
       Gdiplus::Pen * m_ppen;
-      int m_xLast = -1;
-      int m_yLast = -1;
+      ::i32 m_xLast = -1;
+      ::i32 m_yLast = -1;
    };
 }// namespace remoting
 

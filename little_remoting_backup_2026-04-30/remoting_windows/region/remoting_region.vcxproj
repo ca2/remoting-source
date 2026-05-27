@@ -296,7 +296,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Dimension.h" />
-    <ClInclude Include="::int_point.h" />
+    <ClInclude Include="::i32_point.h" />
     <ClInclude Include="Rect.h" />
     <ClInclude Include="RectSerializer.h" />
     <ClInclude Include="Region.h" />

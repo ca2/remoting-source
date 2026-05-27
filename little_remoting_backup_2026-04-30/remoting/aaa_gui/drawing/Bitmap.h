@@ -48,9 +48,9 @@ namespace remoting
       virtual ~Bitmap();
 
       // Returns bitmap width.
-      int width() const;
+      ::i32 width() const;
       // Returns bitmap height.
-      int height() const;
+      ::i32 height() const;
    protected:
       HBITMAP m_bitmap;
 

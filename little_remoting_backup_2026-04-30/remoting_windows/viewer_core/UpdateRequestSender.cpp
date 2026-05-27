@@ -35,7 +35,7 @@ namespace remoting
       m_bWasUpdateReceived = true;
    }
 
-   void UpdateRequestSender::setTimeout(int miliseconds)
+   void UpdateRequestSender::setTimeout(::i32 miliseconds)
    {
       critical_section_lock al(&m_criticalsectionTimeout);
       m_iTimeout = miliseconds;
@@ -70,7 +70,7 @@ namespace remoting
                sendFbUpdateRequest();
             }
 
-            int timeout = getTimeout();
+            ::i32 timeout = getTimeout();
             timeout = timeout > 0 ? timeout : 500;
             //todo: check if it is best approoach?
             Thread::sleep(timeout);
@@ -125,7 +125,7 @@ namespace remoting
       return result;
    }
 
-   int UpdateRequestSender::getTimeout()
+   ::i32 UpdateRequestSender::getTimeout()
    {
       critical_section_lock al(&m_criticalsectionTimeout);
       return m_iTimeout;

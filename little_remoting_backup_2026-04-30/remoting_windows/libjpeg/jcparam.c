@@ -22,7 +22,7 @@
 
 GLOBAL(void)
 jpeg_add_quant_table (j_compress_ptr cinfo, int which_tbl,
-		      const unsigned int *basic_table,
+		      const ::u32 *basic_table,
 		      int scale_factor, boolean force_baseline)
 /* Define a quantization table equal to the basic_table times
  * a scale factor (given as a percentage).
@@ -53,7 +53,7 @@ jpeg_add_quant_table (j_compress_ptr cinfo, int which_tbl,
     if (temp > 32767L) temp = 32767L; /* max quantizer needed for 12 bits */
     if (force_baseline && temp > 255L)
       temp = 255L;		/* limit to baseline range if requested */
-    (*qtblptr)->quantval[i] = (unsigned short) temp;
+    (*qtblptr)->quantval[i] = (::u16) temp;
   }
 
   /* Initialize sent_table FALSE so table will be written to JPEG file. */
@@ -66,7 +66,7 @@ jpeg_add_quant_table (j_compress_ptr cinfo, int which_tbl,
  * The spec says that the values given produce "good" quality,
  * and when divided by 2, "very good" quality.
  */
-static const unsigned int std_luminance_quant_tbl[DCTSIZE2] = {
+static const ::u32 std_luminance_quant_tbl[DCTSIZE2] = {
   16,  11,  10,  16,  24,  40,  51,  61,
   12,  12,  14,  19,  26,  58,  60,  55,
   14,  13,  16,  24,  40,  57,  69,  56,
@@ -76,7 +76,7 @@ static const unsigned int std_luminance_quant_tbl[DCTSIZE2] = {
   49,  64,  78,  87, 103, 121, 120, 101,
   72,  92,  95,  98, 112, 100, 103,  99
 };
-static const unsigned int std_chrominance_quant_tbl[DCTSIZE2] = {
+static const ::u32 std_chrominance_quant_tbl[DCTSIZE2] = {
   16,  18,  24,  47,  99,  99,  99,  99,
   18,  21,  26,  66,  99,  99,  99,  99,
   24,  26,  56,  99,  99,  99,  99,  99,

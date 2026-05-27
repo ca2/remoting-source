@@ -89,7 +89,7 @@ void ImagedButton::drawItem(LPDRAWITEMSTRUCT dis)
       FrameRect(dc, &itemRect, shadow);
       DeleteObject(shadow);
     } else {
-      unsigned int uState = DFCS_BUTTONPUSH |
+      ::u32 uState = DFCS_BUTTONPUSH |
                     ((m_mouseOver) ? DFCS_HOT : 0) |
                     ((isPressed) ? DFCS_PUSHED : 0);
 
@@ -134,7 +134,7 @@ void ImagedButton::drawItem(LPDRAWITEMSTRUCT dis)
       }
 
       ThemeLib::DrawThemeText(m_theme, dc, BP_PUSHBUTTON, state,
-                              uniTitle, (int)uniTitle.length(),
+                              uniTitle, (::i32)uniTitle.length(),
                               DT_CENTER | DT_VCENTER | DT_SINGLELINE,
                               0, &captionRect);
     } else {
@@ -225,7 +225,7 @@ void ImagedButton::drawIcon(HDC* dc, RECT* prectangleImage, bool isPressed, bool
             (isDisabled ? DSS_DISABLED : DSS_NORMAL) | DST_ICON);
 } // End of drawIcon
 
-bool ImagedButton::window_procedure(LRESULT &lresul, unsigned int scopedstrMessage, ::wparam wparam, ::lparam lparam)
+bool ImagedButton::window_procedure(LRESULT &lresul, ::u32 scopedstrMessage, ::wparam wparam, ::lparam lparam)
 {
   //ImagedButton *_this = (ImagedButton *)GetWindowLongPtr(hWnd, GWLP_USERDATA);
 

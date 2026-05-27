@@ -33,7 +33,7 @@
 // }
 //
 // bool CommandLine::parse(const CommandLineFormat *format,
-//                         int formatSize,
+//                         ::i32 formatSize,
 //                         const CommandLineArgs *cmdArgs)
 // {
 //   ::string_array argContainer;
@@ -52,7 +52,7 @@
 //     key->make_lower();
 //
 //     result = false;
-//     for (int i = 0; i < formatSize; i++) {
+//     for (::i32 i = 0; i < formatSize; i++) {
 //       if (matchKey(format[i].keyName, key)) {
 //         KeyContainer keyContainer;
 //         result = true;
@@ -90,7 +90,7 @@
 //   return found;
 // }
 //
-// bool CommandLine::getOption(int index, ::string & key, ::string & arg) const
+// bool CommandLine::getOption(::i32 index, ::string & key, ::string & arg) const
 // {
 //   if (index < 0 || (size_t)index >= m_foundKeys.size()) {
 //     return false;

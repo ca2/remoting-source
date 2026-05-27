@@ -138,8 +138,8 @@
 
 /* provide prototypes for these when building zlib without LFS */
 #if !defined(_LARGEFILE64_SOURCE) || _LFS64_LARGEFILE-0 == 0
-    ZEXTERN gzFile ZEXPORT gzopen64 OF((const char *, const char *));
-    ZEXTERN z_off64_t ZEXPORT gzseek64 OF((gzFile, z_off64_t, int));
+    ZEXTERN gzFile ZEXPORT gzopen64 OF((const_char_pointer , const_char_pointer ));
+    ZEXTERN z_off64_t ZEXPORT gzseek64 OF((gzFile, z_off64_t, ::i32));
     ZEXTERN z_off64_t ZEXPORT gztell64 OF((gzFile));
     ZEXTERN z_off64_t ZEXPORT gzoffset64 OF((gzFile));
 #endif
@@ -151,8 +151,8 @@
 #  define DEF_MEM_LEVEL  MAX_MEM_LEVEL
 #endif
 
-/* default i/o buffer size -- double this for output when reading (this and
-   twice this must be able to fit in an unsigned type) */
+/* default i/o buffer size -- ::f64 this for output when reading (this and
+   twice this must be able to fit in an ::u32 type) */
 #define GZBUFSIZE 8192
 
 /* gzip modes, also provide a little integrity check on the passed structure */
@@ -174,46 +174,46 @@ typedef struct {
                             /* x.next: next output data to deliver or write */
                             /* x.pos: current pointPosition in uncompressed data */
         /* used for both reading and writing */
-    int mode;               /* see gzip modes above */
-    int fd;                 /* file descriptor */
-    char *path;             /* path or fd for error messages */
-    unsigned size;          /* buffer size, zero if not allocated yet */
-    unsigned want;          /* requested buffer size, default is GZBUFSIZE */
-    unsigned char *in;      /* input buffer (double-sized when writing) */
-    unsigned char *out;     /* output buffer (double-sized when reading) */
-    int direct;             /* 0 if processing gzip, 1 if transparent */
+    ::i32 mode;               /* see gzip modes above */
+    ::i32 fd;                 /* file descriptor */
+    char_pointer path;             /* path or fd for error messages */
+    ::u32 size;          /* buffer size, zero if not allocated yet */
+    ::u32 want;          /* requested buffer size, default is GZBUFSIZE */
+    ::u8 *in;      /* input buffer (::f64-sized when writing) */
+    ::u8 *out;     /* output buffer (::f64-sized when reading) */
+    ::i32 direct;             /* 0 if processing gzip, 1 if transparent */
         /* just for reading */
-    int how;                /* 0: get header, 1: copy, 2: decompress */
+    ::i32 how;                /* 0: get header, 1: copy, 2: decompress */
     z_off64_t start;        /* where the gzip data started, for rewinding */
-    int eof;                /* true if end of input file reached */
-    int past;               /* true if read requested past end */
+    ::i32 eof;                /* true if end of input file reached */
+    ::i32 past;               /* true if read requested past end */
         /* just for writing */
-    int level;              /* compression level */
-    int strategy;           /* compression strategy */
-    int reset;              /* true if a reset is pending after a Z_FINISH */
+    ::i32 level;              /* compression level */
+    ::i32 strategy;           /* compression strategy */
+    ::i32 reset;              /* true if a reset is pending after a Z_FINISH */
         /* seek request */
     z_off64_t skip;         /* amount to skip (already rewound if backwards) */
-    int seek;               /* true if seek request pending */
+    ::i32 seek;               /* true if seek request pending */
         /* error information */
-    int err;                /* error code */
-    char *msg;              /* error scopedstrMessage */
+    ::i32 err;                /* error code */
+    char_pointer msg;              /* error scopedstrMessage */
         /* zlib inflate or deflate stream */
     z_stream strm;          /* stream structure in-place (not a pointer) */
 } gz_state;
 typedef gz_state FAR *gz_statep;
 
 /* shared functions */
-void ZLIB_INTERNAL gz_error OF((gz_statep, int, const char *));
+void ZLIB_INTERNAL gz_error OF((gz_statep, ::i32, const_char_pointer ));
 #if defined UNDER_CE
-char ZLIB_INTERNAL *gz_strwinerror OF((DWORD error));
+::i8 ZLIB_INTERNAL *gz_strwinerror OF((DWORD error));
 #endif
 
-/* GT_OFF(x), where x is an unsigned value, is true if x > maximum z_off64_t
-   value -- needed when comparing unsigned to z_off64_t, which is signed
+/* GT_OFF(x), where x is an ::u32 value, is true if x > maximum z_off64_t
+   value -- needed when comparing ::u32 to z_off64_t, which is signed
    (possible z_off64_t types off_t, off64_t, and long are all signed) */
 #ifdef INT_MAX
-#  define GT_OFF(x) (sizeof(int) == sizeof(z_off64_t) && (x) > INT_MAX)
+#  define GT_OFF(x) (sizeof(::i32) == sizeof(z_off64_t) && (x) > INT_MAX)
 #else
-unsigned ZLIB_INTERNAL gz_intmax OF((void));
-#  define GT_OFF(x) (sizeof(int) == sizeof(z_off64_t) && (x) > gz_intmax())
+::u32 ZLIB_INTERNAL gz_intmax OF((void));
+#  define GT_OFF(x) (sizeof(::i32) == sizeof(z_off64_t) && (x) > gz_intmax())
 #endif

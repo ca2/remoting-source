@@ -66,7 +66,7 @@ namespace remoting_node_desktop
        *
        * @return 0 when user chooses "accept", 1 when user chooses "reject".
        */
-      //virtual int run();
+      //virtual ::i32 run();
       virtual void run() override;
 
       /**
@@ -78,7 +78,7 @@ namespace remoting_node_desktop
        * @return application exit code (0 means accept connection, 1 means reject connection).
        * @throws ::subsystem::Exception on fail.
        */
-      int execute(const ::scoped_string & scopedstrPeerAddr, bool acceptByDefault, ::u32 timeOutSec);
+      ::i32 execute(const ::scoped_string & scopedstrPeerAddr, bool acceptByDefault, ::u32 timeOutSec);
 
       //private:
       ::string m_cmdLine;

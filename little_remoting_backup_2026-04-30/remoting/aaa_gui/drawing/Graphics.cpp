@@ -55,10 +55,10 @@ namespace remoting
    //
    //    }
    //
-   //    m_ppen = new Gdiplus::Pen(Gdiplus::Color(color.byte_opacity(),
-   //       color.byte_red(),
-   //       color.byte_green(),
-   //       color.byte_blue()), fWidth);
+   //    m_ppen = new Gdiplus::Pen(Gdiplus::Color(color.u8_opacity(),
+   //       color.u8_red(),
+   //       color.u8_green(),
+   //       color.u8_blue()), fWidth);
    //
    // }
 
@@ -89,21 +89,21 @@ namespace remoting
       ::SelectObject(m_hdc, object);
    }
 
-   void Graphics::moveTo(int x, int y)
+   void Graphics::moveTo(::i32 x, ::i32 y)
    {
       MoveToEx(m_hdc, x, y, NULL);
       //m_xLast = x;
       //m_yLast = y;
    }
 
-   void Graphics::lineTo(int x, int y)
+   void Graphics::lineTo(::i32 x, ::i32 y)
    {
       LineTo(m_hdc, x, y);
       //m_xLast = x;
       //m_yLast = y;
    }
    //
-   // void Graphics::ExLineTo(int x, int y)
+   // void Graphics::ExLineTo(::i32 x, ::i32 y)
    // {
    //    Gdiplus::Graphics g(m_hdc);
    //    g.DrawLine(m_ppen, m_xLast, m_yLast, x, y);
@@ -121,10 +121,10 @@ namespace remoting
    //    //r.deflate(2, 2);
    //    Gdiplus::Rect gdiplusr;
    //    ::copy(gdiplusr, rectangle);
-   //    Gdiplus::SolidBrush brush(Gdiplus::Color(color.byte_opacity(), color.byte_red(), color.byte_green(), color.byte_blue()));
+   //    Gdiplus::SolidBrush brush(Gdiplus::Color(color.u8_opacity(), color.u8_red(), color.u8_green(), color.u8_blue()));
    //    g.FillRectangle(&brush, gdiplusr);
    //    // // Set background color
-   //    // COLORREF oldColor = SetBkColor(m_hdc, RGB(color.byte_red(), color.byte_green(), color.byte_blue()));
+   //    // COLORREF oldColor = SetBkColor(m_hdc, RGB(color.u8_red(), color.u8_green(), color.u8_blue()));
    //    //
    //    // RECT r;
    //    // ::copy(r, rectangle);
@@ -150,7 +150,7 @@ namespace remoting
       fillRect(r.left, r.top, r.right, r.bottom, pbrush);
 
    }
-   void Graphics::fillRect(int l, int t, int r, int b, const Brush *brush)
+   void Graphics::fillRect(::i32 l, ::i32 t, ::i32 r, ::i32 b, const Brush *brush)
    {
       RECT rectangle;
 
@@ -162,17 +162,17 @@ namespace remoting
       FillRect(m_hdc, rectangle, brush->m_brush);
    }
 
-   void Graphics::ellipse(int l, int t, int r, int b)
+   void Graphics::ellipse(::i32 l, ::i32 t, ::i32 r, ::i32 b)
    {
       Ellipse(m_hdc, l, t, r, b);
    }
 
-   void Graphics::rectangle(int l, int t, int r, int b)
+   void Graphics::rectangle(::i32 l, ::i32 t, ::i32 r, ::i32 b)
    {
       Rectangle(m_hdc, l, t, r, b);
    }
 
-   void Graphics::drawBitmap(const Bitmap *bitmap, int x, int y, int w, int h)
+   void Graphics::drawBitmap(const Bitmap *bitmap, ::i32 x, ::i32 y, ::i32 w, ::i32 h)
    {
       HDC hdcMem = ::CreateCompatibleDC(m_hdc);
 
@@ -185,7 +185,7 @@ namespace remoting
       ::DeleteDC(hdcMem);
    }
 
-   void Graphics::drawText(const ::scoped_string & scopedstrText, int cchText, RECT *rectangle, unsigned int format)
+   void Graphics::drawText(const ::scoped_string & scopedstrText, ::i32 cchText, RECT *rectangle, ::u32 format)
    {
       DrawText(m_hdc, ::wstring(scopedstrText).c_str(), cchText, rectangle, format);
    }
@@ -246,10 +246,10 @@ namespace remoting
 
       }
 
-      m_ppen = new Gdiplus::Pen(Gdiplus::Color(color.byte_opacity(),
-         color.byte_red(),
-         color.byte_green(),
-         color.byte_blue()), fWidth);
+      m_ppen = new Gdiplus::Pen(Gdiplus::Color(color.u8_opacity(),
+         color.u8_red(),
+         color.u8_green(),
+         color.u8_blue()), fWidth);
 
    }
 
@@ -280,21 +280,21 @@ namespace remoting
    //   m_dc->selectObject(object);
    // }
    //
-   void GraphicsPlus::moveTo(int x, int y)
+   void GraphicsPlus::moveTo(::i32 x, ::i32 y)
    {
       //   MoveToEx(m_hdc, x, y, NULL);
       m_xLast = x;
       m_yLast = y;
    }
    //
-   // void Graphics::lineTo(int x, int y)
+   // void Graphics::lineTo(::i32 x, ::i32 y)
    // {
    //   LineTo(m_hdc, x, y);
    //    m_xLast = x;
    //    m_yLast = y;
    // }
 
-   void GraphicsPlus::lineTo(int x, int y)
+   void GraphicsPlus::lineTo(::i32 x, ::i32 y)
    {
       //Gdiplus::Graphics g(m_hdc);
       m_pgraphics->DrawLine(m_ppen, m_xLast, m_yLast, x, y);
@@ -310,10 +310,10 @@ namespace remoting
       //r.deflate(2, 2);
       Gdiplus::Rect gdiplusr;
       ::copy(gdiplusr, rectangle);
-      Gdiplus::SolidBrush brush(Gdiplus::Color(color.byte_opacity(), color.byte_red(), color.byte_green(), color.byte_blue()));
+      Gdiplus::SolidBrush brush(Gdiplus::Color(color.u8_opacity(), color.u8_red(), color.u8_green(), color.u8_blue()));
       m_pgraphics->FillRectangle(&brush, gdiplusr);
       // // Set background color
-      // COLORREF oldColor = SetBkColor(m_hdc, RGB(color.byte_red(), color.byte_green(), color.byte_blue()));
+      // COLORREF oldColor = SetBkColor(m_hdc, RGB(color.u8_red(), color.u8_green(), color.u8_blue()));
       //
       // RECT r;
       // ::copy(r, rectangle);
@@ -339,7 +339,7 @@ namespace remoting
    //    fillRect(r.left, r.top, r.right, r.bottom, pbrush);
    //
    // }
-   // void Graphics::fillRect(int l, int t, int r, int b, const Brush *brush)
+   // void Graphics::fillRect(::i32 l, ::i32 t, ::i32 r, ::i32 b, const Brush *brush)
    // {
    //   RECT rectangle;
    //
@@ -351,17 +351,17 @@ namespace remoting
    //   FillRect(m_hdc, rectangle, brush->m_brush);
    // }
    //
-   // void Graphics::ellipse(int l, int t, int r, int b)
+   // void Graphics::ellipse(::i32 l, ::i32 t, ::i32 r, ::i32 b)
    // {
    //   Ellipse(m_hdc, l, t, r, b);
    // }
    //
-   // void Graphics::rectangle(int l, int t, int r, int b)
+   // void Graphics::rectangle(::i32 l, ::i32 t, ::i32 r, ::i32 b)
    // {
    //   Rectangle(m_hdc, l, t, r, b);
    // }
 
-   // void GraphicsPlus::drawBitmap(const Bitmap *bitmap, int x, int y, int w, int h)
+   // void GraphicsPlus::drawBitmap(const Bitmap *bitmap, ::i32 x, ::i32 y, ::i32 w, ::i32 h)
    // {
    //   DeviceContext memDC(m_dc);
    //
@@ -372,7 +372,7 @@ namespace remoting
    //   memDC.selectObject(oldBitmap);
    // }
 
-   // void GraphicsPlus::drawText(const ::scoped_string & scopedstrText, int cchText, RECT *rectangle, unsigned int format)
+   // void GraphicsPlus::drawText(const ::scoped_string & scopedstrText, ::i32 cchText, RECT *rectangle, ::u32 format)
    // {
    //   DrawText(m_hdc, text, cchText, rectangle, format);
    // }

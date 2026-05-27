@@ -35,10 +35,10 @@
 class CLASS_DECL_REMOTING Pipe
 {
 public:
-  unsigned int getMaxPortionSize();
+  ::u32 getMaxPortionSize();
 
 protected:
-  Pipe(unsigned int maxPortionSize);
+  Pipe(::u32 maxPortionSize);
   virtual ~Pipe();
 
   // This read and write functions is common way to read and write
@@ -60,9 +60,9 @@ protected:
 private:
   void checkPipeHandle(HANDLE pipeHandle);
 
-  unsigned long long m_totalWrote;
-  unsigned long long m_totalRead;
-  unsigned int m_maxPortionSize;
+  ::u64 m_totalWrote;
+  ::u64 m_totalRead;
+  ::u32 m_maxPortionSize;
 };
 
 //// __PIPE_H__

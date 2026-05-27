@@ -480,7 +480,7 @@ int k;
 /*
   Write the 64-bit values in table[0..k-1] to out, three per line in
   hexadecimal separated by commas. This assumes that if there is a 64-bit
-  type, then there is also a long long integer type, and it is at least 64
+  type, then there is also a ::i64 integer type, and it is at least 64
   bits. If not, then the type cast and format string can be adjusted
   accordingly.
  */
@@ -493,7 +493,7 @@ local void write_table64(out, table, k)
 
     for (n = 0; n < k; n++)
         fprintf(out, "%s0x%016llx%s", n == 0 || n % 3 ? "" : "    ",
-                (unsigned long long)(table[n]),
+                (::u64)(table[n]),
                 n == k - 1 ? "" : (n % 3 == 2 ? ",\n" : ", "));
 }
 

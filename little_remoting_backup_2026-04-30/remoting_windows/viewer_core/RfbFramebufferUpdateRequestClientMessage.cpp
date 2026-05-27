@@ -42,10 +42,10 @@ namespace remoting
       critical_section_lock al(output);
       output->writeUInt8(ClientMsgDefs::FB_UPDATE_REQUEST);
       output->writeUInt8(m_incremental);
-      output->writeUInt16(static_cast<unsigned short>(m_rect.left));
-      output->writeUInt16(static_cast<unsigned short>(m_rect.top));
-      output->writeUInt16(static_cast<unsigned short>(m_rect.width()));
-      output->writeUInt16(static_cast<unsigned short>(m_rect.height()));
+      output->writeUInt16(static_cast<::u16>(m_rect.left));
+      output->writeUInt16(static_cast<::u16>(m_rect.top));
+      output->writeUInt16(static_cast<::u16>(m_rect.width()));
+      output->writeUInt16(static_cast<::u16>(m_rect.height()));
       output->flush();
    }
 } //namespace remoting

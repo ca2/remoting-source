@@ -45,7 +45,7 @@ namespace remoting_windows
       virtual ~WinAutoMapDxgiSurface();
 
       size_t getStride() const;
-      char *getBuffer() const;
+      char_pointer getBuffer() const;
 
    private:
       WinDxgiSurface *m_surface;

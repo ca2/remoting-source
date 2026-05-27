@@ -60,8 +60,8 @@
 //  // Methods creates windows and show it in nonmodal/modal mode
 //  //
 //
-//  int show();
-//  int showModal();
+//  ::i32 show();
+//  ::i32 showModal();
 //
 //  // Returns true if dialog is already created.
 //  bool isCreated();
@@ -69,7 +69,7 @@
 //  // Method hides window
 //  void hide();
 //  // Method closes dialog
-//  virtual void closeDialog(int code);
+//  virtual void closeDialog(::i32 code);
 //  // Method sets parent window
 //
 //  // Set resource name for dialog
@@ -93,7 +93,7 @@
 //   * Sets default push button for dialog.
 //   * @pararm buttonId new default push button id.
 //   */
-//  void setDefaultPushButton(unsigned int buttonId);
+//  void setDefaultPushButton(::u32 buttonId);
 //
 ////protected:
 //
@@ -102,8 +102,8 @@
 //  //
 //
 //  virtual bool onInitDialog();
-//  virtual bool onNotify(unsigned int controlID, ::lparam data);
-//  virtual bool onCommand(unsigned int controlID, unsigned int notificationID);
+//  virtual bool onNotify(::u32 controlID, ::lparam data);
+//  virtual bool onCommand(::u32 controlID, ::u32 notificationID);
 //  virtual bool onClose();
 //  virtual bool onDestroy();
 //
@@ -112,14 +112,14 @@
 //  //
 //
 //  virtual bool onDrawItem(::wparam controlID, LPDRAWITEMSTRUCT dis);
-//  virtual void onMessageReceived(unsigned int uMsg, ::wparam wParam, ::lparam lParam);
+//  virtual void onMessageReceived(::u32 uMsg, ::wparam wParam, ::lparam lParam);
 //
 //  //
 //  // Window scopedstrMessage proccessing method
 //  //
 //
-//    static INT_PTR CALLBACK dialogProc(const ::operating_system::window & operatingsystemwindow, unsigned int uMsg, ::wparam wParam, ::lparam lParam);
-//    virtual bool dialog_procedure(INT_PTR & iptrResult, unsigned int message, ::wparam wparam, ::lparam lparam);
+//    static INT_PTR CALLBACK dialogProc(const ::operating_system::window & operatingsystemwindow, ::u32 uMsg, ::wparam wParam, ::lparam lParam);
+//    virtual bool dialog_procedure(INT_PTR & iptrResult, ::u32 message, ::wparam wparam, ::lparam lparam);
 ////private:
 //    TCHAR *getResouceName();
 //

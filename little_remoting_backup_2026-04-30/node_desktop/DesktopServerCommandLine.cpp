@@ -64,7 +64,7 @@ namespace remoting_node_desktop
       }
    }
 
-   int DesktopServerCommandLine::getLogLevel()
+   ::i32 DesktopServerCommandLine::getLogLevel()
    {
       ::string logLevelKeyArg;
 
@@ -73,7 +73,7 @@ namespace remoting_node_desktop
          _ASSERT(false);
       }
 
-      int ret;
+      ::i32 ret;
 
       if (!MainSubsystem().StringParser().parseInt(logLevelKeyArg, &ret))
       {

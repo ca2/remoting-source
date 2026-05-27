@@ -37,7 +37,7 @@ public:
   virtual ~WindowsDisplays();
 
   // If a display does not exist now the function return an empty rectangle.
-  void getDisplayCoordinates(unsigned char displayNumber, ::i32_rectangle rectangle);
+  void getDisplayCoordinates(::u8 displayNumber, ::i32_rectangle rectangle);
 
   ::int_rectangle_array_base getDisplaysCoords();
 
@@ -56,13 +56,13 @@ private:
   // Returns true if the update() function has been called lately.
   bool isAlreadyUpdated();
 
-  int m_xVirtualScreen;
-  int m_yVirtualScreen;
+  ::i32 m_xVirtualScreen;
+  ::i32 m_yVirtualScreen;
 
   ::int_rectangle_array_base m_displayRects;
   lockable_critical_section m_displayRectsMutex;
   
-  static const unsigned int UPDATE_INTERVAL = 3000;
+  static const ::u32 UPDATE_INTERVAL = 3000;
   class ::time m_latestUpdateTime;
 };
 

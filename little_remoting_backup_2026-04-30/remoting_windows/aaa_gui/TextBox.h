@@ -45,15 +45,15 @@ public:
   // Methods for multiline textboxes
   //
 
-  int getCurrentLineIndex();
-  int getLineCount();
+  ::i32 getCurrentLineIndex();
+  ::i32 getLineCount();
 
   //
   // Get / set caret pointPosition
   //
 
-  int getCaretPos();
-  void setCaretPos(int h, int v);
+  ::i32 getCaretPos();
+  void setCaretPos(::i32 h, ::i32 v);
 
   //
   // Text selection

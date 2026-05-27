@@ -39,7 +39,7 @@ WinHooks::~WinHooks()
   unregisterKeyboardHook(0);
 }
 
-LRESULT CALLBACK WinHooks::lowLevelKeyboardHook(int nCode, ::wparam wParam, ::lparam lParam)
+LRESULT CALLBACK WinHooks::lowLevelKeyboardHook(::i32 nCode, ::wparam wParam, ::lparam lParam)
 {
   if (nCode < 0) {
     return CallNextHookEx(s_hooks, nCode, wParam, lParam);

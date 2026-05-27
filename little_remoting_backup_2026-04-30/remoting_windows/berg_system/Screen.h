@@ -82,7 +82,7 @@ public:
 private:
   void fillPixelFormat(const BMI *bmi);
   // Find pointPosition of first true bit
-  static inline int findFirstBit(const ::u32 bits);
+  static inline ::i32 findFirstBit(const ::u32 bits);
 
   void fillScreenRect();
 

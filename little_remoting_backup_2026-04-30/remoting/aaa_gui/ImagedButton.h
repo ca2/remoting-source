@@ -80,10 +80,10 @@ protected:
 
   HICON *m_icon;
 
-  int m_iconWidth;
-  int m_iconHeight;
+  ::i32 m_iconWidth;
+  ::i32 m_iconHeight;
 
-  bool window_procedure(LRESULT &lresult, unsigned int scopedstrMessage, wparam wparam, lparam lparam) override;
+  bool window_procedure(LRESULT &lresult, ::u32 scopedstrMessage, wparam wparam, lparam lparam) override;
 };
 
 //

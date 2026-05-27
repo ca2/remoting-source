@@ -46,8 +46,8 @@ namespace remoting
          m_currentFramebufferRect = rectangle;
 
          m_currentRect = pframebuffer().getDimension();
-         int dx = (rectangle.width()/2) - (m_width/2);
-         int dy = (rectangle.height()/2) - (m_height/2);
+         ::i32 dx = (rectangle.width()/2) - (m_width/2);
+         ::i32 dy = (rectangle.height()/2) - (m_height/2);
          m_currentRect.offset(dx, dy);
 
          m_overlay.setDimension(m_currentRect);
@@ -108,18 +108,18 @@ namespace remoting
 
    void WatermarksController::loadFromfile()
    {
-      int pixelsOfset = *(int*)&WATERMARK_BMP_BODY[14] + 14;
+      ::i32 pixelsOfset = *(::i32*)&WATERMARK_BMP_BODY[14] + 14;
 
-      m_width = *(int*)&WATERMARK_BMP_BODY[18];
-      m_height = *(int*)&WATERMARK_BMP_BODY[22];
+      m_width = *(::i32*)&WATERMARK_BMP_BODY[18];
+      m_height = *(::i32*)&WATERMARK_BMP_BODY[22];
 
-      int imageBpp = (WATERMARK_BMP_BODY[28] + 7) / 8;
+      ::i32 imageBpp = (WATERMARK_BMP_BODY[28] + 7) / 8;
 
-      int pad = 4 - ((m_width * 3) % 4);
+      ::i32 pad = 4 - ((m_width * 3) % 4);
 
-      int bufferSize = m_width * m_height * 4;
+      ::i32 bufferSize = m_width * m_height * 4;
 
-      unsigned char* buffer = new unsigned char[bufferSize];
+      ::u8* buffer = new ::u8[bufferSize];
 
 
       ::i32_size size(m_width, m_height);
@@ -127,14 +127,14 @@ namespace remoting
       m_pframebuffer->setPropertiesWithoutResize(size, pixelformat);
       m_overlay.setPropertiesWithoutResize(m_overlay.getDimension(), pixelformat);
 
-      for (int i = 0; i < m_height; ++i)
+      for (::i32 i = 0; i < m_height; ++i)
       {
-         int vi = m_width * i * 3 + i * pad + pixelsOfset;
-         int vb = m_width * (m_height - i - 1) * 4;
-         for(int j = 0; j < m_width; ++j)
+         ::i32 vi = m_width * i * 3 + i * pad + pixelsOfset;
+         ::i32 vb = m_width * (m_height - i - 1) * 4;
+         for(::i32 j = 0; j < m_width; ++j)
          {
-            int hi = vi + j*3;
-            int hb = vb + j*4;
+            ::i32 hi = vi + j*3;
+            ::i32 hb = vb + j*4;
 
             buffer[hb] = WATERMARK_BMP_BODY[hi];			//B
             buffer[hb + 1] = WATERMARK_BMP_BODY[hi + 1];	//G

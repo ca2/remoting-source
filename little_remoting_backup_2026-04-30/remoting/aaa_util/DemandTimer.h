@@ -32,7 +32,7 @@
 class DemandTimer
 {
 public:
-  DemandTimer(unsigned long long intervalMillis);
+  DemandTimer(::u64 intervalMillis);
   ~DemandTimer();
 
   // Starts the timer from the now time.
@@ -42,7 +42,7 @@ public:
   bool isElapsed();
 
 private:
-  unsigned long long m_intervalMillis;
+  ::u64 m_intervalMillis;
   class ::time m_timeStart;
 };
 

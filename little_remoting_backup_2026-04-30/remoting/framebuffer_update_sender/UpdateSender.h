@@ -134,21 +134,21 @@ namespace remoting
 
       // Information
       // FIXME: Document this properly.
-      int m_id;
+      ::i32 m_id;
 
       // updReqListener - pointer to the out listener for retranslate
       // update reqest to out.
       // FIXME: Document all the arguments properly.
       // UpdateSender(RfbCodeRegistrator *m_prfbcoderegistrator, UpdateRequestListener *updReqListener,
       //              SenderControlInformationInterface *senderControlInformation, ::remoting::RfbOutputGate *output,
-      //              int id, Desktop *desktop, ::subsystem::LogWriter * plogwriter);
+      //              ::i32 id, Desktop *desktop, ::subsystem::LogWriter * plogwriter);
       UpdateSender();
        ~UpdateSender() override;
 
 
       virtual void initialize_update_sender(RfbCodeRegistrator *m_prfbcoderegistrator, UpdateRequestListener *updReqListener,
              SenderControlInformationInterface *senderControlInformation, ::remoting::RfbOutputGate *output,
-             int id, Desktop *desktop, ::subsystem::LogWriter * plogwriter);
+             ::i32 id, Desktop *desktop, ::subsystem::LogWriter * plogwriter);
 
       // The sendServerInit() function sends first rfb init scopedstrMessage to a client
       // FIXME: The comment does not seem to be relevant.
@@ -233,8 +233,8 @@ namespace remoting
       // New pixel format will take effect on sending next frame buffer update.
       void setClientPixelFormat(const ::innate_subsystem::PixelFormat & pixelformat, bool clrMapEntries);
 
-      void sendRectHeader(const ::i32_rectangle & rectangle, int encodingType);
-      void sendRectHeader(unsigned short x, unsigned short y, unsigned short w, unsigned short h, int encodingType);
+      void sendRectHeader(const ::i32_rectangle & rectangle, ::i32 encodingType);
+      void sendRectHeader(::u16 x, ::u16 y, ::u16 w, ::u16 h, ::i32 encodingType);
       void sendNewFBSize(::i32_size & size, bool extended);
       void sendFbInClientDim(const EncodeOptions *encodeOptions, const ::innate_subsystem::Framebuffer *pframebuffer,
                              const ::i32_size &size, const ::innate_subsystem::PixelFormat & pixelformat);
@@ -259,9 +259,9 @@ namespace remoting
 
       // Returns part of region with total area not much more than area
       // and removes this part form source reg
-      ::remoting::Region takePartFromRegion(::remoting::Region & region, int area);
+      ::remoting::Region takePartFromRegion(::remoting::Region & region, ::i32 area);
       // calculate total area of rectanglea in pixels
-      int calcAreas(::int_rectangle_array_base rectanglea);
+      ::i32 calcAreas(::int_rectangle_array_base rectanglea);
 
    };
 

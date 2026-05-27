@@ -33,7 +33,7 @@ public:
   ~WinHooks();
   
   // Hook procedure.
-  static LRESULT CALLBACK lowLevelKeyboardHook(int nCode,
+  static LRESULT CALLBACK lowLevelKeyboardHook(::i32 nCode,
                                                ::wparam wParam,
                                                ::lparam lParam);
   

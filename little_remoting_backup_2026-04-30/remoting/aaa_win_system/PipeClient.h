@@ -34,12 +34,12 @@
 class CLASS_DECL_REMOTING PipeClient
 {
 public:
-  static NamedPipe *connect(const ::scoped_string & scopedstrName, unsigned int maxPortionSize);
+  static NamedPipe *connect(const ::scoped_string & scopedstrName, ::u32 maxPortionSize);
 
 private:
   PipeClient();
 
-  unsigned int m_maxPortionSize;
+  ::u32 m_maxPortionSize;
 };
 
 //// __PIPECLIENT_H__

@@ -60,7 +60,7 @@ namespace remoting
       virtual void sendInit(BlockingGate *pblockinggate);
 
       // To catch update event
-      virtual void onRequest(unsigned char reqCode, BlockingGate *pblockinggate);
+      virtual void onRequest(::u8 reqCode, BlockingGate *pblockinggate);
 
       ::pointer < UpdateListener > m_pupdatelistenerExternal;
 

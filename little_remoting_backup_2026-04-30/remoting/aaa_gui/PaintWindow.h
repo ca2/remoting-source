@@ -44,7 +44,7 @@ protected:
    //virtual void onPaint(DeviceContext *dc, PAINTSTRUCT *paintStruct);
    virtual void onPaint();
 
-  bool wndProc(unsigned int scopedstrMessage, ::wparam wParam, ::lparam lParam);
+  bool wndProc(::u32 scopedstrMessage, ::wparam wParam, ::lparam lParam);
 
   bool m_bIsDraw;
   PAINTSTRUCT m_paintStruct;

@@ -39,20 +39,20 @@ public:
   void setWindow(const ::operating_system::window & operatingsystemwindow);
   bool showVertScroll(bool show);
   bool showHorzScroll(bool show);
-  void setHorzRange(int imin, int imax, int istep);
-  void setVertRange(int imin, int imax, int istep);
-  void setVertPos(int iPos);
-  void setHorzPos(int iPos);
-  void moveUpVert(int iPercent = 0);
-  void moveDownVert(int iPercent = 0);
-  void moveLeftHorz(int iPercent = 0);
-  void moveRightHorz(int inPercent = 0);
-  int getVertPos();
-  int getHorzPos();
-  int getVerticalSize();
-  int getHorizontalSize();
+  void setHorzRange(::i32 imin, ::i32 imax, ::i32 istep);
+  void setVertRange(::i32 imin, ::i32 imax, ::i32 istep);
+  void setVertPos(::i32 iPos);
+  void setHorzPos(::i32 iPos);
+  void moveUpVert(::i32 iPercent = 0);
+  void moveDownVert(::i32 iPercent = 0);
+  void moveLeftHorz(::i32 iPercent = 0);
+  void moveRightHorz(::i32 inPercent = 0);
+  ::i32 getVertPos();
+  ::i32 getHorzPos();
+  ::i32 getVerticalSize();
+  ::i32 getHorizontalSize();
 
-  static const int SCROLL_STEP = 5;
+  static const ::i32 SCROLL_STEP = 5;
 protected:
   void enableVirtualScroll();
   void disableVirtualScroll();
@@ -60,11 +60,11 @@ protected:
   bool _showHorzScroll(bool show);
 
   ::operating_system::window m_operatingsystemwindow;
-  int m_vPos, m_hPos;
-  int m_vMin, m_vMax;
-  int m_hMin, m_hMax;
-  int m_vStep;
-  int m_hStep;
+  ::i32 m_vPos, m_hPos;
+  ::i32 m_vMin, m_vMax;
+  ::i32 m_hMin, m_hMax;
+  ::i32 m_vStep;
+  ::i32 m_hStep;
   bool m_isVirtualScroll;
   bool m_isVert;
   bool m_isHorz;

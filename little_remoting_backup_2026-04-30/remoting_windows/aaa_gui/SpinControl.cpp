@@ -42,17 +42,17 @@ void SpinControl::setBuddy(::innate_subsystem::Control *buddyControl)
   m_buddy = buddyControl;
 }
 
-void SpinControl::setRange(short lower, short upper)
+void SpinControl::setRange(::i16 lower, ::i16 upper)
 {
   SendMessage(m_hwnd, UDM_SETRANGE, NULL, (::lparam)MAKELONG(upper, lower));
 }
 
-void SpinControl::setRange32(int lower, int upper)
+void SpinControl::setRange32(::i32 lower, ::i32 upper)
 {
   SendMessage(m_hwnd, UDM_SETRANGE32, lower, upper);
 }
 
-void SpinControl::setAccel(unsigned int nSec, unsigned int nInc)
+void SpinControl::setAccel(::u32 nSec, ::u32 nInc)
 {
   UDACCEL accel = {0};
   accel.nSec = nSec;
@@ -68,8 +68,8 @@ void SpinControl::autoAccelerationHandler(LPNMUPDOWN scopedstrMessage)
     return;
   }
 
-  int currentValue;
-  int delta = m_maxDelta;
+  ::i32 currentValue;
+  ::i32 delta = m_maxDelta;
 
   // Get buddy textbox value
   ::string storage;
@@ -99,7 +99,7 @@ void SpinControl::autoAccelerationHandler(LPNMUPDOWN scopedstrMessage)
     } // for
   } // if
 
-  int mod = (currentValue + delta) % delta;
+  ::i32 mod = (currentValue + delta) % delta;
   if (mod != 0) {
     delta -= mod;
   }
@@ -112,9 +112,9 @@ void SpinControl::enableAutoAcceleration(bool enabled)
   m_isAutoAccelerationEnabled = enabled;
 }
 
-void SpinControl::setAutoAccelerationParams(const ::array_base<int> *limitters,
-                                            const ::array_base<int> *deltas,
-                                            int maxDelta)
+void SpinControl::setAutoAccelerationParams(const ::array_base<::i32> *limitters,
+                                            const ::array_base<::i32> *deltas,
+                                            ::i32 maxDelta)
 {
   m_limitters = *limitters;
   m_deltas = *deltas;

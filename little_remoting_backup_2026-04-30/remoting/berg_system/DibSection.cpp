@@ -119,17 +119,17 @@ void DibSection::setupBMIStruct(BITMAPINFO *pBmi, const ::innate_subsystem::Pixe
     Screen::Palette8bitBMI *paletteBMI = reinterpret_cast<Screen::Palette8bitBMI *>(pBmi);
     memset(paletteBMI, 0, sizeof(Screen::Palette8bitBMI));
     pBmi->bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
-    unsigned char index = 0;
-    for (int i = 0; i < 256; i++, index++) {
+    ::u8 index = 0;
+    for (::i32 i = 0; i < 256; i++, index++) {
       ::u32 red = (index >> pixelformat.redShift) & pixelformat.redMax;
       red = red * 0xFF / pixelformat.redMax;
-      paletteBMI->rgbQuad[index].rgbRed = (unsigned char)red;
+      paletteBMI->rgbQuad[index].rgbRed = (::u8)red;
       ::u32 green = (index >> pixelformat.greenShift) & pixelformat.greenMax;
       green = green * 0xFF / pixelformat.greenMax;
-      paletteBMI->rgbQuad[index].rgbGreen = (unsigned char)(green);
+      paletteBMI->rgbQuad[index].rgbGreen = (::u8)(green);
       ::u32 blue = (index >> pixelformat.blueShift) & pixelformat.blueMax;
       blue = blue * 0xFF / pixelformat.blueMax;
-      paletteBMI->rgbQuad[index].rgbBlue  = (unsigned char)blue;
+      paletteBMI->rgbQuad[index].rgbBlue  = (::u8)blue;
     }
   } else {
     Screen::BMI *bitFieldBmi = reinterpret_cast<Screen::BMI *>(pBmi);

@@ -66,7 +66,7 @@ void WindowsDisplays::update()
   }
 }
 
-void WindowsDisplays::getDisplayCoordinates(unsigned char displayNumber,
+void WindowsDisplays::getDisplayCoordinates(::u8 displayNumber,
                                             ::i32_rectangle &prectangle)
 {
   critical_section_lock al(&m_displayRectsMutex);

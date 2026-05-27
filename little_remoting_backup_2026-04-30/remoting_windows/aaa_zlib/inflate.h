@@ -82,45 +82,45 @@ typedef enum {
 struct inflate_state {
     z_streamp strm;             /* pointer back to this zlib stream */
     inflate_mode mode;          /* current inflate mode */
-    int last;                   /* true if processing last block */
-    int wrap;                   /* bit 0 true for zlib, bit 1 true for gzip,
+    ::i32 last;                   /* true if processing last block */
+    ::i32 wrap;                   /* bit 0 true for zlib, bit 1 true for gzip,
                                    bit 2 true to validate check value */
-    int havedict;               /* true if dictionary provided */
-    int flags;                  /* gzip header method and flags, 0 if zlib, or
+    ::i32 havedict;               /* true if dictionary provided */
+    ::i32 flags;                  /* gzip header method and flags, 0 if zlib, or
                                    -1 if raw or no header yet */
-    unsigned dmax;              /* zlib header max distance (INFLATE_STRICT) */
-    unsigned long check;        /* protected copy of check value */
-    unsigned long total;        /* protected copy of output count */
+    ::u32 dmax;              /* zlib header max distance (INFLATE_STRICT) */
+    ulong check;        /* protected copy of check value */
+    ulong total;        /* protected copy of output count */
     gz_headerp head;            /* where to save gzip header information */
         /* sliding window */
-    unsigned wbits;             /* log base 2 of requested window size */
-    unsigned wsize;             /* window size or zero if not using window */
-    unsigned whave;             /* valid bytes in the window */
-    unsigned wnext;             /* window write index */
-    unsigned char FAR *window;  /* allocated sliding window, if needed */
+    ::u32 wbits;             /* log base 2 of requested window size */
+    ::u32 wsize;             /* window size or zero if not using window */
+    ::u32 whave;             /* valid bytes in the window */
+    ::u32 wnext;             /* window write index */
+    ::u8 FAR *window;  /* allocated sliding window, if needed */
         /* bit accumulator */
-    unsigned long hold;         /* input bit accumulator */
-    unsigned bits;              /* number of bits in "in" */
+    ulong hold;         /* input bit accumulator */
+    ::u32 bits;              /* number of bits in "in" */
         /* for string and stored block copying */
-    unsigned length;            /* literal or length of data to copy */
-    unsigned offset;            /* distance back to copy string from */
+    ::u32 length;            /* literal or length of data to copy */
+    ::u32 offset;            /* distance back to copy string from */
         /* for table and code decoding */
-    unsigned extra;             /* extra bits needed */
+    ::u32 extra;             /* extra bits needed */
         /* fixed and dynamic code tables */
     code const FAR *lencode;    /* starting table for length/literal codes */
     code const FAR *distcode;   /* starting table for distance codes */
-    unsigned lenbits;           /* index bits for lencode */
-    unsigned distbits;          /* index bits for distcode */
+    ::u32 lenbits;           /* index bits for lencode */
+    ::u32 distbits;          /* index bits for distcode */
         /* dynamic table building */
-    unsigned ncode;             /* number of code length code lengths */
-    unsigned nlen;              /* number of length code lengths */
-    unsigned ndist;             /* number of distance code lengths */
-    unsigned have;              /* number of code lengths in lens[] */
+    ::u32 ncode;             /* number of code length code lengths */
+    ::u32 nlen;              /* number of length code lengths */
+    ::u32 ndist;             /* number of distance code lengths */
+    ::u32 have;              /* number of code lengths in lens[] */
     code FAR *next;             /* next available space in codes[] */
-    unsigned short lens[320];   /* temporary storage for code lengths */
-    unsigned short work[288];   /* work area for code table building */
+    ::u16 lens[320];   /* temporary storage for code lengths */
+    ::u16 work[288];   /* work area for code table building */
     code codes[ENOUGH];         /* space for code tables */
-    int sane;                   /* if false, allow invalid distance too far */
-    int back;                   /* bits back of last unprocessed length/lit */
-    unsigned was;               /* initial length of match */
+    ::i32 sane;                   /* if false, allow invalid distance too far */
+    ::i32 back;                   /* bits back of last unprocessed length/lit */
+    ::u32 was;               /* initial length of match */
 };

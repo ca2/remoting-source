@@ -31,16 +31,16 @@
 //{
 //public:
 //  ::string();
-//  ::string(const char *string);
+//  ::string(const_char_pointer string);
 //  ::string(const ::scoped_string & string);
 //  ::string(const ::string &stringBuffer);
 //  ~::string();
 //
 //  // Fills internal buffer by the string.
-//  virtual void= const char *string;
+//  virtual void= const_char_pointer string;
 //
 //  // Returns pointer to the first symbol.
-//  const char *getString() const;
+//  const_char_pointer getString() const;
 //
 //    // Returns length of string (in characters, not including terminating null character).
 //  size_t length() const;
@@ -55,14 +55,14 @@
 //  void fromStringStorage(const ::scoped_string & src);
 //  void toStringStorage(::string & dst) const;
 //
-//  void format(const char *format, ...);
+//  void format(const_char_pointer format, ...);
 //
-//  void appendString(const char *string);
+//  void appendString(const_char_pointer string);
 //
 //  static bool checkAnsiConversion(::string &string);
 //
 //private:
-//  typedef ::array_base<char> BufferType;
+//  typedef ::array_base<::i8> BufferType;
 //  BufferType m_buffer;
 //};
 //

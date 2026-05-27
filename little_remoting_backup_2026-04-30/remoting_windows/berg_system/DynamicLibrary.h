@@ -53,7 +53,7 @@ public:
   @param procName procedure name.
   @return address of procedure or 0 if failed.
   */
-  FARPROC getProcAddress(const char *procName);
+  FARPROC getProcAddress(const_char_pointer procName);
 
 protected:
   HMODULE m_module;

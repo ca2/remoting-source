@@ -88,7 +88,7 @@ typedef enum {			/* JPEG marker codes */
 typedef struct {
   struct jpeg_marker_writer pub; /* public fields */
 
-  unsigned int last_restart_interval; /* last DRI value emitted; 0 after SOI */
+  ::u32 last_restart_interval; /* last DRI value emitted; 0 after SOI */
 } my_marker_writer;
 
 typedef my_marker_writer * my_marker_ptr;
@@ -170,7 +170,7 @@ emit_dqt (j_compress_ptr cinfo, int index)
 
     for (i = 0; i <= cinfo->lim_Se; i++) {
       /* The table entries must be emitted in zigzag order. */
-      unsigned int qval = qtbl->quantval[cinfo->natural_order[i]];
+      ::u32 qval = qtbl->quantval[cinfo->natural_order[i]];
       if (prec)
 	emit_byte(cinfo, (int) (qval >> 8));
       emit_byte(cinfo, (int) (qval & 0xFF));
@@ -327,7 +327,7 @@ emit_sof (j_compress_ptr cinfo, JPEG_MARKER code)
   /* Make sure image isn't bigger than SOF field can handle */
   if ((long) cinfo->jpeg_height > 65535L ||
       (long) cinfo->jpeg_width > 65535L)
-    ERREXIT1(cinfo, JERR_IMAGE_TOO_BIG, (unsigned int) 65535);
+    ERREXIT1(cinfo, JERR_IMAGE_TOO_BIG, (::u32) 65535);
 
   emit_byte(cinfo, cinfo->data_precision);
   emit_2bytes(cinfo, (int) cinfo->jpeg_height);
@@ -484,10 +484,10 @@ emit_adobe_app14 (j_compress_ptr cinfo)
  */
 
 METHODDEF(void)
-write_marker_header (j_compress_ptr cinfo, int marker, unsigned int datalen)
+write_marker_header (j_compress_ptr cinfo, int marker, ::u32 datalen)
 /* Emit an arbitrary marker header */
 {
-  if (datalen > (unsigned int) 65533)		/* safety check */
+  if (datalen > (::u32) 65533)		/* safety check */
     ERREXIT(cinfo, JERR_BAD_LENGTH);
 
   emit_marker(cinfo, (JPEG_MARKER) marker);

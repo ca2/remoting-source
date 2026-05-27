@@ -85,7 +85,7 @@ struct jpeg_color_converter {
   JMETHOD(void, start_pass, (j_compress_ptr cinfo));
   JMETHOD(void, color_convert, (j_compress_ptr cinfo,
 				JSAMPARRAY input_buf, JSAMPIMAGE output_buf,
-				JDIMENSION output_row, int num_rows));
+				JDIMENSION output_row, ::i32 num_rows));
 };
 
 /* Downsampling */
@@ -127,9 +127,9 @@ struct jpeg_marker_writer {
   JMETHOD(void, write_tables_only, (j_compress_ptr cinfo));
   /* These routines are exported to allow insertion of extra markers */
   /* Probably only COM and APPn markers should be written this way */
-  JMETHOD(void, write_marker_header, (j_compress_ptr cinfo, int marker,
-				      unsigned int datalen));
-  JMETHOD(void, write_marker_byte, (j_compress_ptr cinfo, int val));
+  JMETHOD(void, write_marker_header, (j_compress_ptr cinfo, ::i32 marker,
+				      ::u32 datalen));
+  JMETHOD(void, write_marker_byte, (j_compress_ptr cinfo, ::i32 val));
 };
 
 
@@ -146,7 +146,7 @@ struct jpeg_decomp_master {
 
 /* Input control module */
 struct jpeg_input_controller {
-  JMETHOD(int, consume_input, (j_decompress_ptr cinfo));
+  JMETHOD(::i32, consume_input, (j_decompress_ptr cinfo));
   JMETHOD(void, reset_input_controller, (j_decompress_ptr cinfo));
   JMETHOD(void, start_input_pass, (j_decompress_ptr cinfo));
   JMETHOD(void, finish_input_pass, (j_decompress_ptr cinfo));
@@ -167,9 +167,9 @@ struct jpeg_d_main_controller {
 /* Coefficient buffer control */
 struct jpeg_d_coef_controller {
   JMETHOD(void, start_input_pass, (j_decompress_ptr cinfo));
-  JMETHOD(int, consume_data, (j_decompress_ptr cinfo));
+  JMETHOD(::i32, consume_data, (j_decompress_ptr cinfo));
   JMETHOD(void, start_output_pass, (j_decompress_ptr cinfo));
-  JMETHOD(int, decompress_data, (j_decompress_ptr cinfo,
+  JMETHOD(::i32, decompress_data, (j_decompress_ptr cinfo,
 				 JSAMPIMAGE output_buf));
   /* Pointer to array of coefficient virtual arrays, or NULL if none */
   jvirt_barray_ptr *coef_arrays;
@@ -194,7 +194,7 @@ struct jpeg_marker_reader {
    * Returns same codes as are defined for jpeg_consume_input:
    * JPEG_SUSPENDED, JPEG_REACHED_SOS, or JPEG_REACHED_EOI.
    */
-  JMETHOD(int, read_markers, (j_decompress_ptr cinfo));
+  JMETHOD(::i32, read_markers, (j_decompress_ptr cinfo));
   /* Read a restart marker --- exported for use by entropy decoder only */
   jpeg_marker_parser_method read_restart_marker;
 
@@ -203,8 +203,8 @@ struct jpeg_marker_reader {
    */
   boolean saw_SOI;		/* found SOI? */
   boolean saw_SOF;		/* found SOF? */
-  int next_restart_num;		/* next restart number expected (0-7) */
-  unsigned int discarded_bytes;	/* # of bytes skipped looking for a marker */
+  ::i32 next_restart_num;		/* next restart number expected (0-7) */
+  ::u32 discarded_bytes;	/* # of bytes skipped looking for a marker */
 };
 
 /* Entropy decoding */
@@ -245,7 +245,7 @@ struct jpeg_color_deconverter {
   JMETHOD(void, start_pass, (j_decompress_ptr cinfo));
   JMETHOD(void, color_convert, (j_decompress_ptr cinfo,
 				JSAMPIMAGE input_buf, JDIMENSION input_row,
-				JSAMPARRAY output_buf, int num_rows));
+				JSAMPARRAY output_buf, ::i32 num_rows));
 };
 
 /* Color quantization or color precision reduction */
@@ -253,7 +253,7 @@ struct jpeg_color_quantizer {
   JMETHOD(void, start_pass, (j_decompress_ptr cinfo, boolean is_pre_scan));
   JMETHOD(void, color_quantize, (j_decompress_ptr cinfo,
 				 JSAMPARRAY input_buf, JSAMPARRAY output_buf,
-				 int num_rows));
+				 ::i32 num_rows));
   JMETHOD(void, finish_pass, (j_decompress_ptr cinfo));
   JMETHOD(void, new_color_map, (j_decompress_ptr cinfo));
 };
@@ -283,30 +283,30 @@ struct jpeg_color_quantizer {
 /* We assume that right shift corresponds to signed division by 2 with
  * rounding towards minus infinity.  This is correct for typical "arithmetic
  * shift" instructions that shift in copies of the sign bit.  But some
- * C compilers implement >> with an unsigned shift.  For these machines you
+ * C compilers implement >> with an ::u32 shift.  For these machines you
  * must define RIGHT_SHIFT_IS_UNSIGNED.
- * RIGHT_SHIFT provides a proper signed right shift of an int quantity.
+ * RIGHT_SHIFT provides a proper signed right shift of an ::i32 quantity.
  * It is only applied with constant shift counts.  SHIFT_TEMPS must be
  * included in the variables of any routine using RIGHT_SHIFT.
  */
 
 #ifdef RIGHT_SHIFT_IS_UNSIGNED
-#define SHIFT_TEMPS	int shift_temp;
+#define SHIFT_TEMPS	::i32 shift_temp;
 #define RIGHT_SHIFT(x,shft)  \
 	((shift_temp = (x)) < 0 ? \
-	 (shift_temp >> (shft)) | ((~((int) 0)) << (32-(shft))) : \
+	 (shift_temp >> (shft)) | ((~((::i32) 0)) << (32-(shft))) : \
 	 (shift_temp >> (shft)))
 #else
 #define SHIFT_TEMPS
 #define RIGHT_SHIFT(x,shft)	((x) >> (shft))
 #endif
 
-/* Descale and correctly round an int value that's scaled by N bits.
+/* Descale and correctly round an ::i32 value that's scaled by N bits.
  * We assume RIGHT_SHIFT rounds towards minus infinity, so adding
  * the fudge factor is correct for either sign of X.
  */
 
-#define DESCALE(x,n)	RIGHT_SHIFT((x) + ((int) 1 << ((n)-1)), n)
+#define DESCALE(x,n)	RIGHT_SHIFT((x) + ((::i32) 1 << ((n)-1)), n)
 
 
 /* Short forms of external names for systems with brain-damaged linkers. */
@@ -417,23 +417,23 @@ EXTERN(long) jdiv_round_up JPP((long a, long b));
 EXTERN(long) jround_up JPP((long a, long b));
 EXTERN(void) jcopy_sample_rows JPP((JSAMPARRAY input_array,
 				    JSAMPARRAY output_array,
-				    int num_rows, JDIMENSION num_cols));
+				    ::i32 num_rows, JDIMENSION num_cols));
 EXTERN(void) jcopy_block_row JPP((JBLOCKROW input_row, JBLOCKROW output_row,
 				  JDIMENSION num_blocks));
 /* Constant tables in jutils.c */
 #if 0				/* This table is not actually needed in v6a */
-extern const int jpeg_zigzag_order[]; /* natural coef order to zigzag order */
+extern const ::i32 jpeg_zigzag_order[]; /* natural coef order to zigzag order */
 #endif
-extern const int jpeg_natural_order[]; /* zigzag coef order to natural order */
-extern const int jpeg_natural_order7[]; /* zz to natural order for 7x7 block */
-extern const int jpeg_natural_order6[]; /* zz to natural order for 6x6 block */
-extern const int jpeg_natural_order5[]; /* zz to natural order for 5x5 block */
-extern const int jpeg_natural_order4[]; /* zz to natural order for 4x4 block */
-extern const int jpeg_natural_order3[]; /* zz to natural order for 3x3 block */
-extern const int jpeg_natural_order2[]; /* zz to natural order for 2x2 block */
+extern const ::i32 jpeg_natural_order[]; /* zigzag coef order to natural order */
+extern const ::i32 jpeg_natural_order7[]; /* zz to natural order for 7x7 block */
+extern const ::i32 jpeg_natural_order6[]; /* zz to natural order for 6x6 block */
+extern const ::i32 jpeg_natural_order5[]; /* zz to natural order for 5x5 block */
+extern const ::i32 jpeg_natural_order4[]; /* zz to natural order for 4x4 block */
+extern const ::i32 jpeg_natural_order3[]; /* zz to natural order for 3x3 block */
+extern const ::i32 jpeg_natural_order2[]; /* zz to natural order for 2x2 block */
 
 /* Arithmetic coding probability estimation tables in jaricom.c */
-extern const int jpeg_aritab[];
+extern const ::i32 jpeg_aritab[];
 
 /* Suppress undefined-structure complaints if necessary. */
 

@@ -27,22 +27,22 @@
 // #include "subsystem/platform/Exception.h"
 // //#include aaa_<crtdbg.h>
 //
-// ::string::::string()
+// ::string::string()
 // {
 //  = "";
 // }
 //
-// ::string::::string(const char *string)
+// ::string::string(const_char_pointer string)
 // {
 //  = string;
 // }
 //
-// ::string::::string(const ::scoped_string & string)
+// ::string::string(const ::scoped_string & string)
 // {
 //   fromStringStorage(string);
 // }
 //
-// ::string::::string(const ::string &stringBuffer)
+// ::string::string(const ::string &stringBuffer)
 // {
 //   *this = stringBuffer;
 // }
@@ -51,7 +51,7 @@
 // {
 // }
 //
-// void ::string::setString(const char *string)
+// void ::string::setString(const_char_pointer string)
 // {
 //   if (string == 0) {
 //     string = "";
@@ -61,7 +61,7 @@
 //   memcpy(&m_buffer.front(), string, getSize());
 // }
 //
-// const char *::string::getString() const
+// const_char_pointer ::string::getString() const
 // {
 //   return &m_buffer.front();
 // }
@@ -73,7 +73,7 @@
 //
 // size_t ::string::getSize() const
 // {
-//   return m_buffer.size() * sizeof(char);
+//   return m_buffer.size() * sizeof(::i8);
 // }
 //
 // bool ::string::is_empty() const
@@ -87,14 +87,14 @@
 //  = src;
 // #else
 //   // WideCharToMultiByte returns result length including terminating null character
-//   int symbolCount = WideCharToMultiByte(CP_ACP, 0, src, -1,
+//   ::i32 symbolCount = WideCharToMultiByte(CP_ACP, 0, src, -1,
 //                                         NULL, 0, NULL, NULL);
 //
 //   // Allocate space for the requred size
 //   m_buffer.resize(symbolCount);
 //
 //   // Convert to ansi
-//   int constrSize = (int)m_buffer.size();
+//   ::i32 constrSize = (::i32)m_buffer.size();
 //   _ASSERT(constrSize == m_buffer.size());
 //   WideCharToMultiByte(CP_ACP, 0, src, -1,
 //                       &m_buffer.front(), symbolCount, NULL, NULL);
@@ -106,10 +106,10 @@
 // #ifndef _UNICODE
 //   dst-= getString();
 // #else
-//   int symbolCount = (int)getSize();
+//   ::i32 symbolCount = (::i32)getSize();
 //   _ASSERT(symbolCount == getSize());
 //   ::array_base<WCHAR> unicodeBuffer(symbolCount);
-//   int result = MultiByteToWideChar(CP_ACP, 0, &m_buffer.front(),
+//   ::i32 result = MultiByteToWideChar(CP_ACP, 0, &m_buffer.front(),
 //                                    symbolCount,
 //                                    &unicodeBuffer.front(),
 //                                    symbolCount);
@@ -121,12 +121,12 @@
 // #endif
 // }
 //
-// void ::string::format(const char *format, ...)
+// void ::string::format(const_char_pointer format, ...)
 // {
 //   va_list vl;
 //
 //   va_start(vl, format);
-//   int count = _vscprintf(format, vl);
+//   ::i32 count = _vscprintf(format, vl);
 //   va_end(vl);
 //
 //   m_buffer.resize(count + 1);
@@ -136,7 +136,7 @@
 //   va_end(vl);
 // }
 //
-// void ::string::appendString(const char *string)
+// void ::string::appendString(const_char_pointer string)
 // {
 //   if (string == 0) {
 //     return;

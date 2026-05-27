@@ -198,7 +198,7 @@ jpeg_finish_compress (j_compress_ptr cinfo)
 
 GLOBAL(void)
 jpeg_write_marker (j_compress_ptr cinfo, int marker,
-		   const JOCTET *dataptr, unsigned int datalen)
+		   const JOCTET *dataptr, ::u32 datalen)
 {
   JMETHOD(void, write_marker_byte, (j_compress_ptr info, int val));
 
@@ -219,7 +219,7 @@ jpeg_write_marker (j_compress_ptr cinfo, int marker,
 /* Same, but piecemeal. */
 
 GLOBAL(void)
-jpeg_write_m_header (j_compress_ptr cinfo, int marker, unsigned int datalen)
+jpeg_write_m_header (j_compress_ptr cinfo, int marker, ::u32 datalen)
 {
   if (cinfo->next_scanline != 0 ||
       (cinfo->global_state != CSTATE_SCANNING &&

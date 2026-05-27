@@ -34,11 +34,11 @@
 #endif
 
 typedef bool (WINAPI *SetFilterEx)(HWND hWnd,
-                                   unsigned int scopedstrMessage,
+                                   ::u32 scopedstrMessage,
                                    DWORD action,
-                                   unsigned int *reserved
+                                   ::u32 *reserved
                                    );
-typedef bool (WINAPI *SetFilter)(unsigned int scopedstrMessage,
+typedef bool (WINAPI *SetFilter)(::u32 scopedstrMessage,
                                  DWORD action);
 
 UipiControl::UipiControl(::subsystem::LogWriter * plogwriter)
@@ -50,7 +50,7 @@ UipiControl::~UipiControl()
 {
 }
 
-void UipiControl::allowMessage(unsigned int uMessage, const ::operating_system::window & operatingsystemwindow)
+void UipiControl::allowMessage(::u32 uMessage, const ::operating_system::window & operatingsystemwindow)
 {
   m_plogwriter->information("Try allow to receive the %u windows uMessage");
   if (::system()->node()->_windows_isVistaOrLater()) {

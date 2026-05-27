@@ -534,7 +534,7 @@ namespace remoting
             AutoLock l(m_prfboutputgate);
 
             m_prfboutputgate->writeUInt32(FTMessage::MD5_REPLY);
-            m_prfboutputgate->write((const char *)md5calculator.getHash(), 16);
+            m_prfboutputgate->write((const_char_pointer )md5calculator.getHash(), 16);
 
             m_prfboutputgate->flush();
          }
@@ -623,7 +623,7 @@ namespace remoting
          compressionLevel = m_prfbinputgate->readUInt8();
          compressedSize = m_prfbinputgate->readUInt32();
          uncompressedSize = m_prfbinputgate->readUInt32();
-         //std::vector<char> buffer(compressedSize);
+         //std::vector<::i8> buffer(compressedSize);
          memory buffer;
          buffer.set_size(compressedSize);
          if (compressedSize != 0) {
@@ -826,7 +826,7 @@ namespace remoting
          //    throw FileTransferException("No active download at the moment");
          // }
          //
-         // std::vector<char> buffer(dataSize);
+         // std::vector<::i8> buffer(dataSize);
          memory buffer;
          buffer.set_size(dataSize);
          //
@@ -900,7 +900,7 @@ namespace remoting
                m_prfboutputgate->write(buffer.data(), uncompressedSize);
             }
          } else {
-            m_prfboutputgate->write((const char *)m_deflater.getOutput(), compressedSize);
+            m_prfboutputgate->write((const_char_pointer )m_deflater.getOutput(), compressedSize);
          }
 
          m_prfboutputgate->flush();
@@ -911,7 +911,7 @@ namespace remoting
          lastRequestFailed(storage);
       }
 
-      void FileTransferRequestHandler::lastRequestFailed(const char *description)
+      void FileTransferRequestHandler::lastRequestFailed(const_char_pointer description)
       {
          m_plogwriter->error("last request failed: \"%s\"", description);
 
@@ -925,7 +925,7 @@ namespace remoting
          }
       }
 
-      bool FileTransferRequestHandler::getDirectorySize(const char *pathname, filesize *dirSize)
+      bool FileTransferRequestHandler::getDirectorySize(const_char_pointer pszPathname, filesize *dirSize)
       {
          throw "todo";
 

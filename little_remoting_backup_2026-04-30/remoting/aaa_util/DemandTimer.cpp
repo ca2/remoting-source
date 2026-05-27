@@ -24,7 +24,7 @@
 #include "framework.h"
 #include "DemandTimer.h"
 
-DemandTimer::DemandTimer(unsigned long long intervalMillis)
+DemandTimer::DemandTimer(::u64 intervalMillis)
 : m_intervalMillis(intervalMillis)
 {
   reset();

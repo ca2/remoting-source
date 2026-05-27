@@ -60,16 +60,16 @@ namespace remoting
       output->writeUInt8(0);
 
       // send pixel format
-      output->writeUInt8(static_cast<unsigned char>(m_pixelformat.bitsPerPixel));
-      output->writeUInt8(static_cast<unsigned char>(m_pixelformat.colorDepth));
+      output->writeUInt8(static_cast<::u8>(m_pixelformat.bitsPerPixel));
+      output->writeUInt8(static_cast<::u8>(m_pixelformat.colorDepth));
       output->writeUInt8(m_pixelformat.bigEndian);
       output->writeUInt8(true); // true color is always true
       output->writeUInt16(m_pixelformat.redMax);
       output->writeUInt16(m_pixelformat.greenMax);
       output->writeUInt16(m_pixelformat.blueMax);
-      output->writeUInt8(static_cast<unsigned char>(m_pixelformat.redShift));
-      output->writeUInt8(static_cast<unsigned char>(m_pixelformat.greenShift));
-      output->writeUInt8(static_cast<unsigned char>(m_pixelformat.blueShift));
+      output->writeUInt8(static_cast<::u8>(m_pixelformat.redShift));
+      output->writeUInt8(static_cast<::u8>(m_pixelformat.greenShift));
+      output->writeUInt8(static_cast<::u8>(m_pixelformat.blueShift));
       output->writeUInt8(0); // padding bytes (3)
       output->writeUInt8(0);
       output->writeUInt8(0);
