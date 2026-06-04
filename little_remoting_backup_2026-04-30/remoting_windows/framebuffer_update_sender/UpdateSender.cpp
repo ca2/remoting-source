@@ -249,7 +249,7 @@ UpdateSender::UpdateSender() :
       }
       else
       {
-         ::int_rectangle_array_base screens = m_pdesktop->getDisplaysCoords();
+         ::i32_rectangle_array_base screens = m_pdesktop->getDisplaysCoords();
          if (screens.size() > 255)
          {
             screens.resize(255);
@@ -284,7 +284,7 @@ UpdateSender::UpdateSender() :
 
       ::i32_rectangle rectangleForRegion(size);
       Region region(rectangleForRegion);
-      ::int_rectangle_array_base rectanglea;
+      ::i32_rectangle_array_base rectanglea;
       splitRegion(m_pencoderstore->getEncoder(), region, rectanglea, &blankFramebuffer, encodeOptions);
 
       // Header
@@ -326,7 +326,7 @@ UpdateSender::UpdateSender() :
    }
 
 
-   void UpdateSender::sendCopyRect(const ::int_rectangle_array_base & rectanglea, const ::i32_point & pointSource)
+   void UpdateSender::sendCopyRect(const ::i32_rectangle_array_base & rectanglea, const ::i32_point & pointSource)
    {
 
       for (auto rectangle : rectanglea)
@@ -572,18 +572,18 @@ UpdateSender::UpdateSender() :
 
          // Convert m_regionChanged to the final ::list_base of rectangles.
          m_plogwriter->debug("Number of normal rectangles before splitting: {}", m_regionChanged.getCount());
-         ::int_rectangle_array_base rectangleaNormal;
+         ::i32_rectangle_array_base rectangleaNormal;
          splitRegion(m_pencoderstore->getEncoder(), m_regionChanged, rectangleaNormal, pframebuffer, &encodeOptions);
 
          // Convert regionLossless to the final ::list_base of rectangles.
-         ::int_rectangle_array_base rectangleaLossless;
+         ::i32_rectangle_array_base rectangleaLossless;
          if (losslessEnabled && !regionLossless.is_empty())
          {
             m_plogwriter->debug("Number of lossless rectangles before splitting: {}", regionLossless.getCount());
             splitRegion(m_pencoderstore->getEncoder(), regionLossless, rectangleaLossless, pframebuffer, &losslessEncodeOptions);
          }
          // Do the same for the m_regionVideo.
-         ::int_rectangle_array_base rectangleaVideo;
+         ::i32_rectangle_array_base rectangleaVideo;
          if (!m_regionVideo.is_empty())
          {
             m_plogwriter->debug("Video region is not empty");
@@ -592,7 +592,7 @@ UpdateSender::UpdateSender() :
          }
 
          // Get the final ::list_base of CopyRect rectangles.
-         ::int_rectangle_array_base rectangleaCopy;
+         ::i32_rectangle_array_base rectangleaCopy;
          updatecontainer.m_regionCopied.getRects(rectangleaCopy);
 
          m_plogwriter->debug("Number of normal rectangles: {}", rectangleaNormal.size());
@@ -694,7 +694,7 @@ UpdateSender::UpdateSender() :
 
    void UpdateSender::paintBlack(::innate_subsystem::Framebuffer *pframebuffer, const Region & regionBlack)
    {
-      ::int_rectangle_array_base rectangleaBlack;
+      ::i32_rectangle_array_base rectangleaBlack;
       regionBlack.getRects(rectangleaBlack);
       for (size_t i = 0; i < rectangleaBlack.size(); i++)
       {
@@ -702,24 +702,24 @@ UpdateSender::UpdateSender() :
       }
    }
 
-   void UpdateSender::splitRegion(Encoder *encoder, const Region & region, ::int_rectangle_array_base & rectanglea,
+   void UpdateSender::splitRegion(Encoder *encoder, const Region & region, ::i32_rectangle_array_base & rectanglea,
                                   const ::innate_subsystem::Framebuffer *pframebuffer,
                                   const EncodeOptions *encodeOptions)
    {
-      ::int_rectangle_array_base rectangleaBase;
+      ::i32_rectangle_array_base rectangleaBase;
       region.getRects(rectangleaBase);
-      ::int_rectangle_array_base::iterator i;
+      ::i32_rectangle_array_base::iterator i;
       for (i = rectangleaBase.begin(); i != rectangleaBase.end(); i++)
       {
          encoder->splitRectangle(*i, rectanglea, pframebuffer, encodeOptions);
       }
    }
 
-   void UpdateSender::sendRectangles(Encoder *encoder, const ::int_rectangle_array_base & rectanglea,
+   void UpdateSender::sendRectangles(Encoder *encoder, const ::i32_rectangle_array_base & rectanglea,
                                      const ::innate_subsystem::Framebuffer *pframebuffer,
                                      const EncodeOptions *encodeOptions)
    {
-      //::int_rectangle_array_base::const_iterator i;
+      //::i32_rectangle_array_base::const_iterator i;
       for (auto & rectangle : rectanglea)
       {
          sendRectHeader(rectangle, encoder->getCode());
@@ -1042,7 +1042,7 @@ UpdateSender::UpdateSender() :
    Region UpdateSender::takePartFromRegion(Region & region, ::i32 area)
    {
       Region out;
-      ::int_rectangle_array_base rectanglea;
+      ::i32_rectangle_array_base rectanglea;
       region.getRects(rectanglea);
       // process region rectanglea form last one, I hope it can reduce allocation number for region structure
       for (::i32 i = rectanglea.size() - 1; i >= 0 && area > 0; i--)
@@ -1062,7 +1062,7 @@ UpdateSender::UpdateSender() :
       return out;
    }
 
-   ::i32 UpdateSender::calcAreas(::int_rectangle_array_base rectanglea)
+   ::i32 UpdateSender::calcAreas(::i32_rectangle_array_base rectanglea)
    {
       ::i32 sum = 0;
       for (size_t i = 0; i < rectanglea.size(); i++)

@@ -74,7 +74,7 @@ namespace remoting
    }
 
    void WinVideoRegionUpdaterImpl::getClassNamesAndRectsFromConfig(::string_array &classNames,
-                                                                   ::int_rectangle_array_base &rectanglea)
+                                                                   ::i32_rectangle_array_base &rectanglea)
    {
       ::remoting_node::ServerConfig *pserverconfig = m_pconfigurator->getServerConfig();
       critical_section_lock al(pserverconfig);
@@ -85,7 +85,7 @@ namespace remoting
    void WinVideoRegionUpdaterImpl::updateVideoRegion()
    {
       ::string_array classNames;
-      ::int_rectangle_array_base rectanglea;
+      ::i32_rectangle_array_base rectanglea;
       getClassNamesAndRectsFromConfig(classNames, rectanglea);
       Region tmpRegion;
       m_plogwriter->debug(L"WinVideoRegionUpdaterImpl: ClassNames {}, Rects {}", classNames.size(),
@@ -144,9 +144,9 @@ namespace remoting
       return vidRegion;
    }
 
-   Region WinVideoRegionUpdaterImpl::getRectsByCoords(::int_rectangle_array_base &rectanglea)
+   Region WinVideoRegionUpdaterImpl::getRectsByCoords(::i32_rectangle_array_base &rectanglea)
    {
-      ::int_rectangle_array_base::iterator rIter;
+      ::i32_rectangle_array_base::iterator rIter;
       ::i32_rectangle rectangleVideo;
       Region vidRegion;
       for (rIter = rectanglea.begin(); rIter != rectanglea.end(); rIter++)

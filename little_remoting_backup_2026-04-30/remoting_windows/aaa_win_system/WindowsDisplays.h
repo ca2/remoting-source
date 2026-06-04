@@ -39,10 +39,10 @@ public:
   // If a display does not exist now the function return an empty rectangle.
   void getDisplayCoordinates(::u8 displayNumber, ::i32_rectangle rectangle);
 
-  ::int_rectangle_array_base getDisplaysCoords();
+  ::i32_rectangle_array_base getDisplaysCoords();
 
   // Returns a ::array_base that contain dispalys coordinates at the current time.
-  ::int_rectangle_array_base getDisplays();
+  ::i32_rectangle_array_base getDisplays();
 
 private:
   // Updates internal information to a current state.
@@ -59,7 +59,7 @@ private:
   ::i32 m_xVirtualScreen;
   ::i32 m_yVirtualScreen;
 
-  ::int_rectangle_array_base m_displayRects;
+  ::i32_rectangle_array_base m_displayRects;
   lockable_critical_section m_displayRectsMutex;
   
   static const ::u32 UPDATE_INTERVAL = 3000;

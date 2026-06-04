@@ -127,8 +127,8 @@ namespace remoting
       m_plogwriter->debug("UpdateHandlerServer: Send video region");
       sendRegion(&updatecontainer.m_regionVideo, pblockinggate);
       // Send changed region
-      ::int_rectangle_array_base rectanglea;
-      ::int_rectangle_array_base::iterator iRect;
+      ::i32_rectangle_array_base rectanglea;
+      ::i32_rectangle_array_base::iterator iRect;
       updatecontainer.m_regionChanged.getRects(&rectanglea);
       ::u32 countChangedRect = (::u32)rectanglea.size();
       _ASSERT(countChangedRect == rectanglea.size());

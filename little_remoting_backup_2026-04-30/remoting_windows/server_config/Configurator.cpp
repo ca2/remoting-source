@@ -426,7 +426,7 @@ namespace remoting
       ::string buffer;
       ::string_array *videoClasses = m_pserverconfig.getVideoClassNames();
       size_t size = videoClasses->size();
-      ::int_rectangle_array_base *rectangleaVideo = m_pserverconfig.getVideoRects();
+      ::i32_rectangle_array_base *rectangleaVideo = m_pserverconfig.getVideoRects();
 
       AutoLock al(&m_pserverconfig);
       buffer = "";
@@ -467,7 +467,7 @@ namespace remoting
       bool loadResult = true;
 
       ::string_array *videoClasses = m_pserverconfig.getVideoClassNames();
-      ::int_rectangle_array_base *rectangleaVideo = m_pserverconfig.getVideoRects();
+      ::i32_rectangle_array_base *rectangleaVideo = m_pserverconfig.getVideoRects();
 
       // Lock configuration
       AutoLock al(&m_pserverconfig);

@@ -433,7 +433,7 @@ namespace remoting_node
       ::string buffer;
       ::string_array *videoClasses = m_pserverconfig->getVideoClassNames();
       size_t size = videoClasses->size();
-      ::int_rectangle_array_base *rectangleaVideo = m_pserverconfig->getVideoRects();
+      ::i32_rectangle_array_base *rectangleaVideo = m_pserverconfig->getVideoRects();
 
       AutoLock l(m_pserverconfig.m_p);
       buffer = "";
@@ -474,7 +474,7 @@ namespace remoting_node
       bool loadResult = true;
 
       ::string_array *videoClasses = m_pserverconfig->getVideoClassNames();
-      ::int_rectangle_array_base *rectangleaVideo = m_pserverconfig->getVideoRects();
+      ::i32_rectangle_array_base *rectangleaVideo = m_pserverconfig->getVideoRects();
 
       // Lock configuration
       AutoLock l(m_pserverconfig.m_p);

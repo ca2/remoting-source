@@ -758,7 +758,7 @@ void ::remoting_node::ServerConfig::setVideoRecognitionInterval(::u32 interval)
   m_videoRecognitionInterval = interval;
 }
 
-::int_rectangle_array_base *::remoting_node::ServerConfig::getVideoRects()
+::i32_rectangle_array_base *::remoting_node::ServerConfig::getVideoRects()
 {
   return &m_videoRects;
 }

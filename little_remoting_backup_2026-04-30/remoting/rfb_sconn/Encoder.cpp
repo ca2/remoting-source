@@ -43,7 +43,7 @@ namespace remoting
    }
 
    void Encoder::splitRectangle(const ::i32_rectangle &  rectangle,
-                                ::int_rectangle_array_base & rectanglea,
+                                ::i32_rectangle_array_base & rectanglea,
                                 const ::innate_subsystem::Framebuffer *serverFb,
                                 const EncodeOptions *options)
    {

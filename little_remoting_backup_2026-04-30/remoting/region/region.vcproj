@@ -579,7 +579,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\::int_rectangle.h"
+				RelativePath=".\::i32_rectangle.h"
 				>
 			</File>
 			<File

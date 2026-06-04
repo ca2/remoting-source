@@ -146,13 +146,13 @@ namespace remoting
        * @param dst pointer to an ::array_base where the ::list_base of rectangles will be
        *            saved to. The previous contents of the ::array_base will be cleared.
        */
-      void getRects(::int_rectangle_array_base & rectanglea) const;
+      void getRects(::i32_rectangle_array_base & rectanglea) const;
       /**
        * Get the ::list_base of rectangles that constitute this region.
        * @param dst pointer to an ::list_base where the ::list_base of rectangles will be
        *            saved to. The previous contents of the ::list_base will be cleared.
        */
-      ::int_rectangle_array_base getRects() const;
+      ::i32_rectangle_array_base getRects() const;
 
       // Returns count of rectangles in the region.
       size_t getCount() const;

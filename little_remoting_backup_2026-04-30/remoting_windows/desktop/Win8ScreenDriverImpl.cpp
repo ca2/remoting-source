@@ -156,7 +156,7 @@ namespace remoting_windows
       ::remoting::Region virtDeskRegion;
       m_plogwriter->debug("Try to enumerate dxgi outputs");
       ::pointer_array<WinDxgiOutput> dxgiOutputArray;
-      ::int_rectangle_array_base deskCoordArray;
+      ::i32_rectangle_array_base deskCoordArray;
       ::u32 iOutput = 0;
       try
       {

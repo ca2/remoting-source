@@ -79,7 +79,7 @@ void WindowsDisplays::getDisplayCoordinates(::u8 displayNumber,
   }
 }
 
-::int_rectangle_array_base WindowsDisplays::getDisplaysCoords()
+::i32_rectangle_array_base WindowsDisplays::getDisplaysCoords()
 {
   critical_section_lock al(&m_displayRectsMutex);
   update();
@@ -95,7 +95,7 @@ bool WindowsDisplays::isAlreadyUpdated()
   }
 }
 
-::int_rectangle_array_base WindowsDisplays::getDisplays()
+::i32_rectangle_array_base WindowsDisplays::getDisplays()
 {
   update();
   return m_displayRects;

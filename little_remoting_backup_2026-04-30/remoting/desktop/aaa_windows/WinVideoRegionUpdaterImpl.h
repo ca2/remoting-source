@@ -48,10 +48,10 @@ namespace remoting
    private:
       virtual Region getVideoRegion();
       void updateVideoRegion();
-      void getClassNamesAndRectsFromConfig(::string_array &classNames, ::int_rectangle_array_base &rectanglea);
+      void getClassNamesAndRectsFromConfig(::string_array &classNames, ::i32_rectangle_array_base &rectanglea);
       ::u32 WinVideoRegionUpdaterImpl::getInterval();
       Region getRectsByClass(::string_array classNames);
-      Region getRectsByCoords(::int_rectangle_array_base &rectanglea);
+      Region getRectsByCoords(::i32_rectangle_array_base &rectanglea);
 
       class ::time m_timeLastVideoUpdate;
       Region m_regionVideo;

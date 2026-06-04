@@ -208,7 +208,7 @@ namespace remoting
       m_winDisplays.getDisplayCoordinates(dispNumber, rectangle);
    }
 
-   ::int_rectangle_array_base WindowsUserInput::getDisplaysCoords() { return m_winDisplays.getDisplaysCoords(); }
+   ::i32_rectangle_array_base WindowsUserInput::getDisplaysCoords() { return m_winDisplays.getDisplaysCoords(); }
 
    void WindowsUserInput::getNormalizedRect(::i32_rectangle rectangle) { toFbCoordinates(rectangle); }
 

@@ -50,7 +50,7 @@ namespace remoting
       // Vgrab - is a grab velocity,
       // N - is number of rectangles to grab,
       // g - overhead time costs adding on each grabbed rectangle.
-      //::int_rectangle_array_base rectanglea;
+      //::i32_rectangle_array_base rectanglea;
       auto rectanglea = regionGrab.getRects();
       ::i32_rectangle rectangleBounds = regionGrab.getBounds();
       ::i32 boundsRectS = rectangleBounds.area();
@@ -169,7 +169,7 @@ namespace remoting
       }
    }
 
-   ::i32 GrabOptimizator::getArea(const ::int_rectangle_array_base & rectanglea)
+   ::i32 GrabOptimizator::getArea(const ::i32_rectangle_array_base & rectanglea)
    {
       ::i32 result = 0;
       for (size_t i = 0; i < rectanglea.size(); i++)
@@ -179,7 +179,7 @@ namespace remoting
       return result;
    }
 
-   bool GrabOptimizator::isAlikeToWhole(const ::int_rectangle_array_base & rectanglea)
+   bool GrabOptimizator::isAlikeToWhole(const ::i32_rectangle_array_base & rectanglea)
    {
       ::i32 area = getArea(rectanglea);
       if (area < 1)
@@ -199,7 +199,7 @@ namespace remoting
       return m_wholeS / rectangle.area() <= 9; // area >= 10%
    }
 
-   bool GrabOptimizator::isAlikeToFragments(const ::int_rectangle_array_base & rectanglea) { return rectanglea.size() >= 10; }
+   bool GrabOptimizator::isAlikeToFragments(const ::i32_rectangle_array_base & rectanglea) { return rectanglea.size() >= 10; }
 
    ::i64 GrabOptimizator::grabWhole(ScreenDriver *grabber)
    {
@@ -283,13 +283,13 @@ namespace remoting
       m_wholeTElements.erase(iter);
    }
 
-   ::i64 GrabOptimizator::grabFragments(const ::int_rectangle_array_base & rectanglea, ScreenDriver *grabber)
+   ::i64 GrabOptimizator::grabFragments(const ::i32_rectangle_array_base & rectanglea, ScreenDriver *grabber)
    {
       // FIXME: WARNING!!! The microsoft API usage!!!
       LARGE_INTEGER timeBegin, timeEnd;
       bool timerResult1 = QueryPerformanceCounter(&timeBegin) != 0;
 
-      ::int_rectangle_array_base::const_iterator iRect;
+      ::i32_rectangle_array_base::const_iterator iRect;
       for (iRect = rectanglea.begin(); iRect < rectanglea.end(); iRect++)
       {
          if (!grabber->grabFb((*iRect)))

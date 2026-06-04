@@ -68,10 +68,10 @@ namespace remoting_windows
    //private:
       virtual ::remoting::Region getVideoRegion();
       void updateVideoRegion();
-      void getClassNamesAndRectsFromConfig(::string_array &classNames, ::int_rectangle_array_base &rectanglea);
+      void getClassNamesAndRectsFromConfig(::string_array &classNames, ::i32_rectangle_array_base &rectanglea);
       ::u32 getInterval();
       ::remoting::Region getRectsByClass(::string_array classNames);
-      ::remoting::Region getRectsByCoords(::int_rectangle_array_base &rectanglea);
+      ::remoting::Region getRectsByCoords(::i32_rectangle_array_base &rectanglea);
 
    };
 
