@@ -52,22 +52,22 @@ void Inflater::setUnpackedSize(size_t size)
 
 void Inflater::inflate()
 {
-  size_t avaliableOutput = m_unpackedSize + m_unpackedSize / 100 + 1024;
+  size_t availableOutput = m_unpackedSize + m_unpackedSize / 100 + 1024;
   ulong prevTotalOut = m_zlibStream.total_out;
 
   // Check to overflow.
-  ::u32 constrainedValue = (::u32)avaliableOutput;
-  _ASSERT(avaliableOutput == constrainedValue);
+  ::u32 constrainedValue = (::u32)availableOutput;
+  _ASSERT(availableOutput == constrainedValue);
   constrainedValue = (::u32)m_inputSize;
   _ASSERT(m_inputSize == constrainedValue);
 
-  m_output.set_size(avaliableOutput);
+  m_output.set_size(availableOutput);
 
   m_zlibStream.next_in = (Bytef *)m_input;
   m_zlibStream.avail_in = (::u32)m_inputSize;
 
   m_zlibStream.next_out = (Bytef *)m_output.data();
-  m_zlibStream.avail_out = (::u32)avaliableOutput;
+  m_zlibStream.avail_out = (::u32)availableOutput;
 
   ::i32 r = ::inflate(&m_zlibStream, Z_SYNC_FLUSH);
 

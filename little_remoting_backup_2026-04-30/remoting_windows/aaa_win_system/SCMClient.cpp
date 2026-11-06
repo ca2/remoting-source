@@ -28,7 +28,7 @@
 #include "subsystem/thread/Thread.h"
 
 ServiceControlManagerClientException::ServiceControlManagerClientException(::i32 scmErrCode)
-: SystemException("[::subsystem::Exception description is not avaliable]")
+: SystemException("[::subsystem::Exception description is not available]")
 {
   switch (scmErrCode) {
   case ERROR_ALREADY_STOPPED:
