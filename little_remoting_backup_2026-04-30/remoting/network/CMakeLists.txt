@@ -5,8 +5,8 @@ project(remoting_network)
 list(APPEND library_source
    _.cpp
    _.h
-   framework.cpp
-   framework.h
+   platform.cpp
+   platform.h
    socket/sockdefs.h
    socket/SocketAddressIPv4.cpp
    socket/SocketAddressIPv4.h
@@ -50,8 +50,8 @@ add_library(${PROJECT_NAME} STATIC ${library_source})
 
 #target_link_directories(${PROJECT_NAME} PRIVATE ${library_link_directories})
 
-target_precompile_headers(${PROJECT_NAME} PRIVATE framework.h)
-#target_precompile_headers(static_${PROJECT_NAME} PRIVATE framework.h)
+target_precompile_headers(${PROJECT_NAME} PRIVATE platform.h)
+#target_precompile_headers(static_${PROJECT_NAME} PRIVATE platform.h)
 
 #set_target_properties(${PROJECT_NAME} PROPERTIES LINKER_LANGUAGE CXX)
 

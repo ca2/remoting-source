@@ -261,7 +261,7 @@
     <ClCompile Include="EncodeOptions.cpp" />
     <ClCompile Include="Encoder.cpp" />
     <ClCompile Include="EncoderStore.cpp" />
-    <ClCompile Include="framework.cpp">
+    <ClCompile Include="platform.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DebugNoUnicode|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
@@ -295,7 +295,7 @@
     <ClInclude Include="EncodeOptions.h" />
     <ClInclude Include="Encoder.h" />
     <ClInclude Include="EncoderStore.h" />
-    <ClInclude Include="framework.h" />
+    <ClInclude Include="platform.h" />
     <ClInclude Include="HextileEncoder.h" />
     <ClInclude Include="HextileTile.h" />
     <ClInclude Include="JpegCompressor.h" />

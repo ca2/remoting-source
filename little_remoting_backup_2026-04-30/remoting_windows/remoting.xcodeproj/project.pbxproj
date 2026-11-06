@@ -143,13 +143,13 @@
 		9A3742C62F816B3000E892B1 /* JpegQualityLevel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A37415A2F81656200E892B1 /* JpegQualityLevel.cpp */; };
 		9A3742C72F816B3000E892B1 /* CapabilitiesManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A37413B2F81656200E892B1 /* CapabilitiesManager.cpp */; };
 		9A3742C82F816B3000E892B1 /* TightDecoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A3741802F81656200E892B1 /* TightDecoder.cpp */; };
-		9A3743F02F816DA300E892B1 /* framework.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A3743EC2F816DA300E892B1 /* framework.h */; };
+		9A3743F02F816DA300E892B1 /* platform.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A3743EC2F816DA300E892B1 /* platform.h */; };
 		9A3743F12F816DA300E892B1 /* remoting.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A3743EE2F816DA300E892B1 /* remoting.h */; };
 		9A3743F22F816DA300E892B1 /* _.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A3743E62F816DA300E892B1 /* _.h */; };
 		9A3743F32F816DA300E892B1 /* EOFException.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A3743EA2F816DA300E892B1 /* EOFException.h */; };
 		9A3743F42F816DA300E892B1 /* remoting.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A3743EF2F816DA300E892B1 /* remoting.cpp */; };
 		9A3743F52F816DA300E892B1 /* EOFException.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A3743EB2F816DA300E892B1 /* EOFException.cpp */; };
-		9A3743F62F816DA300E892B1 /* framework.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A3743ED2F816DA300E892B1 /* framework.cpp */; };
+		9A3743F62F816DA300E892B1 /* platform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A3743ED2F816DA300E892B1 /* platform.cpp */; };
 		9A3743F72F816DA300E892B1 /* _.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A3743E72F816DA300E892B1 /* _.cpp */; };
 /* End PBXBuildFile section */
 
@@ -480,8 +480,8 @@
 		9A3743E92F816DA300E892B1 /* _____release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "_____release.xcconfig"; sourceTree = "<group>"; };
 		9A3743EA2F816DA300E892B1 /* EOFException.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EOFException.h; sourceTree = "<group>"; };
 		9A3743EB2F816DA300E892B1 /* EOFException.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EOFException.cpp; sourceTree = "<group>"; };
-		9A3743EC2F816DA300E892B1 /* framework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = framework.h; sourceTree = "<group>"; };
-		9A3743ED2F816DA300E892B1 /* framework.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = framework.cpp; sourceTree = "<group>"; };
+		9A3743EC2F816DA300E892B1 /* platform.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = platform.h; sourceTree = "<group>"; };
+		9A3743ED2F816DA300E892B1 /* platform.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = platform.cpp; sourceTree = "<group>"; };
 		9A3743EE2F816DA300E892B1 /* remoting.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = remoting.h; sourceTree = "<group>"; };
 		9A3743EF2F816DA300E892B1 /* remoting.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = remoting.cpp; sourceTree = "<group>"; };
 		9A3743F82F816DF200E892B1 /* apex.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = apex.xcodeproj; path = ../../app/apex/apex.xcodeproj; sourceTree = SOURCE_ROOT; };
@@ -541,8 +541,8 @@
 				9A3743E92F816DA300E892B1 /* _____release.xcconfig */,
 				9A3743EA2F816DA300E892B1 /* EOFException.h */,
 				9A3743EB2F816DA300E892B1 /* EOFException.cpp */,
-				9A3743EC2F816DA300E892B1 /* framework.h */,
-				9A3743ED2F816DA300E892B1 /* framework.cpp */,
+				9A3743EC2F816DA300E892B1 /* platform.h */,
+				9A3743ED2F816DA300E892B1 /* platform.cpp */,
 				9A3743EE2F816DA300E892B1 /* remoting.h */,
 				9A3743EF2F816DA300E892B1 /* remoting.cpp */,
 			);
@@ -943,7 +943,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9A3743F02F816DA300E892B1 /* framework.h in Headers */,
+				9A3743F02F816DA300E892B1 /* platform.h in Headers */,
 				9A3743F12F816DA300E892B1 /* remoting.h in Headers */,
 				9A3743F22F816DA300E892B1 /* _.h in Headers */,
 				9A3743F32F816DA300E892B1 /* EOFException.h in Headers */,
@@ -1136,7 +1136,7 @@
 				9A3742952F816AEF00E892B1 /* Exception.cpp in Sources */,
 				9A3743F42F816DA300E892B1 /* remoting.cpp in Sources */,
 				9A3743F52F816DA300E892B1 /* EOFException.cpp in Sources */,
-				9A3743F62F816DA300E892B1 /* framework.cpp in Sources */,
+				9A3743F62F816DA300E892B1 /* platform.cpp in Sources */,
 				9A3743F72F816DA300E892B1 /* _.cpp in Sources */,
 				9A3742962F816AEF00E892B1 /* CommandLineFormatHelp.cpp in Sources */,
 				9A3742972F816AEF00E892B1 /* DesCrypt.cpp in Sources */,
@@ -1259,7 +1259,7 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = framework.h;
+				GCC_PREFIX_HEADER = platform.h;
 				GCC_REUSE_STRINGS = YES;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_VERSION = "";
@@ -1383,7 +1383,7 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = framework.h;
+				GCC_PREFIX_HEADER = platform.h;
 				GCC_REUSE_STRINGS = YES;
 				GCC_VERSION = "";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;

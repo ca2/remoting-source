@@ -61,8 +61,8 @@
 		9A26B2572F816ED30047ECA2 /* FileRenameDialog.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FileRenameDialog.cpp; sourceTree = "<group>"; };
 		9A26B2582F816ED30047ECA2 /* FileTransferMainDialog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileTransferMainDialog.h; sourceTree = "<group>"; };
 		9A26B2592F816ED30047ECA2 /* FileTransferMainDialog.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FileTransferMainDialog.cpp; sourceTree = "<group>"; };
-		9A26B25A2F816ED30047ECA2 /* framework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = framework.h; sourceTree = "<group>"; };
-		9A26B25B2F816ED30047ECA2 /* framework.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = framework.cpp; sourceTree = "<group>"; };
+		9A26B25A2F816ED30047ECA2 /* platform.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = platform.h; sourceTree = "<group>"; };
+		9A26B25B2F816ED30047ECA2 /* platform.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = platform.cpp; sourceTree = "<group>"; };
 		9A26B25C2F816ED30047ECA2 /* FsWarningDialog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FsWarningDialog.h; sourceTree = "<group>"; };
 		9A26B25D2F816ED30047ECA2 /* FsWarningDialog.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FsWarningDialog.cpp; sourceTree = "<group>"; };
 		9A26B25E2F816ED30047ECA2 /* HelpDialog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HelpDialog.h; sourceTree = "<group>"; };
@@ -164,8 +164,8 @@
 				9A26B2572F816ED30047ECA2 /* FileRenameDialog.cpp */,
 				9A26B2582F816ED30047ECA2 /* FileTransferMainDialog.h */,
 				9A26B2592F816ED30047ECA2 /* FileTransferMainDialog.cpp */,
-				9A26B25A2F816ED30047ECA2 /* framework.h */,
-				9A26B25B2F816ED30047ECA2 /* framework.cpp */,
+				9A26B25A2F816ED30047ECA2 /* platform.h */,
+				9A26B25B2F816ED30047ECA2 /* platform.cpp */,
 				9A26B25C2F816ED30047ECA2 /* FsWarningDialog.h */,
 				9A26B25D2F816ED30047ECA2 /* FsWarningDialog.cpp */,
 				9A26B25E2F816ED30047ECA2 /* HelpDialog.h */,
@@ -399,7 +399,7 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = framework.h;
+				GCC_PREFIX_HEADER = platform.h;
 				GCC_REUSE_STRINGS = YES;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_VERSION = "";
@@ -523,7 +523,7 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = framework.h;
+				GCC_PREFIX_HEADER = platform.h;
 				GCC_REUSE_STRINGS = YES;
 				GCC_VERSION = "";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;

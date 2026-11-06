@@ -260,7 +260,7 @@
   <ItemGroup>
     <ClCompile Include="ConnectionConfig.cpp" />
     <ClCompile Include="ConnectionConfigSM.cpp" />
-    <ClCompile Include="framework.cpp">
+    <ClCompile Include="platform.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DebugNoUnicode|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
@@ -276,7 +276,7 @@
   <ItemGroup>
     <ClInclude Include="ConnectionConfig.h" />
     <ClInclude Include="ConnectionConfigSM.h" />
-    <ClInclude Include="framework.h" />
+    <ClInclude Include="platform.h" />
     <ClInclude Include="ViewerConfig.h" />
     <ClInclude Include="ViewerSettingsManager.h" />
     <ClInclude Include="_.h" />

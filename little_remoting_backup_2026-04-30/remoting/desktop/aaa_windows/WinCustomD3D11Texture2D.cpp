@@ -23,7 +23,7 @@
 //
 
 // The header including of this cpp file must be at last place to avoid build conflicts.
-#include "framework.h"
+#include "platform.h"
 #include "../WinCustomD3D11Texture2D.h"
 
 namespace remoting

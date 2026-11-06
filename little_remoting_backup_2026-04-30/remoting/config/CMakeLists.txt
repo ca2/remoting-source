@@ -6,8 +6,8 @@ project(remoting_config_lib)
 
 
 list(APPEND library_source
-   framework.cpp
-   framework.h
+   platform.cpp
+   platform.h
    _.h
    SettingsManager.cpp
    IniFileSettingsManager.cpp

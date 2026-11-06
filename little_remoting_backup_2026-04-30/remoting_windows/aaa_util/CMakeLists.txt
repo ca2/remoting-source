@@ -63,8 +63,8 @@ list(APPEND library_source
    Inflater.cpp
    GetCPUtime.cpp
    GetCPUtime.h
-   framework.h
-   framework.cpp
+   platform.h
+   platform.cpp
    Exception.h
    DesCrypt.h
    DesCrypt.cpp
@@ -75,8 +75,8 @@ list(APPEND library_source
    Deflater.cpp
    DateTime.h
    DateTime.cpp
-   framework.cpp
-   framework.h
+   platform.cpp
+   platform.h
 )
 
 
@@ -102,8 +102,8 @@ add_library(${PROJECT_NAME} STATIC ${library_source})
 
 #target_link_directories(${PROJECT_NAME} PRIVATE ${library_link_directories})
 
-target_precompile_headers(${PROJECT_NAME} PRIVATE framework.h)
-#target_precompile_headers(static_${PROJECT_NAME} PRIVATE framework.h)
+target_precompile_headers(${PROJECT_NAME} PRIVATE platform.h)
+#target_precompile_headers(static_${PROJECT_NAME} PRIVATE platform.h)
 
 #set_target_properties(${PROJECT_NAME} PROPERTIES LINKER_LANGUAGE CXX)
 

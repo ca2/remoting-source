@@ -3,8 +3,8 @@ project(remoting_ftp_client)
 
 
 list(APPEND library_source
-   framework.cpp
-   framework.h
+   platform.cpp
+   platform.h
    UploadOperation.h
    RemoteFileRenameOperation.h
    resource.h

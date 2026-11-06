@@ -319,7 +319,7 @@
     <ClCompile Include="DesktopServerApplication.cpp" />
     <ClCompile Include="DesktopServerCommandLine.cpp" />
     <ClCompile Include="ExtraRfbServers.cpp" />
-    <ClCompile Include="framework.cpp">
+    <ClCompile Include="platform.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DebugNoUnicode|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
@@ -361,7 +361,7 @@
     <ClInclude Include="DesktopServerApplication.h" />
     <ClInclude Include="DesktopServerCommandLine.h" />
     <ClInclude Include="ExtraRfbServers.h" />
-    <ClInclude Include="framework.h" />
+    <ClInclude Include="platform.h" />
     <ClInclude Include="LogInitListener.h" />
     <ClInclude Include="NamingDefs.h" />
     <ClInclude Include="NewConnectionEvents.h" />

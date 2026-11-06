@@ -84,8 +84,8 @@ list(APPEND library_source
    WindowProcHolder.h
    _.cpp
    _.h
-   framework.cpp
-   framework.h
+   platform.cpp
+   platform.h
    resource.h
 )
 
@@ -93,7 +93,7 @@ list(APPEND library_source
 add_library(${PROJECT_NAME} STATIC ${library_source})
 
 
-target_precompile_headers(${PROJECT_NAME} PRIVATE framework.h)
+target_precompile_headers(${PROJECT_NAME} PRIVATE platform.h)
 
 
 if(${WIN32})

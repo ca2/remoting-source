@@ -3,8 +3,8 @@ project(remoting_ftp_common)
 
 
 list(APPEND library_source
-   framework.cpp
-   framework.h
+   platform.cpp
+   platform.h
    WinFilePath.h
    WinFilePath.cpp
    OperationNotSupportedException.h

@@ -49,6 +49,6 @@
     <ClCompile Include="RfbOutputGate.cpp" />
     <ClCompile Include="TcpClientThread.cpp" />
     <ClCompile Include="TcpServer.cpp" />
-    <ClCompile Include="framework.cpp" />
+    <ClCompile Include="platform.cpp" />
   </ItemGroup>
 </Project>

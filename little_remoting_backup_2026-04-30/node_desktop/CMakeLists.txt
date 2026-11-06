@@ -34,8 +34,8 @@ list(APPEND library_source
    control_desktop/ControlTrayIcon.h
    control_desktop/DisconnectAllCommand.cpp
    control_desktop/DisconnectAllCommand.h
-   ##control_desktop/framework.cpp
-   ##control_desktop/framework.h
+   ##control_desktop/platform.cpp
+   ##control_desktop/platform.h
    control_desktop/MakeRfbConnectionCommand.cpp
    control_desktop/MakeRfbConnectionCommand.h
    #control_desktop/matter.txt
@@ -99,8 +99,8 @@ list(APPEND library_source
    DesktopServerCommandLine.h
    ExtraRfbServers.cpp
    ExtraRfbServers.h
-   framework.cpp
-   framework.h
+   platform.cpp
+   platform.h
    LogInitListener.h
    #NamingDefs.cpp
    #NamingDefs.h
@@ -170,8 +170,8 @@ add_library(${PROJECT_NAME} SHARED ${library_source})
 
 #target_link_directories(${PROJECT_NAME} PRIVATE ${executable_link_directories})
 
-target_precompile_headers(${PROJECT_NAME} PRIVATE framework.h)
-#target_precompile_headers(static_${PROJECT_NAME} PRIVATE framework.h)
+target_precompile_headers(${PROJECT_NAME} PRIVATE platform.h)
+#target_precompile_headers(static_${PROJECT_NAME} PRIVATE platform.h)
 
 set_target_properties(${PROJECT_NAME} PROPERTIES LINKER_LANGUAGE CXX)
 

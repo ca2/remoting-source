@@ -7,8 +7,8 @@ project(remoting_ipc)
 
 
 list(APPEND library_source
-   framework.cpp
-   framework.h
+   platform.cpp
+   platform.h
 )
 
 

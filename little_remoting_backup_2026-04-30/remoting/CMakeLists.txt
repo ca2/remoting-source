@@ -86,8 +86,8 @@ list(APPEND library_source
    #node_user_config/_.cpp
    #node_user_config/_____debug.xcconfig
    #node_user_config/_____release.xcconfig
-   #node_user_config/framework.cpp
-   #node_user_config/framework.h
+   #node_user_config/platform.cpp
+   #node_user_config/platform.h
    #node_user_config/matter.txt
    #node_user_config/remoting_wsconfig.vcxproj
    #node_user_config/remoting_wsconfig.vcxproj.filters
@@ -537,8 +537,8 @@ list(APPEND library_source
 #   util/VncPassCrypt.h
    _.cpp
    _.h
-   framework.cpp
-   framework.h
+   platform.cpp
+   platform.h
 )
 
 
@@ -640,14 +640,14 @@ list(APPEND library_include_directories
 
 add_library(${PROJECT_NAME} SHARED ${library_source})
 
-#target_precompile_headers(${PROJECT_NAME} PRIVATE framework.h)
+#target_precompile_headers(${PROJECT_NAME} PRIVATE platform.h)
 
 
 
 if (NOT ${NO_PRECOMPILED_HEADER})
 
-   target_precompile_headers(${PROJECT_NAME} PRIVATE framework.h)
-   #target_precompile_headers(static_${PROJECT_NAME} PRIVATE framework.h)
+   target_precompile_headers(${PROJECT_NAME} PRIVATE platform.h)
+   #target_precompile_headers(static_${PROJECT_NAME} PRIVATE platform.h)
    set_source_files_properties(region/x11region.c PROPERTIES SKIP_PRECOMPILE_HEADERS ON)
 endif ()
 
